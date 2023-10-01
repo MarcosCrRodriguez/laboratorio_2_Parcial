@@ -2,7 +2,7 @@
 
 ##### Una serie de menues, funcionales para mantener un registro de lo producido en la empresa.
 <p>
-________________________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________
 </p>
 <p>
 Este proyecto conciste en un sarie de menues, en donde el usuario (Supervisor u Operario) interactua con el sistema, registrando modificaciones en el stock de materias primas de la empresa y producción de productos finales .
@@ -18,7 +18,7 @@ podra interactuar con ambos y ingresar a sus respectiva ventana
 </ul>
 
 <p>
-________________________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________
 </p>
 
 
