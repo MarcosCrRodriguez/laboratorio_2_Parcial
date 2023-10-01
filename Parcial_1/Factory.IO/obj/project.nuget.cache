@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "GAYiar4GxYlBuv87/2/aq6oO1OjndBnAfNW2nUA8HVUZeJ4wuZRAS3P5wLdJKEAIfr3V1Vuz7m++ISxAQVZ90Q==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\rodri\\OneDrive\\Documentos\\C# Archivos\\Factory.IO\\Factory.IO\\Factory.IO.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project FrmLogin is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project FrmLogin supports: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "FrmLogin",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}
