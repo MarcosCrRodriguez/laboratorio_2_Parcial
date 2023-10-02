@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\FrmLobby\\FrmLobby.csproj": {}
+    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\FrmLobby\\FrmLobby.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj": {
+    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj",
+        "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\obj\\",
+        "outputPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -63,14 +63,14 @@
         }
       }
     },
-    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\FrmLobby\\FrmLobby.csproj": {
+    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\FrmLobby\\FrmLobby.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\FrmLobby\\FrmLobby.csproj",
+        "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\FrmLobby\\FrmLobby.csproj",
         "projectName": "FrmLobby",
-        "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\FrmLobby\\FrmLobby.csproj",
+        "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\FrmLobby\\FrmLobby.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\FrmLobby\\obj\\",
+        "outputPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\FrmLobby\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -91,8 +91,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj": {
-                "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj"
+              "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj": {
+                "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj"
               }
             }
           }

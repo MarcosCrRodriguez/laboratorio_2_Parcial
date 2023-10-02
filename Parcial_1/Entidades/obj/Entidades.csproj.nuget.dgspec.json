@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj": {}
+    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj": {
+    "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj",
+        "projectUniqueName": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj",
         "projectName": "Entidades",
-        "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\Entidades.csproj",
+        "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj",
         "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\Parcial_1\\Entidades\\obj\\",
+        "outputPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -53,14 +53,7 @@ namespace FrmLobby
                 this.label9.Text = "Condensador";
                 this.label10.Text = "Ventilador";
 
-                this.listaValores.Add((int)numFabricar.Value * videoCard.UnidadProcesamientoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.CableVerdeNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.BarraPlasticoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.BaraHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.EngranajeHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.FibrasVidrioNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.CondensadorNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * videoCard.VentiladorNecesaria);
+                this.listaValores = videoCard.CrearLista((int)numFabricar.Value);
             }
             else if (this.producto == 1)
             {
@@ -75,14 +68,7 @@ namespace FrmLobby
                 this.label9.Text = "Condensador";
                 this.label10.Text = "Ventilador";
 
-                this.listaValores.Add((int)numFabricar.Value * motherboard.CircuitoElectAvanzadoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.CableRojoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.BarraPlasticoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.BaraHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.EngranajeHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.FibrasVidrioNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.CondensadorNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * motherboard.VentiladorNecesaria);
+                this.listaValores = motherboard.CrearLista((int)numFabricar.Value);
             }
             else if (this.producto == 2)
             {
@@ -101,10 +87,7 @@ namespace FrmLobby
                 this.txtSeptimoBox.Visible = false;
                 this.txtOctavoBox.Visible = false;
 
-                this.listaValores.Add((int)numFabricar.Value * ram.CircuitoElectNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * ram.BarraPlasticoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * ram.BaraHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * ram.EngranajeHierroNecesaria);
+                this.listaValores = ram.CrearLista((int)numFabricar.Value);
             }
             else
             {
@@ -122,16 +105,12 @@ namespace FrmLobby
                 this.txtSeptimoBox.Visible = false;
                 this.txtOctavoBox.Visible = false;
 
-                this.listaValores.Add((int)numFabricar.Value * cabinet.CableRojoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * cabinet.BarraPlasticoNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * cabinet.BaraHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * cabinet.EngranajeHierroNecesaria);
-                this.listaValores.Add((int)numFabricar.Value * cabinet.VentiladorNecesaria);
+                this.listaValores = cabinet.CrearLista((int)numFabricar.Value);
             }
 
             this.CrearListaTxtBox();
             this.CargaDatos();
-            this.ActualizarLista();
+            //this.ActualizarLista();
             this.BtnFabric.Visible = false;
         }
 
@@ -283,41 +262,20 @@ namespace FrmLobby
         {
             if (this.producto == 0)
             {
-                this.listaValores[0] = (int)numFabricar.Value * videoCard.UnidadProcesamientoNecesaria;
-                this.listaValores[1] = (int)numFabricar.Value * videoCard.CableVerdeNecesaria;
-                this.listaValores[2] = (int)numFabricar.Value * videoCard.BarraPlasticoNecesaria;
-                this.listaValores[3] = (int)numFabricar.Value * videoCard.BaraHierroNecesaria;
-                this.listaValores[4] = (int)numFabricar.Value * videoCard.EngranajeHierroNecesaria;
-                this.listaValores[5] = (int)numFabricar.Value * videoCard.FibrasVidrioNecesaria;
-                this.listaValores[6] = (int)numFabricar.Value * videoCard.CondensadorNecesaria;
-                this.listaValores[7] = (int)numFabricar.Value * videoCard.VentiladorNecesaria;
+                // probar de hacer un indexador para ingresarle y pisar su valor por otro
+                this.listaValores = videoCard.PisarLista((int)numFabricar.Value);
             }
             else if (this.producto == 1)
             {
-                this.listaValores[0] = (int)numFabricar.Value * motherboard.CircuitoElectAvanzadoNecesaria;
-                this.listaValores[1] = (int)numFabricar.Value * motherboard.CableRojoNecesaria;
-                this.listaValores[2] = (int)numFabricar.Value * motherboard.BarraPlasticoNecesaria;
-                this.listaValores[3] = (int)numFabricar.Value * motherboard.BaraHierroNecesaria;
-                this.listaValores[4] = (int)numFabricar.Value * motherboard.EngranajeHierroNecesaria;
-                this.listaValores[5] = (int)numFabricar.Value * motherboard.FibrasVidrioNecesaria;
-                this.listaValores[6] = (int)numFabricar.Value * motherboard.CondensadorNecesaria;
-                this.listaValores[7] = (int)numFabricar.Value * motherboard.VentiladorNecesaria;
+                this.listaValores = motherboard.PisarLista((int)numFabricar.Value);
             }
             else if (this.producto == 2)
             {
-                this.listaValores[0] = (int)numFabricar.Value * ram.CircuitoElectNecesaria;
-                this.listaValores[1] = (int)numFabricar.Value * ram.BarraPlasticoNecesaria;
-                this.listaValores[2] = (int)numFabricar.Value * ram.BaraHierroNecesaria;
-                this.listaValores[3] = (int)numFabricar.Value * ram.EngranajeHierroNecesaria;
+                this.listaValores = ram.PisarLista((int)numFabricar.Value);
             }
             else
             {
-                this.listaValores[0] = (int)numFabricar.Value * cabinet.CableRojoNecesaria;
-                this.listaValores[1] = (int)numFabricar.Value * cabinet.BarraPlasticoNecesaria;
-                this.listaValores[2] = (int)numFabricar.Value * cabinet.BaraHierroNecesaria;
-                this.listaValores[3] = (int)numFabricar.Value * cabinet.EngranajeHierroNecesaria;
-                this.listaValores[4] = (int)numFabricar.Value * cabinet.VentiladorNecesaria;
-
+                this.listaValores = cabinet.PisarLista((int)numFabricar.Value);
             }
         }
 

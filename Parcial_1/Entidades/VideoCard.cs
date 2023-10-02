@@ -10,14 +10,22 @@ namespace Entidades
         private const int cantBaraHierroConsumida = 3;
         private const int cantEngranajeHierroConsumida = 9;
         private const int cantFibrasVidrioConsumida = 5;
-        private const int cantcantCondensadorConsumida = 7;
+        private const int cantCondensadorConsumida = 7;
         private const int cantVentiladorConsumida = 2;
         private static int contadorProducto = 0;
         private static string tipoProducto;
+        private List<int> listaCantidadesConstantes;
+        private List<int> listaValores;
 
         public VideoCard(string razonSocial, string cuit, ulong codigoFabricacion) : base(razonSocial, cuit, codigoFabricacion)
         {
             TipoProducto = TiposProductos.Motherboard.ToString();
+            this.listaValores = new List<int>();
+            this.listaCantidadesConstantes = new List<int> {
+                UnidadProcesamientoNecesaria, CableVerdeNecesaria, BarraPlasticoNecesaria, 
+                BaraHierroNecesaria, EngranajeHierroNecesaria, FibrasVidrioNecesaria,
+                CondensadorNecesaria, VentiladorNecesaria
+            };
         }
 
         // el atributo 'contadorProducto' y si propiedad podrian heredar de una clase producto
@@ -65,7 +73,7 @@ namespace Entidades
 
         public int CondensadorNecesaria
         {
-            get { return cantcantCondensadorConsumida; }
+            get { return cantCondensadorConsumida; }
         }
 
         public int VentiladorNecesaria
@@ -73,7 +81,51 @@ namespace Entidades
             get { return cantVentiladorConsumida; }
         }
 
-        // intentar realizar una sobrecarga del metodo
+        public int this[int index]
+        {
+            get { return listaValores[index]; }
+            set { listaValores[index] = value; }
+        }
+
+        /// <summary>
+        /// Creamos una lista en donde le damos valores por cada cantidad de materiales que necesitara para
+        /// producir la cantidad ingresada
+        /// </summary>
+        /// <param name="cantidadFdabricar">Cantidad de productos a fabricar</param>
+        /// <returns>Retornamos la lista creada con valores enteros</returns>
+        public List<int> CrearLista(int cantidadFdabricar)
+        {
+            this.listaValores.Add(cantidadFdabricar * UnidadProcesamientoNecesaria);
+            this.listaValores.Add(cantidadFdabricar * CableVerdeNecesaria);
+            this.listaValores.Add(cantidadFdabricar * BarraPlasticoNecesaria);
+            this.listaValores.Add(cantidadFdabricar * BaraHierroNecesaria);
+            this.listaValores.Add(cantidadFdabricar * EngranajeHierroNecesaria);
+            this.listaValores.Add(cantidadFdabricar * FibrasVidrioNecesaria);
+            this.listaValores.Add(cantidadFdabricar * CondensadorNecesaria);
+            this.listaValores.Add(cantidadFdabricar * VentiladorNecesaria);
+
+            return this.listaValores;
+        }
+
+        /// <summary>
+        /// Pisamos la lista con valores actualizados
+        /// </summary>
+        /// <param name="cantidadFdabricar">Cantidad de productos a fabricar</param>
+        /// <returns>Retornamos la lista con los valores actualizados</returns>
+        public List<int> PisarLista(int cantidadFdabricar)
+        {
+            for (int i = 0; i < listaValores.Count; i++)
+            {
+                this.listaValores[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
+            }
+
+            return this.listaValores;
+        }
+
+        /// <summary>
+        /// Creamos un StringBuilder en donde le ingresaremos datos que mostraremos 
+        /// </summary>
+        /// <returns>Retorna un string con un formato específico</returns>
         public string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
@@ -85,6 +137,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Mostrar
+        /// </summary>
+        /// <param name="v">Clase actual</param>
         public static explicit operator string(VideoCard v)
         {
 
