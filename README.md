@@ -24,7 +24,7 @@ ________________________________________________________________________________
 En el formulario usted tendra casillas en donde ingresara sus datos personales, cargo y contraseña con la cual le permitira el ingreso al Menu de Usuarios.
 En caso de querer ahorrar tiempo para no ingresar datos a mano, debera de interactuar con el boton 'Hardcoear' y le completara las casillas por usted.
 
-[![Captura-de-pantalla-2023-10-01-221636.png](https://i.postimg.cc/7hPSYdN5/Captura-de-pantalla-2023-10-01-221636.png)](https://postimg.cc/bDMZm6WP)
+[![Captura-de-pantalla-2023-10-01-221635.png](https://i.postimg.cc/Dfg1SvHm/Captura-de-pantalla-2023-10-01-221635.png)](https://postimg.cc/hhXXwBSq)
 
 ## Menu de Usuario
 
