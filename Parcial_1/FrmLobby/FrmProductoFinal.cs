@@ -91,8 +91,8 @@ namespace FrmLobby
             }
             else
             {
-                this.groupBox1.Text = "Produccion Ram";
-                this.label1.Text = "Cantidad de Ram";
+                this.groupBox1.Text = "Produccion Cabinet";
+                this.label1.Text = "Cantidad de Cabinet";
                 this.label3.Text = "Cable Rojo";
                 this.label4.Text = "Barrra Plástico";
                 this.label5.Text = "Bara Hierro";
@@ -110,7 +110,6 @@ namespace FrmLobby
 
             this.CrearListaTxtBox();
             this.CargaDatos();
-            //this.ActualizarLista();
             this.BtnFabric.Visible = false;
         }
 
@@ -226,13 +225,16 @@ namespace FrmLobby
                     MessageBox.Show($"{(string)videoCard}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 1:
-                    MessageBox.Show($"{(string)motherboard}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{motherboard.Mostrar()}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 2:
-                    MessageBox.Show($"{(string)ram}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{ram.Mostrar()}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 3:
-                    MessageBox.Show($"{(string)cabinet}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{cabinet.Mostrar()}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                default:
+                    MessageBox.Show("No se pudo fabricar ningun producto\nNo se pudo ingresar al sector", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
         }

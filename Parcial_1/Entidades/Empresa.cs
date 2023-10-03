@@ -6,25 +6,28 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Empresa
+    public abstract class Empresa
     {
+        protected string razonSocial;
+        protected string cuit;
         protected Empresa(string razonSocial, string cuit)
         {
-            this.RazonSocial = razonSocial;
-            this.CUIT = cuit;
+            this.razonSocial = razonSocial;
+            this.cuit = cuit;
         }
 
-        protected string CUIT { get; set; }
-        protected string RazonSocial { get; set; }
-
-        public string Mostrar()
+        protected string CUIT 
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
-
-            return sb.ToString();
+            get { return cuit; }
+            set { cuit = value; }
         }
+        protected string RazonSocial 
+        {
+            get { return razonSocial; }
+            set { razonSocial = value; }
+        }
+
+        public abstract string Mostrar();
 
     }
 }

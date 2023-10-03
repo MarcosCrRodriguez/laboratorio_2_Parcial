@@ -25,7 +25,7 @@ namespace Entidades
             set { this.apellido = value; }
         }
 
-        public string Mostrar()
+        public virtual string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 

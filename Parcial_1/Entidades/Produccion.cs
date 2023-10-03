@@ -10,6 +10,8 @@ namespace Entidades
     {
         public static bool Elaborar(ProcesoProduccion proceso)
         {
+            // intentar en algun momento ver de que agrege ciertos materiales por proceso y en base
+            // a eso que devuelva true o false si hay o faltan materia prima 
             bool retorno = false;
 
             switch (proceso) 

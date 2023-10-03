@@ -23,7 +23,7 @@ namespace FrmLobby
         private string cargo;
         private List<string> listNombre;
         private List<string> listApellido;
-        private List<string> listCargo;
+        private List<string> listSector;
 
         public MenuUsuario(FrmLobby menuPrincipal, Usuario usuario, string cargo)
         {
@@ -34,7 +34,7 @@ namespace FrmLobby
 
             this.listNombre = new List<string>();
             this.listApellido = new List<string>();
-            this.listCargo = new List<string>();
+            this.listSector = new List<string>();
             this.CargarListas();
         }
 
@@ -76,6 +76,7 @@ namespace FrmLobby
             }
         }
 
+        // intentar armar un DataGirdView (investigar su uso)
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
@@ -84,8 +85,8 @@ namespace FrmLobby
 
             for (int i = 0; i < listNombre.Count; i++)
             {
-                sb.AppendLine($"- {this.listNombre[i]} {this.listApellido[i]} -");
-                sb.AppendLine($"- {this.listCargo[i]} -\n");
+                sb.AppendLine($"- Datos personales: {this.listNombre[i]} {this.listApellido[i]} -");
+                sb.AppendLine($"- Sector: {this.listSector[i]} -\n");
             }
 
             MessageBox.Show($"{sb}", "Registro de Operarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -146,37 +147,9 @@ namespace FrmLobby
         private void CargarListas()
         {
             //------------------------Operario------------------------//
-            this.listNombre.Add("Juan");
-            this.listApellido.Add("Carlos");
-            this.listCargo.Add("Sector: Motherboard");
-
-            this.listNombre.Add("Santiago");
-            this.listApellido.Add("Cano");
-            this.listCargo.Add("Sector: Motherboard");
-
-            this.listNombre.Add("Gabriel");
-            this.listApellido.Add("Abano");
-            this.listCargo.Add("Sector: Video Card");
-
-            this.listNombre.Add("Martin");
-            this.listApellido.Add("Santos");
-            this.listCargo.Add("Sector: Video Card");
-
-            this.listNombre.Add("Candela");
-            this.listApellido.Add("Dacorso");
-            this.listCargo.Add("Sector: Cabinet");
-
-            this.listNombre.Add("Sofia");
-            this.listApellido.Add("Alfonso");
-            this.listCargo.Add("Sector: Cabinet");
-
-            this.listNombre.Add("Pablo");
-            this.listApellido.Add("Carmes");
-            this.listCargo.Add("Sector: Ram");
-
-            this.listNombre.Add("Pedro");
-            this.listApellido.Add("Roesse");
-            this.listCargo.Add("Sector: Ram");
+            this.listNombre = Operario.HardcodearNombre();
+            this.listApellido = Operario.HardcodearApellido();
+            this.listSector = Operario.HardcodearSector();
         }
 
         /// <summary>

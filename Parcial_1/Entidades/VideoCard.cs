@@ -19,7 +19,7 @@ namespace Entidades
 
         public VideoCard(string razonSocial, string cuit, ulong codigoFabricacion) : base(razonSocial, cuit, codigoFabricacion)
         {
-            TipoProducto = TiposProductos.Motherboard.ToString();
+            TipoProducto = TiposProductos.VideoCard.ToString();
             this.listaValores = new List<int>();
             this.listaCantidadesConstantes = new List<int> {
                 UnidadProcesamientoNecesaria, CableVerdeNecesaria, BarraPlasticoNecesaria, 
@@ -116,7 +116,7 @@ namespace Entidades
         {
             for (int i = 0; i < listaValores.Count; i++)
             {
-                this.listaValores[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
+                this[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
             }
 
             return this.listaValores;
@@ -126,7 +126,7 @@ namespace Entidades
         /// Creamos un StringBuilder en donde le ingresaremos datos que mostraremos 
         /// </summary>
         /// <returns>Retorna un string con un formato específico</returns>
-        public string Mostrar()
+        public override string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -143,12 +143,9 @@ namespace Entidades
         /// <param name="v">Clase actual</param>
         public static explicit operator string(VideoCard v)
         {
-
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine(v.Mostrar());
-            sb.AppendLine($"Producto *- {TipoProducto} -*");
-            sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 
             return sb.ToString();
         }

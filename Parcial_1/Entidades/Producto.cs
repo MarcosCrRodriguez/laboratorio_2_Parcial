@@ -8,18 +8,23 @@ namespace Entidades
 {
     public class Producto : Empresa
     {
+        protected ulong codigoFabricacion;
         protected Producto(string razonSocial, string cuit, ulong codigoFabricacion) : base (razonSocial, cuit)
         {
-            this.CodigoFabricacion = codigoFabricacion;
+            this.codigoFabricacion = codigoFabricacion;
         }
 
-        protected ulong CodigoFabricacion { get; set; }
+        protected ulong CodigoFabricacion 
+        {
+            get { return codigoFabricacion; }
+            set { codigoFabricacion = value; } 
+        }
 
-        public string Mostrar()
+        public override string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(base.Mostrar());
+            sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
             sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacion}");
 
             return sb.ToString();

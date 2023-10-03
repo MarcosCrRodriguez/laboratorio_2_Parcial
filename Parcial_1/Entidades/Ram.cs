@@ -15,7 +15,7 @@ namespace Entidades
 
         public Ram(string razonSocial, string cuit, ulong codigoFabricacion) : base(razonSocial, cuit, codigoFabricacion)
         {
-            TipoProducto = TiposProductos.Motherboard.ToString();
+            TipoProducto = TiposProductos.Ram.ToString();
             listaValores = new List<int>();
             this.listaCantidadesConstantes = new List<int> {
                 CircuitoElectNecesaria, BarraPlasticoNecesaria, BaraHierroNecesaria,
@@ -87,7 +87,7 @@ namespace Entidades
         {
             for (int i = 0; i < listaValores.Count; i++)
             {
-                this.listaValores[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
+                this[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
             }
 
             return this.listaValores;
@@ -97,7 +97,7 @@ namespace Entidades
         /// Creamos un StringBuilder en donde le ingresaremos datos que mostraremos 
         /// </summary>
         /// <returns>Retorna un string con un formato específico</returns>
-        public string Mostrar()
+        public override string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -118,8 +118,6 @@ namespace Entidades
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine(r.Mostrar());
-            sb.AppendLine($"Producto *- {TipoProducto} -*");
-            sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 
             return sb.ToString();
         }

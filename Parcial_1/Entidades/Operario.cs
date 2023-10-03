@@ -5,6 +5,9 @@ namespace Entidades
     public class Operario : Usuario
     {
         protected string puesto;
+        protected static List<string> listNombre;
+        protected static List<string> listApellido;
+        protected static List<string> listSector;
         public Operario(string nombre, string apellido, string puesto)
             :base(nombre, apellido)
         {
@@ -17,7 +20,43 @@ namespace Entidades
             set { this.puesto = value; }
         }
 
-        public string MostrarOperario()
+        public static List<string> HardcodearNombre()
+        {
+            listNombre = new List<string>();
+
+            listNombre.Add("Juan");
+            listNombre.Add("Santiago");
+            listNombre.Add("Gabriel");
+            listNombre.Add("Martin");
+
+            return listNombre;
+        }
+
+        public static List<string> HardcodearApellido()
+        {
+            listApellido = new List<string>();
+
+            listApellido.Add("Carlos");
+            listApellido.Add("Cano");
+            listApellido.Add("Abano");
+            listApellido.Add("Santos");
+
+            return listApellido;
+        }
+
+        public static List<string> HardcodearSector()
+        {
+            listSector = new List<string>();
+
+            listSector.Add("Motherboard");
+            listSector.Add("Video Card");
+            listSector.Add("Cabinet");
+            listSector.Add("Ram");
+
+            return listSector;
+        }
+
+        public override string Mostrar()
         {
             string cadena;
 
@@ -36,7 +75,6 @@ namespace Entidades
             StringBuilder sb = new StringBuilder();
             cadena = s.Mostrar();
             sb.Append(cadena);
-            sb.AppendLine($"- {s.puesto} -");
 
             return sb.ToString();
         }

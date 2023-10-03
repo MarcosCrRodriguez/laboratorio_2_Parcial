@@ -38,8 +38,8 @@
             lblCargo = new Label();
             lblContraseña = new Label();
             cboxCargo = new ComboBox();
-            btnIngresar = new Button();
-            btnHardcode = new Button();
+            BtnIngresar = new Button();
+            BtnHardcode = new Button();
             lblFactory = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
@@ -147,31 +147,31 @@
             cboxCargo.Size = new Size(146, 29);
             cboxCargo.TabIndex = 9;
             // 
-            // btnIngresar
+            // BtnIngresar
             // 
-            btnIngresar.BackColor = Color.LimeGreen;
-            btnIngresar.FlatAppearance.BorderColor = Color.Black;
-            btnIngresar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnIngresar.ForeColor = SystemColors.ActiveCaptionText;
-            btnIngresar.Location = new Point(357, 229);
-            btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(144, 55);
-            btnIngresar.TabIndex = 10;
-            btnIngresar.Text = "Ingresar al sistema";
-            btnIngresar.UseVisualStyleBackColor = false;
-            btnIngresar.Click += btnIngresar_Click;
+            BtnIngresar.BackColor = Color.LimeGreen;
+            BtnIngresar.FlatAppearance.BorderColor = Color.Black;
+            BtnIngresar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnIngresar.ForeColor = SystemColors.ActiveCaptionText;
+            BtnIngresar.Location = new Point(357, 229);
+            BtnIngresar.Name = "BtnIngresar";
+            BtnIngresar.Size = new Size(144, 55);
+            BtnIngresar.TabIndex = 10;
+            BtnIngresar.Text = "Ingresar al sistema";
+            BtnIngresar.UseVisualStyleBackColor = false;
+            BtnIngresar.Click += BtnIngresar_Click;
             // 
-            // btnHardcode
+            // BtnHardcode
             // 
-            btnHardcode.BackColor = Color.RosyBrown;
-            btnHardcode.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnHardcode.Location = new Point(98, 229);
-            btnHardcode.Name = "btnHardcode";
-            btnHardcode.Size = new Size(132, 55);
-            btnHardcode.TabIndex = 14;
-            btnHardcode.Text = "Hardcodeo";
-            btnHardcode.UseVisualStyleBackColor = false;
-            btnHardcode.Click += btnHardcode_Click;
+            BtnHardcode.BackColor = Color.RosyBrown;
+            BtnHardcode.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnHardcode.Location = new Point(98, 229);
+            BtnHardcode.Name = "BtnHardcode";
+            BtnHardcode.Size = new Size(132, 55);
+            BtnHardcode.TabIndex = 14;
+            BtnHardcode.Text = "Hardcodeo";
+            BtnHardcode.UseVisualStyleBackColor = false;
+            BtnHardcode.Click += BtnHardcode_Click;
             // 
             // lblFactory
             // 
@@ -229,8 +229,8 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(lblFactory);
-            Controls.Add(btnHardcode);
-            Controls.Add(btnIngresar);
+            Controls.Add(BtnHardcode);
+            Controls.Add(BtnIngresar);
             Controls.Add(lblLobby);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -259,8 +259,8 @@
         private Label lblCargo;
         private Label lblContraseña;
         private ComboBox cboxCargo;
-        private Button btnIngresar;
-        private Button btnHardcode;
+        private Button BtnIngresar;
+        private Button BtnHardcode;
         private Label lblFactory;
         private GroupBox groupBox1;
         private GroupBox groupBox2;

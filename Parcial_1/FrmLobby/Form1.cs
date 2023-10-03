@@ -31,14 +31,14 @@ namespace FrmLobby
             cboxCargo.Items.Add("Supervisor");
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private void BtnIngresar_Click(object sender, EventArgs e)
         {
             this.usuario = new Usuario(this.txtNombre.Text, this.txtApellido.Text);
 
             if (this.txtPassword.Text == "operario")
             {
                 Operario operario = new Operario(this.txtNombre.Text, this.txtApellido.Text, this.cboxCargo.Text);
-                MessageBox.Show($"{this.usuario.Mostrar()}", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{(string)operario}", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 MenuUsuario frmOperario = new MenuUsuario(this, this.usuario, this.cboxCargo.Text);
                 frmOperario.Show();
@@ -46,7 +46,7 @@ namespace FrmLobby
             else if (this.txtPassword.Text == "superusaurio")
             {
                 Supervisor supervisor = new Supervisor(this.txtNombre.Text, this.txtApellido.Text, this.cboxCargo.Text);
-                MessageBox.Show($"{this.usuario.Mostrar()}", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{(string)supervisor}", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 MenuUsuario frmSupervisor = new MenuUsuario(this, this.usuario, this.cboxCargo.Text);
                 frmSupervisor.Show();
@@ -57,7 +57,7 @@ namespace FrmLobby
             }
         }
 
-        private void btnHardcode_Click(object sender, EventArgs e)
+        private void BtnHardcode_Click(object sender, EventArgs e)
         {
             if (this.cantHardcode > 7)
             {
@@ -78,54 +78,18 @@ namespace FrmLobby
                 e.Cancel = true;
             }
         }
-        
+
         /// <summary>
         /// Ingreso unicamente cuando cargo el formulario, me hardcodea una lista con datos, que 
         /// esos datos son los uruarios, operarios/supervisores para facilitar el ingreso al sistema
         /// </summary>
         private void CargarListas()
         {
-            //------------------------Operario------------------------//
-            this.listNombre.Add("Juan");
-            this.listApellido.Add("Carlos");
-            this.listCargo.Add("Operario");
-            this.listPassword.Add("operario");
-
-            this.listNombre.Add("Santiago");
-            this.listApellido.Add("Cano");
-            this.listCargo.Add("Operario");
-            this.listPassword.Add("operario");
-
-            this.listNombre.Add("Gabriel");
-            this.listApellido.Add("Abano");
-            this.listCargo.Add("Operario");
-            this.listPassword.Add("operario");
-
-            this.listNombre.Add("Martin");
-            this.listApellido.Add("Santos");
-            this.listCargo.Add("Operario");
-            this.listPassword.Add("operario");
-            //------------------------Supervisor------------------------//
-            this.listNombre.Add("Kenpachi");
-            this.listApellido.Add("Zaraki");
-            this.listCargo.Add("Supervisor");
-            this.listPassword.Add("superusaurio");
-
-            this.listNombre.Add("Brandon");
-            this.listApellido.Add("Sanderson");
-            this.listCargo.Add("Supervisor");
-            this.listPassword.Add("superusaurio");
-
-            this.listNombre.Add("Stephen");
-            this.listApellido.Add("King");
-            this.listCargo.Add("Supervisor");
-            this.listPassword.Add("superusaurio");
-
-            this.listNombre.Add("Marcos");
-            this.listApellido.Add("Rodriguez");
-            this.listCargo.Add("Supervisor");
-            this.listPassword.Add("superusaurio");
+            //------------------------Usuarios Harcodeados------------------------//
+            this.listNombre = Supervisor.HardcodearNombre();
+            this.listApellido = Supervisor.HardcodearApellido();
+            this.listCargo = Supervisor.HardcodearCargo();
+            this.listPassword = Supervisor.HardcodearPassword();
         }
-
     }
 }
