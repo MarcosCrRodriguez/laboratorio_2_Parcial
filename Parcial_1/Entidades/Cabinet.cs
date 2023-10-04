@@ -11,11 +11,14 @@ namespace Entidades
         private const int cantVentiladorConsumida = 4;
         private static int contadorProducto = 0;
         private static string tipoProducto;
+        private static ulong codigoFabricacionC;
         private List<int> listaCantidadesConstantes;
         private List<int> listaValores;
 
-        public Cabinet(string razonSocial, string cuit, ulong codigoFabricacion) : base(razonSocial, cuit, codigoFabricacion)
+        public Cabinet()
         {
+            codigoFabricacionC = 43885702;
+
             TipoProducto = TiposProductos.Cabinet.ToString();
             listaValores = new List<int>();
             this.listaCantidadesConstantes = new List<int> {
@@ -35,6 +38,12 @@ namespace Entidades
         {
             get { return tipoProducto; }
             set { tipoProducto = value; }
+        }
+
+        public static ulong CodigoFabricacionCabinet
+        {
+            get { return codigoFabricacionC; }
+            set { codigoFabricacionC = value; }
         }
 
         public int CableRojoNecesaria
@@ -62,12 +71,6 @@ namespace Entidades
             get { return cantVentiladorConsumida; }
         }
 
-        public int this[int index]
-        {
-            get { return listaValores[index]; }
-            set { listaValores[index] = value; }
-        }
-
         /// <summary>
         /// Creamos una lista en donde le damos valores por cada cantidad de materiales que necesitara para
         /// producir la cantidad ingresada
@@ -83,6 +86,12 @@ namespace Entidades
             this.listaValores.Add(cantidadFdabricar * VentiladorNecesaria);
 
             return this.listaValores;
+        }
+
+        public int this[int index]
+        {
+            get { return listaValores[index]; }
+            set { listaValores[index] = value; }
         }
 
         /// <summary>
@@ -108,7 +117,8 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(base.Mostrar());
+            sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
+            sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacionCabinet}");
             sb.AppendLine($"Producto *- {TipoProducto} -*");
             sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 

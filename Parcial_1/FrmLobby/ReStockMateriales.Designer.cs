@@ -106,6 +106,7 @@
             // 
             numVentilador.Location = new Point(337, 199);
             numVentilador.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numVentilador.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numVentilador.Name = "numVentilador";
             numVentilador.Size = new Size(81, 25);
             numVentilador.TabIndex = 45;
@@ -114,6 +115,7 @@
             // 
             numCondensador.Location = new Point(337, 155);
             numCondensador.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numCondensador.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numCondensador.Name = "numCondensador";
             numCondensador.Size = new Size(81, 25);
             numCondensador.TabIndex = 44;
@@ -122,6 +124,7 @@
             // 
             numFibraVidrio.Location = new Point(337, 111);
             numFibraVidrio.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numFibraVidrio.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numFibraVidrio.Name = "numFibraVidrio";
             numFibraVidrio.Size = new Size(81, 25);
             numFibraVidrio.TabIndex = 43;
@@ -130,6 +133,7 @@
             // 
             numEngranajeHierro.Location = new Point(337, 66);
             numEngranajeHierro.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numEngranajeHierro.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numEngranajeHierro.Name = "numEngranajeHierro";
             numEngranajeHierro.Size = new Size(81, 25);
             numEngranajeHierro.TabIndex = 42;
@@ -138,6 +142,7 @@
             // 
             numBaraHierro.Location = new Point(337, 23);
             numBaraHierro.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numBaraHierro.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numBaraHierro.Name = "numBaraHierro";
             numBaraHierro.Size = new Size(81, 25);
             numBaraHierro.TabIndex = 41;
@@ -146,6 +151,7 @@
             // 
             numCableRojo.Location = new Point(124, 244);
             numCableRojo.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numCableRojo.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numCableRojo.Name = "numCableRojo";
             numCableRojo.Size = new Size(81, 25);
             numCableRojo.TabIndex = 40;
@@ -154,6 +160,7 @@
             // 
             numCableVerde.Location = new Point(124, 199);
             numCableVerde.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numCableVerde.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numCableVerde.Name = "numCableVerde";
             numCableVerde.Size = new Size(81, 25);
             numCableVerde.TabIndex = 39;
@@ -162,6 +169,7 @@
             // 
             numBarraPlastica.Location = new Point(124, 155);
             numBarraPlastica.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numBarraPlastica.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numBarraPlastica.Name = "numBarraPlastica";
             numBarraPlastica.Size = new Size(81, 25);
             numBarraPlastica.TabIndex = 38;
@@ -170,6 +178,7 @@
             // 
             numUnProcesamiento.Location = new Point(124, 111);
             numUnProcesamiento.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numUnProcesamiento.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numUnProcesamiento.Name = "numUnProcesamiento";
             numUnProcesamiento.Size = new Size(81, 25);
             numUnProcesamiento.TabIndex = 37;
@@ -178,6 +187,7 @@
             // 
             numCircuitoElectAv.Location = new Point(124, 68);
             numCircuitoElectAv.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numCircuitoElectAv.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numCircuitoElectAv.Name = "numCircuitoElectAv";
             numCircuitoElectAv.Size = new Size(81, 25);
             numCircuitoElectAv.TabIndex = 36;
@@ -186,6 +196,7 @@
             // 
             numCircuitoElect.Location = new Point(124, 22);
             numCircuitoElect.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
+            numCircuitoElect.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
             numCircuitoElect.Name = "numCircuitoElect";
             numCircuitoElect.Size = new Size(81, 25);
             numCircuitoElect.TabIndex = 28;

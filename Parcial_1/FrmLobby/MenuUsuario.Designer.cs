@@ -140,6 +140,7 @@
             lblVideo.Size = new Size(107, 25);
             lblVideo.TabIndex = 11;
             lblVideo.Text = "Video Card";
+            lblVideo.Click += LblVideo_Click;
             // 
             // lblMoth
             // 
@@ -150,6 +151,7 @@
             lblMoth.Size = new Size(125, 25);
             lblMoth.TabIndex = 12;
             lblMoth.Text = "Motherboard";
+            lblMoth.Click += LblMoth_Click;
             // 
             // lblRam
             // 
@@ -160,6 +162,7 @@
             lblRam.Size = new Size(52, 25);
             lblRam.TabIndex = 13;
             lblRam.Text = "Ram";
+            lblRam.Click += LblRam_Click;
             // 
             // lblCabinet
             // 
@@ -170,6 +173,7 @@
             lblCabinet.Size = new Size(79, 25);
             lblCabinet.TabIndex = 14;
             lblCabinet.Text = "Cabinet";
+            lblCabinet.Click += LblCabinet_Click;
             // 
             // gboxUsuario
             // 

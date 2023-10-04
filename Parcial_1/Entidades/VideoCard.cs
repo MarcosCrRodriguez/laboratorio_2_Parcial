@@ -14,15 +14,18 @@ namespace Entidades
         private const int cantVentiladorConsumida = 2;
         private static int contadorProducto = 0;
         private static string tipoProducto;
+        private static ulong codigoFabricacionV;
         private List<int> listaCantidadesConstantes;
         private List<int> listaValores;
 
-        public VideoCard(string razonSocial, string cuit, ulong codigoFabricacion) : base(razonSocial, cuit, codigoFabricacion)
+        public VideoCard()
         {
+            codigoFabricacionV = 82774327;
+
             TipoProducto = TiposProductos.VideoCard.ToString();
             this.listaValores = new List<int>();
             this.listaCantidadesConstantes = new List<int> {
-                UnidadProcesamientoNecesaria, CableVerdeNecesaria, BarraPlasticoNecesaria, 
+                UnidadProcesamientoNecesaria, CableVerdeNecesaria, BarraPlasticoNecesaria,
                 BaraHierroNecesaria, EngranajeHierroNecesaria, FibrasVidrioNecesaria,
                 CondensadorNecesaria, VentiladorNecesaria
             };
@@ -39,6 +42,12 @@ namespace Entidades
         {
             get { return tipoProducto; }
             set { tipoProducto = value; }
+        }
+
+        public static ulong CodigoFabricacionVideocard
+        {
+            get { return codigoFabricacionV; }
+            set { codigoFabricacionV = value; }
         }
 
         public int UnidadProcesamientoNecesaria
@@ -81,12 +90,6 @@ namespace Entidades
             get { return cantVentiladorConsumida; }
         }
 
-        public int this[int index]
-        {
-            get { return listaValores[index]; }
-            set { listaValores[index] = value; }
-        }
-
         /// <summary>
         /// Creamos una lista en donde le damos valores por cada cantidad de materiales que necesitara para
         /// producir la cantidad ingresada
@@ -105,6 +108,12 @@ namespace Entidades
             this.listaValores.Add(cantidadFdabricar * VentiladorNecesaria);
 
             return this.listaValores;
+        }
+
+        public int this[int index]
+        {
+            get { return listaValores[index]; }
+            set { listaValores[index] = value; }
         }
 
         /// <summary>
@@ -130,7 +139,8 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(base.Mostrar());
+            sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
+            sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacionVideocard}");
             sb.AppendLine($"Producto *- {TipoProducto} -*");
             sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 

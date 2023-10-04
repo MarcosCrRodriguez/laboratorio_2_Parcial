@@ -17,14 +17,14 @@ namespace FrmLobby
         public FrmLobby()
         {
             InitializeComponent();
-        }
-        private void FrmLobby_Load(object sender, EventArgs e)
-        {
-            this.cantHardcode = 0;
             this.listNombre = new List<string>();
             this.listApellido = new List<string>();
             this.listCargo = new List<string>();
             this.listPassword = new List<string>();
+        }
+        private void FrmLobby_Load(object sender, EventArgs e)
+        {
+            this.cantHardcode = 0;
             this.CargarListas();
 
             cboxCargo.Items.Add("Operario");

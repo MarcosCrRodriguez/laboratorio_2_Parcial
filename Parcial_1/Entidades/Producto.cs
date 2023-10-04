@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Producto : Empresa
+    public abstract class Producto : Empresa
     {
-        protected ulong codigoFabricacion;
-        protected Producto(string razonSocial, string cuit, ulong codigoFabricacion) : base (razonSocial, cuit)
+        protected static ulong codigoFabricacion;
+        protected Producto()
         {
-            this.codigoFabricacion = codigoFabricacion;
+            codigoFabricacion = (ulong)new Random().Next(10000000, 99999999);
         }
 
         protected ulong CodigoFabricacion 
@@ -20,15 +20,7 @@ namespace Entidades
             set { codigoFabricacion = value; } 
         }
 
-        public override string Mostrar()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
-            sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacion}");
-
-            return sb.ToString();
-        }
+        public abstract string Mostrar();
     }
 }
 

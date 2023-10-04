@@ -15,6 +15,8 @@ namespace Entidades
         private static int cantFibrasVidrio = 2850;
         private static int cantCondensador = 2250;
         private static int cantVentilador = 2000;
+        private static List<int> listaStock;
+        private static List<string> listaHardcodeada;
 
         public static int CantCircuitosElectronicos
         {
@@ -189,20 +191,37 @@ namespace Entidades
             }
         }
 
+        public static List<int> InstanciarListaStock()
+        {
+            listaStock = new List<int>() {
+                CantCircuitosElectronicos,
+                CantCircuitosElectronicosAvanzados,
+                CantUnidadProcesamiento,
+                CantBarraPlastico,
+                CantCableVerde,
+                CantCableRojo,
+                CantBaraHierro,
+                CantEngranajeHierro,
+                CantFibrasVidrio,
+                CantCondensador,
+                CantVentilador
+            };
+
+            return listaStock;
+        }
+
         /// <summary>
         /// Construimos un StringBuilder con los materiales y cantidades que faltan para producir
         /// la cantidad pedida
         /// </summary>
         /// <param name="listaValores">Lista de valores a restar para la produccion</param>
         /// <param name="dictProducto">Diccionario que contiene el tipo d materiales y sus cantidades disponibles</param>
-        /// <param name="producto">Enumerado pasado a int que nos indica con que producto estamos trabajando</param>
         /// <returns>Retorna una cadena con los materiales y cantidades faltanes</returns>
-        public static string ConstruccionStock(List<int> listaValores, Dictionary<string, int> dictProducto, int producto)
+        public static string StockFaltante(List<int> listaValores, Dictionary<string, int> dictProducto)
         {
             int resto;
 
             StringBuilder sb = new StringBuilder();
-            dictProducto = Stock.ModificarDiccionario(producto);
 
             int i = 0;
 
@@ -225,14 +244,12 @@ namespace Entidades
         /// </summary>
         /// <param name="listaValores">Lista de valores a restar para la produccion</param>
         /// <param name="dictProducto">Diccionario que contiene el tipo d materiales y sus cantidades disponibles</param>
-        /// <param name="producto">Enumerado pasado a int que nos indica con que producto estamos trabajando</param>
         /// <returns>Retorna un booleano para verificar de que haya/no haya stock disponible</returns>
-        public static bool VerificarStock(List<int> listaValores, Dictionary<string, int> dictProducto, int producto)
+        public static bool VerificarStock(List<int> listaValores, Dictionary<string, int> dictProducto)
         {
             bool retorno = true;
 
             StringBuilder sb = new StringBuilder();
-            dictProducto = Stock.ModificarDiccionario(producto);
 
             int i = 0;
 
@@ -269,7 +286,7 @@ namespace Entidades
                         { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
                         { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
                         { "Condensador" ,Stock.CantCondensador },
-                        { "Ventilador" ,Stock.CantVentilador },
+                        { "Ventilador" ,Stock.CantVentilador }
                         };
                     break;
                 case 1:
@@ -281,7 +298,7 @@ namespace Entidades
                         { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
                         { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
                         { "Condensador" ,Stock.CantCondensador },
-                        { "Ventilador" ,Stock.CantVentilador },
+                        { "Ventilador" ,Stock.CantVentilador }
                         };
                     break;
                 case 2:
@@ -307,6 +324,44 @@ namespace Entidades
             }
 
             return dictProducto;
-        }                
+        }
+
+        public static Dictionary<string, int> DiccionarioDelStock()
+        {
+            Dictionary<string, int> dictStock;
+
+            dictStock = new Dictionary<string, int>() {
+                { "Circuitos Electronicos" ,Stock.CantCircuitosElectronicos },
+                { "Circuitos Electronicos Avanzados" ,Stock.CantCircuitosElectronicosAvanzados },
+                { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
+                { "Cable Verde" ,Stock.CantCableVerde },
+                { "Cable Rojo" ,Stock.CantCableRojo },
+                { "Barra Plastico" ,Stock.CantBarraPlastico },
+                { "Bara Hierro" ,Stock.CantBaraHierro },
+                { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
+                { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
+                { "Condensador" ,Stock.CantCondensador },
+                { "Ventilador" ,Stock.CantVentilador }
+            };
+
+            return dictStock;
+        }
+
+        public static List<string> ListaHarcodeadaStock()
+        {
+            listaHardcodeada.Add("Circuitos Electronicos");
+            listaHardcodeada.Add("Circuitos Electronicos Avanzados");
+            listaHardcodeada.Add("Unidad Procesamiento");
+            listaHardcodeada.Add("Cable Verde");
+            listaHardcodeada.Add("Cable Rojo");
+            listaHardcodeada.Add("Barra Plastico");
+            listaHardcodeada.Add("Bara Hierro");
+            listaHardcodeada.Add("Engranaje Hierro");
+            listaHardcodeada.Add("Fibras Vidrio");
+            listaHardcodeada.Add("Condensador");
+            listaHardcodeada.Add("Ventilador");
+
+            return listaHardcodeada;
+        }
     }
 }

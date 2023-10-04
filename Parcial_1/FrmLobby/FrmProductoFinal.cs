@@ -30,10 +30,10 @@ namespace FrmLobby
         {
             InitializeComponent();
             this.frmUsuario = frmUsuario;
-            this.videoCard = new VideoCard("Factory.IO", "16-56433112-2", 78864278);
-            this.motherboard = new Motherboard("Factory.IO", "27-36777903-5", 44131364);
-            this.ram = new Ram("Factory.IO", "28-42227079-9", 45667578);
-            this.cabinet = new Cabinet("Factory.IO", "36-37984545-8", 25788642);
+            this.videoCard = new VideoCard();
+            this.motherboard = new Motherboard();
+            this.ram = new Ram();
+            this.cabinet = new Cabinet();
             this.listaValores = new List<int>();
             this.producto = producto;
         }
@@ -53,6 +53,7 @@ namespace FrmLobby
                 this.label9.Text = "Condensador";
                 this.label10.Text = "Ventilador";
 
+                //sobrecarga que reciba el decimal y lo caste a entero
                 this.listaValores = videoCard.CrearLista((int)numFabricar.Value);
             }
             else if (this.producto == 1)
@@ -168,6 +169,7 @@ namespace FrmLobby
                     MessageBox.Show("Conectando cables...", "Conección cables", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (this.producto == 0)
                     {
+                        // intentar de llevar a las clases y no tenerlo aca
                         Stock.CantUnidadProcesamiento = valorNegativo * this.listaValores[0];
                         Stock.CantCableVerde = valorNegativo * this.listaValores[1];
                         Stock.CantBarraPlastico = valorNegativo * this.listaValores[2];
@@ -222,19 +224,19 @@ namespace FrmLobby
             switch (this.producto)
             {
                 case 0:
-                    MessageBox.Show($"{(string)videoCard}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{(string)videoCard}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 1:
-                    MessageBox.Show($"{motherboard.Mostrar()}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{(string)motherboard}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 2:
-                    MessageBox.Show($"{ram.Mostrar()}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{(string)ram}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case 3:
-                    MessageBox.Show($"{cabinet.Mostrar()}", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{(string)cabinet}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 default:
-                    MessageBox.Show("No se pudo fabricar ningun producto\nNo se pudo ingresar al sector", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se pudo fabricar ningun producto\nNo se pudo ingresar al sector", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
         }
@@ -262,22 +264,20 @@ namespace FrmLobby
         /// </summary>
         private void ActualizarLista()
         {
-            if (this.producto == 0)
+            switch (this.producto)
             {
-                // probar de hacer un indexador para ingresarle y pisar su valor por otro
-                this.listaValores = videoCard.PisarLista((int)numFabricar.Value);
-            }
-            else if (this.producto == 1)
-            {
-                this.listaValores = motherboard.PisarLista((int)numFabricar.Value);
-            }
-            else if (this.producto == 2)
-            {
-                this.listaValores = ram.PisarLista((int)numFabricar.Value);
-            }
-            else
-            {
-                this.listaValores = cabinet.PisarLista((int)numFabricar.Value);
+                case 0:
+                    this.listaValores = videoCard.PisarLista((int)numFabricar.Value);
+                    break;
+                case 1:
+                    this.listaValores = motherboard.PisarLista((int)numFabricar.Value);
+                    break;
+                case 2:
+                    this.listaValores = ram.PisarLista((int)numFabricar.Value);
+                    break;
+                case 3:
+                    this.listaValores = cabinet.PisarLista((int)numFabricar.Value);
+                    break;
             }
         }
 
@@ -331,6 +331,11 @@ namespace FrmLobby
                     this.txtQuintoBox
                     };
             }
+
+            foreach (TextBox item in this.listaTxtBox)
+            {
+                item.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -343,15 +348,17 @@ namespace FrmLobby
             string formatoStock;
             bool retorno = false;
 
-            if (retorno = Stock.VerificarStock(listaValores, this.dictProducto, this.producto))
+            this.dictProducto = Stock.ModificarDiccionario(producto);
+
+            if (retorno = Stock.VerificarStock(listaValores, this.dictProducto))
             {
-                MessageBox.Show("Stock OK\nEn condiciones de producir la cantidad pedida", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Stock OK\nEn condiciones de producir la cantidad pedida", "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 retorno = true;
             }
             else
             {
-                formatoStock = Stock.ConstruccionStock(listaValores, this.dictProducto, this.producto);
-                MessageBox.Show(formatoStock, "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                formatoStock = Stock.StockFaltante(listaValores, this.dictProducto);
+                MessageBox.Show(formatoStock, "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.BtnFabric.Visible = false;
             }
 

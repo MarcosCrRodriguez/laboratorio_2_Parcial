@@ -99,6 +99,7 @@
             // 
             // txtOctavoBox
             // 
+            txtOctavoBox.Enabled = false;
             txtOctavoBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtOctavoBox.Location = new Point(132, 257);
             txtOctavoBox.Name = "txtOctavoBox";
@@ -107,6 +108,7 @@
             // 
             // txtSeptimoBox
             // 
+            txtSeptimoBox.Enabled = false;
             txtSeptimoBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtSeptimoBox.Location = new Point(132, 225);
             txtSeptimoBox.Name = "txtSeptimoBox";
@@ -115,6 +117,7 @@
             // 
             // txtSextoBox
             // 
+            txtSextoBox.Enabled = false;
             txtSextoBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtSextoBox.Location = new Point(132, 192);
             txtSextoBox.Name = "txtSextoBox";
@@ -123,6 +126,7 @@
             // 
             // txtQuintoBox
             // 
+            txtQuintoBox.Enabled = false;
             txtQuintoBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtQuintoBox.Location = new Point(132, 159);
             txtQuintoBox.Name = "txtQuintoBox";
@@ -131,6 +135,7 @@
             // 
             // txtCuartoBox
             // 
+            txtCuartoBox.Enabled = false;
             txtCuartoBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtCuartoBox.Location = new Point(132, 127);
             txtCuartoBox.Name = "txtCuartoBox";
@@ -139,6 +144,7 @@
             // 
             // txtTercerBox
             // 
+            txtTercerBox.Enabled = false;
             txtTercerBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtTercerBox.Location = new Point(132, 94);
             txtTercerBox.Name = "txtTercerBox";
@@ -147,6 +153,7 @@
             // 
             // txtSegundoBox
             // 
+            txtSegundoBox.Enabled = false;
             txtSegundoBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtSegundoBox.Location = new Point(132, 61);
             txtSegundoBox.Name = "txtSegundoBox";
@@ -155,6 +162,7 @@
             // 
             // txtPrimerBox
             // 
+            txtPrimerBox.Enabled = false;
             txtPrimerBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             txtPrimerBox.Location = new Point(132, 28);
             txtPrimerBox.Name = "txtPrimerBox";

@@ -14,11 +14,14 @@ namespace Entidades
         private const int cantVentiladorConsumida = 1;
         private static int contadorProducto = 0;
         private static string tipoProducto;
+        private static ulong codigoFabricacionM;
         private List<int> listaCantidadesConstantes;
         private List<int> listaValores;
 
-        public Motherboard(string razonSocial, string cuit, ulong codigoFabricacion) : base(razonSocial, cuit, codigoFabricacion)
+        public Motherboard()
         {
+            codigoFabricacionM = 27336012;
+
             TipoProducto = TiposProductos.Motherboard.ToString();
             listaValores = new List<int>();
             this.listaCantidadesConstantes = new List<int> {
@@ -28,7 +31,6 @@ namespace Entidades
             };
         }
 
-        // el atributo 'contadorProducto' y si propiedad podrian heredar de una clase producto
         public static int CantidadProducto
         {
             get { return contadorProducto; } 
@@ -39,6 +41,12 @@ namespace Entidades
         {
             get { return tipoProducto; }
             set { tipoProducto = value; }
+        }
+
+        public static ulong CodigoFabricacionMotherboard
+        {
+            get { return codigoFabricacionM; }
+            set { codigoFabricacionM = value; }
         }
 
         public int CircuitoElectAvanzadoNecesaria
@@ -81,12 +89,6 @@ namespace Entidades
             get { return cantVentiladorConsumida; }
         }
 
-        public int this[int index]
-        {
-            get { return listaValores[index]; }
-            set { listaValores[index] = value; }
-        }
-
         /// <summary>
         /// Creamos una lista en donde le damos valores por cada cantidad de materiales que necesitara para
         /// producir la cantidad ingresada
@@ -105,6 +107,12 @@ namespace Entidades
             this.listaValores.Add(cantidadFdabricar * cantVentiladorConsumida);
 
             return this.listaValores;
+        }
+
+        public int this[int index]
+        {
+            get { return listaValores[index]; }
+            set { listaValores[index] = value; }
         }
 
         /// <summary>
@@ -130,7 +138,8 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(base.Mostrar());
+            sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
+            sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacionMotherboard}");
             sb.AppendLine($"Producto *- {TipoProducto} -*");
             sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 

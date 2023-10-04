@@ -20,21 +20,33 @@ namespace FrmLobby
         private Usuario usuario;
         private Supervisor supervisor;
         private Operario operario;
+        private VideoCard videoCard;
+        private Motherboard motherboard;
+        private Ram ram;
+        private Cabinet cabinet;
+
         private string cargo;
         private List<string> listNombre;
         private List<string> listApellido;
         private List<string> listSector;
+        private List<TextBox> listaTxtBox;
+        private List<int> listaStock;
 
         public MenuUsuario(FrmLobby menuPrincipal, Usuario usuario, string cargo)
         {
             InitializeComponent();
             this.menuPrincipal = menuPrincipal;
             this.usuario = usuario;
-            this.cargo = cargo;
+            this.videoCard = new VideoCard();
+            this.motherboard = new Motherboard();
+            this.ram = new Ram();
+            this.cabinet = new Cabinet();
 
+            this.cargo = cargo;
             this.listNombre = new List<string>();
             this.listApellido = new List<string>();
             this.listSector = new List<string>();
+            this.listaTxtBox = new List<TextBox>();
             this.CargarListas();
         }
 
@@ -45,12 +57,14 @@ namespace FrmLobby
                 this.supervisor = new Supervisor(usuario.Nombre, usuario.Apellido, this.cargo);
                 this.txtNombre.Text = $" {this.supervisor.Nombre} {this.supervisor.Apellido}";
                 this.gboxUsuario.Text = "Supervisor";
+                this.gboxUsuario.Enabled = false;
             }
             else
             {
                 this.operario = new Operario(usuario.Nombre, usuario.Apellido, this.cargo);
                 this.txtNombre.Text = $" {this.operario.Nombre} {this.operario.Apellido}";
                 this.gboxUsuario.Text = "Operario";
+                this.gboxUsuario.Enabled = false;
                 this.BtnRegistro.Visible = false;
                 this.BtnReStock.Visible = false;
             }
@@ -146,6 +160,18 @@ namespace FrmLobby
         /// </summary>
         private void CargarListas()
         {
+            this.listaTxtBox.Add(this.txtCircuitoElect);
+            this.listaTxtBox.Add(this.txtCircuitoElectAv);
+            this.listaTxtBox.Add(this.txtUniProcesamiento);
+            this.listaTxtBox.Add(this.txtBarraPlastica);
+            this.listaTxtBox.Add(this.txtCableVerde);
+            this.listaTxtBox.Add(this.txtCableRojo);
+            this.listaTxtBox.Add(this.txtBaraHierro);
+            this.listaTxtBox.Add(this.txtEngranajeHierro);
+            this.listaTxtBox.Add(this.txtFibtaVidrio);
+            this.listaTxtBox.Add(this.txtCondensador);
+            this.listaTxtBox.Add(this.txtVentilador);
+
             //------------------------Operario------------------------//
             this.listNombre = Operario.HardcodearNombre();
             this.listApellido = Operario.HardcodearApellido();
@@ -157,21 +183,47 @@ namespace FrmLobby
         /// </summary>
         public void CargaDatos()
         {
-            this.txtCircuitoElect.Text = Stock.CantCircuitosElectronicos.ToString();
-            this.txtCircuitoElectAv.Text = Stock.CantCircuitosElectronicosAvanzados.ToString();
-            this.txtUniProcesamiento.Text = Stock.CantUnidadProcesamiento.ToString();
-            this.txtBarraPlastica.Text = Stock.CantBarraPlastico.ToString();
-            this.txtCableVerde.Text = Stock.CantCableVerde.ToString();
-            this.txtCableRojo.Text = Stock.CantCableRojo.ToString();
-            this.txtBaraHierro.Text = Stock.CantBaraHierro.ToString();
-            this.txtEngranajeHierro.Text = Stock.CantEngranajeHierro.ToString();
-            this.txtFibtaVidrio.Text = Stock.CantFibrasVidrio.ToString();
-            this.txtCondensador.Text = Stock.CantCondensador.ToString();
-            this.txtVentilador.Text = Stock.CantVentilador.ToString();
+            this.listaStock = Stock.InstanciarListaStock();
+
+            for (int i = 0; i < this.listaTxtBox.Count; i++)
+            {
+                this.listaTxtBox[i].Text = this.listaStock[i].ToString();
+            }
+
+            foreach (TextBox item in this.listaTxtBox)
+            {
+                item.Enabled = false;
+            }
+
             this.txtBoxCantVideoCard.Text = VideoCard.CantidadProducto.ToString();
             this.txtBoxCantMotherboard.Text = Motherboard.CantidadProducto.ToString();
             this.txtBoxCantRam.Text = Ram.CantidadProducto.ToString();
             this.txtBoxCantCabinet.Text = Cabinet.CantidadProducto.ToString();
+
+            this.txtBoxCantVideoCard.Enabled = false;
+            this.txtBoxCantMotherboard.Enabled = false;
+            this.txtBoxCantRam.Enabled = false;
+            this.txtBoxCantCabinet.Enabled = false;
+        }
+
+        private void LblVideo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"{(string)videoCard}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void LblMoth_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"{(string)motherboard}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void LblRam_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"{(string)ram}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void LblCabinet_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"{(string)cabinet}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

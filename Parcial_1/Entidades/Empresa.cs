@@ -8,12 +8,12 @@ namespace Entidades
 {
     public abstract class Empresa
     {
-        protected string razonSocial;
-        protected string cuit;
-        protected Empresa(string razonSocial, string cuit)
+        protected static string razonSocial;
+        protected static string cuit;
+        protected Empresa()
         {
-            this.razonSocial = razonSocial;
-            this.cuit = cuit;
+            razonSocial = "Factory.IO";
+            cuit = "16-56433112-2";
         }
 
         protected string CUIT 
@@ -26,8 +26,6 @@ namespace Entidades
             get { return razonSocial; }
             set { razonSocial = value; }
         }
-
-        public abstract string Mostrar();
 
     }
 }

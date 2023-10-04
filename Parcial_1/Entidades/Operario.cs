@@ -8,8 +8,7 @@ namespace Entidades
         protected static List<string> listNombre;
         protected static List<string> listApellido;
         protected static List<string> listSector;
-        public Operario(string nombre, string apellido, string puesto)
-            :base(nombre, apellido)
+        public Operario(string nombre, string apellido, string puesto) : base(nombre, apellido)
         {
             this.puesto = puesto;
         }
