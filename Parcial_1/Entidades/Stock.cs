@@ -4,32 +4,48 @@ namespace Entidades
 {
     public static class Stock
     {
-        private static int cantCircuitoElect = 2850;
-        private static int cantCircuitoElectAvanzado = 2550;
-        private static int cantUnidadProcesamiento = 2200;
-        private static int cantBarraPlastico = 3700;
-        private static int cantCableVerde = 2500;
-        private static int cantCableRojo = 2500;
-        private static int cantBaraHierro = 3600;
-        private static int cantEngranajeHierro = 3600;
-        private static int cantFibrasVidrio = 2850;
-        private static int cantCondensador = 2250;
-        private static int cantVentilador = 2000;
+        private static int cantCircuitoElect;
+        private static int cantCircuitoElectAvanzado;
+        private static int cantUnidadProcesamiento;
+        private static int cantBarraPlastico;
+        private static int cantCableVerde;
+        private static int cantCableRojo;
+        private static int cantBaraHierro;
+        private static int cantEngranajeHierro;
+        private static int cantFibrasVidrio;
+        private static int cantCondensador;
+        private static int cantVentilador;
         private static List<int> listaStock;
         private static List<string> listaHardcodeada;
+        private static Dictionary<string, int> dictValores;
+
+        static Stock()
+        {
+            cantCircuitoElect = 2850;
+            cantCircuitoElectAvanzado = 2550;
+            cantUnidadProcesamiento = 2200;
+            cantBarraPlastico = 3700;
+            cantCableVerde = 2500;
+            cantCableRojo = 2500;
+            cantBaraHierro = 3600;
+            cantEngranajeHierro = 3600;
+            cantFibrasVidrio = 2850;
+            cantCondensador = 2250;
+            cantVentilador = 2000;
+            dictValores = new Dictionary<string, int>();
+            listaHardcodeada = new List<string>();
+    }
 
         public static int CantCircuitosElectronicos
         {
             get { return cantCircuitoElect; }
             set 
             {
-                if (value > 0)
+                cantCircuitoElect = value;
+
+                if (cantCircuitoElect < 0)
                 {
-                    cantCircuitoElect += value;
-                }
-                else
-                {
-                    cantCircuitoElect += value;
+                    cantCircuitoElect = 0;
                 }
             }
         }
@@ -38,14 +54,12 @@ namespace Entidades
         {
             get { return cantCircuitoElectAvanzado; }
             set 
-            { 
-                if (value > 0)
+            {
+                cantCircuitoElectAvanzado = value;
+
+                if (cantCircuitoElectAvanzado < 0)
                 {
-                    cantCircuitoElectAvanzado += value;
-                }
-                else
-                {
-                    cantCircuitoElectAvanzado += value;
+                    cantCircuitoElectAvanzado = 0;
                 }
             }
         }
@@ -55,13 +69,11 @@ namespace Entidades
             get { return cantUnidadProcesamiento; }
             set 
             {
-                if (value > 0)
+                cantUnidadProcesamiento = value;
+
+                if (cantUnidadProcesamiento < 0)
                 {
-                    cantUnidadProcesamiento += value;
-                }
-                else
-                {
-                    cantUnidadProcesamiento += value;
+                    cantUnidadProcesamiento = 0;
                 }
             }
         }
@@ -70,13 +82,11 @@ namespace Entidades
             get { return cantBarraPlastico; }
             set 
             {
-                if (value > 0)
+                cantBarraPlastico = value;
+
+                if (cantBarraPlastico < 0)
                 {
-                    cantBarraPlastico += value;
-                }
-                else
-                {
-                    cantBarraPlastico += value;
+                    cantBarraPlastico = 0;
                 }
             }
         }
@@ -86,13 +96,11 @@ namespace Entidades
             get { return cantCableVerde; }
             set 
             {
-                if (value > 0)
+                cantCableVerde = value;
+
+                if (cantCableVerde < 0)
                 {
-                    cantCableVerde += value;
-                }
-                else
-                {
-                    cantCableVerde += value;
+                    cantCableVerde = 0;
                 }
             }
         }
@@ -102,13 +110,11 @@ namespace Entidades
             get { return cantCableRojo; }
             set 
             {
-                if (value > 0)
+                cantCableRojo = value;
+
+                if (cantCableRojo < 0)
                 {
-                    cantCableRojo += value;
-                }
-                else
-                {
-                    cantCableRojo += value;
+                    cantCableRojo = 0;
                 }
             }
         }
@@ -117,13 +123,11 @@ namespace Entidades
             get { return cantBaraHierro; }
             set 
             {
-                if (value > 0)
+                cantBaraHierro = value;
+
+                if (cantBaraHierro < 0)
                 {
-                    cantBaraHierro += value;
-                }
-                else
-                {
-                    cantBaraHierro += value;
+                    cantBaraHierro = 0;
                 }
             }
         }
@@ -133,13 +137,11 @@ namespace Entidades
             get { return cantEngranajeHierro; }
             set 
             {
-                if (value > 0)
+                cantEngranajeHierro = value;
+
+                if (cantEngranajeHierro < 0)
                 {
-                    cantEngranajeHierro += value;
-                }
-                else
-                {
-                    cantEngranajeHierro += value;
+                    cantEngranajeHierro = 0;
                 }
             }
         }
@@ -149,13 +151,11 @@ namespace Entidades
             get { return cantFibrasVidrio; }
             set 
             {
-                if (value > 0)
+                cantFibrasVidrio = value;
+
+                if (cantFibrasVidrio < 0)
                 {
-                    cantFibrasVidrio += value;
-                }
-                else
-                {
-                    cantFibrasVidrio += value;
+                    cantFibrasVidrio = 0;
                 }
             }
         }
@@ -164,13 +164,11 @@ namespace Entidades
             get { return cantCondensador; }
             set 
             {
-                if (value > 0)
+                cantCondensador = value;
+
+                if (cantCondensador < 0)
                 {
-                    cantCondensador += value;
-                }
-                else
-                {
-                    cantCondensador += value;
+                    cantCondensador = 0;
                 }
             }
         }
@@ -180,13 +178,11 @@ namespace Entidades
             get { return cantVentilador; }
             set 
             {
-                if (value > 0)
+                cantVentilador = value;
+
+                if (cantVentilador < 0)
                 {
-                    cantVentilador += value;
-                }
-                else
-                {
-                    cantVentilador += value;
+                    cantVentilador = 0;
                 }
             }
         }
@@ -326,6 +322,21 @@ namespace Entidades
             return dictProducto;
         }
 
+        public static void ActualizarStock(List<int> listaValores)
+        {
+            Stock.CantCircuitosElectronicos += listaValores[0];
+            Stock.CantCircuitosElectronicosAvanzados += listaValores[1];
+            Stock.CantUnidadProcesamiento += listaValores[2];
+            Stock.CantCableVerde += listaValores[3];
+            Stock.CantCableRojo += listaValores[4];
+            Stock.CantBarraPlastico += listaValores[5];
+            Stock.CantBaraHierro += listaValores[6];
+            Stock.CantEngranajeHierro += listaValores[7];
+            Stock.CantFibrasVidrio += listaValores[8];
+            Stock.CantCondensador += listaValores[9];
+            Stock.CantVentilador += listaValores[10];
+        }
+
         public static Dictionary<string, int> DiccionarioDelStock()
         {
             Dictionary<string, int> dictStock;
@@ -346,7 +357,7 @@ namespace Entidades
 
             return dictStock;
         }
-
+        
         public static List<string> ListaHarcodeadaStock()
         {
             listaHardcodeada.Add("Circuitos Electronicos");

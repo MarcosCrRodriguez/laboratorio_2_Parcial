@@ -4,14 +4,14 @@ namespace Entidades
 {
     public class VideoCard : Producto
     {
-        private const int cantUniProcesamientoConsumida = 4;
-        private const int cantCableVerdeConsumida = 9;
-        private const int cantBarraPlasticoConsumida = 4;
-        private const int cantBaraHierroConsumida = 3;
-        private const int cantEngranajeHierroConsumida = 9;
-        private const int cantFibrasVidrioConsumida = 5;
-        private const int cantCondensadorConsumida = 7;
-        private const int cantVentiladorConsumida = 2;
+        private int cantUniProcesamientoConsumida = 4;
+        private int cantCableVerdeConsumida = 9;
+        private int cantBarraPlasticoConsumida = 4;
+        private int cantBaraHierroConsumida = 3;
+        private int cantEngranajeHierroConsumida = 9;
+        private int cantFibrasVidrioConsumida = 5;
+        private int cantCondensadorConsumida = 7;
+        private int cantVentiladorConsumida = 2;
         private static int contadorProducto = 0;
         private static string tipoProducto;
         private static ulong codigoFabricacionV;
@@ -141,8 +141,6 @@ namespace Entidades
 
             sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
             sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacionVideocard}");
-            sb.AppendLine($"Producto *- {TipoProducto} -*");
-            sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 
             return sb.ToString();
         }
@@ -156,6 +154,8 @@ namespace Entidades
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine(v.Mostrar());
+            sb.AppendLine($"Producto *- {TipoProducto} -*");
+            sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 
             return sb.ToString();
         }

@@ -22,7 +22,7 @@ namespace FrmLobby
             InitializeComponent();
             this.menuCargo = menuCargo;
             this.listaNum = new List<int>();
-            this.listaHardcodeada = new List<string>(); 
+            this.listaHardcodeada = new List<string>();
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
@@ -30,42 +30,32 @@ namespace FrmLobby
             this.listaHardcodeada = Stock.ListaHarcodeadaStock();
         }
 
-        private void btnBackWindow_Click(object sender, EventArgs e)
+        private void BtnBackWindow_Click(object sender, EventArgs e)
         {
             this.menuCargo.Show();
             this.Close();
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void BtnHardcodeo_Click(object sender, EventArgs e)
         {
-            // si logro poder realizar la logica de abajo, condicionar que si tengo valores por debajo del
-            // 0 al modificar los atributos no los modifique
+            numCircuitoElect.Value += 1500;
+            numCircuitoElectAv.Value += 1500;
+            numUnProcesamiento.Value += 1500;
+            numCableVerde.Value += 1500;
+            numCableRojo.Value += 1500;
+            numBarraPlastica.Value += 1500;
+            numBaraHierro.Value += 1500;
+            numEngranajeHierro.Value += 1500;
+            numFibraVidrio.Value += 1500;
+            numCondensador.Value += 1500;
+            numVentilador.Value += 1500;
+        }
 
-            //this.dictStock = Stock.DiccionarioDelStock();
-            //this.listaNum = this.CargarListaNum();
+        private void BtnLoad_Click(object sender, EventArgs e)
+        {
+            this.listaNum = this.CargarListaNum();
 
-            //// falta una vuelta de rosca por aca
-            //int i = 0;
-
-            //foreach (KeyValuePair<string, int> item in this.dictStock)
-            //{
-            //    this.dictStock.TryGetValue(this.listaHardcodeada[i], out int value); 
-            //    i++;
-            //}
-
-            Stock.CantCircuitosElectronicos = (int)numCircuitoElect.Value;
-            Stock.CantCircuitosElectronicosAvanzados = (int)numCircuitoElectAv.Value;
-            Stock.CantUnidadProcesamiento = (int)numUnProcesamiento.Value;
-            Stock.CantCableVerde = (int)numCableVerde.Value;
-            Stock.CantCableRojo = (int)numCableRojo.Value;
-            Stock.CantBarraPlastico = (int)numBarraPlastica.Value;
-            Stock.CantBaraHierro = (int)numBaraHierro.Value;
-            Stock.CantEngranajeHierro = (int)numEngranajeHierro.Value;
-            Stock.CantFibrasVidrio = (int)numFibraVidrio.Value;
-            Stock.CantCondensador = (int)numCondensador.Value;
-            Stock.CantVentilador = (int)numVentilador.Value;
-
-            //investigar que es singleton
+            Stock.ActualizarStock(this.listaNum);
 
             MessageBox.Show("Carga de materiales ha sido completada\nvolviendo al menu", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
             MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -77,17 +67,17 @@ namespace FrmLobby
 
         private List<int> CargarListaNum()
         {
-            this.listaNum.Add((int)numCircuitoElect.Value);
-            this.listaNum.Add((int)numCircuitoElectAv.Value);
-            this.listaNum.Add((int)numUnProcesamiento.Value);
-            this.listaNum.Add((int)numCableVerde.Value);
-            this.listaNum.Add((int)numCableRojo.Value);
-            this.listaNum.Add((int)numBarraPlastica.Value);
-            this.listaNum.Add((int)numBaraHierro.Value);
-            this.listaNum.Add((int)numEngranajeHierro.Value);
-            this.listaNum.Add((int)numFibraVidrio.Value);
-            this.listaNum.Add((int)numCondensador.Value);
-            this.listaNum.Add((int)numVentilador.Value);
+            this.listaNum.Add((int)this.numCircuitoElect.Value);
+            this.listaNum.Add((int)this.numCircuitoElectAv.Value);
+            this.listaNum.Add((int)this.numUnProcesamiento.Value);
+            this.listaNum.Add((int)this.numCableVerde.Value);
+            this.listaNum.Add((int)this.numCableRojo.Value);
+            this.listaNum.Add((int)this.numBarraPlastica.Value);
+            this.listaNum.Add((int)this.numBaraHierro.Value);
+            this.listaNum.Add((int)this.numEngranajeHierro.Value);
+            this.listaNum.Add((int)this.numFibraVidrio.Value);
+            this.listaNum.Add((int)this.numCondensador.Value);
+            this.listaNum.Add((int)this.numVentilador.Value);
 
             return this.listaNum;
         }

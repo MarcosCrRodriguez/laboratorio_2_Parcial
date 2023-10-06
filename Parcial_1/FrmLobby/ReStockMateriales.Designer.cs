@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gboxMateriales = new GroupBox();
+            BtnHardcodeo = new Button();
             numVentilador = new NumericUpDown();
             numCondensador = new NumericUpDown();
             numFibraVidrio = new NumericUpDown();
@@ -51,9 +52,9 @@
             label5 = new Label();
             label7 = new Label();
             label6 = new Label();
-            btnBackWindow = new Button();
+            BtnBackWindow = new Button();
             lblFactory = new Label();
-            btnLoad = new Button();
+            BtnLoad = new Button();
             gboxMateriales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numVentilador).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numCondensador).BeginInit();
@@ -71,6 +72,7 @@
             // gboxMateriales
             // 
             gboxMateriales.BackColor = Color.Transparent;
+            gboxMateriales.Controls.Add(BtnHardcodeo);
             gboxMateriales.Controls.Add(numVentilador);
             gboxMateriales.Controls.Add(numCondensador);
             gboxMateriales.Controls.Add(numFibraVidrio);
@@ -101,6 +103,17 @@
             gboxMateriales.TabIndex = 24;
             gboxMateriales.TabStop = false;
             gboxMateriales.Text = "Cantidad materiales a agregar";
+            // 
+            // BtnHardcodeo
+            // 
+            BtnHardcodeo.ForeColor = Color.Gray;
+            BtnHardcodeo.Location = new Point(256, 242);
+            BtnHardcodeo.Name = "BtnHardcodeo";
+            BtnHardcodeo.Size = new Size(119, 27);
+            BtnHardcodeo.TabIndex = 46;
+            BtnHardcodeo.Text = "Hardcodear";
+            BtnHardcodeo.UseVisualStyleBackColor = true;
+            BtnHardcodeo.Click += BtnHardcodeo_Click;
             // 
             // numVentilador
             // 
@@ -300,17 +313,17 @@
             label6.TabIndex = 25;
             label6.Text = "Circuito Elect Av";
             // 
-            // btnBackWindow
+            // BtnBackWindow
             // 
-            btnBackWindow.BackColor = Color.BurlyWood;
-            btnBackWindow.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBackWindow.Location = new Point(453, 237);
-            btnBackWindow.Name = "btnBackWindow";
-            btnBackWindow.Size = new Size(127, 58);
-            btnBackWindow.TabIndex = 25;
-            btnBackWindow.Text = "Back to Window";
-            btnBackWindow.UseVisualStyleBackColor = false;
-            btnBackWindow.Click += btnBackWindow_Click;
+            BtnBackWindow.BackColor = Color.BurlyWood;
+            BtnBackWindow.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnBackWindow.Location = new Point(453, 237);
+            BtnBackWindow.Name = "BtnBackWindow";
+            BtnBackWindow.Size = new Size(127, 58);
+            BtnBackWindow.TabIndex = 25;
+            BtnBackWindow.Text = "Back to Window";
+            BtnBackWindow.UseVisualStyleBackColor = false;
+            BtnBackWindow.Click += BtnBackWindow_Click;
             // 
             // lblFactory
             // 
@@ -325,16 +338,16 @@
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
-            // btnLoad
+            // BtnLoad
             // 
-            btnLoad.BackColor = Color.MediumSeaGreen;
-            btnLoad.Location = new Point(471, 166);
-            btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(94, 43);
-            btnLoad.TabIndex = 27;
-            btnLoad.Text = "Load Materials";
-            btnLoad.UseVisualStyleBackColor = false;
-            btnLoad.Click += btnLoad_Click;
+            BtnLoad.BackColor = Color.MediumSeaGreen;
+            BtnLoad.Location = new Point(471, 166);
+            BtnLoad.Name = "BtnLoad";
+            BtnLoad.Size = new Size(94, 43);
+            BtnLoad.TabIndex = 27;
+            BtnLoad.Text = "Load Materials";
+            BtnLoad.UseVisualStyleBackColor = false;
+            BtnLoad.Click += BtnLoad_Click;
             // 
             // FrmReStockMateriales
             // 
@@ -343,9 +356,9 @@
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_background_v_1517907jpg_sw800;
             ClientSize = new Size(592, 308);
             ControlBox = false;
-            Controls.Add(btnLoad);
+            Controls.Add(BtnLoad);
             Controls.Add(lblFactory);
-            Controls.Add(btnBackWindow);
+            Controls.Add(BtnBackWindow);
             Controls.Add(gboxMateriales);
             MaximizeBox = false;
             Name = "FrmReStockMateriales";
@@ -383,9 +396,9 @@
         private Label label5;
         private Label label7;
         private Label label6;
-        private Button btnBackWindow;
+        private Button BtnBackWindow;
         private Label lblFactory;
-        private Button btnLoad;
+        private Button BtnLoad;
         private NumericUpDown numVentilador;
         private NumericUpDown numCondensador;
         private NumericUpDown numFibraVidrio;
@@ -397,5 +410,6 @@
         private NumericUpDown numUnProcesamiento;
         private NumericUpDown numCircuitoElectAv;
         private NumericUpDown numCircuitoElect;
+        private Button BtnHardcodeo;
     }
 }

@@ -208,22 +208,22 @@ namespace FrmLobby
 
         private void LblVideo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{(string)videoCard}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{videoCard.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LblMoth_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{(string)motherboard}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{motherboard.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LblRam_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{(string)ram}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{ram.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void LblCabinet_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{(string)cabinet}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{cabinet.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -167,46 +167,48 @@ namespace FrmLobby
                 {
                     MessageBox.Show("Soldando materiales...", "Proceso metalúrgico", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MessageBox.Show("Conectando cables...", "Conección cables", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                     if (this.producto == 0)
                     {
                         // intentar de llevar a las clases y no tenerlo aca
-                        Stock.CantUnidadProcesamiento = valorNegativo * this.listaValores[0];
-                        Stock.CantCableVerde = valorNegativo * this.listaValores[1];
-                        Stock.CantBarraPlastico = valorNegativo * this.listaValores[2];
-                        Stock.CantBaraHierro = valorNegativo * this.listaValores[3];
-                        Stock.CantEngranajeHierro = valorNegativo * this.listaValores[4];
-                        Stock.CantFibrasVidrio = valorNegativo * this.listaValores[5];
-                        Stock.CantCondensador = valorNegativo * this.listaValores[6];
-                        Stock.CantVentilador = valorNegativo * this.listaValores[7];
-                        VideoCard.CantidadProducto = (int)numFabricar.Value;
+
+                        Stock.CantUnidadProcesamiento += valorNegativo * this.listaValores[0];
+                        Stock.CantCableVerde += valorNegativo * this.listaValores[1];
+                        Stock.CantBarraPlastico += valorNegativo * this.listaValores[2];
+                        Stock.CantBaraHierro += valorNegativo * this.listaValores[3];
+                        Stock.CantEngranajeHierro += valorNegativo * this.listaValores[4];
+                        Stock.CantFibrasVidrio += valorNegativo * this.listaValores[5];
+                        Stock.CantCondensador += valorNegativo * this.listaValores[6];
+                        Stock.CantVentilador += valorNegativo * this.listaValores[7];
+                        VideoCard.CantidadProducto += (int)numFabricar.Value;
                     }
                     else if (this.producto == 1)
                     {
-                        Stock.CantCircuitosElectronicosAvanzados = valorNegativo * this.listaValores[0];
-                        Stock.CantCableRojo = valorNegativo * this.listaValores[1];
-                        Stock.CantBarraPlastico = valorNegativo * this.listaValores[2];
-                        Stock.CantBaraHierro = valorNegativo * this.listaValores[3];
-                        Stock.CantEngranajeHierro = valorNegativo * this.listaValores[4];
-                        Stock.CantFibrasVidrio = valorNegativo * this.listaValores[5];
-                        Stock.CantCondensador = valorNegativo * this.listaValores[6];
-                        Stock.CantVentilador = valorNegativo * this.listaValores[7];
-                        Motherboard.CantidadProducto = (int)numFabricar.Value;
+                        Stock.CantCircuitosElectronicosAvanzados += valorNegativo * this.listaValores[0];
+                        Stock.CantCableRojo += valorNegativo * this.listaValores[1];
+                        Stock.CantBarraPlastico += valorNegativo * this.listaValores[2];
+                        Stock.CantBaraHierro += valorNegativo * this.listaValores[3];
+                        Stock.CantEngranajeHierro += valorNegativo * this.listaValores[4];
+                        Stock.CantFibrasVidrio += valorNegativo * this.listaValores[5];
+                        Stock.CantCondensador += valorNegativo * this.listaValores[6];
+                        Stock.CantVentilador += valorNegativo * this.listaValores[7];
+                        Motherboard.CantidadProducto += (int)numFabricar.Value;
                     }
                     else if (this.producto == 2)
                     {
-                        Stock.CantCircuitosElectronicos = valorNegativo * this.listaValores[0];
-                        Stock.CantBarraPlastico = valorNegativo * this.listaValores[1];
-                        Stock.CantBaraHierro = valorNegativo * this.listaValores[2];
-                        Stock.CantEngranajeHierro = valorNegativo * this.listaValores[3];
-                        Ram.CantidadProducto = (int)numFabricar.Value;
+                        Stock.CantCircuitosElectronicos += valorNegativo * this.listaValores[0];
+                        Stock.CantBarraPlastico += valorNegativo * this.listaValores[1];
+                        Stock.CantBaraHierro += valorNegativo * this.listaValores[2];
+                        Stock.CantEngranajeHierro += valorNegativo * this.listaValores[3];
+                        Ram.CantidadProducto += (int)numFabricar.Value;
                     }
                     else
                     {
-                        Stock.CantCableRojo = valorNegativo * this.listaValores[0];
-                        Stock.CantBarraPlastico = valorNegativo * this.listaValores[1];
-                        Stock.CantBaraHierro = valorNegativo * this.listaValores[2];
-                        Stock.CantEngranajeHierro = valorNegativo * this.listaValores[3];
-                        Stock.CantVentilador = valorNegativo * this.listaValores[4];
+                        Stock.CantCableRojo += valorNegativo * this.listaValores[0];
+                        Stock.CantBarraPlastico += valorNegativo * this.listaValores[1];
+                        Stock.CantBaraHierro += valorNegativo * this.listaValores[2];
+                        Stock.CantEngranajeHierro += valorNegativo * this.listaValores[3];
+                        Stock.CantVentilador += valorNegativo * this.listaValores[4];
                         Cabinet.CantidadProducto = (int)numFabricar.Value;
                     }
                     MessageBox.Show("Procesos finalizados\nFabricación EXITOSA", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -236,7 +238,7 @@ namespace FrmLobby
                     MessageBox.Show($"{(string)cabinet}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 default:
-                    MessageBox.Show("No se pudo fabricar ningun producto\nNo se pudo ingresar al sector", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se pude mostrar producto", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
         }
@@ -350,14 +352,14 @@ namespace FrmLobby
 
             this.dictProducto = Stock.ModificarDiccionario(producto);
 
-            if (retorno = Stock.VerificarStock(listaValores, this.dictProducto))
+            if (retorno = Stock.VerificarStock(this.listaValores, this.dictProducto))
             {
                 MessageBox.Show("Stock OK\nEn condiciones de producir la cantidad pedida", "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 retorno = true;
             }
             else
             {
-                formatoStock = Stock.StockFaltante(listaValores, this.dictProducto);
+                formatoStock = Stock.StockFaltante(this.listaValores, this.dictProducto);
                 MessageBox.Show(formatoStock, "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.BtnFabric.Visible = false;
             }

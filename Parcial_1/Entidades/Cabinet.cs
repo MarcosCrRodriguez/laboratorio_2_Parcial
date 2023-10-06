@@ -119,8 +119,6 @@ namespace Entidades
 
             sb.AppendLine($"Empresa: {RazonSocial} - CUIT: {CUIT}");
             sb.AppendLine($"Codigo de fabricacion: {CodigoFabricacionCabinet}");
-            sb.AppendLine($"Producto *- {TipoProducto} -*");
-            sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 
             return sb.ToString();
         }
@@ -135,6 +133,8 @@ namespace Entidades
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine(c.Mostrar());
+            sb.AppendLine($"Producto *- {TipoProducto} -*");
+            sb.AppendLine($"Cantidad de productos fabricados -> {CantidadProducto}");
 
             return sb.ToString();
         }
