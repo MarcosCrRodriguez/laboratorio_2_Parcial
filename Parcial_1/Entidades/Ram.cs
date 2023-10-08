@@ -4,10 +4,10 @@ namespace Entidades
 {
     public class Ram : Producto
     {
-        private const int cantCircuitoElectConsumida = 2;
-        private const int cantBarraPlasticoConsumida = 2;
-        private const int cantBaraHierroConsumida = 2;
-        private const int cantEngranajeHierroConsumida = 3;
+        private int cantCircuitoElectConsumida;
+        private int cantBarraPlasticoConsumida;
+        private int cantBaraHierroConsumida;
+        private int cantEngranajeHierroConsumida;
         private static int contadorProducto = 0;
         private static string tipoProducto;
         private static ulong codigoFabricacionR;
@@ -16,6 +16,10 @@ namespace Entidades
 
         public Ram()
         {
+            this.cantCircuitoElectConsumida = 2;
+            this.cantBarraPlasticoConsumida = 2;
+            this.cantBaraHierroConsumida = 2;
+            this.cantEngranajeHierroConsumida = 3;
             codigoFabricacionR = 57001313;
 
             TipoProducto = TiposProductos.Ram.ToString();
@@ -30,7 +34,7 @@ namespace Entidades
         public static int CantidadProducto
         {
             get { return contadorProducto; }
-            set { contadorProducto += value; }
+            set { contadorProducto = value; }
         }
 
         public static string TipoProducto
@@ -100,6 +104,27 @@ namespace Entidades
             }
 
             return this.listaValores;
+        }
+
+        /// <summary>
+        /// Le resto las cantidades utilizadas en la fabricacion del producto al Stock
+        /// </summary>
+        /// <param name="valor">El valor con el que transformo en negativo la lista '-1'</param>
+        /// <param name="listaValores">Lista de cantidad de materiales utilizados</param>
+        /// <returns>Retora true si se cumplio la condicion, sino false</returns>
+        public override bool FabricarProducto(int valor, List<int> listaValores)
+        {
+            if (listaValores.Count > 0 && listaValores != null)
+            {
+                Stock.CantCircuitosElectronicos += valor * this.listaValores[0];
+                Stock.CantBarraPlastico += valor * this.listaValores[1];
+                Stock.CantBaraHierro += valor * this.listaValores[2];
+                Stock.CantEngranajeHierro += valor * this.listaValores[3];
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

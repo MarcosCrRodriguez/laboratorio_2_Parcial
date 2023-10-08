@@ -15,19 +15,18 @@ namespace FrmLobby
     {
         private MenuUsuario menuCargo;
         private List<int> listaNum;
-        private List<string> listaHardcodeada;
+        //private List<string> listaHardcodeada;
         private Dictionary<string, int> dictStock;
         public FrmReStockMateriales(MenuUsuario menuCargo)
         {
             InitializeComponent();
             this.menuCargo = menuCargo;
-            this.listaNum = new List<int>();
-            this.listaHardcodeada = new List<string>();
+            //this.listaHardcodeada = new List<string>();
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
         {
-            this.listaHardcodeada = Stock.ListaHarcodeadaStock();
+            //this.listaHardcodeada = Stock.ListaHarcodeadaStock();
         }
 
         private void BtnBackWindow_Click(object sender, EventArgs e)
@@ -67,17 +66,19 @@ namespace FrmLobby
 
         private List<int> CargarListaNum()
         {
-            this.listaNum.Add((int)this.numCircuitoElect.Value);
-            this.listaNum.Add((int)this.numCircuitoElectAv.Value);
-            this.listaNum.Add((int)this.numUnProcesamiento.Value);
-            this.listaNum.Add((int)this.numCableVerde.Value);
-            this.listaNum.Add((int)this.numCableRojo.Value);
-            this.listaNum.Add((int)this.numBarraPlastica.Value);
-            this.listaNum.Add((int)this.numBaraHierro.Value);
-            this.listaNum.Add((int)this.numEngranajeHierro.Value);
-            this.listaNum.Add((int)this.numFibraVidrio.Value);
-            this.listaNum.Add((int)this.numCondensador.Value);
-            this.listaNum.Add((int)this.numVentilador.Value);
+            this.listaNum = new List<int>() {
+                (int)this.numCircuitoElect.Value,
+                (int)this.numCircuitoElectAv.Value,
+                (int)this.numUnProcesamiento.Value,
+                (int)this.numCableVerde.Value,
+                (int)this.numCableRojo.Value,
+                (int)this.numBarraPlastica.Value,
+                (int)this.numBaraHierro.Value,
+                (int)this.numEngranajeHierro.Value,
+                (int)this.numFibraVidrio.Value,
+                (int)this.numCondensador.Value,
+                (int)this.numVentilador.Value
+                };
 
             return this.listaNum;
         }

@@ -4,27 +4,35 @@ namespace Entidades
 {
     public class VideoCard : Producto
     {
-        private int cantUniProcesamientoConsumida = 4;
-        private int cantCableVerdeConsumida = 9;
-        private int cantBarraPlasticoConsumida = 4;
-        private int cantBaraHierroConsumida = 3;
-        private int cantEngranajeHierroConsumida = 9;
-        private int cantFibrasVidrioConsumida = 5;
-        private int cantCondensadorConsumida = 7;
-        private int cantVentiladorConsumida = 2;
+        private int cantUniProcesamientoConsumida;
+        private int cantCableVerdeConsumida;
+        private int cantBarraPlasticoConsumida;
+        private int cantBaraHierroConsumida;
+        private int cantEngranajeHierroConsumida;
+        private int cantFibrasVidrioConsumida;
+        private int cantCondensadorConsumida;
+        private int cantVentiladorConsumida;
         private static int contadorProducto = 0;
         private static string tipoProducto;
         private static ulong codigoFabricacionV;
-        private List<int> listaCantidadesConstantes;
+        private List<int> listaCantidades;
         private List<int> listaValores;
 
         public VideoCard()
         {
+            this.cantUniProcesamientoConsumida = 4;
+            this.cantCableVerdeConsumida = 9;
+            this.cantBarraPlasticoConsumida = 4;
+            this.cantBaraHierroConsumida = 3;
+            this.cantEngranajeHierroConsumida = 9;
+            this.cantFibrasVidrioConsumida = 5;
+            this.cantCondensadorConsumida = 7;
+            this.cantVentiladorConsumida = 2;
             codigoFabricacionV = 82774327;
 
             TipoProducto = TiposProductos.VideoCard.ToString();
             this.listaValores = new List<int>();
-            this.listaCantidadesConstantes = new List<int> {
+            this.listaCantidades = new List<int> {
                 UnidadProcesamientoNecesaria, CableVerdeNecesaria, BarraPlasticoNecesaria,
                 BaraHierroNecesaria, EngranajeHierroNecesaria, FibrasVidrioNecesaria,
                 CondensadorNecesaria, VentiladorNecesaria
@@ -35,7 +43,7 @@ namespace Entidades
         public static int CantidadProducto
         {
             get { return contadorProducto; }
-            set { contadorProducto += value; }
+            set { contadorProducto = value; }
         }
 
         public static string TipoProducto
@@ -125,10 +133,35 @@ namespace Entidades
         {
             for (int i = 0; i < listaValores.Count; i++)
             {
-                this[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
+                this[i] = cantidadFdabricar * this.listaCantidades[i];
             }
 
             return this.listaValores;
+        }
+
+        /// <summary>
+        /// Le resto las cantidades utilizadas en la fabricacion del producto al Stock
+        /// </summary>
+        /// <param name="valor">El valor con el que transformo en negativo la lista '-1'</param>
+        /// <param name="listaValores">Lista de cantidad de materiales utilizados</param>
+        /// <returns>Retora true si se cumplio la condicion, sino false</returns>
+        public override bool FabricarProducto(int valor, List<int> listaValores)
+        {
+            if (listaValores.Count > 0 && listaValores != null)
+            {
+                Stock.CantUnidadProcesamiento += valor * this.listaValores[0];
+                Stock.CantCableVerde += valor * this.listaValores[1];
+                Stock.CantBarraPlastico += valor * this.listaValores[2];
+                Stock.CantBaraHierro += valor * this.listaValores[3];
+                Stock.CantEngranajeHierro += valor * this.listaValores[4];
+                Stock.CantFibrasVidrio += valor * this.listaValores[5];
+                Stock.CantCondensador += valor * this.listaValores[6];
+                Stock.CantVentilador += valor * this.listaValores[7];
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

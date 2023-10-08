@@ -21,6 +21,8 @@ namespace Entidades
             set { codigoFabricacion = value; } 
         }
 
+        public abstract bool FabricarProducto(int valor, List<int> lista);
+
         public abstract string Mostrar();
     }
 }

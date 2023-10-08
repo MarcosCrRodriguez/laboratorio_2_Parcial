@@ -337,42 +337,42 @@ namespace Entidades
             Stock.CantVentilador += listaValores[10];
         }
 
-        public static Dictionary<string, int> DiccionarioDelStock()
-        {
-            Dictionary<string, int> dictStock;
+        //public static Dictionary<string, int> DiccionarioDelStock()
+        //{
+        //    Dictionary<string, int> dictStock;
 
-            dictStock = new Dictionary<string, int>() {
-                { "Circuitos Electronicos" ,Stock.CantCircuitosElectronicos },
-                { "Circuitos Electronicos Avanzados" ,Stock.CantCircuitosElectronicosAvanzados },
-                { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
-                { "Cable Verde" ,Stock.CantCableVerde },
-                { "Cable Rojo" ,Stock.CantCableRojo },
-                { "Barra Plastico" ,Stock.CantBarraPlastico },
-                { "Bara Hierro" ,Stock.CantBaraHierro },
-                { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
-                { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
-                { "Condensador" ,Stock.CantCondensador },
-                { "Ventilador" ,Stock.CantVentilador }
-            };
+        //    dictStock = new Dictionary<string, int>() {
+        //        { "Circuitos Electronicos" ,Stock.CantCircuitosElectronicos },
+        //        { "Circuitos Electronicos Avanzados" ,Stock.CantCircuitosElectronicosAvanzados },
+        //        { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
+        //        { "Cable Verde" ,Stock.CantCableVerde },
+        //        { "Cable Rojo" ,Stock.CantCableRojo },
+        //        { "Barra Plastico" ,Stock.CantBarraPlastico },
+        //        { "Bara Hierro" ,Stock.CantBaraHierro },
+        //        { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
+        //        { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
+        //        { "Condensador" ,Stock.CantCondensador },
+        //        { "Ventilador" ,Stock.CantVentilador }
+        //    };
 
-            return dictStock;
-        }
+        //    return dictStock;
+        //}
         
-        public static List<string> ListaHarcodeadaStock()
-        {
-            listaHardcodeada.Add("Circuitos Electronicos");
-            listaHardcodeada.Add("Circuitos Electronicos Avanzados");
-            listaHardcodeada.Add("Unidad Procesamiento");
-            listaHardcodeada.Add("Cable Verde");
-            listaHardcodeada.Add("Cable Rojo");
-            listaHardcodeada.Add("Barra Plastico");
-            listaHardcodeada.Add("Bara Hierro");
-            listaHardcodeada.Add("Engranaje Hierro");
-            listaHardcodeada.Add("Fibras Vidrio");
-            listaHardcodeada.Add("Condensador");
-            listaHardcodeada.Add("Ventilador");
+        //public static List<string> ListaHarcodeadaStock()
+        //{
+        //    listaHardcodeada.Add("Circuitos Electronicos");
+        //    listaHardcodeada.Add("Circuitos Electronicos Avanzados");
+        //    listaHardcodeada.Add("Unidad Procesamiento");
+        //    listaHardcodeada.Add("Cable Verde");
+        //    listaHardcodeada.Add("Cable Rojo");
+        //    listaHardcodeada.Add("Barra Plastico");
+        //    listaHardcodeada.Add("Bara Hierro");
+        //    listaHardcodeada.Add("Engranaje Hierro");
+        //    listaHardcodeada.Add("Fibras Vidrio");
+        //    listaHardcodeada.Add("Condensador");
+        //    listaHardcodeada.Add("Ventilador");
 
-            return listaHardcodeada;
-        }
+        //    return listaHardcodeada;
+        //}
     }
 }

@@ -4,27 +4,35 @@ namespace Entidades
 {
     public class Motherboard : Producto
     {
-        private const int cantCircuitoElectAvanzadoConsumida = 7;
-        private const int cantCableRojoConsumida = 12;
-        private const int cantBarraPlasticoConsumida = 5;
-        private const int cantBaraHierroConsumida = 5;
-        private const int cantEngranajeHierroConsumida = 11;
-        private const int cantFibrasVidrioConsumida = 15;
-        private const int cantcantCondensadorConsumida = 9;
-        private const int cantVentiladorConsumida = 1;
+        private int cantCircuitoElectAvanzadoConsumida;
+        private int cantCableRojoConsumida;
+        private int cantBarraPlasticoConsumida;
+        private int cantBaraHierroConsumida;
+        private int cantEngranajeHierroConsumida;
+        private int cantFibrasVidrioConsumida;
+        private int cantcantCondensadorConsumida;
+        private int cantVentiladorConsumida;
         private static int contadorProducto = 0;
         private static string tipoProducto;
         private static ulong codigoFabricacionM;
-        private List<int> listaCantidadesConstantes;
+        private List<int> listaCantidades;
         private List<int> listaValores;
 
         public Motherboard()
         {
+            this.cantCircuitoElectAvanzadoConsumida = 7;
+            this.cantCableRojoConsumida = 12;
+            this.cantBarraPlasticoConsumida = 5;
+            this.cantBaraHierroConsumida = 5;
+            this.cantEngranajeHierroConsumida = 11;
+            this.cantFibrasVidrioConsumida = 15;
+            this.cantcantCondensadorConsumida = 9;
+            this.cantVentiladorConsumida = 1;
             codigoFabricacionM = 27336012;
 
             TipoProducto = TiposProductos.Motherboard.ToString();
             listaValores = new List<int>();
-            this.listaCantidadesConstantes = new List<int> {
+            this.listaCantidades = new List<int> {
                 CircuitoElectAvanzadoNecesaria, CableRojoNecesaria, BarraPlasticoNecesaria,
                 BaraHierroNecesaria, EngranajeHierroNecesaria, FibrasVidrioNecesaria,
                 CondensadorNecesaria, VentiladorNecesaria
@@ -34,7 +42,7 @@ namespace Entidades
         public static int CantidadProducto
         {
             get { return contadorProducto; } 
-            set { contadorProducto += value;}
+            set { contadorProducto = value;}
         }
 
         public static string TipoProducto
@@ -124,10 +132,35 @@ namespace Entidades
         {
             for (int i = 0; i < listaValores.Count; i++)
             {
-                this[i] = cantidadFdabricar * this.listaCantidadesConstantes[i];
+                this[i] = cantidadFdabricar * this.listaCantidades[i];
             }
 
             return this.listaValores;
+        }
+
+        /// <summary>
+        /// Le resto las cantidades utilizadas en la fabricacion del producto al Stock
+        /// </summary>
+        /// <param name="valor">El valor con el que transformo en negativo la lista '-1'</param>
+        /// <param name="listaValores">Lista de cantidad de materiales utilizados</param>
+        /// <returns>Retora true si se cumplio la condicion, sino false</returns>
+        public override bool FabricarProducto(int valor, List<int> listaValores)
+        {
+            if (listaValores.Count > 0 && listaValores != null)
+            {
+                Stock.CantCircuitosElectronicosAvanzados += valor * this.listaValores[0];
+                Stock.CantCableRojo += valor * this.listaValores[1];
+                Stock.CantBarraPlastico += valor * this.listaValores[2];
+                Stock.CantBaraHierro += valor * this.listaValores[3];
+                Stock.CantEngranajeHierro += valor * this.listaValores[4];
+                Stock.CantFibrasVidrio += valor * this.listaValores[5];
+                Stock.CantCondensador += valor * this.listaValores[6];
+                Stock.CantVentilador += valor * this.listaValores[7];
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

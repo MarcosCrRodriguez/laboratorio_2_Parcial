@@ -22,6 +22,9 @@ namespace Entidades
                 case ProcesoProduccion.Conectar:
                     retorno = true;
                     break;
+                case ProcesoProduccion.Ensamblar:
+                    retorno = true;
+                    break;
 
             }
 

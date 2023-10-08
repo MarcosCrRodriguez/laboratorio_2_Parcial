@@ -4,11 +4,11 @@ namespace Entidades
 {
     public class Cabinet : Producto
     {
-        private const int cantCableRojoConsumida = 2;
-        private const int cantBarraPlasticoConsumida = 10;
-        private const int cantBaraHierroConsumida = 12;
-        private const int cantEngranajeHierroConsumida = 12;
-        private const int cantVentiladorConsumida = 4;
+        private int cantCableRojoConsumida;
+        private int cantBarraPlasticoConsumida;
+        private int cantBaraHierroConsumida;
+        private int cantEngranajeHierroConsumida;
+        private int cantVentiladorConsumida;
         private static int contadorProducto = 0;
         private static string tipoProducto;
         private static ulong codigoFabricacionC;
@@ -17,6 +17,11 @@ namespace Entidades
 
         public Cabinet()
         {
+            this.cantCableRojoConsumida = 2;
+            this.cantBarraPlasticoConsumida = 10;
+            this.cantBaraHierroConsumida = 12;
+            this.cantEngranajeHierroConsumida = 12;
+            this.cantVentiladorConsumida = 4;
             codigoFabricacionC = 43885702;
 
             TipoProducto = TiposProductos.Cabinet.ToString();
@@ -31,7 +36,7 @@ namespace Entidades
         public static int CantidadProducto
         {
             get { return contadorProducto; }
-            set { contadorProducto += value; }
+            set { contadorProducto = value; }
         }
 
         public static string TipoProducto
@@ -107,6 +112,28 @@ namespace Entidades
             }
 
             return this.listaValores;
+        }
+
+        /// <summary>
+        /// Le resto las cantidades utilizadas en la fabricacion del producto al Stock
+        /// </summary>
+        /// <param name="valor">El valor con el que transformo en negativo la lista '-1'</param>
+        /// <param name="listaValores">Lista de cantidad de materiales utilizados</param>
+        /// <returns>Retora true si se cumplio la condicion, sino false</returns>
+        public override bool FabricarProducto(int valor, List<int> listaValores)
+        {
+            if (listaValores.Count > 0 && listaValores != null)
+            {
+                Stock.CantCableRojo += valor * this.listaValores[0];
+                Stock.CantBarraPlastico += valor * this.listaValores[1];
+                Stock.CantBaraHierro += valor * this.listaValores[2];
+                Stock.CantEngranajeHierro += valor * this.listaValores[3];
+                Stock.CantVentilador += valor * this.listaValores[4];
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
