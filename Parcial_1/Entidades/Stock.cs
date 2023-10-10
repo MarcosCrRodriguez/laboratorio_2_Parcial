@@ -16,8 +16,6 @@ namespace Entidades
         private static int cantCondensador;
         private static int cantVentilador;
         private static List<int> listaStock;
-        private static List<string> listaHardcodeada;
-        private static Dictionary<string, int> dictValores;
 
         static Stock()
         {
@@ -32,8 +30,7 @@ namespace Entidades
             cantFibrasVidrio = 2850;
             cantCondensador = 2250;
             cantVentilador = 2000;
-            dictValores = new Dictionary<string, int>();
-            listaHardcodeada = new List<string>();
+            listaStock = new List<int>();
     }
 
         public static int CantCircuitosElectronicos
@@ -77,6 +74,7 @@ namespace Entidades
                 }
             }
         }
+        
         public static int CantBarraPlastico
         {
             get { return cantBarraPlastico; }
@@ -118,6 +116,7 @@ namespace Entidades
                 }
             }
         }
+        
         public static int CantBaraHierro
         {
             get { return cantBaraHierro; }
@@ -159,6 +158,7 @@ namespace Entidades
                 }
             }
         }
+        
         public static int CantCondensador
         {
             get { return cantCondensador; }
@@ -245,8 +245,6 @@ namespace Entidades
         {
             bool retorno = true;
 
-            StringBuilder sb = new StringBuilder();
-
             int i = 0;
 
             foreach (KeyValuePair<string, int> item in dictProducto)
@@ -322,57 +320,27 @@ namespace Entidades
             return dictProducto;
         }
 
-        public static void ActualizarStock(List<int> listaValores)
+        public static bool ActualizarStock(List<int> listaValores)
         {
-            Stock.CantCircuitosElectronicos += listaValores[0];
-            Stock.CantCircuitosElectronicosAvanzados += listaValores[1];
-            Stock.CantUnidadProcesamiento += listaValores[2];
-            Stock.CantCableVerde += listaValores[3];
-            Stock.CantCableRojo += listaValores[4];
-            Stock.CantBarraPlastico += listaValores[5];
-            Stock.CantBaraHierro += listaValores[6];
-            Stock.CantEngranajeHierro += listaValores[7];
-            Stock.CantFibrasVidrio += listaValores[8];
-            Stock.CantCondensador += listaValores[9];
-            Stock.CantVentilador += listaValores[10];
+            if (listaValores.Count > 0 && listaValores != null)
+            {
+                Stock.CantCircuitosElectronicos += listaValores[0];
+                Stock.CantCircuitosElectronicosAvanzados += listaValores[1];
+                Stock.CantUnidadProcesamiento += listaValores[2];
+                Stock.CantCableVerde += listaValores[3];
+                Stock.CantCableRojo += listaValores[4];
+                Stock.CantBarraPlastico += listaValores[5];
+                Stock.CantBaraHierro += listaValores[6];
+                Stock.CantEngranajeHierro += listaValores[7];
+                Stock.CantFibrasVidrio += listaValores[8];
+                Stock.CantCondensador += listaValores[9];
+                Stock.CantVentilador += listaValores[10];
+
+                return true;
+            }
+
+            return false;
         }
 
-        //public static Dictionary<string, int> DiccionarioDelStock()
-        //{
-        //    Dictionary<string, int> dictStock;
-
-        //    dictStock = new Dictionary<string, int>() {
-        //        { "Circuitos Electronicos" ,Stock.CantCircuitosElectronicos },
-        //        { "Circuitos Electronicos Avanzados" ,Stock.CantCircuitosElectronicosAvanzados },
-        //        { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
-        //        { "Cable Verde" ,Stock.CantCableVerde },
-        //        { "Cable Rojo" ,Stock.CantCableRojo },
-        //        { "Barra Plastico" ,Stock.CantBarraPlastico },
-        //        { "Bara Hierro" ,Stock.CantBaraHierro },
-        //        { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
-        //        { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
-        //        { "Condensador" ,Stock.CantCondensador },
-        //        { "Ventilador" ,Stock.CantVentilador }
-        //    };
-
-        //    return dictStock;
-        //}
-        
-        //public static List<string> ListaHarcodeadaStock()
-        //{
-        //    listaHardcodeada.Add("Circuitos Electronicos");
-        //    listaHardcodeada.Add("Circuitos Electronicos Avanzados");
-        //    listaHardcodeada.Add("Unidad Procesamiento");
-        //    listaHardcodeada.Add("Cable Verde");
-        //    listaHardcodeada.Add("Cable Rojo");
-        //    listaHardcodeada.Add("Barra Plastico");
-        //    listaHardcodeada.Add("Bara Hierro");
-        //    listaHardcodeada.Add("Engranaje Hierro");
-        //    listaHardcodeada.Add("Fibras Vidrio");
-        //    listaHardcodeada.Add("Condensador");
-        //    listaHardcodeada.Add("Ventilador");
-
-        //    return listaHardcodeada;
-        //}
     }
 }

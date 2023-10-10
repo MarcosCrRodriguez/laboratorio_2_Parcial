@@ -8,7 +8,6 @@ namespace Entidades
 {
     public abstract class Producto : Empresa
     {
-        // probar de que tenga todos los atributos de la cantidad de productos
         protected static ulong codigoFabricacion;
         protected Producto()
         {

@@ -15,18 +15,16 @@ namespace FrmLobby
     {
         private MenuUsuario menuCargo;
         private List<int> listaNum;
-        //private List<string> listaHardcodeada;
-        private Dictionary<string, int> dictStock;
         public FrmReStockMateriales(MenuUsuario menuCargo)
         {
             InitializeComponent();
             this.menuCargo = menuCargo;
-            //this.listaHardcodeada = new List<string>();
+            this.listaNum = new List<int>();
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
         {
-            //this.listaHardcodeada = Stock.ListaHarcodeadaStock();
+            
         }
 
         private void BtnBackWindow_Click(object sender, EventArgs e)
@@ -52,16 +50,24 @@ namespace FrmLobby
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
+            bool ret;
             this.listaNum = this.CargarListaNum();
 
-            Stock.ActualizarStock(this.listaNum);
+            ret = Stock.ActualizarStock(this.listaNum);
 
-            MessageBox.Show("Carga de materiales ha sido completada\nvolviendo al menu", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (ret)
+            {
+                MessageBox.Show("Carga de materiales ha sido completada\nvolviendo al menu", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            menuCargo.CargaDatos();
-            this.menuCargo.Show();
-            this.Close();
+                menuCargo.CargaDatos();
+                this.menuCargo.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show($"No se pudieron cargar los materiales", "Error en carga de materiales", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private List<int> CargarListaNum()

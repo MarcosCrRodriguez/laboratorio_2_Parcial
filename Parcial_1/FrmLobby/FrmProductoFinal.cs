@@ -21,7 +21,6 @@ namespace FrmLobby
         private Ram ram;
         private Cabinet cabinet;
         private int producto;
-
         private Dictionary<string, int> dictProducto;
         private List<TextBox> listaTxtBox;
         private List<int> listaValores;
@@ -34,8 +33,10 @@ namespace FrmLobby
             this.motherboard = new Motherboard();
             this.ram = new Ram();
             this.cabinet = new Cabinet();
-            this.listaValores = new List<int>();
             this.producto = producto;
+            this.dictProducto = new Dictionary<string, int>();
+            this.listaTxtBox = new List<TextBox>();
+            this.listaValores = new List<int>();
         }
 
         private void FrmVideoCard_Load(object sender, EventArgs e)
@@ -154,8 +155,9 @@ namespace FrmLobby
             bool retorno;
             bool retSoldar;
             bool retConectar;
-            bool retFabricar = false;
+            bool retFabricar;
 
+            this.ActualizarLista();
             retorno = VerificarStock();
 
             if (retorno)
@@ -170,7 +172,6 @@ namespace FrmLobby
                     
                     if (this.producto == 0)
                     {
-                        // intentar de llevar a las clases y no tenerlo aca
                         retFabricar = videoCard.FabricarProducto(valorNegativo, this.listaValores);
                         VideoCard.CantidadProducto += (int)numFabricar.Value;
                     }
@@ -337,7 +338,7 @@ namespace FrmLobby
 
             this.dictProducto = Stock.ModificarDiccionario(producto);
 
-            if (retorno = Stock.VerificarStock(this.listaValores, this.dictProducto))
+            if (Stock.VerificarStock(this.listaValores, this.dictProducto))
             {
                 MessageBox.Show("Stock OK\nEn condiciones de producir la cantidad pedida", "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 retorno = true;

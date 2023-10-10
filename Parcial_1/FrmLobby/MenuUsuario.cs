@@ -37,6 +37,8 @@ namespace FrmLobby
             InitializeComponent();
             this.menuPrincipal = menuPrincipal;
             this.usuario = usuario;
+            this.supervisor = new Supervisor();
+            this.operario = new Operario();
             this.videoCard = new VideoCard();
             this.motherboard = new Motherboard();
             this.ram = new Ram();
@@ -47,6 +49,7 @@ namespace FrmLobby
             this.listApellido = new List<string>();
             this.listSector = new List<string>();
             this.listaTxtBox = new List<TextBox>();
+            this.listaStock = new List<int>();
             this.CargarListas();
         }
 
@@ -99,8 +102,10 @@ namespace FrmLobby
 
             for (int i = 0; i < listNombre.Count; i++)
             {
-                sb.AppendLine($"- Datos personales: {this.listNombre[i]} {this.listApellido[i]} -");
-                sb.AppendLine($"- Sector: {this.listSector[i]} -\n");
+                sb.AppendLine("----           ----           ----");
+                sb.AppendLine($"Nombre: {this.listNombre[i]}");
+                sb.AppendLine($"Apellido: {this.listApellido[i]}\n");
+                sb.AppendLine($"Sector: - {this.listSector[i]} -");
             }
 
             MessageBox.Show($"{sb}", "Registro de Operarios", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -10,6 +10,8 @@ namespace Entidades
         protected static List<string> listApellido;
         protected static List<string> listCargo;
         protected static List<string> listPassword;
+
+        public Supervisor() { }
         public Supervisor(string nombre, string apellido, string puesto) : base(nombre, apellido)
         {
             this.puesto = puesto;
@@ -99,8 +101,8 @@ namespace Entidades
 
             StringBuilder sb = new StringBuilder();
             cadena = base.Mostrar();
-            sb.Append(cadena);
             sb.AppendLine($"- {this.puesto} -");
+            sb.Append(cadena);
 
             return sb.ToString();
         }
