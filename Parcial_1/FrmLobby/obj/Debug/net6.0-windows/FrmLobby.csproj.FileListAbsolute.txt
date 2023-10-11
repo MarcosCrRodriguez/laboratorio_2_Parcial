@@ -70,3 +70,4 @@ C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Par
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\obj\Debug\net6.0-windows\FrmLobby.pdb
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\obj\Debug\net6.0-windows\FrmLobby.genruntimeconfig.cache
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\obj\Debug\net6.0-windows\ref\FrmLobby.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\obj\Debug\net6.0-windows\FrmLobby.FrmDataGirdView.resources

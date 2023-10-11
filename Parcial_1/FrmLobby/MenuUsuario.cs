@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +32,7 @@ namespace FrmLobby
         private List<string> listSector;
         private List<TextBox> listaTxtBox;
         private List<int> listaStock;
+        private List<Operario> listOperarios;
 
         public MenuUsuario(FrmLobby menuPrincipal, Usuario usuario, string cargo)
         {
@@ -48,6 +50,7 @@ namespace FrmLobby
             this.listSector = new List<string>();
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<int>();
+            this.listOperarios = new List<Operario>();
             this.CargarListas();
         }
 
@@ -91,14 +94,27 @@ namespace FrmLobby
             }
         }
 
-        // intentar armar un DataGirdView (investigar su uso)
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
-            string sb;
+            Operario op;
 
-            sb = Operario.StringBuilderList(this.listNombre, this.listApellido, this.listSector);
+            if (listNombre != null && listApellido != null && listSector != null)
+            {
+                for (int i = 0; i < listNombre.Count; i++)
+                {
+                    op = new Operario(this.listNombre[i], this.listApellido[i], this.listSector[i]);
+                    this.listOperarios.Add(op);
+                }
 
-            MessageBox.Show($"{sb}", "Registro de Operarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Hide();
+                FrmDataGirdView frmDtgv = new FrmDataGirdView(this, this.listOperarios);
+                frmDtgv.Show();
+            }
+            else
+            {
+                MessageBox.Show($"No se cargar ingresar <Registro Operarios>\nError al cargar Operarios", "Error al cargar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnReStock_Click(object sender, EventArgs e)

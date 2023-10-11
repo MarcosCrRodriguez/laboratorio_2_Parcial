@@ -93,6 +93,16 @@ namespace FrmLobby.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap design_in1 {
+            get {
+                object obj = ResourceManager.GetObject("design-in1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap factorio_logo_video_games_hd_wallpaper_thumb {
             get {
                 object obj = ResourceManager.GetObject("factorio-logo-video-games-hd-wallpaper-thumb", resourceCulture);

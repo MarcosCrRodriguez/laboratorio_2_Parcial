@@ -28,6 +28,10 @@ namespace Entidades
             listNombre.Add("Santiago");
             listNombre.Add("Gabriel");
             listNombre.Add("Martin");
+            listNombre.Add("Pedro");
+            listNombre.Add("Julieta");
+            listNombre.Add("Pablo");
+            listNombre.Add("Cecilia");
 
             return listNombre;
         }
@@ -40,6 +44,10 @@ namespace Entidades
             listApellido.Add("Cano");
             listApellido.Add("Abano");
             listApellido.Add("Santos");
+            listApellido.Add("Ramon");
+            listApellido.Add("Indigo");
+            listApellido.Add("Perez");
+            listApellido.Add("Bernau");
 
             return listApellido;
         }
@@ -48,33 +56,16 @@ namespace Entidades
         {
             listSector = new List<string>();
 
-            listSector.Add("Motherboard");
-            listSector.Add("Video Card");
             listSector.Add("Cabinet");
+            listSector.Add("Cabinet");
+            listSector.Add("Motherboard");
+            listSector.Add("Motherboard");
             listSector.Add("Ram");
+            listSector.Add("Ram");
+            listSector.Add("Video Card");
+            listSector.Add("Video Card");
 
             return listSector;
-        }
-
-        public static string StringBuilderList(List<string> listN, List<string> listA, List<string> listS)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("#------------------------------#");
-            sb.AppendLine("#  Listado de Operarios  #");
-            sb.AppendLine("#------------------------------#\n");
-
-            if (listN != null && listA != null && listS != null)
-            {
-                for (int i = 0; i < listN.Count; i++)
-                {
-                    sb.AppendLine("#------------------------------#");
-                    sb.AppendLine($"Nombre: {listN[i]}");
-                    sb.AppendLine($"Apellido: {listA[i]}");
-                    sb.AppendLine($"Sector -> {listS[i]}\n");
-                }
-            }
-            
-            return sb.ToString();
         }
 
         public override string Mostrar()
