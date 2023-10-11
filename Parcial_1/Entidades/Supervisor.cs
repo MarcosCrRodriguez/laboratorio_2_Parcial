@@ -6,12 +6,11 @@ namespace Entidades
     public class Supervisor : Usuario
     {
         protected string puesto;
-        protected static List<string> listNombre;
-        protected static List<string> listApellido;
-        protected static List<string> listCargo;
-        protected static List<string> listPassword;
+        protected static List<string>? listNombre;
+        protected static List<string>? listApellido;
+        protected static List<string>? listCargo;
+        protected static List<string>? listPassword;
 
-        public Supervisor() { }
         public Supervisor(string nombre, string apellido, string puesto) : base(nombre, apellido)
         {
             this.puesto = puesto;
@@ -63,15 +62,18 @@ namespace Entidades
         {
             listCargo = new List<string>();
 
-            //-------------- Op --------------//
-            for (int i = 0; listNombre.Count / 2 > i; i++)
+            if (listNombre != null)
             {
-                listCargo.Add("Operario");
-            }
-            //-------------- Su --------------//
-            for (int i = 0; listNombre.Count / 2 > i; i++)
-            {
-                listCargo.Add("Supervisor");
+                //-------------- Op --------------//
+                for (int i = 0; listNombre.Count / 2 > i; i++)
+                {
+                    listCargo.Add("Operario");
+                }
+                //-------------- Su --------------//
+                for (int i = 0; listNombre.Count / 2 > i; i++)
+                {
+                    listCargo.Add("Supervisor");
+                }
             }
 
             return listCargo;
@@ -81,15 +83,18 @@ namespace Entidades
         {
             listPassword = new List<string>();
 
-            //-------------- Op --------------//
-            for (int i = 0; listNombre.Count / 2 > i; i++)
+            if (listNombre != null)
             {
-                listPassword.Add("operario");
-            }
-            //-------------- Su --------------//
-            for (int i = 0; listNombre.Count / 2 > i; i++)
-            {
-                listPassword.Add("superusaurio");
+                //-------------- Op --------------//
+                for (int i = 0; listNombre.Count / 2 > i; i++)
+                {
+                    listPassword.Add("operario");
+                }
+                //-------------- Su --------------//
+                for (int i = 0; listNombre.Count / 2 > i; i++)
+                {
+                    listPassword.Add("superusaurio");
+                }
             }
 
             return listPassword;
@@ -101,7 +106,7 @@ namespace Entidades
 
             StringBuilder sb = new StringBuilder();
             cadena = base.Mostrar();
-            sb.AppendLine($"- {this.puesto} -");
+            sb.AppendLine($"- {this.puesto} -\n");
             sb.Append(cadena);
 
             return sb.ToString();

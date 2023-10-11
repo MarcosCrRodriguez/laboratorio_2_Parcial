@@ -11,7 +11,7 @@ namespace FrmLobby
         private List<string> listApellido;
         private List<string> listCargo;
         private List<string> listPassword;
-        private Usuario usuario;
+        private Usuario? usuario;
 
         public FrmLobby()
         {
@@ -20,7 +20,6 @@ namespace FrmLobby
             this.listApellido = new List<string>();
             this.listCargo = new List<string>();
             this.listPassword = new List<string>();
-            this.usuario = new Usuario();
         }
         private void FrmLobby_Load(object sender, EventArgs e)
         {

@@ -187,6 +187,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Lista instanciada con los valores tomadas de las propiedades
+        /// </summary>
+        /// <returns>Retorna la lista con los datos cargados</returns>
         public static List<int> InstanciarListaStock()
         {
             listaStock = new List<int>() {

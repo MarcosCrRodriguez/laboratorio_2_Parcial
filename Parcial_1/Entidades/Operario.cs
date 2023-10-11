@@ -5,11 +5,10 @@ namespace Entidades
     public class Operario : Usuario
     {
         protected string puesto;
-        protected static List<string> listNombre;
-        protected static List<string> listApellido;
-        protected static List<string> listSector;
+        protected static List<string>? listNombre;
+        protected static List<string>? listApellido;
+        protected static List<string>? listSector;
 
-        public Operario() { }
         public Operario(string nombre, string apellido, string puesto) : base(nombre, apellido)
         {
             this.puesto = puesto;
@@ -57,13 +56,34 @@ namespace Entidades
             return listSector;
         }
 
+        public static string StringBuilderList(List<string> listN, List<string> listA, List<string> listS)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("#------------------------------#");
+            sb.AppendLine("#  Listado de Operarios  #");
+            sb.AppendLine("#------------------------------#\n");
+
+            if (listN != null && listA != null && listS != null)
+            {
+                for (int i = 0; i < listN.Count; i++)
+                {
+                    sb.AppendLine("#------------------------------#");
+                    sb.AppendLine($"Nombre: {listN[i]}");
+                    sb.AppendLine($"Apellido: {listA[i]}");
+                    sb.AppendLine($"Sector -> {listS[i]}\n");
+                }
+            }
+            
+            return sb.ToString();
+        }
+
         public override string Mostrar()
         {
             string cadena;
 
             StringBuilder sb = new StringBuilder();
             cadena = base.Mostrar();
-            sb.AppendLine($"- {this.puesto} -");
+            sb.AppendLine($"- {this.puesto} -\n");
             sb.Append(cadena);
 
             return sb.ToString();

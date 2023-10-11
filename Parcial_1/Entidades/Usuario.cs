@@ -7,7 +7,6 @@ namespace Entidades
         protected string nombre;
         protected string apellido;
 
-        public Usuario() { }
         public Usuario(string nombre, string apellido)
         {
             this.nombre = nombre;
@@ -30,8 +29,8 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"Nombre -> {this.nombre}");
-            sb.AppendLine($"Apellido -> {this.apellido}");
+            sb.AppendLine($"Nombre: {this.nombre}");
+            sb.AppendLine($"Apellido: {this.apellido}");
 
             return sb.ToString();
         }

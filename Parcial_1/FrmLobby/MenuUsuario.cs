@@ -37,8 +37,6 @@ namespace FrmLobby
             InitializeComponent();
             this.menuPrincipal = menuPrincipal;
             this.usuario = usuario;
-            this.supervisor = new Supervisor();
-            this.operario = new Operario();
             this.videoCard = new VideoCard();
             this.motherboard = new Motherboard();
             this.ram = new Ram();
@@ -96,24 +94,16 @@ namespace FrmLobby
         // intentar armar un DataGirdView (investigar su uso)
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
+            string sb;
 
-            sb.AppendLine("-- Listado de operarios --\n");
-
-            for (int i = 0; i < listNombre.Count; i++)
-            {
-                sb.AppendLine("----           ----           ----");
-                sb.AppendLine($"Nombre: {this.listNombre[i]}");
-                sb.AppendLine($"Apellido: {this.listApellido[i]}\n");
-                sb.AppendLine($"Sector: - {this.listSector[i]} -");
-            }
+            sb = Operario.StringBuilderList(this.listNombre, this.listApellido, this.listSector);
 
             MessageBox.Show($"{sb}", "Registro de Operarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnReStock_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Cargando ventana Re Stock", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Cargando ventana de <Stock>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Hide();
             FrmReStockMateriales frmReStock = new FrmReStockMateriales(this);
             frmReStock.Show();

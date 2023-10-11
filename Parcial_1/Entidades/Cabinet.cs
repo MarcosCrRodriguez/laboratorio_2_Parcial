@@ -10,7 +10,7 @@ namespace Entidades
         private int cantEngranajeHierroConsumida;
         private int cantVentiladorConsumida;
         private static int contadorProducto = 0;
-        private static string tipoProducto;
+        private static string? tipoProducto;
         private static ulong codigoFabricacionC;
         private List<int> listaCantidadesConstantes;
         private List<int> listaValores;
@@ -41,7 +41,15 @@ namespace Entidades
 
         public static string TipoProducto
         {
-            get { return tipoProducto; }
+            get
+            {
+                if (tipoProducto != null)
+                {
+                    return tipoProducto;
+                }
+
+                return "No Type";
+            }
             set { tipoProducto = value; }
         }
 

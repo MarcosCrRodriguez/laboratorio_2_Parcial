@@ -24,7 +24,7 @@ namespace FrmLobby
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void BtnBackWindow_Click(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace FrmLobby
 
             if (ret)
             {
-                MessageBox.Show("Carga de materiales ha sido completada\nvolviendo al menu", "Iniciando sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Carga de materiales ha sido completada\nvolviendo al menu", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 menuCargo.CargaDatos();
@@ -69,7 +69,11 @@ namespace FrmLobby
                 MessageBox.Show($"No se pudieron cargar los materiales", "Error en carga de materiales", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        
+        /// <summary>
+        /// Lista instanciada con los valores de los controles num
+        /// </summary>
+        /// <returns>Retorna la lista con los datos cargados</returns>
         private List<int> CargarListaNum()
         {
             this.listaNum = new List<int>() {
