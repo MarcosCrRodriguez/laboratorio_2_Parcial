@@ -83,7 +83,9 @@
             DtgvRegistro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DtgvRegistro.Location = new Point(31, 73);
             DtgvRegistro.Name = "DtgvRegistro";
+            DtgvRegistro.ReadOnly = true;
             DtgvRegistro.RowTemplate.Height = 25;
+            DtgvRegistro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DtgvRegistro.Size = new Size(362, 155);
             DtgvRegistro.TabIndex = 17;
             // 

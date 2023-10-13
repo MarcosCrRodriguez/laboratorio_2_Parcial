@@ -10,8 +10,7 @@ namespace Entidades
     {
         public static bool Elaborar(ProcesoProduccion proceso)
         {
-            // intentar en algun momento ver de que agrege ciertos materiales por proceso y en base
-            // a eso que devuelva true o false si hay o faltan materia prima 
+            // tendremos que programar timers para sus distintos procesos
             bool retorno = false;
 
             switch (proceso) 
@@ -23,6 +22,9 @@ namespace Entidades
                     retorno = true;
                     break;
                 case ProcesoProduccion.Ensamblar:
+                    retorno = true;
+                    break;
+                case ProcesoProduccion.Empaquetar:
                     retorno = true;
                     break;
 

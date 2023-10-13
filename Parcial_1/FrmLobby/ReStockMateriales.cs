@@ -14,12 +14,14 @@ namespace FrmLobby
     public partial class FrmReStockMateriales : Form
     {
         private MenuUsuario menuCargo;
-        private List<int> listaNum;
+        private List<decimal> listaNum;
+        private List<int> listaInt;
         public FrmReStockMateriales(MenuUsuario menuCargo)
         {
             InitializeComponent();
             this.menuCargo = menuCargo;
-            this.listaNum = new List<int>();
+            this.listaNum = new List<decimal>();
+            this.listaInt = new List<int>();    
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
@@ -51,9 +53,9 @@ namespace FrmLobby
         private void BtnLoad_Click(object sender, EventArgs e)
         {
             bool ret;
-            this.listaNum = this.CargarListaNum();
+            this.listaInt = this.CargarListaNum();
 
-            ret = Stock.ActualizarStock(this.listaNum);
+            ret = Stock.ActualizarStock(this.listaInt);
 
             if (ret)
             {
@@ -76,21 +78,23 @@ namespace FrmLobby
         /// <returns>Retorna la lista con los datos cargados</returns>
         private List<int> CargarListaNum()
         {
-            this.listaNum = new List<int>() {
-                (int)this.numCircuitoElect.Value,
-                (int)this.numCircuitoElectAv.Value,
-                (int)this.numUnProcesamiento.Value,
-                (int)this.numCableVerde.Value,
-                (int)this.numCableRojo.Value,
-                (int)this.numBarraPlastica.Value,
-                (int)this.numBaraHierro.Value,
-                (int)this.numEngranajeHierro.Value,
-                (int)this.numFibraVidrio.Value,
-                (int)this.numCondensador.Value,
-                (int)this.numVentilador.Value
+            this.listaNum = new List<decimal>() {
+                this.numCircuitoElect.Value,
+                this.numCircuitoElectAv.Value,
+                this.numUnProcesamiento.Value,
+                this.numCableVerde.Value,
+                this.numCableRojo.Value,
+                this.numBarraPlastica.Value,
+                this.numBaraHierro.Value,
+                this.numEngranajeHierro.Value,
+                this.numFibraVidrio.Value,
+                this.numCondensador.Value,
+                this.numVentilador.Value
                 };
 
-            return this.listaNum;
+            this.listaInt = Stock.CasteoExplicitoLista(this.listaNum);
+
+            return this.listaInt;
         }
     }
 }

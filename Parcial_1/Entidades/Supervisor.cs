@@ -11,16 +11,22 @@ namespace Entidades
         protected static List<string>? listCargo;
         protected static List<string>? listPassword;
 
+        public Supervisor(string nombre, string apellido) : base(nombre, apellido)
+        {
+            this.puesto = "Supervisor";
+        }
         public Supervisor(string nombre, string apellido, string puesto) : base(nombre, apellido)
         {
             this.puesto = puesto;
         }
 
+        #region Propiedades
         public string Puesto
         {
             get { return this.puesto; }
             set { this.puesto = value; }
         }
+        #endregion
 
         public static List<string> HardcodearNombre()
         {

@@ -15,6 +15,7 @@ namespace FrmLobby
 {
     public partial class FrmProductoFinal : Form
     {
+        private int valorInt;
         private MenuUsuario frmUsuario;
         private VideoCard videoCard;
         private Motherboard motherboard;
@@ -41,6 +42,8 @@ namespace FrmLobby
 
         private void FrmVideoCard_Load(object sender, EventArgs e)
         {
+            this.valorInt = Stock.CasteoExplicito(numFabricar.Value);
+
             if (this.producto == 0)
             {
                 this.groupBox1.Text = "Produccion Video Cards";
@@ -54,8 +57,7 @@ namespace FrmLobby
                 this.label9.Text = "Condensador";
                 this.label10.Text = "Ventilador";
 
-                //sobrecarga que reciba el decimal y lo caste a entero
-                this.listaValores = videoCard.CrearLista((int)numFabricar.Value);
+                this.listaValores = videoCard.CrearLista(this.valorInt);
             }
             else if (this.producto == 1)
             {
@@ -70,7 +72,7 @@ namespace FrmLobby
                 this.label9.Text = "Condensador";
                 this.label10.Text = "Ventilador";
 
-                this.listaValores = motherboard.CrearLista((int)numFabricar.Value);
+                this.listaValores = motherboard.CrearLista(this.valorInt);
             }
             else if (this.producto == 2)
             {
@@ -89,7 +91,7 @@ namespace FrmLobby
                 this.txtSeptimoBox.Visible = false;
                 this.txtOctavoBox.Visible = false;
 
-                this.listaValores = ram.CrearLista((int)numFabricar.Value);
+                this.listaValores = ram.CrearLista(this.valorInt);
             }
             else
             {
@@ -107,7 +109,7 @@ namespace FrmLobby
                 this.txtSeptimoBox.Visible = false;
                 this.txtOctavoBox.Visible = false;
 
-                this.listaValores = cabinet.CrearLista((int)numFabricar.Value);
+                this.listaValores = cabinet.CrearLista(this.valorInt);
             }
 
             this.CrearListaTxtBox();
@@ -128,7 +130,8 @@ namespace FrmLobby
 
             int i = 0;
 
-            this.ActualizarLista();
+            this.valorInt = Stock.CasteoExplicito(numFabricar.Value);
+            this.ActualizarLista(this.valorInt);
             this.dictProducto = Stock.ModificarDiccionario(this.producto);
 
             foreach (KeyValuePair<string, int> item in this.dictProducto)
@@ -155,9 +158,12 @@ namespace FrmLobby
             bool retorno;
             bool retSoldar;
             bool retConectar;
+            bool retEnsamblar;
+            bool retEmpaquetar;
             bool retFabricar;
 
-            this.ActualizarLista();
+            this.valorInt = Stock.CasteoExplicito(numFabricar.Value);
+            this.ActualizarLista(this.valorInt);
             retorno = VerificarStock();
 
             if (retorno)
@@ -165,35 +171,37 @@ namespace FrmLobby
                 MessageBox.Show("Iniciando proceso...", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 retSoldar = Produccion.Elaborar(ProcesoProduccion.Soldar);
                 retConectar = Produccion.Elaborar(ProcesoProduccion.Conectar);
+                retEnsamblar = Produccion.Elaborar(ProcesoProduccion.Ensamblar);
+                retEmpaquetar = Produccion.Elaborar(ProcesoProduccion.Empaquetar);
 
-                if (retSoldar && retConectar)
+                if (retSoldar && retConectar && retEnsamblar && retEmpaquetar)
                 {
                     MessageBox.Show("Soldando materiales...\nConectando cables...\nEnsamblado de piezas...", "Proceso metalúrgico - Conexión cables - Ensamblaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     if (this.producto == 0)
                     {
                         retFabricar = videoCard.FabricarProducto(valorNegativo, this.listaValores);
-                        VideoCard.CantidadProducto += (int)numFabricar.Value;
+                        VideoCard.CantidadProducto += this.valorInt;
                     }
                     else if (this.producto == 1)
                     {
                         retFabricar = motherboard.FabricarProducto(valorNegativo, this.listaValores);
-                        Motherboard.CantidadProducto += (int)numFabricar.Value;
+                        Motherboard.CantidadProducto += this.valorInt;
                     }
                     else if (this.producto == 2)
                     {
                         retFabricar = ram.FabricarProducto(valorNegativo, this.listaValores);
-                        Ram.CantidadProducto += (int)numFabricar.Value;
+                        Ram.CantidadProducto += this.valorInt;
                     }
                     else
                     {
                         retFabricar = cabinet.FabricarProducto(valorNegativo, this.listaValores);
-                        Cabinet.CantidadProducto = (int)numFabricar.Value;
+                        Cabinet.CantidadProducto = this.valorInt;
                     }
 
                     if (retFabricar)
                     {
-                        MessageBox.Show("Procesos finalizados\nFabricación EXITOSA", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Fabricación EXITOSA\nEmpaquetando productos\n", "Procesos finalizados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MessageBox.Show("Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frmUsuario.CargaDatos();
                         this.frmUsuario.Show();
@@ -250,21 +258,21 @@ namespace FrmLobby
         /// Dependiendo con que producto estemos trabajando se actualizaran cada vez q llamemos a este metodo
         /// los datos que posiblemente utilizaremos para la fabricacion del producto terminado 
         /// </summary>
-        private void ActualizarLista()
+        private void ActualizarLista(int valor)
         {
             switch (this.producto)
             {
                 case 0:
-                    this.listaValores = videoCard.PisarLista((int)numFabricar.Value);
+                    this.listaValores = videoCard.PisarLista(valor);
                     break;
                 case 1:
-                    this.listaValores = motherboard.PisarLista((int)numFabricar.Value);
+                    this.listaValores = motherboard.PisarLista(valor);
                     break;
                 case 2:
-                    this.listaValores = ram.PisarLista((int)numFabricar.Value);
+                    this.listaValores = ram.PisarLista(valor);
                     break;
                 case 3:
-                    this.listaValores = cabinet.PisarLista((int)numFabricar.Value);
+                    this.listaValores = cabinet.PisarLista(valor);
                     break;
             }
         }

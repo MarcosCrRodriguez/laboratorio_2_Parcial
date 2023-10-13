@@ -9,16 +9,22 @@ namespace Entidades
         protected static List<string>? listApellido;
         protected static List<string>? listSector;
 
+        public Operario(string nombre, string apellido) : base(nombre, apellido)
+        {
+            this.puesto = "Operario";
+        }
         public Operario(string nombre, string apellido, string puesto) : base(nombre, apellido)
         {
             this.puesto = puesto;
         }
 
+        #region Propiedades
         public string Puesto
         {
             get { return this.puesto; }
             set { this.puesto = value; }
         }
+        #endregion
 
         public static List<string> HardcodearNombre()
         {
@@ -64,7 +70,7 @@ namespace Entidades
             listSector.Add("Ram");
             listSector.Add("Video Card");
             listSector.Add("Video Card");
-
+            
             return listSector;
         }
 

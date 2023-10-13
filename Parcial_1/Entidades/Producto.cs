@@ -14,11 +14,13 @@ namespace Entidades
             codigoFabricacion = (ulong)new Random().Next(10000000, 99999999);
         }
 
+        #region Propiedades
         protected ulong CodigoFabricacion 
         {
             get { return codigoFabricacion; }
             set { codigoFabricacion = value; } 
         }
+        #endregion
 
         public abstract bool FabricarProducto(int valor, List<int> lista);
 

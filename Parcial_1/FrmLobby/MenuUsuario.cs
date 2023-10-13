@@ -33,6 +33,7 @@ namespace FrmLobby
         private List<TextBox> listaTxtBox;
         private List<int> listaStock;
         private List<Operario> listOperarios;
+        private bool boolListaOp;
 
         public MenuUsuario(FrmLobby menuPrincipal, Usuario usuario, string cargo)
         {
@@ -51,6 +52,7 @@ namespace FrmLobby
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<int>();
             this.listOperarios = new List<Operario>();
+            this.boolListaOp = false;
             this.CargarListas();
         }
 
@@ -58,14 +60,14 @@ namespace FrmLobby
         {
             if (this.cargo == "Supervisor")
             {
-                this.supervisor = new Supervisor(usuario.Nombre, usuario.Apellido, this.cargo);
+                this.supervisor = new Supervisor(usuario.Nombre, usuario.Apellido);
                 this.txtNombre.Text = $" {this.supervisor.Nombre} {this.supervisor.Apellido}";
                 this.gboxUsuario.Text = "Supervisor";
                 this.gboxUsuario.Enabled = false;
             }
             else
             {
-                this.operario = new Operario(usuario.Nombre, usuario.Apellido, this.cargo);
+                this.operario = new Operario(usuario.Nombre, usuario.Apellido);
                 this.txtNombre.Text = $" {this.operario.Nombre} {this.operario.Apellido}";
                 this.gboxUsuario.Text = "Operario";
                 this.gboxUsuario.Enabled = false;
@@ -96,20 +98,11 @@ namespace FrmLobby
 
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
-            Operario op;
-
-            if (listNombre != null && listApellido != null && listSector != null)
+            if (this.listOperarios != null)
             {
-                for (int i = 0; i < listNombre.Count; i++)
-                {
-                    op = new Operario(this.listNombre[i], this.listApellido[i], this.listSector[i]);
-                    this.listOperarios.Add(op);
-                }
-
                 MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                FrmDataGirdView frmDtgv = new FrmDataGirdView(this, this.listOperarios);
-                frmDtgv.Show();
+                FrmDataGirdView frmDtgv = new FrmDataGirdView(this.listOperarios);
+                frmDtgv.ShowDialog();
             }
             else
             {
@@ -187,6 +180,18 @@ namespace FrmLobby
             this.listNombre = Operario.HardcodearNombre();
             this.listApellido = Operario.HardcodearApellido();
             this.listSector = Operario.HardcodearSector();
+
+            Operario op;
+
+            if (this.boolListaOp == false)
+            {
+                for (int i = 0; i < listNombre.Count; i++)
+                {
+                    op = new Operario(this.listNombre[i], this.listApellido[i], this.listSector[i]);
+                    this.listOperarios.Add(op);
+                }
+                this.boolListaOp = true;
+            }
         }
 
         /// <summary>

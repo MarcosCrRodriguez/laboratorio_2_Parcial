@@ -39,6 +39,7 @@ namespace Entidades
             };
         }
 
+        #region Propiedades
         public static int CantidadProducto
         {
             get { return contadorProducto; } 
@@ -104,6 +105,7 @@ namespace Entidades
         {
             get { return cantVentiladorConsumida; }
         }
+        #endregion
 
         /// <summary>
         /// Creamos una lista en donde le damos valores por cada cantidad de materiales que necesitara para

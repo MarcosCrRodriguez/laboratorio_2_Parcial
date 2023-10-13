@@ -13,6 +13,7 @@ namespace Entidades
             this.apellido = apellido;
         }
 
+        #region Propiedades
         public string Nombre
         {
             get { return this.nombre; }
@@ -24,6 +25,8 @@ namespace Entidades
             get { return this.apellido; }
             set { this.apellido = value; }
         }
+
+        #endregion
 
         public virtual string Mostrar()
         {

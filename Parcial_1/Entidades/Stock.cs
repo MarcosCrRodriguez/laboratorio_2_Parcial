@@ -31,8 +31,9 @@ namespace Entidades
             cantCondensador = 2250;
             cantVentilador = 2000;
             listaStock = new List<int>();
-    }
+        }
 
+        #region Propiedades
         public static int CantCircuitosElectronicos
         {
             get { return cantCircuitoElect; }
@@ -185,6 +186,43 @@ namespace Entidades
                     cantVentilador = 0;
                 }
             }
+        }
+        #endregion
+
+        /// <summary>
+        /// Casteo de dato de decimal a entero
+        /// </summary>
+        /// <param name="dato"></param>
+        /// <returns>Retorno el dato casteado</returns>
+        public static int CasteoExplicito(decimal dato)
+        {
+            int valor = 0;
+
+            if (dato > -1)
+            {
+                valor = (int)dato;
+            }
+            return valor;
+        }
+
+        /// <summary>
+        /// Casteo Explicito de una Lista de decimal a entero
+        /// </summary>
+        /// <param name="listaDecimal"></param>
+        /// <returns>Retornamos la lista casteada</returns>
+        public static List<int> CasteoExplicitoLista(List<decimal> listaDecimal)
+        {
+            List<int> listaInt = new List<int>();
+
+            if (listaDecimal != null && listaDecimal.Count > 0)
+            {
+                for (int i = 0; i < listaDecimal.Count; i++)
+                {
+                    listaInt.Add((int)listaDecimal[i]);
+                }
+            }
+
+            return listaInt;
         }
 
         /// <summary>
