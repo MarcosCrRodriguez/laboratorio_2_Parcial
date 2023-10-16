@@ -10,7 +10,7 @@ Este proyecto consiste en un serie de menues, en donde el usuario (Supervisor u 
 
 <ul>
 <li>Ingresar al sistema completando los datos requeridos en el menu **Login**
-<li>En el menu usuario tendra varias opciones a seguir, pero lo mas distintivo, sera el stock actual de materia prima y los productos finales con sus valores mostrados allí mismo, constantemente actaulizados ante alguna modificación
+<li>En el menu usuario tendra varias opciones a seguir, pero lo mas distintivo, sera el stock actual de materia prima y los productos finales con sus valores mostrados allí mismo, constantemente actulizados ante alguna modificación
 <li>Tiene la opcion de ingresar a los sectores de produccion, en donde tanto Supervisor como Operario podran trabajar en los diferentes sectores de trabajo
 <li>Tiene tambien varias opciones con las cuales podria interactuar si es Supervisor
 </ul>
