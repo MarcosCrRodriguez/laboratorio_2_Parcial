@@ -5,7 +5,7 @@
 ____________________________________________________________________________________________________________________________
 </p>
 <p>
-Este proyecto conciste en un sarie de menues, en donde el usuario (Supervisor u Operario) interactua con el sistema, registrando modificaciones en el stock de materias primas de la empresa y producción de productos finales .
+Este proyecto consiste en un serie de menues, en donde el usuario (Supervisor u Operario) interactua con el sistema, registrando modificaciones en el stock de materias primas de la empresa y producción de productos finales .
 </p>
 
 <ul>
