@@ -25,7 +25,6 @@ namespace Entidades
             get { return this.apellido; }
             set { this.apellido = value; }
         }
-
         #endregion
 
         public virtual string Mostrar()

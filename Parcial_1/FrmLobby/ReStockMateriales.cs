@@ -37,17 +37,19 @@ namespace FrmLobby
 
         private void BtnHardcodeo_Click(object sender, EventArgs e)
         {
-            numCircuitoElect.Value += 1500;
-            numCircuitoElectAv.Value += 1500;
-            numUnProcesamiento.Value += 1500;
-            numCableVerde.Value += 1500;
-            numCableRojo.Value += 1500;
-            numBarraPlastica.Value += 1500;
-            numBaraHierro.Value += 1500;
-            numEngranajeHierro.Value += 1500;
-            numFibraVidrio.Value += 1500;
-            numCondensador.Value += 1500;
-            numVentilador.Value += 1500;
+            int sumaValor = 1500;
+
+            numCircuitoElect.Value += sumaValor;
+            numCircuitoElectAv.Value += sumaValor;
+            numUnProcesamiento.Value += sumaValor;
+            numCableVerde.Value += sumaValor;
+            numCableRojo.Value += sumaValor;
+            numBarraPlastica.Value += sumaValor;
+            numBaraHierro.Value += sumaValor;
+            numEngranajeHierro.Value += sumaValor;
+            numFibraVidrio.Value += sumaValor;
+            numCondensador.Value += sumaValor;
+            numVentilador.Value += sumaValor;
         }
 
         private void BtnLoad_Click(object sender, EventArgs e)
