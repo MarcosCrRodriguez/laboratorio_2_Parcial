@@ -52,6 +52,16 @@ Dentro del formulario habrán casillas vacias para ingresar las cantidades a sum
 ____________________________________________________________________________________________________________________________
 </p>
 
+## Regsitro de Operarios
+
+En este formulario se encontrara un registro de todos los operarios que se encuentran en la empresa, solo los supervisores tienen acceso a este formulario.
+
+[![Captura-de-pantalla-2023-10-13-202759.png](https://i.postimg.cc/QC4CxH6T/Captura-de-pantalla-2023-10-13-202759.png)](https://postimg.cc/RJt4gVxS)
+
+<p>
+____________________________________________________________________________________________________________________________
+</p>
+
 ##### Cómo modificar este proyecto para su propio negocio
 
 Dado que este es un proyecto de ejemplo, te recomiendo que clones y cambies el nombre de este proyecto para usarlo en tus propósitos. Es un buen texto inicial.
