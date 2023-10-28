@@ -6,9 +6,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace FrmLobby
 {
@@ -33,7 +35,10 @@ namespace FrmLobby
         private List<TextBox> listaTxtBox;
         private List<int> listaStock;
         private List<Operario> listOperarios;
+        private Dictionary<string, int> dictSotck;
         private bool boolListaOp;
+
+        private string path;
 
         public MenuUsuario(FrmLobby menuPrincipal, Usuario usuario, string cargo)
         {
@@ -52,12 +57,17 @@ namespace FrmLobby
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<int>();
             this.listOperarios = new List<Operario>();
+            this.dictSotck = new Dictionary<string, int>();
             this.boolListaOp = false;
+
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\";
             this.CargarListas();
         }
 
         private void MenuSu_Load(object sender, EventArgs e)
         {
+            string pathXML = "Archivo.xml";
+
             if (this.cargo == "Supervisor")
             {
                 this.supervisor = new Supervisor(usuario.Nombre, usuario.Apellido);
@@ -74,7 +84,32 @@ namespace FrmLobby
                 this.BtnRegistro.Visible = false;
                 this.BtnReStock.Visible = false;
             }
+            this.dictSotck = Stock.InstanciarDiccionarioStock();
 
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(this.path + pathXML))
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(Dictionary<string, int>));
+                    xmlSerializer.Serialize(sw, this.dictSotck);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            ////EscribirXML
+            //if(ArchivosXML<Usuario>.EscribirXML(this.path + pathXML, this.usuario))
+            //{
+            //    MessageBox.Show("Se actualizo la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("No se pudo actualizar la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //// despues de actualizar el stock tendria que meter los datos actualizados en un xml
             this.CargaDatos();
         }
 

@@ -22,9 +22,9 @@ namespace FrmLobby
         private Ram ram;
         private Cabinet cabinet;
         private int producto;
-        private Dictionary<string, int> dictProducto;
         private List<TextBox> listaTxtBox;
         private List<int> listaValores;
+        private Dictionary<string, int> dictProducto;
 
         public FrmProductoFinal(MenuUsuario frmUsuario, int producto)
         {
@@ -35,9 +35,9 @@ namespace FrmLobby
             this.ram = new Ram();
             this.cabinet = new Cabinet();
             this.producto = producto;
-            this.dictProducto = new Dictionary<string, int>();
             this.listaTxtBox = new List<TextBox>();
             this.listaValores = new List<int>();
+            this.dictProducto = new Dictionary<string, int>();
         }
 
         private void FrmVideoCard_Load(object sender, EventArgs e)
@@ -114,7 +114,6 @@ namespace FrmLobby
 
             this.CrearListaTxtBox();
             this.CargaDatos();
-            this.BtnFabric.Visible = false;
         }
 
         private void BtnBackMenu_Click(object sender, EventArgs e)
@@ -141,15 +140,6 @@ namespace FrmLobby
             }
 
             MessageBox.Show(sb.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            if (this.numFabricar.Value > 0)
-            {
-                this.BtnFabric.Visible = true;
-            }
-            else
-            {
-                this.BtnFabric.Visible = false;
-            }
         }
 
         private void BtnFabric_Click(object sender, EventArgs e)
@@ -201,7 +191,7 @@ namespace FrmLobby
 
                     if (retFabricar)
                     {
-                        MessageBox.Show("Fabricación EXITOSA\nEmpaquetando productos\n", "Procesos finalizados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Fabricación EXITOSA\nEmpaquetando productos\n\nProductos fabricados: {this.valorInt}", "Procesos finalizados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MessageBox.Show("Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frmUsuario.CargaDatos();
                         this.frmUsuario.Show();
@@ -354,8 +344,9 @@ namespace FrmLobby
             else
             {
                 formatoStock = Stock.StockFaltante(this.listaValores, this.dictProducto);
+                // podria probar de hacer mi propia excepcion aca -> interesante :D
                 MessageBox.Show(formatoStock, "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.BtnFabric.Visible = false;
+                MessageBox.Show("Deberá fabricar una menor cantidad de materiales, o pedir a un supervisor que encargue mas materiales de los faltantes", "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return retorno;

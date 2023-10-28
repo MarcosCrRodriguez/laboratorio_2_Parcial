@@ -248,6 +248,26 @@ namespace Entidades
             return listaStock;
         }
 
+        // se deberia de actualizar estos datos cada vez que agrego (o saco) stock / fabrico productos
+        public static Dictionary<string, int> InstanciarDiccionarioStock()
+        {
+            Dictionary<string, int> dictProducto = new Dictionary<string, int>() {
+                { "Circuito Electrico" ,Stock.CantCircuitosElectronicos },
+                { "Circuito Electrico Avanzado" ,Stock.CantCircuitosElectronicosAvanzados },
+                { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
+                { "Cable Verde" ,Stock.CantCableVerde },
+                { "Cable Rojo" ,Stock.CantCableRojo },
+                { "Barra Plastico" ,Stock.CantBarraPlastico },
+                { "Bara Hierro" ,Stock.CantBaraHierro },
+                { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
+                { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
+                { "Condensador" ,Stock.CantCondensador },
+                { "Ventilador" ,Stock.CantVentilador }
+                };
+
+            return dictProducto;
+        }
+
         /// <summary>
         /// Construimos un StringBuilder con los materiales y cantidades que faltan para producir
         /// la cantidad pedida

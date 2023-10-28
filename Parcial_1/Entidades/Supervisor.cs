@@ -10,6 +10,7 @@ namespace Entidades
         protected static List<string>? listApellido;
         protected static List<string>? listCargo;
         protected static List<string>? listPassword;
+        // va a haber que agregar datos del Supervisor cuando veamos base de datos
 
         public Supervisor(string nombre, string apellido) : base(nombre, apellido)
         {

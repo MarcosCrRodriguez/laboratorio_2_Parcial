@@ -21,7 +21,7 @@ namespace FrmLobby
             InitializeComponent();
             this.menuCargo = menuCargo;
             this.listaNum = new List<decimal>();
-            this.listaInt = new List<int>();    
+            this.listaInt = new List<int>();  
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
