@@ -34,8 +34,8 @@ namespace FrmLobby
         private List<string> listSector;
         private List<TextBox> listaTxtBox;
         private List<int> listaStock;
+        private List<string> instanciaListFormat;
         private List<Operario> listOperarios;
-        private Dictionary<string, int> dictSotck;
         private bool boolListaOp;
 
         private string path;
@@ -56,18 +56,17 @@ namespace FrmLobby
             this.listSector = new List<string>();
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<int>();
+            this.instanciaListFormat = new List<string>();
             this.listOperarios = new List<Operario>();
-            this.dictSotck = new Dictionary<string, int>();
             this.boolListaOp = false;
 
-            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\";
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            this.path += @"\Archivos\";
             this.CargarListas();
         }
 
         private void MenuSu_Load(object sender, EventArgs e)
         {
-            string pathXML = "Archivo.xml";
-
             if (this.cargo == "Supervisor")
             {
                 this.supervisor = new Supervisor(usuario.Nombre, usuario.Apellido);
@@ -84,32 +83,7 @@ namespace FrmLobby
                 this.BtnRegistro.Visible = false;
                 this.BtnReStock.Visible = false;
             }
-            this.dictSotck = Stock.InstanciarDiccionarioStock();
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(this.path + pathXML))
-                {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(Dictionary<string, int>));
-                    xmlSerializer.Serialize(sw, this.dictSotck);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            ////EscribirXML
-            //if(ArchivosXML<Usuario>.EscribirXML(this.path + pathXML, this.usuario))
-            //{
-            //    MessageBox.Show("Se actualizo la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("No se pudo actualizar la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            //// despues de actualizar el stock tendria que meter los datos actualizados en un xml
+            this.CrearDirectorio();
             this.CargaDatos();
         }
 
@@ -255,6 +229,8 @@ namespace FrmLobby
             this.txtBoxCantMotherboard.Enabled = false;
             this.txtBoxCantRam.Enabled = false;
             this.txtBoxCantCabinet.Enabled = false;
+
+            this.ActualizarStockXML();
         }
 
         private void LblVideo_Click(object sender, EventArgs e)
@@ -275,6 +251,45 @@ namespace FrmLobby
         private void LblCabinet_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"{cabinet.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    
+        public void CrearDirectorio()
+        {
+            if (!Directory.Exists(this.path))
+            {
+                Directory.CreateDirectory(this.path);
+            }
+            //try
+            //{
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message,"Error al crear directorio");
+            //}
+        }
+
+        public void ActualizarStockXML()
+        {
+            string pathXML = "Stock.xml";
+
+            try
+            {
+                if (Directory.Exists(this.path))
+                {
+                    this.instanciaListFormat = Stock.InstanciarListaFormateada();
+                    ////EscribirXML
+                    if (!(ArchivosXML<List<string>>.EscribirXML(this.path + pathXML, this.instanciaListFormat)))
+                    {
+                        MessageBox.Show("No se pudo actualizar la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    //// despues de actualizar el stock tendria que meter los datos actualizados en un xml
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

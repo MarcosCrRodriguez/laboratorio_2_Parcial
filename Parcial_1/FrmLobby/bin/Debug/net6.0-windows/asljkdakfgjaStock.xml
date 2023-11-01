@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <string>Circuitos Electronicos: 2850</string>
+  <string>Circuitos Electronicos Avanzados: 2550</string>
+  <string>Unidad Procesamiento: 2200</string>
+  <string>Barra Plastico: 3700</string>
+  <string>Cable Verde: 2500</string>
+  <string>Cable Rojo: 2500</string>
+  <string>Bara Hierro: 3600</string>
+  <string>Engranaje Hierro: 3600</string>
+  <string>Fibras Vidrio: 2850</string>
+  <string>Condensador: 2250</string>
+  <string>Ventilador: 2000</string>
+</ArrayOfString>

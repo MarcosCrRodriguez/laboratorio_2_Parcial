@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace Entidades
 {
@@ -16,6 +17,7 @@ namespace Entidades
         private static int cantCondensador;
         private static int cantVentilador;
         private static List<int> listaStock;
+        private static List<string> listaMateriales;
 
         static Stock()
         {
@@ -31,6 +33,7 @@ namespace Entidades
             cantCondensador = 2250;
             cantVentilador = 2000;
             listaStock = new List<int>();
+            listaMateriales = new List<string>();
         }
 
         #region Propiedades
@@ -246,6 +249,42 @@ namespace Entidades
             };
 
             return listaStock;
+        }
+
+        public static List<string> InstanciarListaMateriales()
+        {
+            listaMateriales = new List<string>() {
+                "Circuitos Electronicos",
+                "Circuitos Electronicos Avanzados",
+                "Unidad Procesamiento",
+                "Barra Plastico",
+                "Cable Verde",
+                "Cable Rojo",
+                "Bara Hierro",
+                "Engranaje Hierro",
+                "Fibras Vidrio",
+                "Condensador",
+                "Ventilador"
+            };
+
+            return listaMateriales;
+        }
+
+        public static List<string> InstanciarListaFormateada()
+        {
+            listaStock = InstanciarListaStock();
+            listaMateriales = InstanciarListaMateriales();
+
+            List<string> listaFormat = new List<string>();
+            int i = 0;
+
+            foreach (var item in listaStock)
+            {
+                listaFormat.Add($"{listaMateriales[i]}: {listaStock[i]}");
+                i++;
+            }
+
+            return listaFormat;
         }
 
         // se deberia de actualizar estos datos cada vez que agrego (o saco) stock / fabrico productos

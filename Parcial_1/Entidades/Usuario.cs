@@ -6,11 +6,18 @@ namespace Entidades
     {
         protected string nombre;
         protected string apellido;
+        public Dictionary<string, int> diccionarioStock;    
 
+        public Usuario()
+        {
+
+        }
         public Usuario(string nombre, string apellido)
         {
             this.nombre = nombre;
             this.apellido = apellido;
+            this.diccionarioStock = new Dictionary<string, int>();
+            this.diccionarioStock.Add("asdas", 897);
         }
 
         #region Propiedades
