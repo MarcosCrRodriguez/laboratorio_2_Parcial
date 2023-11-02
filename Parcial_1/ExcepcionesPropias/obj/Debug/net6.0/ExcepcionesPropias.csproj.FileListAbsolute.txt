@@ -1,0 +1,11 @@
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\bin\Debug\net6.0\ExcepcionesPropias.deps.json
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\bin\Debug\net6.0\ExcepcionesPropias.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\bin\Debug\net6.0\ExcepcionesPropias.pdb
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ExcepcionesPropias.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ExcepcionesPropias.AssemblyInfoInputs.cache
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ExcepcionesPropias.AssemblyInfo.cs
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ExcepcionesPropias.csproj.CoreCompileInputs.cache
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ExcepcionesPropias.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\refint\ExcepcionesPropias.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ExcepcionesPropias.pdb
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\ExcepcionesPropias\obj\Debug\net6.0\ref\ExcepcionesPropias.dll

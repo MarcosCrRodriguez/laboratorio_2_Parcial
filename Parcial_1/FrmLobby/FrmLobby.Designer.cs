@@ -39,12 +39,20 @@
             lblContraseña = new Label();
             cboxCargo = new ComboBox();
             BtnIngresar = new Button();
-            BtnHardcode = new Button();
             lblFactory = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            txtCodigo = new TextBox();
+            label1 = new Label();
+            groupBox4 = new GroupBox();
+            label2 = new Label();
+            txtDNI = new TextBox();
+            BtnRegistrar = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // txtNombre
@@ -153,7 +161,7 @@
             BtnIngresar.FlatAppearance.BorderColor = Color.Black;
             BtnIngresar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnIngresar.ForeColor = SystemColors.ActiveCaptionText;
-            BtnIngresar.Location = new Point(357, 229);
+            BtnIngresar.Location = new Point(362, 313);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(144, 55);
             BtnIngresar.TabIndex = 10;
@@ -161,25 +169,13 @@
             BtnIngresar.UseVisualStyleBackColor = false;
             BtnIngresar.Click += BtnIngresar_Click;
             // 
-            // BtnHardcode
-            // 
-            BtnHardcode.BackColor = Color.RosyBrown;
-            BtnHardcode.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnHardcode.Location = new Point(98, 229);
-            BtnHardcode.Name = "BtnHardcode";
-            BtnHardcode.Size = new Size(132, 55);
-            BtnHardcode.TabIndex = 14;
-            BtnHardcode.Text = "Hardcodeo";
-            BtnHardcode.UseVisualStyleBackColor = false;
-            BtnHardcode.Click += BtnHardcode_Click;
-            // 
             // lblFactory
             // 
             lblFactory.AutoSize = true;
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(252, 254);
+            lblFactory.Location = new Point(258, 329);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 15;
@@ -218,6 +214,88 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Puesto";
             // 
+            // groupBox3
+            // 
+            groupBox3.BackColor = Color.Transparent;
+            groupBox3.Controls.Add(txtCodigo);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            groupBox3.ForeColor = SystemColors.ButtonHighlight;
+            groupBox3.Location = new Point(27, 213);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(239, 71);
+            groupBox3.TabIndex = 18;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Código Usuario";
+            // 
+            // txtCodigo
+            // 
+            txtCodigo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtCodigo.Location = new Point(78, 24);
+            txtCodigo.Multiline = true;
+            txtCodigo.Name = "txtCodigo";
+            txtCodigo.Size = new Size(146, 29);
+            txtCodigo.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(18, 30);
+            label1.Name = "label1";
+            label1.Size = new Size(54, 19);
+            label1.TabIndex = 3;
+            label1.Text = "Código";
+            // 
+            // groupBox4
+            // 
+            groupBox4.BackColor = Color.Transparent;
+            groupBox4.Controls.Add(label2);
+            groupBox4.Controls.Add(txtDNI);
+            groupBox4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            groupBox4.ForeColor = SystemColors.ButtonHighlight;
+            groupBox4.Location = new Point(295, 213);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(264, 71);
+            groupBox4.TabIndex = 19;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "DNI";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.ForeColor = SystemColors.ButtonHighlight;
+            label2.Location = new Point(14, 30);
+            label2.Name = "label2";
+            label2.Size = new Size(81, 19);
+            label2.TabIndex = 4;
+            label2.Text = "Documento";
+            // 
+            // txtDNI
+            // 
+            txtDNI.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDNI.Location = new Point(101, 24);
+            txtDNI.Multiline = true;
+            txtDNI.Name = "txtDNI";
+            txtDNI.Size = new Size(146, 29);
+            txtDNI.TabIndex = 0;
+            // 
+            // BtnRegistrar
+            // 
+            BtnRegistrar.BackColor = Color.RosyBrown;
+            BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnRegistrar.Location = new Point(105, 313);
+            BtnRegistrar.Name = "BtnRegistrar";
+            BtnRegistrar.Size = new Size(132, 55);
+            BtnRegistrar.TabIndex = 15;
+            BtnRegistrar.Text = "Registrar";
+            BtnRegistrar.UseVisualStyleBackColor = false;
+            BtnRegistrar.Click += BtnRegistrar_Click;
+            // 
             // FrmLobby
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -225,11 +303,13 @@
             BackColor = Color.PapayaWhip;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(592, 308);
+            ClientSize = new Size(592, 391);
+            Controls.Add(BtnRegistrar);
+            Controls.Add(groupBox4);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(lblFactory);
-            Controls.Add(BtnHardcode);
             Controls.Add(BtnIngresar);
             Controls.Add(lblLobby);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
@@ -244,6 +324,10 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -260,9 +344,15 @@
         private Label lblContraseña;
         private ComboBox cboxCargo;
         private Button BtnIngresar;
-        private Button BtnHardcode;
         private Label lblFactory;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private TextBox txtCodigo;
+        private Label label1;
+        private GroupBox groupBox4;
+        private Label label2;
+        private TextBox txtDNI;
+        private Button BtnRegistrar;
     }
 }

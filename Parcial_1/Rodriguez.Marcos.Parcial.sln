@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrmLobby", "FrmLobby\FrmLobby.csproj", "{993DC31C-420C-4FD8-A739-47CAA01396E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcepcionesPropias", "ExcepcionesPropias\ExcepcionesPropias.csproj", "{5F2D2349-389C-41CE-B050-07998E94DDC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{993DC31C-420C-4FD8-A739-47CAA01396E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{993DC31C-420C-4FD8-A739-47CAA01396E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{993DC31C-420C-4FD8-A739-47CAA01396E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2D2349-389C-41CE-B050-07998E94DDC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2D2349-389C-41CE-B050-07998E94DDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2D2349-389C-41CE-B050-07998E94DDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2D2349-389C-41CE-B050-07998E94DDC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

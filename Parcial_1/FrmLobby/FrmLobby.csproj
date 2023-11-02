@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj" />
+    <ProjectReference Include="..\ExcepcionesPropias\ExcepcionesPropias.csproj" />
   </ItemGroup>
 
   <ItemGroup>

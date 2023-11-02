@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using ExcepcionesPropias;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace FrmLobby
         private string cargo;
         private List<string> listNombre;
         private List<string> listApellido;
-        private List<string> listSector;
+        //private List<string> listSector;
         private List<TextBox> listaTxtBox;
         private List<int> listaStock;
         private List<string> instanciaListFormat;
@@ -53,7 +54,7 @@ namespace FrmLobby
             this.cargo = cargo;
             this.listNombre = new List<string>();
             this.listApellido = new List<string>();
-            this.listSector = new List<string>();
+            //this.listSector = new List<string>();
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<int>();
             this.instanciaListFormat = new List<string>();
@@ -188,7 +189,7 @@ namespace FrmLobby
             //------------------------Operario------------------------//
             this.listNombre = Operario.HardcodearNombre();
             this.listApellido = Operario.HardcodearApellido();
-            this.listSector = Operario.HardcodearSector();
+            //this.listSector = Operario.HardcodearSector();
 
             Operario op;
 
@@ -196,7 +197,7 @@ namespace FrmLobby
             {
                 for (int i = 0; i < listNombre.Count; i++)
                 {
-                    op = new Operario(this.listNombre[i], this.listApellido[i], this.listSector[i]);
+                    op = new Operario(this.listNombre[i], this.listApellido[i]);
                     this.listOperarios.Add(op);
                 }
                 this.boolListaOp = true;

@@ -31,3 +31,4 @@ C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Par
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\Entidades\obj\Debug\net6.0\refint\Entidades.dll
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\Entidades\obj\Debug\net6.0\Entidades.pdb
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\Entidades\obj\Debug\net6.0\Entidades.csproj.AssemblyReference.cache

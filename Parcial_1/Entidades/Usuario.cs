@@ -5,8 +5,7 @@ namespace Entidades
     public class Usuario
     {
         protected string nombre;
-        protected string apellido;
-        public Dictionary<string, int> diccionarioStock;    
+        protected string apellido; 
 
         public Usuario()
         {
@@ -16,8 +15,6 @@ namespace Entidades
         {
             this.nombre = nombre;
             this.apellido = apellido;
-            this.diccionarioStock = new Dictionary<string, int>();
-            this.diccionarioStock.Add("asdas", 897);
         }
 
         #region Propiedades
