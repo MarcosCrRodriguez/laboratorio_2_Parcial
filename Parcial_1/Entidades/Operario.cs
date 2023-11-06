@@ -138,11 +138,27 @@ namespace Entidades
             {
                 foreach (var operario in operarios)
                 {
-                    if (op.ID == operario.ID && op.DNI == operario.DNI && op.Puesto == operario.Puesto)
+                    if (op.ID == operario.ID && op.DNI == operario.DNI && op.Puesto == operario.Puesto 
+                        && op.Nombre == operario.Nombre && op.Apellido == operario.Apellido)
                     {
                         return true;
                     }
                 }   
+            }
+            return false;
+        }
+
+        public static bool VerificarExisteID(List<Operario> operarios, int id)
+        {
+            if (operarios.Count > 0 && operarios != null)
+            {
+                foreach (var operario in operarios)
+                {
+                    if (id == operario.ID)
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
         }

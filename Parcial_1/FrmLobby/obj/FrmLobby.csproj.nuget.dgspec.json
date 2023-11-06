@@ -31,7 +31,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\ExcepcionesPropias\\ExcepcionesPropias.csproj": {
+                "projectPath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\ExcepcionesPropias\\ExcepcionesPropias.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

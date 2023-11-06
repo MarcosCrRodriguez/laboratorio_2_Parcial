@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ExcepcionesPropias;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +26,7 @@ namespace Entidades
 
         public static bool GuardarRegistro(Supervisor operario)
         {
-            bool rtn;
+            bool rtn = false;
             try
             {
                 command.Parameters.Clear();
@@ -46,8 +48,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                rtn = false;
-                throw new Exception($"No se pudo cargar el Usuario - {ex}");
+                throw new SqlExceptionDuplicateUserDB("No se pudo cargar el Usuario con un DNI ya existente", ex);
             }
             finally
             {
@@ -133,13 +134,15 @@ namespace Entidades
                 connection.Close();
             }
         }
-        public static List<Supervisor> LeerSupervisores()
+        public static List<Supervisor> LeerSupervisores(string dato)
         {
             List<Supervisor> personas = new List<Supervisor>();
             try
             {
+                command.Parameters.Clear();
                 connection.Open();
-                command.CommandText = $"SELECT * FROM USUARIOS";
+                command.CommandText = $"SELECT * FROM USUARIOS WHERE CARGO = @Cargo";
+                command.Parameters.AddWithValue("@Cargo", dato);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -167,6 +170,57 @@ namespace Entidades
             {
                 connection.Close();
             }
+        }
+
+        // le voy a pasar un Operario y asi podre modificarle todos los datos que desee
+        public static bool Modificar(string nuevoNombre, int id)
+        {
+            bool rtn = false;
+            try
+            {
+                command.Parameters.Clear();
+                connection.Open();
+                command.CommandText = $"UPDATE USUARIOS SET Nombre = @Nombre WHERE CODIGO_USUARIO = @CODIGO_USUARIO";
+                command.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                command.Parameters.AddWithValue("@CODIGO_USUARIO", id);
+                int rows = command.ExecuteNonQuery();
+                rtn = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rtn;
+        }
+
+        public static bool Eliminar(int id, string dato)
+        {
+            bool rtn = false;
+            try
+            {
+                command.Parameters.Clear();
+                connection.Open();
+                command.CommandText = $"DELETE FROM USUARIOS WHERE CODIGO_USUARIO = @CODIGO_USUARIO AND CARGO = @Cargo";
+                command.Parameters.AddWithValue("@CODIGO_USUARIO", id);
+                command.Parameters.AddWithValue("@Cargo", dato);
+                int rows = command.ExecuteNonQuery();
+                rtn = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rtn;
         }
     }
 }

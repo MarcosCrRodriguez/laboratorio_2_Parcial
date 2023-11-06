@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcepcionesPropias;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Entidades
 
         public static bool GuardarRegistro(Operario operario)
         {
-            bool rtn;
+            bool rtn = false; ;
             try
             {
                 command.Parameters.Clear();
@@ -46,8 +47,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                rtn = false;
-                throw new Exception($"No se pudo cargar el Usuario - {ex}");
+                throw new SqlExceptionDuplicateUserDB("No se pudo cargar el Usuario con un DNI ya existente", ex);
             }
             finally
             {
@@ -133,13 +133,15 @@ namespace Entidades
             }
         }
 
-        public static List<Operario> LeerOperarios()
+        public static List<Operario> LeerOperarios(string dato)
         {
             List<Operario> personas = new List<Operario>();
             try
             {
+                command.Parameters.Clear();
                 connection.Open();
-                command.CommandText = $"SELECT * FROM USUARIOS";
+                command.CommandText = $"SELECT * FROM USUARIOS WHERE CARGO = @Cargo";
+                command.Parameters.AddWithValue("@Cargo", dato);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -151,6 +153,49 @@ namespace Entidades
                             reader["CARGO"].ToString(),
                             Convert.ToInt64(reader["DNI"]))
                             );
+                    }
+                }
+                return personas;
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static List<Operario> LeerOperariosDatosCompletos(string dato)
+        {
+            List<Operario> personas = new List<Operario>();
+            try
+            {
+                command.Parameters.Clear();
+                connection.Open();
+                command.CommandText = $"SELECT * FROM USUARIOS WHERE CARGO = @Cargo";
+                command.Parameters.AddWithValue("@Cargo", dato);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        personas.Add(new Operario(reader["NOMBRE"].ToString(),
+                        reader["APELLIDO"].ToString(),
+                        Convert.ToInt32(reader["CODIGO_USUARIO"]),
+                        reader["CARGO"].ToString(),
+                        Convert.ToInt64(reader["DNI"]),
+                        reader["EMAIL"].ToString(),
+                        Convert.ToInt32(reader["EDAD"]),
+                        Convert.ToDateTime(reader["FECHA_NACIMIENTO"]),
+                        reader["DIRECCION"].ToString(),
+                        reader["TELEFONO"].ToString()
+                        ));
                     }
                 }
                 return personas;

@@ -20,8 +20,8 @@ namespace FrmLobby
         private TiposProductos tiposProdcuto;
         private int numeroProducto;
 
-        private FrmLobby menuPrincipal;
-        private Usuario usuario;
+        private FrmLobby menuInicial;
+        private int codigoUsuario;
         private Supervisor supervisor;
         private Operario operario;
         private VideoCard videoCard;
@@ -41,11 +41,11 @@ namespace FrmLobby
 
         private string path;
 
-        public MenuUsuario(FrmLobby menuPrincipal, Usuario usuario, string cargo)
+        public MenuUsuario(FrmLobby menuInicial, int codigoUsuario, string cargo)
         {
             InitializeComponent();
-            this.menuPrincipal = menuPrincipal;
-            this.usuario = usuario;
+            this.menuInicial = menuInicial;
+            this.codigoUsuario = codigoUsuario;
             this.videoCard = new VideoCard();
             this.motherboard = new Motherboard();
             this.ram = new Ram();
@@ -70,14 +70,14 @@ namespace FrmLobby
         {
             if (this.cargo == "Supervisor")
             {
-                this.supervisor = new Supervisor(usuario.Nombre, usuario.Apellido);
+                this.supervisor = SupervisorDAO.LeerPorID(this.codigoUsuario);
                 this.txtNombre.Text = $" {this.supervisor.Nombre} {this.supervisor.Apellido}";
                 this.gboxUsuario.Text = "Supervisor";
                 this.gboxUsuario.Enabled = false;
             }
             else
             {
-                this.operario = new Operario(usuario.Nombre, usuario.Apellido);
+                this.operario = OperarioDAO.LeerPorID(this.codigoUsuario);
                 this.txtNombre.Text = $" {this.operario.Nombre} {this.operario.Apellido}";
                 this.gboxUsuario.Text = "Operario";
                 this.gboxUsuario.Enabled = false;
@@ -90,7 +90,7 @@ namespace FrmLobby
 
         private void BtnBackSu_Click_1(object sender, EventArgs e)
         {
-            this.menuPrincipal.Show();
+            this.menuInicial.Show();
             this.Close();
         }
 
@@ -111,8 +111,9 @@ namespace FrmLobby
             if (this.listOperarios != null)
             {
                 MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FrmDataGirdView frmDtgv = new FrmDataGirdView(this.listOperarios);
-                frmDtgv.ShowDialog();
+                this.Hide();
+                FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
+                frmDtgv.Show();
             }
             else
             {

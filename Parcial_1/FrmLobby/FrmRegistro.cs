@@ -14,11 +14,9 @@ namespace FrmLobby
 {
     public partial class FormularioRegistro : Form
     {
-        private FrmLobby lobby;
-        public FormularioRegistro(FrmLobby lobby)
+        public FormularioRegistro()
         {
             InitializeComponent();
-            this.lobby = lobby;
         }
 
         private void FormularioRegistro_Load(object sender, EventArgs e)
@@ -33,27 +31,25 @@ namespace FrmLobby
             {
                 if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "" || this.cboxCargo.Text == "" || this.numDia.Value == 0 || this.numMes.Value == 0 || this.numAnio.Value == 0)
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio");
+                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 if (this.cboxCargo.Text == "Operario")
                 {
                     Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), DateTime.Now, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
-                    if (!(operario.VerificarExisteOperario(OperarioDAO.LeerOperarios(), operario)))
+                    if (!(operario.VerificarExisteOperario(OperarioDAO.LeerOperarios("Operario"), operario)))
                     {
                         if (OperarioDAO.GuardarRegistro(operario))
                         {
-                            // podria probar de hacer una excepcion con un dato null
                             operario = OperarioDAO.LeerPorDNI(operario.DNI);
                             if (operario != null)
                             {
-                                MessageBox.Show($"Código de Usuario generado: [{operario.ID}]", "Código Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show($"Código de Usuario generado >{operario.ID}<", "Código Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 MessageBox.Show("Se registro el Operario con Exito", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.lobby.Show();
                                 this.Close();
                             }
                             else
                             {
-                                throw new ObjetoNullException("Alguno de los campos esta vacio");
+                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                     }
@@ -61,22 +57,20 @@ namespace FrmLobby
                 else if (this.cboxCargo.Text == "Supervisor")
                 {
                     Supervisor supervisor = new Supervisor(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), DateTime.Now, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
-                    if (!(supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores(), supervisor)))
+                    if (!(supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor)))
                     {
                         if (SupervisorDAO.GuardarRegistro(supervisor))
                         {
-                            // podria probar de hacer una excepcion con un dato null
                             supervisor = SupervisorDAO.LeerPorDNI(supervisor.DNI);
                             if (supervisor != null)
                             {
-                                MessageBox.Show($"Código de Usuario generado: [{supervisor.ID}]", "Código Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show($"Código de Usuario generado >{supervisor.ID}<", "Código Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 MessageBox.Show("Se registro el Supervisor con Exito", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.lobby.Show();
                                 this.Close();
                             }
                             else
                             {
-                                throw new ObjetoNullException("Alguno de los campos esta vacio");
+                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                     }
@@ -85,6 +79,10 @@ namespace FrmLobby
             catch (ParametrosVaciosException ex)
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (SqlExceptionDuplicateUserDB ex)
+            {
+                MessageBox.Show(ex.Message, "Problemas con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ObjetoNullException ex)
             {
@@ -102,13 +100,22 @@ namespace FrmLobby
 
         private void BtnBackToLobby_Click(object sender, EventArgs e)
         {
-            this.lobby.Show();
             this.Close();
         }
 
         private void BtnHardcodear_Click(object sender, EventArgs e)
         {
-
+            this.txtBoxNombre.Text = "Juan";
+            this.txtBoxApellido.Text = "Carlos";
+            this.txtBoxEdad.Text = new Random().Next(18, 60).ToString();
+            this.txtBoxEmail.Text = "juancarlos@gmail.com";
+            this.txtBoxTelefono.Text = $"{new Random().Next(1000, 9999)}-{new Random().Next(1000, 9999)}";
+            this.txtBoxDNI.Text = new Random().Next(15000000, 45000000).ToString();
+            this.numDia.Value = new Random().Next(1, 30);
+            this.numMes.Value = new Random().Next(1, 12);
+            this.numAnio.Value = new Random().Next(1960, 2005);
+            this.txtBoxDireccion.Text = $"Calle None {new Random().Next(100, 7777)}";
+            this.cboxCargo.Text = "Operario";
         }
     }
 }

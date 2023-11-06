@@ -39,13 +39,13 @@ namespace FrmLobby
             {
                 if (this.txtNombre.Text == "" || this.txtApellido.Text == "" || this.txtCodigo.Text == "" || this.cboxCargo.Text == "" || this.txtPassword.Text == "" || this.txtDNI.Text == "")
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio");
+                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
 
                 if (this.cboxCargo.Text == "Operario")
                 {
                     Operario operario = new Operario(this.txtNombre.Text, this.txtApellido.Text, Operario.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text, Operario.CasteoLong(this.txtDNI.Text));
-                    if (operario.VerificarExisteOperario(OperarioDAO.LeerOperarios(), operario))
+                    if (operario.VerificarExisteOperario(OperarioDAO.LeerOperarios("Operario"), operario))
                     {
                         if (operario.ValidarPassword(this.txtPassword.Text, operario))
                         {
@@ -54,12 +54,12 @@ namespace FrmLobby
                             {
                                 MessageBox.Show($"{(string)operario}", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Hide();
-                                MenuUsuario frmOperario = new MenuUsuario(this, operario, this.cboxCargo.Text);
+                                MenuUsuario frmOperario = new MenuUsuario(this, operario.ID, operario.Puesto);
                                 frmOperario.Show();
                             }
                             else
                             {
-                                throw new ObjetoNullException("Alguno de los campos esta vacio");
+                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                         else
@@ -69,13 +69,13 @@ namespace FrmLobby
                     }
                     else
                     {
-                        MessageBox.Show("No contengo ningun operario con esos datos\nRegistrar al operario", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No contengo ningun operario con esos datos\nSi desea registre al operario", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else if (this.cboxCargo.Text == "Supervisor")
                 {
                     Supervisor supervisor = new Supervisor(this.txtNombre.Text, this.txtApellido.Text, Supervisor.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text, Supervisor.CasteoLong(this.txtDNI.Text));
-                    if (supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores(), supervisor))
+                    if (supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor))
                     {
                         if (supervisor.ValidarPassword(this.txtPassword.Text, supervisor))
                         {
@@ -84,12 +84,12 @@ namespace FrmLobby
                                 supervisor = SupervisorDAO.LeerPorID(supervisor.ID);
                                 MessageBox.Show($"{(string)supervisor}", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Hide();
-                                MenuUsuario frmSupervisor = new MenuUsuario(this, supervisor, this.cboxCargo.Text);
+                                MenuUsuario frmSupervisor = new MenuUsuario(this, supervisor.ID, supervisor.Puesto);
                                 frmSupervisor.Show();
                             }
                             else
                             {
-                                throw new ObjetoNullException("Alguno de los campos esta vacio");
+                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                         else
@@ -99,7 +99,7 @@ namespace FrmLobby
                     }
                     else
                     {
-                        MessageBox.Show("No contengo ningun supervisor con esos datos\nRegistrar al supervisor", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No contengo ningun supervisor con esos datos\nSi desea registre al supervisor", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -122,9 +122,8 @@ namespace FrmLobby
         }
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormularioRegistro frmSupervisor = new FormularioRegistro(this);
-            frmSupervisor.Show();
+            FormularioRegistro frmRegistro = new FormularioRegistro();
+            frmRegistro.ShowDialog();
         }
 
         //private void BtnHardcode_Click(object sender, EventArgs e)

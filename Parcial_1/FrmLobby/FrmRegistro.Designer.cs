@@ -58,8 +58,8 @@
             lblFactory = new Label();
             BtnBackToLobby = new Button();
             groupBox5 = new GroupBox();
-            label10 = new Label();
             cboxCargo = new ComboBox();
+            label10 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numAnio).BeginInit();
@@ -196,6 +196,7 @@
             // numAnio
             // 
             numAnio.Location = new Point(60, 111);
+            numAnio.Maximum = new decimal(new int[] { 2005, 0, 0, 0 });
             numAnio.Name = "numAnio";
             numAnio.Size = new Size(99, 25);
             numAnio.TabIndex = 2;
@@ -299,15 +300,15 @@
             label7.AutoSize = true;
             label7.Location = new Point(6, 35);
             label7.Name = "label7";
-            label7.Size = new Size(65, 19);
+            label7.Size = new Size(38, 19);
             label7.TabIndex = 9;
-            label7.Text = "Dirección";
+            label7.Text = "Calle";
             // 
             // txtBoxDireccion
             // 
-            txtBoxDireccion.Location = new Point(71, 32);
+            txtBoxDireccion.Location = new Point(50, 32);
             txtBoxDireccion.Name = "txtBoxDireccion";
-            txtBoxDireccion.Size = new Size(89, 25);
+            txtBoxDireccion.Size = new Size(109, 25);
             txtBoxDireccion.TabIndex = 9;
             // 
             // BtnRegistrar
@@ -372,6 +373,16 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "Cargo";
             // 
+            // cboxCargo
+            // 
+            cboxCargo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboxCargo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            cboxCargo.FormattingEnabled = true;
+            cboxCargo.Location = new Point(60, 32);
+            cboxCargo.Name = "cboxCargo";
+            cboxCargo.Size = new Size(99, 25);
+            cboxCargo.TabIndex = 10;
+            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -381,22 +392,13 @@
             label10.TabIndex = 9;
             label10.Text = "Puesto";
             // 
-            // cboxCargo
-            // 
-            cboxCargo.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboxCargo.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            cboxCargo.FormattingEnabled = true;
-            cboxCargo.Location = new Point(60, 32);
-            cboxCargo.Name = "cboxCargo";
-            cboxCargo.Size = new Size(100, 25);
-            cboxCargo.TabIndex = 10;
-            // 
             // FormularioRegistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
             ClientSize = new Size(405, 442);
+            ControlBox = false;
             Controls.Add(groupBox5);
             Controls.Add(BtnBackToLobby);
             Controls.Add(lblFactory);
@@ -410,7 +412,6 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormularioRegistro";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "FrmRegistro";
             Load += FormularioRegistro_Load;
             groupBox1.ResumeLayout(false);

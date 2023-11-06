@@ -14,24 +14,43 @@ namespace FrmLobby
 {
     public partial class FrmDataGirdView : Form
     {
+        private MenuUsuario menuPrincipal;
         private List<Operario> listOperario;
-        public FrmDataGirdView(List<Operario> listOperario)
+        public FrmDataGirdView(MenuUsuario menuPrincipal)
         {
             InitializeComponent();
-            this.listOperario = listOperario;
+            this.menuPrincipal = menuPrincipal;
+            this.listOperario = OperarioDAO.LeerOperariosDatosCompletos("Operario");
         }
 
         private void FrmDataGirdView_Load(object sender, EventArgs e)
         {
-            this.DtgvRegistro.DataSource = listOperario;
+            this.DtgvRegistro.DataSource = this.listOperario;
             this.DtgvRegistro.Refresh();
             this.DtgvRegistro.Update();
         }
 
         private void BtnBackMenu_Click(object sender, EventArgs e)
         {
+            this.menuPrincipal.Show();
             this.Close();
         }
 
+        private void BtnRegistrar_Click(object sender, EventArgs e)
+        {
+            FormularioRegistro frmRegistro = new FormularioRegistro();
+            frmRegistro.ShowDialog();
+        }
+
+        private void BtnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            FrmEliminar frmEliminar = new FrmEliminar();
+            frmEliminar.ShowDialog();
+        }
     }
 }

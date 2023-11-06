@@ -141,7 +141,8 @@ namespace Entidades
             {
                 foreach (var supervisor in supervisores)
                 {
-                    if (su.ID == supervisor.ID && su.DNI == supervisor.DNI && su.Puesto == supervisor.Puesto)
+                    if (su.ID == supervisor.ID && su.DNI == supervisor.DNI && su.Puesto == supervisor.Puesto
+                        && su.Nombre == supervisor.Nombre && su.Apellido == supervisor.Apellido)
                     {
                         return true;
                     }

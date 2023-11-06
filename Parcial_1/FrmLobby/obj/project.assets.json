@@ -151,6 +151,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "ExcepcionesPropias": "1.0.0",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {

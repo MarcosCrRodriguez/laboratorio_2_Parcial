@@ -33,6 +33,9 @@
             lblRegistro = new Label();
             lblFactory = new Label();
             DtgvRegistro = new DataGridView();
+            BtnRegistrar = new Button();
+            BtnModificar = new Button();
+            BtnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)DtgvRegistro).BeginInit();
             SuspendLayout();
             // 
@@ -41,7 +44,7 @@
             BtnBackMenu.BackColor = Color.BurlyWood;
             BtnBackMenu.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnBackMenu.ForeColor = SystemColors.ActiveCaptionText;
-            BtnBackMenu.Location = new Point(290, 244);
+            BtnBackMenu.Location = new Point(1027, 244);
             BtnBackMenu.Name = "BtnBackMenu";
             BtnBackMenu.Size = new Size(119, 53);
             BtnBackMenu.TabIndex = 1;
@@ -67,7 +70,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(31, 260);
+            lblFactory.Location = new Point(727, 259);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 16;
@@ -86,16 +89,58 @@
             DtgvRegistro.ReadOnly = true;
             DtgvRegistro.RowTemplate.Height = 25;
             DtgvRegistro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DtgvRegistro.Size = new Size(362, 155);
+            DtgvRegistro.Size = new Size(1098, 155);
             DtgvRegistro.TabIndex = 17;
+            // 
+            // BtnRegistrar
+            // 
+            BtnRegistrar.BackColor = Color.LimeGreen;
+            BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnRegistrar.ForeColor = SystemColors.ActiveCaptionText;
+            BtnRegistrar.Location = new Point(22, 244);
+            BtnRegistrar.Name = "BtnRegistrar";
+            BtnRegistrar.Size = new Size(132, 53);
+            BtnRegistrar.TabIndex = 18;
+            BtnRegistrar.Text = "Registrar";
+            BtnRegistrar.UseVisualStyleBackColor = false;
+            BtnRegistrar.Click += BtnRegistrar_Click;
+            // 
+            // BtnModificar
+            // 
+            BtnModificar.BackColor = Color.SandyBrown;
+            BtnModificar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnModificar.ForeColor = SystemColors.ActiveCaptionText;
+            BtnModificar.Location = new Point(206, 244);
+            BtnModificar.Name = "BtnModificar";
+            BtnModificar.Size = new Size(142, 53);
+            BtnModificar.TabIndex = 19;
+            BtnModificar.Text = "Modificar Datos";
+            BtnModificar.UseVisualStyleBackColor = false;
+            BtnModificar.Click += BtnModificar_Click;
+            // 
+            // BtnEliminar
+            // 
+            BtnEliminar.BackColor = Color.Tomato;
+            BtnEliminar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BtnEliminar.ForeColor = SystemColors.ActiveCaptionText;
+            BtnEliminar.Location = new Point(405, 244);
+            BtnEliminar.Name = "BtnEliminar";
+            BtnEliminar.Size = new Size(136, 53);
+            BtnEliminar.TabIndex = 20;
+            BtnEliminar.Text = "Dar Baja Usuario";
+            BtnEliminar.UseVisualStyleBackColor = false;
+            BtnEliminar.Click += BtnEliminar_Click;
             // 
             // FrmDataGirdView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(421, 309);
+            ClientSize = new Size(1158, 309);
             ControlBox = false;
+            Controls.Add(BtnEliminar);
+            Controls.Add(BtnModificar);
+            Controls.Add(BtnRegistrar);
             Controls.Add(DtgvRegistro);
             Controls.Add(lblFactory);
             Controls.Add(lblRegistro);
@@ -114,5 +159,8 @@
         private Label lblRegistro;
         private Label lblFactory;
         private DataGridView DtgvRegistro;
+        private Button BtnRegistrar;
+        private Button BtnModificar;
+        private Button BtnEliminar;
     }
 }
