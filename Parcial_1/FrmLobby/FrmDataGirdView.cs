@@ -43,8 +43,9 @@ namespace FrmLobby
         }
 
         private void BtnModificar_Click(object sender, EventArgs e)
-        {
-
+        {  
+            FrmModificar frmModificar = new FrmModificar();
+            frmModificar.ShowDialog();
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e)

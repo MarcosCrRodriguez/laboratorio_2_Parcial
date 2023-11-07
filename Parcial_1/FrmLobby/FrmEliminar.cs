@@ -26,12 +26,12 @@ namespace FrmLobby
 
         private void BtnDarBaja_Click(object sender, EventArgs e)
         {
-            if (this.txtCodigoUsuario.Text == "" )
-            {
-                throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
-            }
             try
             {
+                if (this.txtCodigoUsuario.Text == "")
+                {
+                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                }
                 if (Operario.VerificarExisteID(OperarioDAO.LeerOperarios("Operario"), Convert.ToInt32(this.txtCodigoUsuario.Text)))
                 {
                     DialogResult result = MessageBox.Show("¿Esta seguro que desea Dar De Baja a este Usuario?", "Eliminar Usuario", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -43,7 +43,7 @@ namespace FrmLobby
                         }
                         else
                         {
-                            MessageBox.Show("El Usuario no se encuentra en la DB\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -53,7 +53,7 @@ namespace FrmLobby
                 }
                 else
                 {
-                    MessageBox.Show("El Usuario no se encuentra en la DB\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (ParametrosVaciosException ex)
@@ -64,9 +64,12 @@ namespace FrmLobby
             {
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (DataBasesException ex)
+            {
+                MessageBox.Show(ex.Message, "Error con DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

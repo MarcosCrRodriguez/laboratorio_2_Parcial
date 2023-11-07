@@ -29,13 +29,13 @@ namespace FrmLobby
         {
             try
             {
-                if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "" || this.cboxCargo.Text == "" || this.numDia.Value == 0 || this.numMes.Value == 0 || this.numAnio.Value == 0)
+                if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "" || this.cboxCargo.Text == "")
                 {
                     throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 if (this.cboxCargo.Text == "Operario")
                 {
-                    Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), DateTime.Now, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
+                    Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                     if (!(operario.VerificarExisteOperario(OperarioDAO.LeerOperarios("Operario"), operario)))
                     {
                         if (OperarioDAO.GuardarRegistro(operario))
@@ -56,7 +56,7 @@ namespace FrmLobby
                 }
                 else if (this.cboxCargo.Text == "Supervisor")
                 {
-                    Supervisor supervisor = new Supervisor(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), DateTime.Now, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
+                    Supervisor supervisor = new Supervisor(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                     if (!(supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor)))
                     {
                         if (SupervisorDAO.GuardarRegistro(supervisor))
@@ -80,17 +80,21 @@ namespace FrmLobby
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (SqlExceptionDuplicateUserDB ex)
             {
                 MessageBox.Show(ex.Message, "Problemas con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (DataBasesException ex)
+            {
+                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (ObjetoNullException ex)
             {
                 MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -111,9 +115,7 @@ namespace FrmLobby
             this.txtBoxEmail.Text = "juancarlos@gmail.com";
             this.txtBoxTelefono.Text = $"{new Random().Next(1000, 9999)}-{new Random().Next(1000, 9999)}";
             this.txtBoxDNI.Text = new Random().Next(15000000, 45000000).ToString();
-            this.numDia.Value = new Random().Next(1, 30);
-            this.numMes.Value = new Random().Next(1, 12);
-            this.numAnio.Value = new Random().Next(1960, 2005);
+            this.monthCalendar.SelectionStart = DateTime.Now;
             this.txtBoxDireccion.Text = $"Calle None {new Random().Next(100, 7777)}";
             this.cboxCargo.Text = "Operario";
         }

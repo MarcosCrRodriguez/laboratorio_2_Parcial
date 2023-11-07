@@ -115,6 +115,10 @@ namespace FrmLobby
             {
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (DataBasesException ex)
+            {
+                MessageBox.Show(ex.Message, "Error con BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);

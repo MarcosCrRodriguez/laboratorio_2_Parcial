@@ -46,9 +46,13 @@ namespace Entidades
                 int rows = command.ExecuteNonQuery();
                 rtn = true;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw new SqlExceptionDuplicateUserDB("No se pudo cargar el Usuario con un DNI ya existente", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("No se pudo cargar el Usuario con un DNI ya existente", ex);
             }
             finally
             {
@@ -88,7 +92,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
@@ -127,7 +131,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
@@ -158,13 +162,9 @@ namespace Entidades
                 }
                 return personas;
             }
-            catch (IndexOutOfRangeException ex)
-            {
-                throw;
-            }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
             }
             finally
             {
@@ -172,24 +172,30 @@ namespace Entidades
             }
         }
 
-        // le voy a pasar un Operario y asi podre modificarle todos los datos que desee
-        public static bool Modificar(string nuevoNombre, int id)
+        public static bool Modificar(Operario operario)
         {
             bool rtn = false;
             try
             {
                 command.Parameters.Clear();
                 connection.Open();
-                command.CommandText = $"UPDATE USUARIOS SET Nombre = @Nombre WHERE CODIGO_USUARIO = @CODIGO_USUARIO";
-                command.Parameters.AddWithValue("@Nombre", nuevoNombre);
-                command.Parameters.AddWithValue("@CODIGO_USUARIO", id);
+                command.CommandText = $"UPDATE USUARIOS SET NOMBRE = @Nombre, APELLIDO = @Apellido, EDAD = @Edad, EMAIL = @Email, TELEFONO = @Telefono, DNI = @DNI, FECHA_NACIMIENTO = @FechaNacimiento, DIRECCION = @Direccion, CARGO = @Cargo WHERE CODIGO_USUARIO = @CODIGO_USUARIO";
+                command.Parameters.AddWithValue("@CODIGO_USUARIO", operario.ID);
+                command.Parameters.AddWithValue("@Nombre", operario.Nombre);
+                command.Parameters.AddWithValue("@Apellido", operario.Apellido);
+                command.Parameters.AddWithValue("@Edad", operario.Edad);
+                command.Parameters.AddWithValue("@Email", operario.Email);
+                command.Parameters.AddWithValue("@Telefono", operario.Telefono);
+                command.Parameters.AddWithValue("@DNI", operario.DNI);
+                command.Parameters.AddWithValue("@FechaNacimiento", operario.FechaNacimiento);
+                command.Parameters.AddWithValue("@Direccion", operario.Direccion);
+                command.Parameters.AddWithValue("@Cargo", operario.Puesto);
                 int rows = command.ExecuteNonQuery();
                 rtn = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
@@ -211,10 +217,9 @@ namespace Entidades
                 int rows = command.ExecuteNonQuery();
                 rtn = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {

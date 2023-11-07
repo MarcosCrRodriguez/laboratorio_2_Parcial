@@ -48,42 +48,35 @@ namespace Entidades
         public long DNI
         {
             get { return this.dni; }
-            set { this.dni = value; }
         }
         public string Puesto
         {
             get { return this.puesto; }
-            set { this.puesto = value; }
         }
 
         public string Email
         {
             get { return this.email; }
-            set { this.email = value; }
         }
 
         public int Edad
         {
             get { return this.edad; }
-            set { this.edad = value; }
         }
 
         public DateTime FechaNacimiento
         {
             get { return this.fechaNacimiento; }
-            set { this.fechaNacimiento = value; }
         }
 
         public string Direccion
         {
             get { return this.direccion; }
-            set { this.direccion = value; }
         }
 
         public string Telefono
         {
             get { return this.telefono; }
-            set { this.telefono = value; }
         }
 
         public string Password

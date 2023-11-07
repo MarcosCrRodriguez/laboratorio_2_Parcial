@@ -36,13 +36,6 @@
             label2 = new Label();
             label1 = new Label();
             label3 = new Label();
-            groupBox2 = new GroupBox();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            numAnio = new NumericUpDown();
-            numMes = new NumericUpDown();
-            numDia = new NumericUpDown();
             groupBox3 = new GroupBox();
             label9 = new Label();
             txtBoxDNI = new TextBox();
@@ -60,11 +53,9 @@
             groupBox5 = new GroupBox();
             cboxCargo = new ComboBox();
             label10 = new Label();
+            monthCalendar = new MonthCalendar();
+            label4 = new Label();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numAnio).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numMes).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numDia).BeginInit();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -95,7 +86,7 @@
             groupBox1.Controls.Add(txtBoxApellido);
             groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.ForeColor = SystemColors.ButtonHighlight;
-            groupBox1.Location = new Point(12, 62);
+            groupBox1.Location = new Point(12, 43);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(186, 151);
             groupBox1.TabIndex = 2;
@@ -142,78 +133,11 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(12, 21);
+            label3.Location = new Point(12, 12);
             label3.Name = "label3";
             label3.Size = new Size(160, 25);
             label3.TabIndex = 5;
             label3.Text = "Registro Usuario";
-            // 
-            // groupBox2
-            // 
-            groupBox2.BackColor = Color.Transparent;
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(label4);
-            groupBox2.Controls.Add(numAnio);
-            groupBox2.Controls.Add(numMes);
-            groupBox2.Controls.Add(numDia);
-            groupBox2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox2.ForeColor = SystemColors.ButtonHighlight;
-            groupBox2.Location = new Point(218, 21);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(175, 151);
-            groupBox2.TabIndex = 5;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Fecha Nacimiento";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(14, 113);
-            label6.Name = "label6";
-            label6.Size = new Size(34, 19);
-            label6.TabIndex = 6;
-            label6.Text = "Año";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(13, 71);
-            label5.Name = "label5";
-            label5.Size = new Size(35, 19);
-            label5.TabIndex = 5;
-            label5.Text = "Mes";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(19, 30);
-            label4.Name = "label4";
-            label4.Size = new Size(29, 19);
-            label4.TabIndex = 4;
-            label4.Text = "Día";
-            // 
-            // numAnio
-            // 
-            numAnio.Location = new Point(60, 111);
-            numAnio.Maximum = new decimal(new int[] { 2005, 0, 0, 0 });
-            numAnio.Name = "numAnio";
-            numAnio.Size = new Size(99, 25);
-            numAnio.TabIndex = 2;
-            // 
-            // numMes
-            // 
-            numMes.Location = new Point(60, 69);
-            numMes.Name = "numMes";
-            numMes.Size = new Size(99, 25);
-            numMes.TabIndex = 1;
-            // 
-            // numDia
-            // 
-            numDia.Location = new Point(60, 28);
-            numDia.Name = "numDia";
-            numDia.Size = new Size(99, 25);
-            numDia.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -226,9 +150,9 @@
             groupBox3.Controls.Add(txtBoxTelefono);
             groupBox3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox3.ForeColor = SystemColors.ButtonHighlight;
-            groupBox3.Location = new Point(12, 219);
+            groupBox3.Location = new Point(219, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(186, 147);
+            groupBox3.Size = new Size(240, 147);
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Informacion Usuario";
@@ -246,7 +170,7 @@
             // 
             txtBoxDNI.Location = new Point(73, 110);
             txtBoxDNI.Name = "txtBoxDNI";
-            txtBoxDNI.Size = new Size(100, 25);
+            txtBoxDNI.Size = new Size(152, 25);
             txtBoxDNI.TabIndex = 5;
             // 
             // label11
@@ -271,14 +195,14 @@
             // 
             txtBoxEmail.Location = new Point(73, 28);
             txtBoxEmail.Name = "txtBoxEmail";
-            txtBoxEmail.Size = new Size(100, 25);
+            txtBoxEmail.Size = new Size(152, 25);
             txtBoxEmail.TabIndex = 0;
             // 
             // txtBoxTelefono
             // 
             txtBoxTelefono.Location = new Point(73, 69);
             txtBoxTelefono.Name = "txtBoxTelefono";
-            txtBoxTelefono.Size = new Size(100, 25);
+            txtBoxTelefono.Size = new Size(152, 25);
             txtBoxTelefono.TabIndex = 1;
             // 
             // groupBox4
@@ -288,9 +212,9 @@
             groupBox4.Controls.Add(txtBoxDireccion);
             groupBox4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox4.ForeColor = SystemColors.ButtonHighlight;
-            groupBox4.Location = new Point(218, 178);
+            groupBox4.Location = new Point(12, 283);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(175, 77);
+            groupBox4.Size = new Size(186, 77);
             groupBox4.TabIndex = 10;
             groupBox4.TabStop = false;
             groupBox4.Text = "Direccion";
@@ -308,14 +232,14 @@
             // 
             txtBoxDireccion.Location = new Point(50, 32);
             txtBoxDireccion.Name = "txtBoxDireccion";
-            txtBoxDireccion.Size = new Size(109, 25);
+            txtBoxDireccion.Size = new Size(123, 25);
             txtBoxDireccion.TabIndex = 9;
             // 
             // BtnRegistrar
             // 
             BtnRegistrar.BackColor = Color.LimeGreen;
             BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnRegistrar.Location = new Point(257, 378);
+            BtnRegistrar.Location = new Point(323, 412);
             BtnRegistrar.Name = "BtnRegistrar";
             BtnRegistrar.Size = new Size(136, 52);
             BtnRegistrar.TabIndex = 13;
@@ -326,7 +250,7 @@
             // BtnHardcodear
             // 
             BtnHardcodear.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnHardcodear.Location = new Point(154, 386);
+            BtnHardcodear.Location = new Point(185, 419);
             BtnHardcodear.Name = "BtnHardcodear";
             BtnHardcodear.Size = new Size(97, 38);
             BtnHardcodear.TabIndex = 14;
@@ -340,7 +264,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(289, 345);
+            lblFactory.Location = new Point(347, 379);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 16;
@@ -351,7 +275,7 @@
             // 
             BtnBackToLobby.BackColor = Color.LightSalmon;
             BtnBackToLobby.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnBackToLobby.Location = new Point(12, 379);
+            BtnBackToLobby.Location = new Point(13, 412);
             BtnBackToLobby.Name = "BtnBackToLobby";
             BtnBackToLobby.Size = new Size(136, 52);
             BtnBackToLobby.TabIndex = 17;
@@ -366,9 +290,9 @@
             groupBox5.Controls.Add(label10);
             groupBox5.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox5.ForeColor = SystemColors.ButtonHighlight;
-            groupBox5.Location = new Point(218, 261);
+            groupBox5.Location = new Point(13, 200);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(175, 77);
+            groupBox5.Size = new Size(186, 77);
             groupBox5.TabIndex = 11;
             groupBox5.TabStop = false;
             groupBox5.Text = "Cargo";
@@ -380,7 +304,7 @@
             cboxCargo.FormattingEnabled = true;
             cboxCargo.Location = new Point(60, 32);
             cboxCargo.Name = "cboxCargo";
-            cboxCargo.Size = new Size(99, 25);
+            cboxCargo.Size = new Size(113, 25);
             cboxCargo.TabIndex = 10;
             // 
             // label10
@@ -392,13 +316,35 @@
             label10.TabIndex = 9;
             label10.Text = "Puesto";
             // 
+            // monthCalendar
+            // 
+            monthCalendar.Location = new Point(210, 208);
+            monthCalendar.MaxDate = new DateTime(2005, 12, 31, 0, 0, 0, 0);
+            monthCalendar.MinDate = new DateTime(1960, 1, 1, 0, 0, 0, 0);
+            monthCalendar.Name = "monthCalendar";
+            monthCalendar.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = SystemColors.ButtonHighlight;
+            label4.Location = new Point(219, 175);
+            label4.Name = "label4";
+            label4.Size = new Size(136, 19);
+            label4.TabIndex = 18;
+            label4.Text = "Fecha de Nacimiento";
+            // 
             // FormularioRegistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
-            ClientSize = new Size(405, 442);
+            ClientSize = new Size(471, 476);
             ControlBox = false;
+            Controls.Add(label4);
+            Controls.Add(monthCalendar);
             Controls.Add(groupBox5);
             Controls.Add(BtnBackToLobby);
             Controls.Add(lblFactory);
@@ -406,7 +352,6 @@
             Controls.Add(BtnRegistrar);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
-            Controls.Add(groupBox2);
             Controls.Add(label3);
             Controls.Add(groupBox1);
             MaximizeBox = false;
@@ -416,11 +361,6 @@
             Load += FormularioRegistro_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numAnio).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numMes).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numDia).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
@@ -439,15 +379,8 @@
         private Label label2;
         private Label label1;
         private Label label3;
-        private GroupBox groupBox2;
         private Label label8;
         private TextBox txtBoxEdad;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private NumericUpDown numAnio;
-        private NumericUpDown numMes;
-        private NumericUpDown numDia;
         private GroupBox groupBox3;
         private Label label9;
         private TextBox txtBoxDNI;
@@ -465,5 +398,7 @@
         private GroupBox groupBox5;
         private Label label10;
         private ComboBox cboxCargo;
+        private MonthCalendar monthCalendar;
+        private Label label4;
     }
 }

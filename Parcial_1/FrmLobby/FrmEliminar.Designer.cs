@@ -30,8 +30,8 @@
         {
             label1 = new Label();
             groupBox1 = new GroupBox();
-            label2 = new Label();
             txtCodigoUsuario = new TextBox();
+            label2 = new Label();
             BtnDarBaja = new Button();
             BtnBackMenu = new Button();
             lblFactory = new Label();
@@ -63,6 +63,13 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Ingreso Dato";
             // 
+            // txtCodigoUsuario
+            // 
+            txtCodigoUsuario.Location = new Point(15, 59);
+            txtCodigoUsuario.Name = "txtCodigoUsuario";
+            txtCodigoUsuario.Size = new Size(100, 23);
+            txtCodigoUsuario.TabIndex = 2;
+            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -71,13 +78,6 @@
             label2.Size = new Size(89, 15);
             label2.TabIndex = 2;
             label2.Text = "Código Usuario";
-            // 
-            // txtCodigoUsuario
-            // 
-            txtCodigoUsuario.Location = new Point(15, 59);
-            txtCodigoUsuario.Name = "txtCodigoUsuario";
-            txtCodigoUsuario.Size = new Size(100, 23);
-            txtCodigoUsuario.TabIndex = 2;
             // 
             // BtnDarBaja
             // 
@@ -124,6 +124,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
             ClientSize = new Size(311, 252);
+            ControlBox = false;
             Controls.Add(lblFactory);
             Controls.Add(BtnBackMenu);
             Controls.Add(BtnDarBaja);

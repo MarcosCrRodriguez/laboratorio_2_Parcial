@@ -32,7 +32,6 @@ namespace FrmLobby
         private string cargo;
         private List<string> listNombre;
         private List<string> listApellido;
-        //private List<string> listSector;
         private List<TextBox> listaTxtBox;
         private List<int> listaStock;
         private List<string> instanciaListFormat;
@@ -54,7 +53,6 @@ namespace FrmLobby
             this.cargo = cargo;
             this.listNombre = new List<string>();
             this.listApellido = new List<string>();
-            //this.listSector = new List<string>();
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<int>();
             this.instanciaListFormat = new List<string>();
@@ -110,10 +108,13 @@ namespace FrmLobby
         {
             if (this.listOperarios != null)
             {
-                MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
-                frmDtgv.Show();
+                if (this.cargo == "Supervisor")
+                {
+                    MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
+                    frmDtgv.Show();
+                }
             }
             else
             {

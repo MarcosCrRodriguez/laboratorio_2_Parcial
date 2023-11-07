@@ -45,9 +45,13 @@ namespace Entidades
                 int rows = command.ExecuteNonQuery();
                 rtn = true;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw new SqlExceptionDuplicateUserDB("No se pudo cargar el Usuario con un DNI ya existente", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("No se pudo cargar el Usuario con un DNI ya existente", ex);
             }
             finally
             {
@@ -86,7 +90,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
@@ -125,7 +129,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
@@ -157,13 +161,9 @@ namespace Entidades
                 }
                 return personas;
             }
-            catch (IndexOutOfRangeException ex)
-            {
-                throw;
-            }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
             }
             finally
             {
@@ -200,13 +200,9 @@ namespace Entidades
                 }
                 return personas;
             }
-            catch (IndexOutOfRangeException ex)
-            {
-                throw;
-            }
             catch (Exception ex)
             {
-                throw;
+                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
             }
             finally
             {
