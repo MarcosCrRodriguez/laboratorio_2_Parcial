@@ -191,7 +191,6 @@ namespace FrmLobby
             //------------------------Operario------------------------//
             this.listNombre = Operario.HardcodearNombre();
             this.listApellido = Operario.HardcodearApellido();
-            //this.listSector = Operario.HardcodearSector();
 
             Operario op;
 

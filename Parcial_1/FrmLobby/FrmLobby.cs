@@ -12,7 +12,6 @@ namespace FrmLobby
         private List<string> listApellido;
         private List<string> listCargo;
         private List<string> listPassword;
-        private Usuario? usuario;
 
         public FrmLobby()
         {
@@ -33,13 +32,11 @@ namespace FrmLobby
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
-            this.usuario = new Usuario(this.txtNombre.Text, this.txtApellido.Text);
-
             try
             {
                 if (this.txtNombre.Text == "" || this.txtApellido.Text == "" || this.txtCodigo.Text == "" || this.cboxCargo.Text == "" || this.txtPassword.Text == "" || this.txtDNI.Text == "")
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
 
                 if (this.cboxCargo.Text == "Operario")
@@ -47,7 +44,7 @@ namespace FrmLobby
                     Operario operario = new Operario(this.txtNombre.Text, this.txtApellido.Text, Operario.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text, Operario.CasteoLong(this.txtDNI.Text));
                     if (operario.VerificarExisteOperario(OperarioDAO.LeerOperarios("Operario"), operario))
                     {
-                        if (operario.ValidarPassword(this.txtPassword.Text, operario))
+                        if (operario.ValidarPasswordOperario(this.txtPassword.Text, operario))
                         {
                             operario = OperarioDAO.LeerPorID(operario.ID);
                             if (operario != null)
@@ -59,7 +56,7 @@ namespace FrmLobby
                             }
                             else
                             {
-                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                         else
@@ -69,7 +66,7 @@ namespace FrmLobby
                     }
                     else
                     {
-                        MessageBox.Show("No contengo ningun operario con esos datos\nSi desea registre al operario", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No existe ningun operario con esos datos", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else if (this.cboxCargo.Text == "Supervisor")
@@ -77,11 +74,11 @@ namespace FrmLobby
                     Supervisor supervisor = new Supervisor(this.txtNombre.Text, this.txtApellido.Text, Supervisor.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text, Supervisor.CasteoLong(this.txtDNI.Text));
                     if (supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor))
                     {
-                        if (supervisor.ValidarPassword(this.txtPassword.Text, supervisor))
+                        if (supervisor.ValidarPasswordSupervisor(this.txtPassword.Text, supervisor))
                         {
+                            supervisor = SupervisorDAO.LeerPorID(supervisor.ID);
                             if (supervisor != null)
                             {
-                                supervisor = SupervisorDAO.LeerPorID(supervisor.ID);
                                 MessageBox.Show($"{(string)supervisor}", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Hide();
                                 MenuUsuario frmSupervisor = new MenuUsuario(this, supervisor.ID, supervisor.Puesto);
@@ -89,7 +86,7 @@ namespace FrmLobby
                             }
                             else
                             {
-                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                         else
@@ -99,21 +96,26 @@ namespace FrmLobby
                     }
                     else
                     {
-                        MessageBox.Show("No contengo ningun supervisor con esos datos\nSi desea registre al supervisor", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No existe ningun supervisor con esos datos", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            catch (ParametrosVaciosException ex)
+            catch (EmptyParametersException ex)
             {
+                //log (datetime, que excepcion, (ex.StackTrace))
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (ObjetoNullException ex)
-            {
-                MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (InvalidPasswordException ex)
+            {
+                MessageBox.Show(ex.Message, "Constraseña incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (ObjectNullException ex)
+            {
+                MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {

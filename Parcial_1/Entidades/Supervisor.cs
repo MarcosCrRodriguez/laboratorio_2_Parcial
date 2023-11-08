@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using ExcepcionesPropias;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace Entidades
@@ -11,7 +12,7 @@ namespace Entidades
         private long dni;
         private string email;
         private int edad;
-        private DateTime fechaNacimiento;
+        private DateTime fechaIngreso;
         private string direccion;
         private string telefono;
         private const string password = "superusuario";
@@ -36,7 +37,7 @@ namespace Entidades
         {
             this.email = email;
             this.edad = edad;
-            this.fechaNacimiento = fechaNacimiento;
+            this.fechaIngreso = fechaNacimiento;
             this.direccion = direccion;
             this.telefono = telefono;
         }
@@ -71,10 +72,10 @@ namespace Entidades
             set { this.edad = value; }
         }
 
-        public DateTime FechaNacimiento
+        public DateTime FechaIngreso
         {
-            get { return this.fechaNacimiento; }
-            set { this.fechaNacimiento = value; }
+            get { return this.fechaIngreso; }
+            set { this.fechaIngreso = value; }
         }
 
         public string Direccion
@@ -123,11 +124,15 @@ namespace Entidades
             }
         }
 
-        public bool ValidarPassword(string dato, Supervisor supervisor)
+        public bool ValidarPasswordSupervisor(string dato, Supervisor supervisor)
         {
             if (supervisor != null)
             {
-                if (dato == password && supervisor.Puesto == "Supervisor")
+                if (dato != password)
+                {
+                    throw new InvalidPasswordException("La constraseña es invalida - [InvalidPasswordException]");
+                }
+                else if (dato == password && supervisor.Puesto == "Supervisor")
                 {
                     return true;
                 }
@@ -263,7 +268,7 @@ namespace Entidades
             sb.Append(cadena);
             sb.AppendLine($"Email: {this.email}");
             sb.AppendLine($"Edad: {this.edad}");
-            sb.AppendLine($"Fecha Nacimiento: {this.fechaNacimiento.ToString("dd/MM/yyyy")}");
+            sb.AppendLine($"Fecha Nacimiento: {this.fechaIngreso.ToString("dd/MM/yyyy")}");
             sb.AppendLine($"Direccion: {this.direccion}");
             sb.AppendLine($"Telefono: {this.telefono}");
 

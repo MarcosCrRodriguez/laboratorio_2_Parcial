@@ -44,7 +44,7 @@
             BtnBackMenu.BackColor = Color.BurlyWood;
             BtnBackMenu.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnBackMenu.ForeColor = SystemColors.ActiveCaptionText;
-            BtnBackMenu.Location = new Point(1027, 244);
+            BtnBackMenu.Location = new Point(1027, 315);
             BtnBackMenu.Name = "BtnBackMenu";
             BtnBackMenu.Size = new Size(119, 53);
             BtnBackMenu.TabIndex = 1;
@@ -70,7 +70,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(727, 259);
+            lblFactory.Location = new Point(728, 330);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 16;
@@ -89,7 +89,7 @@
             DtgvRegistro.ReadOnly = true;
             DtgvRegistro.RowTemplate.Height = 25;
             DtgvRegistro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DtgvRegistro.Size = new Size(1098, 155);
+            DtgvRegistro.Size = new Size(1098, 215);
             DtgvRegistro.TabIndex = 17;
             // 
             // BtnRegistrar
@@ -97,7 +97,7 @@
             BtnRegistrar.BackColor = Color.LimeGreen;
             BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnRegistrar.ForeColor = SystemColors.ActiveCaptionText;
-            BtnRegistrar.Location = new Point(22, 244);
+            BtnRegistrar.Location = new Point(22, 315);
             BtnRegistrar.Name = "BtnRegistrar";
             BtnRegistrar.Size = new Size(132, 53);
             BtnRegistrar.TabIndex = 18;
@@ -110,7 +110,7 @@
             BtnModificar.BackColor = Color.SandyBrown;
             BtnModificar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnModificar.ForeColor = SystemColors.ActiveCaptionText;
-            BtnModificar.Location = new Point(206, 244);
+            BtnModificar.Location = new Point(212, 315);
             BtnModificar.Name = "BtnModificar";
             BtnModificar.Size = new Size(142, 53);
             BtnModificar.TabIndex = 19;
@@ -123,7 +123,7 @@
             BtnEliminar.BackColor = Color.Tomato;
             BtnEliminar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnEliminar.ForeColor = SystemColors.ActiveCaptionText;
-            BtnEliminar.Location = new Point(405, 244);
+            BtnEliminar.Location = new Point(415, 315);
             BtnEliminar.Name = "BtnEliminar";
             BtnEliminar.Size = new Size(136, 53);
             BtnEliminar.TabIndex = 20;
@@ -136,7 +136,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(1158, 309);
+            ClientSize = new Size(1158, 380);
             ControlBox = false;
             Controls.Add(BtnEliminar);
             Controls.Add(BtnModificar);

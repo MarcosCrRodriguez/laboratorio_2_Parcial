@@ -23,6 +23,13 @@ namespace Entidades
             command.Connection = connection;
         }
 
+        /// <summary>
+        /// Guardamos / agregamos un Usuario en la base de datos
+        /// </summary>
+        /// <param name="operario">Operario que agregaremos a la DB</param>
+        /// <returns>Retorna un true o false para ver si se pudo o no agregar a la DB</returns>
+        /// <exception cref="SqlExceptionDuplicateUserDB">Lanzara la excepcion en caso de que el DNI ingresado EXISTA</exception>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static bool GuardarRegistro(Operario operario)
         {
             bool rtn = false; ;
@@ -30,14 +37,14 @@ namespace Entidades
             {
                 command.Parameters.Clear();
                 connection.Open();
-                command.CommandText = $"Insert INTO USUARIOS (DNI, NOMBRE, APELLIDO, EMAIL, EDAD, FECHA_NACIMIENTO, DIRECCION, TELEFONO, CARGO, PASSW) " +
-                    $"VALUES (@DNI, @Nombre, @Apellido, @Email, @Edad, @FechaNacimiento, @Direccion, @Telefono, @Cargo, @Passw)";
+                command.CommandText = $"Insert INTO USUARIOS (DNI, NOMBRE, APELLIDO, EMAIL, EDAD, FECHA_INGRESO, DIRECCION, TELEFONO, CARGO, PASSW) " +
+                    $"VALUES (@DNI, @Nombre, @Apellido, @Email, @Edad, @FechaIngreso, @Direccion, @Telefono, @Cargo, @Passw)";
                 command.Parameters.AddWithValue("@DNI", operario.DNI);
                 command.Parameters.AddWithValue("@Nombre", operario.Nombre);
                 command.Parameters.AddWithValue("@Apellido", operario.Apellido);
                 command.Parameters.AddWithValue("@Edad", operario.Edad);
                 command.Parameters.AddWithValue("@Email", operario.Email);
-                command.Parameters.AddWithValue("@FechaNacimiento", operario.FechaNacimiento);
+                command.Parameters.AddWithValue("@FechaIngreso", operario.FechaIngreso);
                 command.Parameters.AddWithValue("@Direccion", operario.Direccion);
                 command.Parameters.AddWithValue("@Telefono", operario.Telefono);
                 command.Parameters.AddWithValue("@Cargo", operario.Puesto);
@@ -51,7 +58,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("No se pudo cargar el Usuario con un DNI ya existente", ex);
+                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
             }
             finally
             {
@@ -59,6 +66,13 @@ namespace Entidades
             }
             return rtn;
         }
+
+        /// <summary>
+        /// Leemos y devolvemos un Operario por un ID
+        /// </summary>
+        /// <param name="id">ID que intentaremos de encontrar en la DB</param>
+        /// <returns>Retorna el Operario encontrado por el ID</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static Operario LeerPorID(int id)
         {
             Operario usuario = null;
@@ -80,7 +94,7 @@ namespace Entidades
                             Convert.ToInt64(reader["DNI"]),
                             reader["EMAIL"].ToString(),
                             Convert.ToInt32(reader["EDAD"]),
-                            Convert.ToDateTime(reader["FECHA_NACIMIENTO"]),
+                            Convert.ToDateTime(reader["FECHA_INGRESO"]),
                             reader["DIRECCION"].ToString(),
                             reader["TELEFONO"].ToString()
                             );
@@ -98,6 +112,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Leemos y devolvemos un Operario por un DNI
+        /// </summary>
+        /// <param name="dni">DNI que intentaremos de encontrar en la DB</param>
+        /// <returns>Retorna el Operario encontrado por el DNI</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static Operario LeerPorDNI(long dni)
         {
             Operario usuario = null;
@@ -119,7 +139,7 @@ namespace Entidades
                             Convert.ToInt64(reader["DNI"]),
                             reader["EMAIL"].ToString(),
                             Convert.ToInt32(reader["EDAD"]),
-                            Convert.ToDateTime(reader["FECHA_NACIMIENTO"]),
+                            Convert.ToDateTime(reader["FECHA_INGRESO"]),
                             reader["DIRECCION"].ToString(),
                             reader["TELEFONO"].ToString()
                             );
@@ -137,6 +157,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Leemos y devolvemos una Lista de los Operarios (con ciertos datos) que se encuentren en la DB
+        /// </summary>
+        /// <param name="dato">Cargo del Usuario</param>
+        /// <returns>Retorna la Lista</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static List<Operario> LeerOperarios(string dato)
         {
             List<Operario> personas = new List<Operario>();
@@ -171,6 +197,13 @@ namespace Entidades
             }
         }
 
+
+        /// <summary>
+        /// Leemos y devolvemos una Lista de los Operarios (con todos sus datos) que se encuentren en la DB
+        /// </summary>
+        /// <param name="dato">Cargo del Usuario</param>
+        /// <returns>Retorna la Lista</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static List<Operario> LeerOperariosDatosCompletos(string dato)
         {
             List<Operario> personas = new List<Operario>();
@@ -192,7 +225,7 @@ namespace Entidades
                         Convert.ToInt64(reader["DNI"]),
                         reader["EMAIL"].ToString(),
                         Convert.ToInt32(reader["EDAD"]),
-                        Convert.ToDateTime(reader["FECHA_NACIMIENTO"]),
+                        Convert.ToDateTime(reader["FECHA_INGRESO"]),
                         reader["DIRECCION"].ToString(),
                         reader["TELEFONO"].ToString()
                         ));

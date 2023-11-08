@@ -30,7 +30,7 @@ namespace FrmLobby
             {
                 if (this.txtCodigoUsuario.Text == "")
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 if (Operario.VerificarExisteID(OperarioDAO.LeerOperarios("Operario"), Convert.ToInt32(this.txtCodigoUsuario.Text)))
                 {
@@ -56,7 +56,7 @@ namespace FrmLobby
                     MessageBox.Show("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (ParametrosVaciosException ex)
+            catch (EmptyParametersException ex)
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

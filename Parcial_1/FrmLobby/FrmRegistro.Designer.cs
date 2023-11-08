@@ -319,7 +319,7 @@
             // monthCalendar
             // 
             monthCalendar.Location = new Point(210, 208);
-            monthCalendar.MaxDate = new DateTime(2005, 12, 31, 0, 0, 0, 0);
+            monthCalendar.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
             monthCalendar.MinDate = new DateTime(1960, 1, 1, 0, 0, 0, 0);
             monthCalendar.Name = "monthCalendar";
             monthCalendar.TabIndex = 7;

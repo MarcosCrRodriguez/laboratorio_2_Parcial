@@ -46,7 +46,7 @@ namespace FrmLobby
             {
                 if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "")
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoInt(this.txtCodigoUsuario.Text), this.txtBoxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                 if (SupervisorDAO.Modificar(operario))
@@ -55,7 +55,7 @@ namespace FrmLobby
                     this.Close();
                 }
             }
-            catch (ParametrosVaciosException ex)
+            catch (EmptyParametersException ex)
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -79,7 +79,7 @@ namespace FrmLobby
             {
                 if (this.txtCodigoUsuario.Text == "")
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 if (Operario.VerificarExisteID(OperarioDAO.LeerOperariosDatosCompletos("Operario"), Operario.CasteoInt(this.txtCodigoUsuario.Text)))
                 {
@@ -92,7 +92,7 @@ namespace FrmLobby
                         this.txtBoxEmail.Text = operario.Email;
                         this.txtBoxTelefono.Text = operario.Telefono;
                         this.txtBoxDNI.Text = operario.DNI.ToString();
-                        this.monthCalendar.SelectionStart = operario.FechaNacimiento;
+                        this.monthCalendar.SelectionStart = operario.FechaIngreso;
                         this.txtBoxDireccion.Text = operario.Direccion;
                         this.txtBoxCargo.Text = operario.Puesto;
 
@@ -114,7 +114,7 @@ namespace FrmLobby
                     MessageBox.Show("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (ParametrosVaciosException ex)
+            catch (EmptyParametersException ex)
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

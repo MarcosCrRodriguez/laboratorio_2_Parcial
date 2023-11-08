@@ -31,7 +31,7 @@ namespace FrmLobby
             {
                 if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "" || this.cboxCargo.Text == "")
                 {
-                    throw new ParametrosVaciosException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 if (this.cboxCargo.Text == "Operario")
                 {
@@ -49,7 +49,7 @@ namespace FrmLobby
                             }
                             else
                             {
-                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                     }
@@ -70,13 +70,13 @@ namespace FrmLobby
                             }
                             else
                             {
-                                throw new ObjetoNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
                             }
                         }
                     }
                 }
             }
-            catch (ParametrosVaciosException ex)
+            catch (EmptyParametersException ex)
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -92,7 +92,7 @@ namespace FrmLobby
             {
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (ObjetoNullException ex)
+            catch (ObjectNullException ex)
             {
                 MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
