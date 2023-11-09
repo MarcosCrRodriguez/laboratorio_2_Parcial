@@ -8,14 +8,12 @@ namespace FrmLobby
     public partial class FrmLobby : Form
     {
         private string path;
-        private string pathTXT;
 
         public FrmLobby()
         {
             InitializeComponent();
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
-            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmLobby_Load(object sender, EventArgs e)
@@ -98,32 +96,32 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InvalidPasswordException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "InvalidPasswordException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "InvalidPasswordException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Constraseña incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ObjectNullException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "ObjectNullException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "ObjectNullException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DataBasesException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "DataBasesException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -153,27 +151,27 @@ namespace FrmLobby
             }
             catch (UnauthorizedAccessException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "UnauthorizedAccessException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "UnauthorizedAccessException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Falta de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (PathTooLongException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "PathTooLongException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "PathTooLongException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con la ruta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DirectoryNotFoundException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DirectoryNotFoundException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "DirectoryNotFoundException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "La ruta no se encuentra", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (IOException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "IOException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "IOException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error al crear el directorio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

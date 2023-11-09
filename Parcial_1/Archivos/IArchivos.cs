@@ -8,6 +8,5 @@ namespace Archivos
 {
     public interface IArchivos
     {
-        bool EscribirArchivo();
     }
 }

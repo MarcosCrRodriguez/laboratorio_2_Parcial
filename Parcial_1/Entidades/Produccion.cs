@@ -18,10 +18,10 @@ namespace Entidades
                 case ProcesoProduccion.Soldar:
                     retorno = true;
                     break;
-                case ProcesoProduccion.Conectar:
+                case ProcesoProduccion.Ensamblar:
                     retorno = true;
                     break;
-                case ProcesoProduccion.Ensamblar:
+                case ProcesoProduccion.Conectar:
                     retorno = true;
                     break;
                 case ProcesoProduccion.Empaquetar:

@@ -24,12 +24,14 @@ namespace Entidades
         }
 
         /// <summary>
-        /// Modificamos datos del Usuario seleccionado
+        /// Modificamos la cantidad ded Stock de cierto material
         /// </summary>
-        /// <param name="operario">Operario a modificar</param>
-        /// <returns>Retorna un true o false para verificar que se modifico el Usuario con EXITO</returns>
+        /// <param name="material">Material a modificar</param>
+        /// <param name="cantidadAgregar">Cantidad a modificar</param>
+        /// <param name="id">ID del Stock</param>
+        /// <returns>Retorna un true o false para verificar que se modifico el Stock con EXITO</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static bool ModificarStock(string material, int cantidadAgregar, int id)
+        public static bool Modificar(string material, int cantidadAgregar, int id)
         {
             bool rtn = false;
             try

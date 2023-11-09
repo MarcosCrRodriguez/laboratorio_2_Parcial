@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ExcepcionesPropias;
+using System.Text;
 
 namespace Entidades
 {
@@ -147,6 +148,42 @@ namespace Entidades
             }
 
             return this.listaValores;
+        }
+
+        public static int VerificarValorPositivo(int cantidadAgregar, int id, string material)
+        {
+            int rtn = -1;
+            int cantidadProducto;
+
+            try
+            {
+                cantidadProducto = ProductosDAO.LeerPorMaterial(id, material);
+                if (cantidadProducto != -1)
+                {
+                    cantidadAgregar += cantidadProducto;
+                    if (cantidadAgregar >= 0)
+                    {
+                        rtn = cantidadAgregar;
+                    }
+                    else
+                    {
+                        throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
+                    }
+                }
+                else
+                {
+                    throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Error con el formato de la cantidad ingresada", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrio un error inesperado", ex);
+            }
+            return rtn;
         }
 
         /// <summary>

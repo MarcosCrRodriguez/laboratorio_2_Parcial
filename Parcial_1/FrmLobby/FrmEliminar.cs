@@ -16,13 +16,11 @@ namespace FrmLobby
     public partial class FrmEliminar : Form
     {
         private string path;
-        private string pathTXT;
         public FrmEliminar()
         {
             InitializeComponent();
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
-            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmEliminar_Load(object sender, EventArgs e)
@@ -66,22 +64,22 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DataBasesException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "DataBasesException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

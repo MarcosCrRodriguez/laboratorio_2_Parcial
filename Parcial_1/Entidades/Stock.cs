@@ -374,43 +374,43 @@ namespace Entidades
             {
                 case 0:
                     dictProducto = new Dictionary<string, int>() {
-                        { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
-                        { "Cable Verde" ,Stock.CantCableVerde },
-                        { "Barra Plastico" ,Stock.CantBarraPlastico },
-                        { "Bara Hierro" ,Stock.CantBaraHierro },
-                        { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
-                        { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
-                        { "Condensador" ,Stock.CantCondensador },
-                        { "Ventilador" ,Stock.CantVentilador }
+                        { "UNIDAD_PROCESAMIENTO" ,StockDAO.LeerPorMaterial(1077, "UNIDAD_PROCESAMIENTO") },
+                        { "CABLE_VERDE" ,StockDAO.LeerPorMaterial(1077, "CABLE_VERDE") },
+                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
+                        { "FIBRAS_VIDRIO" ,StockDAO.LeerPorMaterial(1077, "FIBRAS_VIDRIO") },
+                        { "CONDENSADOR" ,StockDAO.LeerPorMaterial(1077, "CONDENSADOR") },
+                        { "VENTILADOR" ,StockDAO.LeerPorMaterial(1077, "VENTILADOR") }
                         };
                     break;
                 case 1:
                     dictProducto = new Dictionary<string, int>() {
-                        { "Circuitos Electronicos Avanzados" ,Stock.CantCircuitosElectronicosAvanzados },
-                        { "Cable Rojo" ,Stock.CantCableRojo },
-                        { "Barra Plastico" ,Stock.CantBarraPlastico },
-                        { "Bara Hierro" ,Stock.CantBaraHierro },
-                        { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
-                        { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
-                        { "Condensador" ,Stock.CantCondensador },
-                        { "Ventilador" ,Stock.CantVentilador }
+                        { "CIRCUITO_ELECTRONICO_AVANZADO" ,StockDAO.LeerPorMaterial(1077, "CIRCUITO_ELECTRONICO_AVANZADO") },
+                        { "CABLE_ROJO" ,StockDAO.LeerPorMaterial(1077, "CABLE_ROJO") },
+                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
+                        { "FIBRAS_VIDRIO" ,StockDAO.LeerPorMaterial(1077, "FIBRAS_VIDRIO") },
+                        { "CONDENSADOR" ,StockDAO.LeerPorMaterial(1077, "CONDENSADOR") },
+                        { "VENTILADOR" ,StockDAO.LeerPorMaterial(1077, "VENTILADOR") }
                         };
                     break;
                 case 2:
                     dictProducto = new Dictionary<string, int>() {
-                        { "Circuitos Electronicos" ,Stock.CantCircuitosElectronicos },
-                        { "Barra Plastico" ,Stock.CantBarraPlastico },
-                        { "Bara Hierro" ,Stock.CantBaraHierro },
-                        { "Engranaje Hierro" ,Stock.CantEngranajeHierro }
+                        { "CIRCUITO_ELECTRONICO" ,StockDAO.LeerPorMaterial(1077, "CIRCUITO_ELECTRONICO") },
+                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") }
                         };
                     break;
                 case 3:
                     dictProducto = new Dictionary<string, int>() {
-                        { "Cable Rojo" ,Stock.CantCableRojo },
-                        { "Barra Plastico" ,Stock.CantBarraPlastico },
-                        { "Bara Hierro" ,Stock.CantBaraHierro },
-                        { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
-                        { "Ventilador" ,Stock.CantVentilador }
+                        { "CABLE_ROJO" ,StockDAO.LeerPorMaterial(1077, "CABLE_ROJO") },
+                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
+                        { "VENTILADOR" ,StockDAO.LeerPorMaterial(1077, "VENTILADOR") }
                         };
                     break;
                 default:

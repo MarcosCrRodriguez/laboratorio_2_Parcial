@@ -20,7 +20,6 @@ namespace FrmLobby
         private List<TextBox> listaTxtBox;
 
         private string path;
-        private string pathTXT;
         public FrmReStockMateriales(MenuUsuario menuCargo)
         {
             InitializeComponent();
@@ -30,7 +29,6 @@ namespace FrmLobby
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
-            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
@@ -58,7 +56,7 @@ namespace FrmLobby
                 cantidadAgregar = Stock.VerificarValorPositivo(Stock.CasteoExplicito(this.numCantAgregar.Value), Stock.CasteoExplicito(this.txtIDSotck.Text), this.txtMaterialSet.Text);
                 if (cantidadAgregar != -1)
                 {
-                    if (StockDAO.ModificarStock(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
+                    if (StockDAO.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
                     {
                         MessageBox.Show($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -79,23 +77,23 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             catch (NegativeValueException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "NegativeValueException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "NegativeValueException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "El valor en Stock no puede ser menor que 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

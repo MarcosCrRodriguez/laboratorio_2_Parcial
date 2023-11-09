@@ -40,7 +40,6 @@ namespace FrmLobby
         private bool boolListaOp;
 
         private string path;
-        private string pathTXT;
 
         public MenuUsuario(FrmLobby menuInicial, int codigoUsuario, string cargo)
         {
@@ -63,7 +62,6 @@ namespace FrmLobby
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
-            this.pathTXT = "Log_Excepciones.txt";
             this.CargarListas();
         }
 
@@ -270,27 +268,27 @@ namespace FrmLobby
             }
             catch (UnauthorizedAccessException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "UnauthorizedAccessException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "UnauthorizedAccessException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Falta de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (PathTooLongException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "PathTooLongException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "PathTooLongException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con la ruta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DirectoryNotFoundException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DirectoryNotFoundException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "DirectoryNotFoundException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "La ruta no se encuentra", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (IOException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "IOException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "IOException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error al crear el directorio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -313,7 +311,7 @@ namespace FrmLobby
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message);
             }
         }

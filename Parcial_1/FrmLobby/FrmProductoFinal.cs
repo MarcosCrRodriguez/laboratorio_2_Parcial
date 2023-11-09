@@ -29,7 +29,6 @@ namespace FrmLobby
         private Dictionary<string, int> dictProducto;
 
         private string path;
-        private string pathTXT;
 
         public FrmProductoFinal(MenuUsuario frmUsuario, int producto)
         {
@@ -46,7 +45,6 @@ namespace FrmLobby
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
-            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmVideoCard_Load(object sender, EventArgs e)
@@ -153,6 +151,58 @@ namespace FrmLobby
 
         private void BtnFabric_Click(object sender, EventArgs e)
         {
+            int cantidadAgregar;
+            try
+            {
+                if (this.numFabricar.Value == 0)
+                {
+                    throw new EmptyParametersException("No se pueden fabricar 0 productos - [ParametrosVaciosException]");
+                }
+                cantidadAgregar = VideoCard.VerificarValorPositivo(Stock.CasteoExplicito(this.numFabricar.Value), 1329, "VIDEO_CARD");
+                if (cantidadAgregar != -1)
+                {
+                    if (ProductosDAO.Modificar("VIDEO_CARD", cantidadAgregar, 1329))
+                    {
+                        MessageBox.Show($"Se ha modificado el material {"VIDEO_CARD"} con éxito", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        frmUsuario.CargaDatos();
+                        this.frmUsuario.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo modificar los datos del material ingresado", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo cargar los materiales cargados en el formulario", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (EmptyParametersException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "EmptyParametersException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "FormatException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            catch (NegativeValueException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "NegativeValueException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "El valor en Stock no puede ser menor que 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
             int valorNegativo = -1;
             bool retorno;
             bool retSoldar;

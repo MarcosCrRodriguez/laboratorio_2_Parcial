@@ -132,7 +132,7 @@ namespace TestUnitarios
 
             //Act
             int cantidadAgregar = Stock.VerificarValorPositivo(1500, id, material);
-            bool actual = StockDAO.ModificarStock(material, cantidadAgregar, id);
+            bool actual = StockDAO.Modificar(material, cantidadAgregar, id);
 
             //Assert
             Assert.AreEqual(expected, actual);

@@ -389,7 +389,7 @@
             // numCantAgregar
             // 
             numCantAgregar.Location = new Point(461, 166);
-            numCantAgregar.Maximum = new decimal(new int[] { 15000, 0, 0, 0 });
+            numCantAgregar.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
             numCantAgregar.Name = "numCantAgregar";
             numCantAgregar.Size = new Size(132, 23);
             numCantAgregar.TabIndex = 63;

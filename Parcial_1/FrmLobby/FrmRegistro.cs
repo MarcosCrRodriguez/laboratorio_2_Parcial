@@ -16,13 +16,11 @@ namespace FrmLobby
     public partial class FormularioRegistro : Form
     {
         private string path;
-        private string pathTXT;
         public FormularioRegistro()
         {
             InitializeComponent();
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
-            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FormularioRegistro_Load(object sender, EventArgs e)
@@ -84,32 +82,32 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (SqlExceptionDuplicateUserDB ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "SqlExceptionDuplicateUserDB", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "SqlExceptionDuplicateUserDB", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Problemas con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DataBasesException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "DataBasesException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ObjectNullException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "ObjectNullException", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "ObjectNullException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
