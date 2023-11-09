@@ -1,5 +1,7 @@
 using Entidades;
 using ExcepcionesPropias;
+using Archivos;
+using System.Diagnostics;
 
 namespace TestUnitarios
 {
@@ -72,7 +74,7 @@ namespace TestUnitarios
             Operario operario = new Operario("Brandon", "Sanderson", 1056, "Operario", 12121313, "brandonsanderson@gmail.com", new Random().Next(18, 60), DateTime.Now, $"Calle None {new Random().Next(100, 2700)}", $"{new Random().Next(1000, 9999)}-{new Random().Next(1000, 9999)}");
 
             //Act
-            bool actual = SupervisorDAO.Modificar(operario);
+            bool actual = SupervisorDAO.ModificarUsuario(operario);
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -94,7 +96,6 @@ namespace TestUnitarios
             Assert.AreEqual(expected, actual);
         }
 
-        //algo no me cierra en este metodo
         [TestMethod]
         [DataRow(9)]
         [DataRow(99)]
@@ -102,7 +103,7 @@ namespace TestUnitarios
         public void Eliminar_CuandoQuieroEliminarUnOperarioDeLaDBQueNoExiste_DeberiaDevolverUnFalse(int id)
         {
             //Arrange
-            bool expected = false; 
+            bool expected = false;
 
             //Act
             bool actual = SupervisorDAO.Eliminar(id, "Operario");
@@ -110,5 +111,51 @@ namespace TestUnitarios
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        [DataRow("CIRCUITO_ELECTRONICO")]
+        [DataRow("CIRCUITO_ELECTRONICO_AVANZADO")]
+        [DataRow("UNIDAD_PROCESAMIENTO")]
+        [DataRow("BARRA_PLASTICA")]
+        [DataRow("CABLE_VERDE")]
+        [DataRow("CABLE_ROJO")]
+        [DataRow("BARA_HIERRO")]
+        [DataRow("ENGRANAJE_HIERRO")]
+        [DataRow("FIBRAS_VIDRIO")]
+        [DataRow("CONDENSADOR")]
+        [DataRow("VENTILADOR")]
+        public void ModificarStock_ModificamosLosDatosDelStock_DeberiaDevolverUnTrue(string material)
+        {
+            //Arrange
+            bool expected = true;
+            int id = 1077;
+
+            //Act
+            int cantidadAgregar = Stock.VerificarValorPositivo(1500, id, material);
+            bool actual = StockDAO.ModificarStock(material, cantidadAgregar, id);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void EscribirArchivo_TratamosDeGuardarUnLogDeErrorEnUnArchivoTXT_DeberiamosDevolverUnTrue()
+        {
+            bool expected = true;
+
+            string path;
+            path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            path += @"\Archivos\";
+            string pathTXT = "Log_Excepciones.txt";
+
+            if (Directory.Exists(path))
+            {
+                //EscribirTXT
+                bool actual = ArchivosTXT<string>.EscribirArchivo(path + pathTXT, ArchivosTXT<string>.CrearFormatoExcepcion("FormatException", "StackTrace"));
+                
+                Assert.AreEqual(expected, actual);  
+            }
+        }
+
     }
 }

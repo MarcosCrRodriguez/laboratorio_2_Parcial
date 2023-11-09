@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using ExcepcionesPropias;
+using Archivos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,9 +17,14 @@ namespace FrmLobby
     public partial class FrmModificar : Form
     {
         private Operario? operario;
+        private string path;
+        private string pathTXT;
         public FrmModificar()
         {
             InitializeComponent();
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmModificar_Load(object sender, EventArgs e)
@@ -49,7 +55,7 @@ namespace FrmLobby
                     throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
                 Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoInt(this.txtCodigoUsuario.Text), this.txtBoxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
-                if (SupervisorDAO.Modificar(operario))
+                if (SupervisorDAO.ModificarUsuario(operario))
                 {
                     MessageBox.Show("Se modifico el Operario correctamente", "Modificación de datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
@@ -57,18 +63,22 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DataBasesException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -116,18 +126,22 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DataBasesException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

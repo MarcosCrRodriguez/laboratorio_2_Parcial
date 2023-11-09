@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "FrmLobby/1.0.0": {
         "dependencies": {
+          "Archivos": "1.0.0",
           "Entidades": "1.0.0",
           "ExcepcionesPropias": "1.0.0"
         },
@@ -90,6 +91,11 @@
         }
       },
       "System.Security.Principal.Windows/4.7.0": {},
+      "Archivos/1.0.0": {
+        "runtime": {
+          "Archivos.dll": {}
+        }
+      },
       "Entidades/1.0.0": {
         "dependencies": {
           "ExcepcionesPropias": "1.0.0",
@@ -174,6 +180,11 @@
       "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
       "path": "system.security.principal.windows/4.7.0",
       "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
+    },
+    "Archivos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Entidades/1.0.0": {
       "type": "project",

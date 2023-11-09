@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrmLobby", "FrmLobby\FrmLob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcepcionesPropias", "ExcepcionesPropias\ExcepcionesPropias.csproj", "{5F2D2349-389C-41CE-B050-07998E94DDC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnitarios", "TestUnitarios\TestUnitarios.csproj", "{BD4EE49C-C02D-441E-8739-03E56E57B96A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUnitarios", "TestUnitarios\TestUnitarios.csproj", "{BD4EE49C-C02D-441E-8739-03E56E57B96A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archivos", "Archivos\Archivos.csproj", "{A2CF243A-73D3-455D-A253-4F3DF4C4FEE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BD4EE49C-C02D-441E-8739-03E56E57B96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD4EE49C-C02D-441E-8739-03E56E57B96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD4EE49C-C02D-441E-8739-03E56E57B96A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2CF243A-73D3-455D-A253-4F3DF4C4FEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2CF243A-73D3-455D-A253-4F3DF4C4FEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2CF243A-73D3-455D-A253-4F3DF4C4FEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2CF243A-73D3-455D-A253-4F3DF4C4FEE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

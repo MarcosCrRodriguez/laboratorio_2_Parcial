@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "TestUnitarios/1.0.0": {
         "dependencies": {
+          "Archivos": "1.0.0",
           "Entidades": "1.0.0",
           "ExcepcionesPropias": "1.0.0",
           "MSTest.TestAdapter": "2.2.8",
@@ -1152,6 +1153,11 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
+      "Archivos/1.0.0": {
+        "runtime": {
+          "Archivos.dll": {}
+        }
+      },
       "Entidades/1.0.0": {
         "dependencies": {
           "ExcepcionesPropias": "1.0.0",
@@ -1845,6 +1851,11 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "Archivos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Entidades/1.0.0": {
       "type": "project",

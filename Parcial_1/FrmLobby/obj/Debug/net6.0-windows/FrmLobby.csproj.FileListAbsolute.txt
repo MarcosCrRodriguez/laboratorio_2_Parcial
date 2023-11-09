@@ -82,3 +82,5 @@ C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Par
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\bin\Debug\net6.0-windows\ExcepcionesPropias.pdb
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\obj\Debug\net6.0-windows\FrmLobby.FrmEliminar.resources
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\obj\Debug\net6.0-windows\FrmLobby.FrmModificar.resources
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\bin\Debug\net6.0-windows\Archivos.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\FrmLobby\bin\Debug\net6.0-windows\Archivos.pdb

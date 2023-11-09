@@ -197,7 +197,6 @@ namespace Entidades
             }
         }
 
-
         /// <summary>
         /// Leemos y devolvemos una Lista de los Operarios (con todos sus datos) que se encuentren en la DB
         /// </summary>

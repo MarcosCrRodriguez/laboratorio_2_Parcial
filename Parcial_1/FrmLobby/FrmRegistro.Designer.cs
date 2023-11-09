@@ -332,9 +332,9 @@
             label4.ForeColor = SystemColors.ButtonHighlight;
             label4.Location = new Point(219, 175);
             label4.Name = "label4";
-            label4.Size = new Size(136, 19);
+            label4.Size = new Size(113, 19);
             label4.TabIndex = 18;
-            label4.Text = "Fecha de Nacimiento";
+            label4.Text = "Fecha de Ingreso";
             // 
             // FormularioRegistro
             // 

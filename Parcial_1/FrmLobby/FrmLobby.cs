@@ -1,33 +1,28 @@
 using Entidades;
 using ExcepcionesPropias;
+using Archivos;
 using System.Text;
 
 namespace FrmLobby
 {
     public partial class FrmLobby : Form
     {
-        private int cantHardcode;
-        private const int constanteHarcodeos = 7;
-        private List<string> listNombre;
-        private List<string> listApellido;
-        private List<string> listCargo;
-        private List<string> listPassword;
+        private string path;
+        private string pathTXT;
 
         public FrmLobby()
         {
             InitializeComponent();
-            this.listNombre = new List<string>();
-            this.listApellido = new List<string>();
-            this.listCargo = new List<string>();
-            this.listPassword = new List<string>();
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
         }
         private void FrmLobby_Load(object sender, EventArgs e)
         {
-            this.cantHardcode = 0;
-            this.CargarListas();
-
-            cboxCargo.Items.Add("Operario");
-            cboxCargo.Items.Add("Supervisor");
+            this.CrearDirectorio();
+            this.cboxCargo.Items.Add("");
+            this.cboxCargo.Items.Add("Operario");
+            this.cboxCargo.Items.Add("Supervisor");
         }
 
         private void BtnIngresar_Click(object sender, EventArgs e)
@@ -49,7 +44,7 @@ namespace FrmLobby
                             operario = OperarioDAO.LeerPorID(operario.ID);
                             if (operario != null)
                             {
-                                MessageBox.Show($"{(string)operario}", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show($"{operario.Nombre} {operario.Apellido} esta ingresando al menu", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Hide();
                                 MenuUsuario frmOperario = new MenuUsuario(this, operario.ID, operario.Puesto);
                                 frmOperario.Show();
@@ -79,7 +74,7 @@ namespace FrmLobby
                             supervisor = SupervisorDAO.LeerPorID(supervisor.ID);
                             if (supervisor != null)
                             {
-                                MessageBox.Show($"{(string)supervisor}", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show($"{supervisor.Nombre} {supervisor.Apellido} esta ingresando al menu", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 this.Hide();
                                 MenuUsuario frmSupervisor = new MenuUsuario(this, supervisor.ID, supervisor.Puesto);
                                 frmSupervisor.Show();
@@ -102,27 +97,32 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
-                //log (datetime, que excepcion, (ex.StackTrace))
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "EmptyParametersException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "FormatException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (InvalidPasswordException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "InvalidPasswordException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Constraseña incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (ObjectNullException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "ObjectNullException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DataBasesException ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DataBasesException", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error con BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -130,21 +130,7 @@ namespace FrmLobby
         {
             FormularioRegistro frmRegistro = new FormularioRegistro();
             frmRegistro.ShowDialog();
-        }
-
-        //private void BtnHardcode_Click(object sender, EventArgs e)
-        //{
-        //    if (this.cantHardcode > 7)
-        //    {
-        //        this.cantHardcode = 0;
-        //    }
-
-        //    this.txtNombre.Text = listNombre[this.cantHardcode];
-        //    this.txtApellido.Text = listApellido[this.cantHardcode];
-        //    this.cboxCargo.Text = listCargo[this.cantHardcode];
-        //    this.txtPassword.Text = listPassword[this.cantHardcode];
-        //    this.cantHardcode++;
-        //}
+        } 
 
         private void FrmLobby_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -154,18 +140,53 @@ namespace FrmLobby
             }
         }
 
-        /// <summary>
-        /// Ingreso unicamente cuando cargo el formulario, me hardcodea una lista con datos, que 
-        /// esos datos son los uruarios, operarios/supervisores para facilitar el ingreso al sistema
-        /// </summary>
-        private void CargarListas()
+        public void CrearDirectorio()
         {
-            //------------------------Usuarios Harcodeados------------------------//
-            this.listNombre = Supervisor.HardcodearNombre();
-            this.listApellido = Supervisor.HardcodearApellido();
-            this.listCargo = Supervisor.HardcodearCargo();
-            this.listPassword = Supervisor.HardcodearPassword();
+            try
+            {
+                if (!Directory.Exists(this.path))
+                {
+                    Directory.CreateDirectory(this.path);
+                }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "UnauthorizedAccessException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Falta de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (PathTooLongException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "PathTooLongException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error con la ruta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DirectoryNotFoundException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "La ruta no se encuentra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (IOException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "IOException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error al crear el directorio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        /// <summary>
+        /// Limpio las casillas de texto del Formulario Lobby
+        /// </summary>
+        public void LimpiarDatos()
+        {
+            this.txtNombre.Text = string.Empty;
+            this.txtApellido.Text = string.Empty;
+            this.txtCodigo.Text = string.Empty;
+            this.cboxCargo.Text = string.Empty;
+            this.txtPassword.Text = string.Empty;
+            this.txtDNI.Text = string.Empty;
+        }
     }
 }

@@ -29,295 +29,280 @@
         private void InitializeComponent()
         {
             gboxMateriales = new GroupBox();
-            BtnHardcodeo = new Button();
-            numVentilador = new NumericUpDown();
-            numCondensador = new NumericUpDown();
-            numFibraVidrio = new NumericUpDown();
-            numEngranajeHierro = new NumericUpDown();
-            numBaraHierro = new NumericUpDown();
-            numCableRojo = new NumericUpDown();
-            numCableVerde = new NumericUpDown();
-            numBarraPlastica = new NumericUpDown();
-            numUnProcesamiento = new NumericUpDown();
-            numCircuitoElectAv = new NumericUpDown();
-            numCircuitoElect = new NumericUpDown();
-            label15 = new Label();
-            label14 = new Label();
-            label13 = new Label();
-            label12 = new Label();
-            label11 = new Label();
-            label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
-            label5 = new Label();
-            label7 = new Label();
-            label6 = new Label();
+            txtVentilador = new TextBox();
+            txtCondensador = new TextBox();
+            txtFibraVidrio = new TextBox();
+            txtEngranajeHierro = new TextBox();
+            txtBaraHierro = new TextBox();
+            BtnLoad = new Button();
+            txtCableR = new TextBox();
+            txtCableV = new TextBox();
+            txtBarraPlastica = new TextBox();
+            txtUnidadProcesamiento = new TextBox();
+            txtCircuitoElectAv = new TextBox();
+            txtCircuitoElect = new TextBox();
+            lblVentilador = new Label();
+            lblCondensador = new Label();
+            lblFibraVidrio = new Label();
+            lblEngranajeHierro = new Label();
+            lblBaraHierro = new Label();
+            lblCableR = new Label();
+            lblCableV = new Label();
+            lblBarraPlastica = new Label();
+            lblCircuitoElect = new Label();
+            lblUnidadProcesamiento = new Label();
+            lblCircuitoElectAv = new Label();
             BtnBackWindow = new Button();
             lblFactory = new Label();
-            BtnLoad = new Button();
+            lblMaterialesModificar = new Label();
+            txtMaterialSet = new TextBox();
+            lblID = new Label();
+            txtIDSotck = new TextBox();
+            lblHelp = new Label();
+            lblCantidadAgregar = new Label();
+            numCantAgregar = new NumericUpDown();
             gboxMateriales.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numVentilador).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numCondensador).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numFibraVidrio).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numEngranajeHierro).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numBaraHierro).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numCableRojo).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numCableVerde).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numBarraPlastica).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numUnProcesamiento).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numCircuitoElectAv).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numCircuitoElect).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numCantAgregar).BeginInit();
             SuspendLayout();
             // 
             // gboxMateriales
             // 
             gboxMateriales.BackColor = Color.Transparent;
-            gboxMateriales.Controls.Add(BtnHardcodeo);
-            gboxMateriales.Controls.Add(numVentilador);
-            gboxMateriales.Controls.Add(numCondensador);
-            gboxMateriales.Controls.Add(numFibraVidrio);
-            gboxMateriales.Controls.Add(numEngranajeHierro);
-            gboxMateriales.Controls.Add(numBaraHierro);
-            gboxMateriales.Controls.Add(numCableRojo);
-            gboxMateriales.Controls.Add(numCableVerde);
-            gboxMateriales.Controls.Add(numBarraPlastica);
-            gboxMateriales.Controls.Add(numUnProcesamiento);
-            gboxMateriales.Controls.Add(numCircuitoElectAv);
-            gboxMateriales.Controls.Add(numCircuitoElect);
-            gboxMateriales.Controls.Add(label15);
-            gboxMateriales.Controls.Add(label14);
-            gboxMateriales.Controls.Add(label13);
-            gboxMateriales.Controls.Add(label12);
-            gboxMateriales.Controls.Add(label11);
-            gboxMateriales.Controls.Add(label10);
-            gboxMateriales.Controls.Add(label9);
-            gboxMateriales.Controls.Add(label8);
-            gboxMateriales.Controls.Add(label5);
-            gboxMateriales.Controls.Add(label7);
-            gboxMateriales.Controls.Add(label6);
+            gboxMateriales.Controls.Add(txtVentilador);
+            gboxMateriales.Controls.Add(txtCondensador);
+            gboxMateriales.Controls.Add(txtFibraVidrio);
+            gboxMateriales.Controls.Add(txtEngranajeHierro);
+            gboxMateriales.Controls.Add(txtBaraHierro);
+            gboxMateriales.Controls.Add(BtnLoad);
+            gboxMateriales.Controls.Add(txtCableR);
+            gboxMateriales.Controls.Add(txtCableV);
+            gboxMateriales.Controls.Add(txtBarraPlastica);
+            gboxMateriales.Controls.Add(txtUnidadProcesamiento);
+            gboxMateriales.Controls.Add(txtCircuitoElectAv);
+            gboxMateriales.Controls.Add(txtCircuitoElect);
+            gboxMateriales.Controls.Add(lblVentilador);
+            gboxMateriales.Controls.Add(lblCondensador);
+            gboxMateriales.Controls.Add(lblFibraVidrio);
+            gboxMateriales.Controls.Add(lblEngranajeHierro);
+            gboxMateriales.Controls.Add(lblBaraHierro);
+            gboxMateriales.Controls.Add(lblCableR);
+            gboxMateriales.Controls.Add(lblCableV);
+            gboxMateriales.Controls.Add(lblBarraPlastica);
+            gboxMateriales.Controls.Add(lblCircuitoElect);
+            gboxMateriales.Controls.Add(lblUnidadProcesamiento);
+            gboxMateriales.Controls.Add(lblCircuitoElectAv);
             gboxMateriales.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             gboxMateriales.ForeColor = SystemColors.ButtonHighlight;
             gboxMateriales.Location = new Point(12, 12);
             gboxMateriales.Name = "gboxMateriales";
-            gboxMateriales.Size = new Size(433, 284);
+            gboxMateriales.Size = new Size(435, 284);
             gboxMateriales.TabIndex = 24;
             gboxMateriales.TabStop = false;
             gboxMateriales.Text = "Cantidad materiales a agregar";
             // 
-            // BtnHardcodeo
+            // txtVentilador
             // 
-            BtnHardcodeo.ForeColor = Color.Gray;
-            BtnHardcodeo.Location = new Point(256, 242);
-            BtnHardcodeo.Name = "BtnHardcodeo";
-            BtnHardcodeo.Size = new Size(119, 27);
-            BtnHardcodeo.TabIndex = 46;
-            BtnHardcodeo.Text = "Hardcodear";
-            BtnHardcodeo.UseVisualStyleBackColor = true;
-            BtnHardcodeo.Click += BtnHardcodeo_Click;
+            txtVentilador.Location = new Point(337, 196);
+            txtVentilador.Name = "txtVentilador";
+            txtVentilador.Size = new Size(88, 25);
+            txtVentilador.TabIndex = 57;
             // 
-            // numVentilador
+            // txtCondensador
             // 
-            numVentilador.Location = new Point(337, 199);
-            numVentilador.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numVentilador.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numVentilador.Name = "numVentilador";
-            numVentilador.Size = new Size(81, 25);
-            numVentilador.TabIndex = 45;
+            txtCondensador.Location = new Point(337, 154);
+            txtCondensador.Name = "txtCondensador";
+            txtCondensador.Size = new Size(88, 25);
+            txtCondensador.TabIndex = 56;
             // 
-            // numCondensador
+            // txtFibraVidrio
             // 
-            numCondensador.Location = new Point(337, 155);
-            numCondensador.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numCondensador.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numCondensador.Name = "numCondensador";
-            numCondensador.Size = new Size(81, 25);
-            numCondensador.TabIndex = 44;
+            txtFibraVidrio.Location = new Point(337, 110);
+            txtFibraVidrio.Name = "txtFibraVidrio";
+            txtFibraVidrio.Size = new Size(88, 25);
+            txtFibraVidrio.TabIndex = 55;
             // 
-            // numFibraVidrio
+            // txtEngranajeHierro
             // 
-            numFibraVidrio.Location = new Point(337, 111);
-            numFibraVidrio.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numFibraVidrio.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numFibraVidrio.Name = "numFibraVidrio";
-            numFibraVidrio.Size = new Size(81, 25);
-            numFibraVidrio.TabIndex = 43;
+            txtEngranajeHierro.Location = new Point(337, 65);
+            txtEngranajeHierro.Name = "txtEngranajeHierro";
+            txtEngranajeHierro.Size = new Size(88, 25);
+            txtEngranajeHierro.TabIndex = 54;
             // 
-            // numEngranajeHierro
+            // txtBaraHierro
             // 
-            numEngranajeHierro.Location = new Point(337, 66);
-            numEngranajeHierro.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numEngranajeHierro.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numEngranajeHierro.Name = "numEngranajeHierro";
-            numEngranajeHierro.Size = new Size(81, 25);
-            numEngranajeHierro.TabIndex = 42;
+            txtBaraHierro.Location = new Point(337, 24);
+            txtBaraHierro.Name = "txtBaraHierro";
+            txtBaraHierro.Size = new Size(88, 25);
+            txtBaraHierro.TabIndex = 53;
             // 
-            // numBaraHierro
+            // BtnLoad
             // 
-            numBaraHierro.Location = new Point(337, 23);
-            numBaraHierro.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numBaraHierro.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numBaraHierro.Name = "numBaraHierro";
-            numBaraHierro.Size = new Size(81, 25);
-            numBaraHierro.TabIndex = 41;
+            BtnLoad.BackColor = Color.MediumSeaGreen;
+            BtnLoad.Location = new Point(265, 234);
+            BtnLoad.Name = "BtnLoad";
+            BtnLoad.Size = new Size(116, 34);
+            BtnLoad.TabIndex = 27;
+            BtnLoad.Text = "Load Materials";
+            BtnLoad.UseVisualStyleBackColor = false;
+            BtnLoad.Click += BtnLoad_Click;
             // 
-            // numCableRojo
+            // txtCableR
             // 
-            numCableRojo.Location = new Point(124, 244);
-            numCableRojo.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numCableRojo.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numCableRojo.Name = "numCableRojo";
-            numCableRojo.Size = new Size(81, 25);
-            numCableRojo.TabIndex = 40;
+            txtCableR.Location = new Point(124, 243);
+            txtCableR.Name = "txtCableR";
+            txtCableR.Size = new Size(88, 25);
+            txtCableR.TabIndex = 52;
             // 
-            // numCableVerde
+            // txtCableV
             // 
-            numCableVerde.Location = new Point(124, 199);
-            numCableVerde.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numCableVerde.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numCableVerde.Name = "numCableVerde";
-            numCableVerde.Size = new Size(81, 25);
-            numCableVerde.TabIndex = 39;
+            txtCableV.Location = new Point(124, 196);
+            txtCableV.Name = "txtCableV";
+            txtCableV.Size = new Size(88, 25);
+            txtCableV.TabIndex = 51;
             // 
-            // numBarraPlastica
+            // txtBarraPlastica
             // 
-            numBarraPlastica.Location = new Point(124, 155);
-            numBarraPlastica.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numBarraPlastica.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numBarraPlastica.Name = "numBarraPlastica";
-            numBarraPlastica.Size = new Size(81, 25);
-            numBarraPlastica.TabIndex = 38;
+            txtBarraPlastica.Location = new Point(124, 154);
+            txtBarraPlastica.Name = "txtBarraPlastica";
+            txtBarraPlastica.Size = new Size(88, 25);
+            txtBarraPlastica.TabIndex = 50;
             // 
-            // numUnProcesamiento
+            // txtUnidadProcesamiento
             // 
-            numUnProcesamiento.Location = new Point(124, 111);
-            numUnProcesamiento.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numUnProcesamiento.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numUnProcesamiento.Name = "numUnProcesamiento";
-            numUnProcesamiento.Size = new Size(81, 25);
-            numUnProcesamiento.TabIndex = 37;
+            txtUnidadProcesamiento.Location = new Point(124, 110);
+            txtUnidadProcesamiento.Name = "txtUnidadProcesamiento";
+            txtUnidadProcesamiento.Size = new Size(88, 25);
+            txtUnidadProcesamiento.TabIndex = 49;
             // 
-            // numCircuitoElectAv
+            // txtCircuitoElectAv
             // 
-            numCircuitoElectAv.Location = new Point(124, 68);
-            numCircuitoElectAv.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numCircuitoElectAv.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numCircuitoElectAv.Name = "numCircuitoElectAv";
-            numCircuitoElectAv.Size = new Size(81, 25);
-            numCircuitoElectAv.TabIndex = 36;
+            txtCircuitoElectAv.Location = new Point(124, 65);
+            txtCircuitoElectAv.Name = "txtCircuitoElectAv";
+            txtCircuitoElectAv.Size = new Size(88, 25);
+            txtCircuitoElectAv.TabIndex = 48;
             // 
-            // numCircuitoElect
+            // txtCircuitoElect
             // 
-            numCircuitoElect.Location = new Point(124, 22);
-            numCircuitoElect.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
-            numCircuitoElect.Minimum = new decimal(new int[] { 10000, 0, 0, int.MinValue });
-            numCircuitoElect.Name = "numCircuitoElect";
-            numCircuitoElect.Size = new Size(81, 25);
-            numCircuitoElect.TabIndex = 28;
+            txtCircuitoElect.Location = new Point(124, 22);
+            txtCircuitoElect.Name = "txtCircuitoElect";
+            txtCircuitoElect.Size = new Size(88, 25);
+            txtCircuitoElect.TabIndex = 47;
             // 
-            // label15
+            // lblVentilador
             // 
-            label15.AutoSize = true;
-            label15.Location = new Point(256, 199);
-            label15.Name = "label15";
-            label15.Size = new Size(75, 19);
-            label15.TabIndex = 35;
-            label15.Text = "Ventilador";
+            lblVentilador.AutoSize = true;
+            lblVentilador.Location = new Point(256, 199);
+            lblVentilador.Name = "lblVentilador";
+            lblVentilador.Size = new Size(75, 19);
+            lblVentilador.TabIndex = 35;
+            lblVentilador.Text = "Ventilador";
+            lblVentilador.Click += lblVentilador_Click;
             // 
-            // label14
+            // lblCondensador
             // 
-            label14.AutoSize = true;
-            label14.Location = new Point(239, 157);
-            label14.Name = "label14";
-            label14.Size = new Size(92, 19);
-            label14.TabIndex = 34;
-            label14.Text = "Condensador";
+            lblCondensador.AutoSize = true;
+            lblCondensador.Location = new Point(239, 157);
+            lblCondensador.Name = "lblCondensador";
+            lblCondensador.Size = new Size(92, 19);
+            lblCondensador.TabIndex = 34;
+            lblCondensador.Text = "Condensador";
+            lblCondensador.Click += lblCondensador_Click;
             // 
-            // label13
+            // lblFibraVidrio
             // 
-            label13.AutoSize = true;
-            label13.Location = new Point(248, 113);
-            label13.Name = "label13";
-            label13.Size = new Size(83, 19);
-            label13.TabIndex = 33;
-            label13.Text = "Fibra Vidrio";
+            lblFibraVidrio.AutoSize = true;
+            lblFibraVidrio.Location = new Point(248, 113);
+            lblFibraVidrio.Name = "lblFibraVidrio";
+            lblFibraVidrio.Size = new Size(83, 19);
+            lblFibraVidrio.TabIndex = 33;
+            lblFibraVidrio.Text = "Fibra Vidrio";
+            lblFibraVidrio.Click += lblFibraVidrio_Click;
             // 
-            // label12
+            // lblEngranajeHierro
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(216, 68);
-            label12.Name = "label12";
-            label12.Size = new Size(115, 19);
-            label12.TabIndex = 32;
-            label12.Text = "Engranaje Hierro";
+            lblEngranajeHierro.AutoSize = true;
+            lblEngranajeHierro.Location = new Point(216, 68);
+            lblEngranajeHierro.Name = "lblEngranajeHierro";
+            lblEngranajeHierro.Size = new Size(115, 19);
+            lblEngranajeHierro.TabIndex = 32;
+            lblEngranajeHierro.Text = "Engranaje Hierro";
+            lblEngranajeHierro.Click += lblEngranajeHierro_Click;
             // 
-            // label11
+            // lblBaraHierro
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(249, 25);
-            label11.Name = "label11";
-            label11.Size = new Size(82, 19);
-            label11.TabIndex = 31;
-            label11.Text = "Bara Hierro";
+            lblBaraHierro.AutoSize = true;
+            lblBaraHierro.Location = new Point(249, 25);
+            lblBaraHierro.Name = "lblBaraHierro";
+            lblBaraHierro.Size = new Size(82, 19);
+            lblBaraHierro.TabIndex = 31;
+            lblBaraHierro.Text = "Bara Hierro";
+            lblBaraHierro.Click += lblBaraHierro_Click;
             // 
-            // label10
+            // lblCableR
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(40, 246);
-            label10.Name = "label10";
-            label10.Size = new Size(78, 19);
-            label10.TabIndex = 30;
-            label10.Text = "Cable Rojo";
+            lblCableR.AutoSize = true;
+            lblCableR.Location = new Point(40, 246);
+            lblCableR.Name = "lblCableR";
+            lblCableR.Size = new Size(78, 19);
+            lblCableR.TabIndex = 30;
+            lblCableR.Text = "Cable Rojo";
+            lblCableR.Click += lblCableR_Click;
             // 
-            // label9
+            // lblCableV
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(33, 199);
-            label9.Name = "label9";
-            label9.Size = new Size(85, 19);
-            label9.TabIndex = 29;
-            label9.Text = "Cable Verde";
+            lblCableV.AutoSize = true;
+            lblCableV.Location = new Point(33, 199);
+            lblCableV.Name = "lblCableV";
+            lblCableV.Size = new Size(85, 19);
+            lblCableV.TabIndex = 29;
+            lblCableV.Text = "Cable Verde";
+            lblCableV.Click += lblCableV_Click;
             // 
-            // label8
+            // lblBarraPlastica
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(21, 157);
-            label8.Name = "label8";
-            label8.Size = new Size(97, 19);
-            label8.TabIndex = 28;
-            label8.Text = "Barra Plascito";
+            lblBarraPlastica.AutoSize = true;
+            lblBarraPlastica.Location = new Point(21, 157);
+            lblBarraPlastica.Name = "lblBarraPlastica";
+            lblBarraPlastica.Size = new Size(97, 19);
+            lblBarraPlastica.TabIndex = 28;
+            lblBarraPlastica.Text = "Barra Plascito";
+            lblBarraPlastica.Click += lblBarraPlastica_Click;
             // 
-            // label5
+            // lblCircuitoElect
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(27, 25);
-            label5.Name = "label5";
-            label5.Size = new Size(91, 19);
-            label5.TabIndex = 27;
-            label5.Text = "Circuito Elect";
+            lblCircuitoElect.AutoSize = true;
+            lblCircuitoElect.Location = new Point(27, 25);
+            lblCircuitoElect.Name = "lblCircuitoElect";
+            lblCircuitoElect.Size = new Size(91, 19);
+            lblCircuitoElect.TabIndex = 27;
+            lblCircuitoElect.Text = "Circuito Elect";
+            lblCircuitoElect.Click += lblCircuitoElect_Click;
             // 
-            // label7
+            // lblUnidadProcesamiento
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(10, 113);
-            label7.Name = "label7";
-            label7.Size = new Size(108, 19);
-            label7.TabIndex = 26;
-            label7.Text = "U Procesaminto";
+            lblUnidadProcesamiento.AutoSize = true;
+            lblUnidadProcesamiento.Location = new Point(10, 113);
+            lblUnidadProcesamiento.Name = "lblUnidadProcesamiento";
+            lblUnidadProcesamiento.Size = new Size(108, 19);
+            lblUnidadProcesamiento.TabIndex = 26;
+            lblUnidadProcesamiento.Text = "U Procesaminto";
+            lblUnidadProcesamiento.Click += lblUnidadProcesamiento_Click;
             // 
-            // label6
+            // lblCircuitoElectAv
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(7, 68);
-            label6.Name = "label6";
-            label6.Size = new Size(111, 19);
-            label6.TabIndex = 25;
-            label6.Text = "Circuito Elect Av";
+            lblCircuitoElectAv.AutoSize = true;
+            lblCircuitoElectAv.Location = new Point(7, 68);
+            lblCircuitoElectAv.Name = "lblCircuitoElectAv";
+            lblCircuitoElectAv.Size = new Size(111, 19);
+            lblCircuitoElectAv.TabIndex = 25;
+            lblCircuitoElectAv.Text = "Circuito Elect Av";
+            lblCircuitoElectAv.Click += lblCircuitoElectAv_Click;
             // 
             // BtnBackWindow
             // 
             BtnBackWindow.BackColor = Color.BurlyWood;
             BtnBackWindow.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnBackWindow.Location = new Point(453, 237);
+            BtnBackWindow.Location = new Point(461, 237);
             BtnBackWindow.Name = "BtnBackWindow";
             BtnBackWindow.Size = new Size(127, 58);
             BtnBackWindow.TabIndex = 25;
@@ -331,32 +316,98 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(478, 38);
+            lblFactory.Location = new Point(482, 199);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 26;
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
-            // BtnLoad
+            // lblMaterialesModificar
             // 
-            BtnLoad.BackColor = Color.MediumSeaGreen;
-            BtnLoad.Location = new Point(471, 166);
-            BtnLoad.Name = "BtnLoad";
-            BtnLoad.Size = new Size(94, 43);
-            BtnLoad.TabIndex = 27;
-            BtnLoad.Text = "Load Materials";
-            BtnLoad.UseVisualStyleBackColor = false;
-            BtnLoad.Click += BtnLoad_Click;
+            lblMaterialesModificar.AutoSize = true;
+            lblMaterialesModificar.BackColor = Color.Transparent;
+            lblMaterialesModificar.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMaterialesModificar.ForeColor = SystemColors.ButtonHighlight;
+            lblMaterialesModificar.Location = new Point(453, 77);
+            lblMaterialesModificar.Name = "lblMaterialesModificar";
+            lblMaterialesModificar.Size = new Size(146, 19);
+            lblMaterialesModificar.TabIndex = 58;
+            lblMaterialesModificar.Text = "Material a modificar";
+            // 
+            // txtMaterialSet
+            // 
+            txtMaterialSet.Location = new Point(461, 100);
+            txtMaterialSet.Name = "txtMaterialSet";
+            txtMaterialSet.Size = new Size(132, 23);
+            txtMaterialSet.TabIndex = 58;
+            // 
+            // lblID
+            // 
+            lblID.AutoSize = true;
+            lblID.BackColor = Color.Transparent;
+            lblID.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
+            lblID.ForeColor = SystemColors.ButtonHighlight;
+            lblID.Location = new Point(494, 19);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(64, 19);
+            lblID.TabIndex = 59;
+            lblID.Text = "ID Stock";
+            // 
+            // txtIDSotck
+            // 
+            txtIDSotck.Location = new Point(461, 41);
+            txtIDSotck.Name = "txtIDSotck";
+            txtIDSotck.Size = new Size(132, 23);
+            txtIDSotck.TabIndex = 60;
+            // 
+            // lblHelp
+            // 
+            lblHelp.AutoSize = true;
+            lblHelp.BackColor = Color.Transparent;
+            lblHelp.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHelp.ForeColor = SystemColors.ButtonHighlight;
+            lblHelp.Location = new Point(568, 9);
+            lblHelp.Name = "lblHelp";
+            lblHelp.Size = new Size(25, 19);
+            lblHelp.TabIndex = 61;
+            lblHelp.Text = "(?)";
+            lblHelp.Click += lblHelp_Click;
+            // 
+            // lblCantidadAgregar
+            // 
+            lblCantidadAgregar.AutoSize = true;
+            lblCantidadAgregar.BackColor = Color.Transparent;
+            lblCantidadAgregar.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCantidadAgregar.ForeColor = SystemColors.ButtonHighlight;
+            lblCantidadAgregar.Location = new Point(454, 138);
+            lblCantidadAgregar.Name = "lblCantidadAgregar";
+            lblCantidadAgregar.Size = new Size(139, 19);
+            lblCantidadAgregar.TabIndex = 62;
+            lblCantidadAgregar.Text = "Cantidad a agregar";
+            // 
+            // numCantAgregar
+            // 
+            numCantAgregar.Location = new Point(461, 166);
+            numCantAgregar.Maximum = new decimal(new int[] { 15000, 0, 0, 0 });
+            numCantAgregar.Name = "numCantAgregar";
+            numCantAgregar.Size = new Size(132, 23);
+            numCantAgregar.TabIndex = 63;
             // 
             // FrmReStockMateriales
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_background_v_1517907jpg_sw800;
-            ClientSize = new Size(592, 308);
+            ClientSize = new Size(605, 308);
             ControlBox = false;
-            Controls.Add(BtnLoad);
+            Controls.Add(numCantAgregar);
+            Controls.Add(lblCantidadAgregar);
+            Controls.Add(lblHelp);
+            Controls.Add(txtIDSotck);
+            Controls.Add(lblID);
+            Controls.Add(txtMaterialSet);
+            Controls.Add(lblMaterialesModificar);
             Controls.Add(lblFactory);
             Controls.Add(BtnBackWindow);
             Controls.Add(gboxMateriales);
@@ -367,17 +418,7 @@
             Load += FrmReStockMateriales_Load;
             gboxMateriales.ResumeLayout(false);
             gboxMateriales.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numVentilador).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numCondensador).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numFibraVidrio).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numEngranajeHierro).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numBaraHierro).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numCableRojo).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numCableVerde).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numBarraPlastica).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numUnProcesamiento).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numCircuitoElectAv).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numCircuitoElect).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numCantAgregar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -385,31 +426,37 @@
         #endregion
 
         private GroupBox gboxMateriales;
-        private Label label15;
-        private Label label14;
-        private Label label13;
-        private Label label12;
-        private Label label11;
-        private Label label10;
-        private Label label9;
-        private Label label8;
-        private Label label5;
-        private Label label7;
-        private Label label6;
+        private Label lblVentilador;
+        private Label lblCondensador;
+        private Label lblFibraVidrio;
+        private Label lblEngranajeHierro;
+        private Label lblBaraHierro;
+        private Label lblCableR;
+        private Label lblCableV;
+        private Label lblBarraPlastica;
+        private Label lblCircuitoElect;
+        private Label lblUnidadProcesamiento;
+        private Label lblCircuitoElectAv;
         private Button BtnBackWindow;
         private Label lblFactory;
         private Button BtnLoad;
-        private NumericUpDown numVentilador;
-        private NumericUpDown numCondensador;
-        private NumericUpDown numFibraVidrio;
-        private NumericUpDown numEngranajeHierro;
-        private NumericUpDown numBaraHierro;
-        private NumericUpDown numCableRojo;
-        private NumericUpDown numCableVerde;
-        private NumericUpDown numBarraPlastica;
-        private NumericUpDown numUnProcesamiento;
-        private NumericUpDown numCircuitoElectAv;
-        private NumericUpDown numCircuitoElect;
-        private Button BtnHardcodeo;
+        private TextBox txtCircuitoElect;
+        private TextBox txtVentilador;
+        private TextBox txtCondensador;
+        private TextBox txtFibraVidrio;
+        private TextBox txtEngranajeHierro;
+        private TextBox txtBaraHierro;
+        private TextBox txtCableR;
+        private TextBox txtCableV;
+        private TextBox txtBarraPlastica;
+        private TextBox txtUnidadProcesamiento;
+        private TextBox txtCircuitoElectAv;
+        private Label lblMaterialesModificar;
+        private TextBox txtMaterialSet;
+        private Label lblID;
+        private TextBox txtIDSotck;
+        private Label lblHelp;
+        private Label lblCantidadAgregar;
+        private NumericUpDown numCantAgregar;
     }
 }

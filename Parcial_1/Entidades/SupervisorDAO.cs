@@ -24,7 +24,14 @@ namespace Entidades
             command.Connection = connection;
         }
 
-        public static bool GuardarRegistro(Supervisor operario)
+        /// <summary>
+        /// Guardamos / agregamos un Usuario en la base de datos
+        /// </summary>
+        /// <param name="supervisor">Supervisor que agregaremos a la DB</param>
+        /// <returns>Retorna un true o false para ver si se pudo o no agregar a la DB</returns>
+        /// <exception cref="SqlExceptionDuplicateUserDB">Lanzara la excepcion en caso de que el DNI ingresado EXISTA</exception>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
+        public static bool GuardarRegistro(Supervisor supervisor)
         {
             //store prosegure investigar
             bool rtn = false;
@@ -34,16 +41,16 @@ namespace Entidades
                 connection.Open();
                 command.CommandText = $"Insert INTO USUARIOS (DNI, NOMBRE, APELLIDO, EMAIL, EDAD, FECHA_INGRESO, DIRECCION, TELEFONO, CARGO, PASSW) " +
                     $"VALUES (@DNI, @Nombre, @Apellido, @Email, @Edad, @FechaIngreso, @Direccion, @Telefono, @Cargo, @Passw)";
-                command.Parameters.AddWithValue("@DNI", operario.DNI);
-                command.Parameters.AddWithValue("@Nombre", operario.Nombre);
-                command.Parameters.AddWithValue("@Apellido", operario.Apellido);
-                command.Parameters.AddWithValue("@Edad", operario.Edad);
-                command.Parameters.AddWithValue("@Email", operario.Email);
-                command.Parameters.AddWithValue("@FechaIngreso", operario.FechaIngreso);
-                command.Parameters.AddWithValue("@Direccion", operario.Direccion);
-                command.Parameters.AddWithValue("@Telefono", operario.Telefono);
-                command.Parameters.AddWithValue("@Cargo", operario.Puesto);
-                command.Parameters.AddWithValue("@Passw", operario.Password);
+                command.Parameters.AddWithValue("@DNI", supervisor.DNI);
+                command.Parameters.AddWithValue("@Nombre", supervisor.Nombre);
+                command.Parameters.AddWithValue("@Apellido", supervisor.Apellido);
+                command.Parameters.AddWithValue("@Edad", supervisor.Edad);
+                command.Parameters.AddWithValue("@Email", supervisor.Email);
+                command.Parameters.AddWithValue("@FechaIngreso", supervisor.FechaIngreso);
+                command.Parameters.AddWithValue("@Direccion", supervisor.Direccion);
+                command.Parameters.AddWithValue("@Telefono", supervisor.Telefono);
+                command.Parameters.AddWithValue("@Cargo", supervisor.Puesto);
+                command.Parameters.AddWithValue("@Passw", supervisor.Password);
                 int rows = command.ExecuteNonQuery();
                 rtn = true;
             }
@@ -62,6 +69,12 @@ namespace Entidades
             return rtn;
         }
 
+        /// <summary>
+        /// Leemos y devolvemos un Supervisor por un ID
+        /// </summary>
+        /// <param name="id">ID que intentaremos de encontrar en la DB</param>
+        /// <returns>Retorna el Supervisor encontrado por ID</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static Supervisor LeerPorID(int id)
         {
             Supervisor usuario = null;
@@ -101,6 +114,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Leemos y devolvemos un Supervisor por un DNI
+        /// </summary>
+        /// <param name="dni">DNI que intentaremos de encontrar en la DB</param>
+        /// <returns>Retorna el Supervisor encontrado por DNI</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static Supervisor LeerPorDNI(long dni)
         {
             Supervisor usuario = null;
@@ -139,6 +158,13 @@ namespace Entidades
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// Leemos y devolvemos una Lista de los Supervisores (con ciertos datos) que se encuentren en la DB
+        /// </summary>
+        /// <param name="dato">Cargo del Usuario</param>
+        /// <returns>Retorna la Lista</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static List<Supervisor> LeerSupervisores(string dato)
         {
             List<Supervisor> personas = new List<Supervisor>();
@@ -173,7 +199,13 @@ namespace Entidades
             }
         }
 
-        public static bool Modificar(Operario operario)
+        /// <summary>
+        /// Modificamos datos del Usuario seleccionado
+        /// </summary>
+        /// <param name="operario">Operario a modificar</param>
+        /// <returns>Retorna un true o false para verificar que se modifico el Usuario con EXITO</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
+        public static bool ModificarUsuario(Operario operario)
         {
             bool rtn = false;
             try
@@ -191,8 +223,10 @@ namespace Entidades
                 command.Parameters.AddWithValue("@FechaIngreso", operario.FechaIngreso);
                 command.Parameters.AddWithValue("@Direccion", operario.Direccion);
                 command.Parameters.AddWithValue("@Cargo", operario.Puesto);
-                int rows = command.ExecuteNonQuery();
-                rtn = true;
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    rtn = true;
+                }
             }
             catch (Exception ex)
             {
@@ -205,6 +239,13 @@ namespace Entidades
             return rtn;
         }
 
+        /// <summary>
+        /// Eliminar un Usuario de la DB a travez de su ID y Cargo
+        /// </summary>
+        /// <param name="id">ID del Usuario</param>
+        /// <param name="dato">Cargo del Usuario</param>
+        /// <returns>Retorna un true o false para verificar que se elimino el Usuario con EXITO</returns>
+        /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
         public static bool Eliminar(int id, string dato)
         {
             bool rtn = false;
@@ -215,7 +256,6 @@ namespace Entidades
                 command.CommandText = $"DELETE FROM USUARIOS WHERE CODIGO_USUARIO = @CODIGO_USUARIO AND CARGO = @Cargo";
                 command.Parameters.AddWithValue("@CODIGO_USUARIO", id);
                 command.Parameters.AddWithValue("@Cargo", dato);
-                int rows = command.ExecuteNonQuery();
                 if (command.ExecuteNonQuery() == 1)
                 {
                     rtn = true;

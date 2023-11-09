@@ -226,7 +226,7 @@
             BtnConfig.Name = "BtnConfig";
             BtnConfig.Size = new Size(106, 69);
             BtnConfig.TabIndex = 20;
-            BtnConfig.Text = "Configuration personal data";
+            BtnConfig.Text = "Datos del Usuario";
             BtnConfig.UseVisualStyleBackColor = false;
             BtnConfig.Click += BtnConfig_Click_1;
             // 

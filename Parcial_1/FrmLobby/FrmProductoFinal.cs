@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using ExcepcionesPropias;
+using Archivos;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,9 @@ namespace FrmLobby
         private List<int> listaValores;
         private Dictionary<string, int> dictProducto;
 
+        private string path;
+        private string pathTXT;
+
         public FrmProductoFinal(MenuUsuario frmUsuario, int producto)
         {
             InitializeComponent();
@@ -39,6 +43,10 @@ namespace FrmLobby
             this.listaTxtBox = new List<TextBox>();
             this.listaValores = new List<int>();
             this.dictProducto = new Dictionary<string, int>();
+
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmVideoCard_Load(object sender, EventArgs e)

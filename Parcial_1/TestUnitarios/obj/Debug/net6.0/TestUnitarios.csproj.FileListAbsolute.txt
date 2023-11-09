@@ -107,3 +107,5 @@ C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Par
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\TestUnitarios\obj\Debug\net6.0\TestUnitarios.pdb
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\TestUnitarios\obj\Debug\net6.0\TestUnitarios.genruntimeconfig.cache
 C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\TestUnitarios\obj\Debug\net6.0\ref\TestUnitarios.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\TestUnitarios\bin\Debug\net6.0\Archivos.dll
+C:\Users\rodri\OneDrive\Documentos\Parciales Progra.ll\laboratorio_2_Parcial\Parcial_1\TestUnitarios\bin\Debug\net6.0\Archivos.pdb

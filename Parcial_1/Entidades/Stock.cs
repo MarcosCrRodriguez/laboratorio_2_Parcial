@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using ExcepcionesPropias;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Entidades
@@ -21,17 +22,6 @@ namespace Entidades
 
         static Stock()
         {
-            cantCircuitoElect = 2850;
-            cantCircuitoElectAvanzado = 2550;
-            cantUnidadProcesamiento = 2200;
-            cantBarraPlastico = 3700;
-            cantCableVerde = 2500;
-            cantCableRojo = 2500;
-            cantBaraHierro = 3600;
-            cantEngranajeHierro = 3600;
-            cantFibrasVidrio = 2850;
-            cantCondensador = 2250;
-            cantVentilador = 2000;
             listaStock = new List<int>();
             listaMateriales = new List<string>();
         }
@@ -192,6 +182,42 @@ namespace Entidades
         }
         #endregion
 
+        public static int VerificarValorPositivo(int cantidadAgregar, int id, string material)
+        {
+            int rtn = -1;
+            int cantidadStock;
+
+            try
+            {
+                cantidadStock = StockDAO.LeerPorMaterial(id, material);
+                if (cantidadStock != -1)
+                {
+                    cantidadAgregar += cantidadStock;
+                    if (cantidadAgregar >= 0)
+                    {
+                        rtn = cantidadAgregar;
+                    }
+                    else
+                    {
+                        throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
+                    }
+                }
+                else
+                {
+                    throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Error con el formato de la cantidad ingresada", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrio un error inesperado", ex);
+            }
+            return rtn;
+        }
+
         /// <summary>
         /// Casteo de dato de decimal a entero
         /// </summary>
@@ -206,6 +232,23 @@ namespace Entidades
                 valor = (int)dato;
             }
             return valor;
+        }
+
+        public static int CasteoExplicito(string dato)
+        {
+            try
+            {
+                int numero = int.Parse(dato);
+                return numero;
+            }
+            catch (FormatException)
+            {
+                throw new FormatException("No se pudo convertir el valor. Error de Formato");
+            }
+            catch (OverflowException)
+            {
+                throw new OverflowException("El valor está fuera del rango para el tipo de dato");
+            }
         }
 
         /// <summary>
@@ -228,43 +271,20 @@ namespace Entidades
             return listaInt;
         }
 
-        /// <summary>
-        /// Lista instanciada con los valores tomadas de las propiedades
-        /// </summary>
-        /// <returns>Retorna la lista con los datos cargados</returns>
-        public static List<int> InstanciarListaStock()
-        {
-            listaStock = new List<int>() {
-                CantCircuitosElectronicos,
-                CantCircuitosElectronicosAvanzados,
-                CantUnidadProcesamiento,
-                CantBarraPlastico,
-                CantCableVerde,
-                CantCableRojo,
-                CantBaraHierro,
-                CantEngranajeHierro,
-                CantFibrasVidrio,
-                CantCondensador,
-                CantVentilador
-            };
-
-            return listaStock;
-        }
-
         public static List<string> InstanciarListaMateriales()
         {
             listaMateriales = new List<string>() {
-                "Circuitos Electronicos",
-                "Circuitos Electronicos Avanzados",
-                "Unidad Procesamiento",
-                "Barra Plastico",
-                "Cable Verde",
-                "Cable Rojo",
-                "Bara Hierro",
-                "Engranaje Hierro",
-                "Fibras Vidrio",
-                "Condensador",
-                "Ventilador"
+                "CIRCUITO_ELECTRONICO",
+                "CIRCUITO_ELECTRONICO_AVANZADO",
+                "UNIDAD_PROCESAMIENTO",
+                "BARRA_PLASTICA",
+                "CABLE_VERDE",
+                "CABLE_ROJO",
+                "BARA_HIERRO",
+                "ENGRANAJE_HIERRO",
+                "FIBRAS_VIDRIO",
+                "CONDENSADOR",
+                "VENTILADOR"
             };
 
             return listaMateriales;
@@ -272,39 +292,19 @@ namespace Entidades
 
         public static List<string> InstanciarListaFormateada()
         {
-            listaStock = InstanciarListaStock();
+            List<string> listaStockDB = StockDAO.LeerStockPorID(1077);
             listaMateriales = InstanciarListaMateriales();
 
             List<string> listaFormat = new List<string>();
             int i = 0;
 
-            foreach (var item in listaStock)
+            foreach (var item in listaStockDB)
             {
-                listaFormat.Add($"{listaMateriales[i]}: {listaStock[i]}");
+                listaFormat.Add($"{listaMateriales[i]}: {listaStockDB[i]}");
                 i++;
             }
 
             return listaFormat;
-        }
-
-        // se deberia de actualizar estos datos cada vez que agrego (o saco) stock / fabrico productos
-        public static Dictionary<string, int> InstanciarDiccionarioStock()
-        {
-            Dictionary<string, int> dictProducto = new Dictionary<string, int>() {
-                { "Circuito Electrico" ,Stock.CantCircuitosElectronicos },
-                { "Circuito Electrico Avanzado" ,Stock.CantCircuitosElectronicosAvanzados },
-                { "Unidad Procesamiento" ,Stock.CantUnidadProcesamiento },
-                { "Cable Verde" ,Stock.CantCableVerde },
-                { "Cable Rojo" ,Stock.CantCableRojo },
-                { "Barra Plastico" ,Stock.CantBarraPlastico },
-                { "Bara Hierro" ,Stock.CantBaraHierro },
-                { "Engranaje Hierro" ,Stock.CantEngranajeHierro },
-                { "Fibras Vidrio" ,Stock.CantFibrasVidrio },
-                { "Condensador" ,Stock.CantCondensador },
-                { "Ventilador" ,Stock.CantVentilador }
-                };
-
-            return dictProducto;
         }
 
         /// <summary>
@@ -420,28 +420,5 @@ namespace Entidades
 
             return dictProducto;
         }
-
-        public static bool ActualizarStock(List<int> listaValores)
-        {
-            if (listaValores.Count > 0 && listaValores != null)
-            {
-                Stock.CantCircuitosElectronicos += listaValores[0];
-                Stock.CantCircuitosElectronicosAvanzados += listaValores[1];
-                Stock.CantUnidadProcesamiento += listaValores[2];
-                Stock.CantCableVerde += listaValores[3];
-                Stock.CantCableRojo += listaValores[4];
-                Stock.CantBarraPlastico += listaValores[5];
-                Stock.CantBaraHierro += listaValores[6];
-                Stock.CantEngranajeHierro += listaValores[7];
-                Stock.CantFibrasVidrio += listaValores[8];
-                Stock.CantCondensador += listaValores[9];
-                Stock.CantVentilador += listaValores[10];
-
-                return true;
-            }
-
-            return false;
-        }
-
     }
 }

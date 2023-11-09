@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using ExcepcionesPropias;
+using Archivos;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,12 +34,13 @@ namespace FrmLobby
         private List<string> listNombre;
         private List<string> listApellido;
         private List<TextBox> listaTxtBox;
-        private List<int> listaStock;
+        private List<string> listaStock;
         private List<string> instanciaListFormat;
         private List<Operario> listOperarios;
         private bool boolListaOp;
 
         private string path;
+        private string pathTXT;
 
         public MenuUsuario(FrmLobby menuInicial, int codigoUsuario, string cargo)
         {
@@ -54,13 +56,14 @@ namespace FrmLobby
             this.listNombre = new List<string>();
             this.listApellido = new List<string>();
             this.listaTxtBox = new List<TextBox>();
-            this.listaStock = new List<int>();
+            this.listaStock = new List<string>();
             this.instanciaListFormat = new List<string>();
             this.listOperarios = new List<Operario>();
             this.boolListaOp = false;
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
             this.CargarListas();
         }
 
@@ -88,6 +91,7 @@ namespace FrmLobby
 
         private void BtnBackSu_Click_1(object sender, EventArgs e)
         {
+            this.menuInicial.LimpiarDatos();
             this.menuInicial.Show();
             this.Close();
         }
@@ -96,11 +100,11 @@ namespace FrmLobby
         {
             if (this.cargo == "Supervisor")
             {
-                MessageBox.Show($"{(string)supervisor}", "Configuracion datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{this.supervisor.MostrarTodosDatos()}", "Configuracion datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"{(string)operario}", "Configuracion datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"{this.operario.MostrarTodosDatos()}", "Configuracion datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -210,11 +214,11 @@ namespace FrmLobby
         /// </summary>
         public void CargaDatos()
         {
-            this.listaStock = Stock.InstanciarListaStock();
+            this.listaStock = StockDAO.LeerStockPorID(1077);
 
             for (int i = 0; i < this.listaTxtBox.Count; i++)
             {
-                this.listaTxtBox[i].Text = this.listaStock[i].ToString();
+                this.listaTxtBox[i].Text = this.listaStock[i];
             }
 
             foreach (TextBox item in this.listaTxtBox)
@@ -254,21 +258,41 @@ namespace FrmLobby
         {
             MessageBox.Show($"{cabinet.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-    
+
         public void CrearDirectorio()
         {
-            if (!Directory.Exists(this.path))
+            try
             {
-                Directory.CreateDirectory(this.path);
+                if (!Directory.Exists(this.path))
+                {
+                    Directory.CreateDirectory(this.path);
+                }
             }
-            //try
-            //{
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message,"Error al crear directorio");
-            //}
+            catch (UnauthorizedAccessException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "UnauthorizedAccessException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Falta de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (PathTooLongException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "PathTooLongException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error con la ruta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "DirectoryNotFoundException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "La ruta no se encuentra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (IOException ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "IOException", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error al crear el directorio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
+                MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void ActualizarStockXML()
@@ -280,16 +304,16 @@ namespace FrmLobby
                 if (Directory.Exists(this.path))
                 {
                     this.instanciaListFormat = Stock.InstanciarListaFormateada();
-                    ////EscribirXML
-                    if (!(ArchivosXML<List<string>>.EscribirXML(this.path + pathXML, this.instanciaListFormat)))
+                    //EscribirXML
+                    if (!(ArchivosXML<List<string>>.EscribirArchivo(this.path + pathXML, this.instanciaListFormat)))
                     {
                         MessageBox.Show("No se pudo actualizar la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    //// despues de actualizar el stock tendria que meter los datos actualizados en un xml
                 }
             }
             catch (Exception ex)
             {
+                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path + this.pathTXT, "Exception", $"{ex.StackTrace}");
                 MessageBox.Show(ex.Message);
             }
         }
