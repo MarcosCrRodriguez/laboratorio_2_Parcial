@@ -89,7 +89,7 @@
             DtgvRegistro.ReadOnly = true;
             DtgvRegistro.RowTemplate.Height = 25;
             DtgvRegistro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DtgvRegistro.Size = new Size(1098, 215);
+            DtgvRegistro.Size = new Size(1098, 218);
             DtgvRegistro.TabIndex = 17;
             // 
             // BtnRegistrar

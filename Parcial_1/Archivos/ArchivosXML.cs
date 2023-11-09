@@ -2,7 +2,7 @@
 
 namespace Archivos
 {
-    public static class ArchivosXML<T>
+    public static class ArchivosXML<T> 
     {
         public static bool EscribirArchivo(string path, T dato)
         {

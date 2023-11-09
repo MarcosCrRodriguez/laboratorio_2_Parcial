@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Archivos
 {
-    public static class ArchivosTXT<T>
+    public static class ArchivosTXT<T> 
     {
         public static bool EscribirArchivo(string path, T dato)
         {

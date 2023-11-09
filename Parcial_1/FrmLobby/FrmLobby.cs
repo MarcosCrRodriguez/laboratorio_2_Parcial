@@ -17,6 +17,7 @@ namespace FrmLobby
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
         }
+
         private void FrmLobby_Load(object sender, EventArgs e)
         {
             this.CrearDirectorio();
@@ -126,6 +127,7 @@ namespace FrmLobby
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
             FormularioRegistro frmRegistro = new FormularioRegistro();
