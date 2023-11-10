@@ -37,51 +37,85 @@ namespace Entidades
 
 
         #region Propiedades
+        /// <summary>
+        /// Retorna el valor del ID
+        /// </summary>
         public int ID
         {
             get { return this.id; }
         }
 
+        /// <summary>
+        /// Retorna el valor del DNI
+        /// </summary>
         public long DNI
         {
             get { return this.dni; }
         }
+
+        /// <summary>
+        /// Retorna la cadena de Puesto
+        /// </summary>
         public string Puesto
         {
             get { return this.puesto; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Email
+        /// </summary>
         public string Email
         {
             get { return this.email; }
         }
 
+        /// <summary>
+        /// Retorna el valor del Edad
+        /// </summary>
         public int Edad
         {
             get { return this.edad; }
         }
 
+        /// <summary>
+        /// Retorna el dato DateTime de FechaIngreso
+        /// </summary>
         public DateTime FechaIngreso
         {
             get { return this.fechaIngreso; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Direccion
+        /// </summary>
         public string Direccion
         {
             get { return this.direccion; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Telefono
+        /// </summary>
         public string Telefono
         {
             get { return this.telefono; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Password
+        /// </summary>
         public string Password
         {
             get { return password; }
         }
         #endregion
 
+        /// <summary>
+        /// Castea un dato a entero
+        /// </summary>
+        /// <param name="dato">Dato a convertir en entero</param>
+        /// <returns>Retorna el valor de un entero</returns>
+        /// <exception cref="FormatException">Formato incorrecto</exception>
         public static int CasteoInt(string dato)
         {
             int numeroInt;
@@ -96,6 +130,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Castea un valor a long
+        /// </summary>
+        /// <param name="dato">Dato a convertir en tipo long</param>
+        /// <returns>Retorna el valor de un long</returns>
+        /// <exception cref="FormatException">Formato incorrecto</exception>
         public static long CasteoLong(string dato)
         {
             long numeroLong;
@@ -110,6 +150,13 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Validamos que la contraseña sea igual a la requrida
+        /// </summary>
+        /// <param name="dato">Dato que contiene la contraseña ingresada por el usuario</param>
+        /// <param name="operario">Operario con sus datos ingresados</param>
+        /// <returns>Retora true si cumple o false si no cumple con las condiciones</returns>
+        /// <exception cref="InvalidPasswordException">Contraseña ingresada incorrecta</exception>
         public bool ValidarPasswordOperario(string dato, Operario operario)
         {
             if (operario != null)
@@ -126,6 +173,12 @@ namespace Entidades
             return false;
         }
 
+        /// <summary>
+        /// Verificamos mediante los parametros ingresados que el operario existe en la DB
+        /// </summary>
+        /// <param name="operarios">Lista de operarios existente de la DB</param>
+        /// <param name="op">Operario ingresado por el usuario</param>
+        /// <returns>Retorna ture si cumple y flase si no cumple con las condiciones</returns>
         public bool VerificarExisteOperario(List<Operario> operarios, Operario op) 
         {
             if (operarios.Count > 0 && operarios != null)
@@ -142,6 +195,12 @@ namespace Entidades
             return false;
         }
 
+        /// <summary>
+        /// Verificamos que el ID ingresado existe en la DB
+        /// </summary>
+        /// <param name="operarios">Lista de operarios existente de la DB</param>
+        /// <param name="id">ID ingresado por el usuario</param>
+        /// <returns>Retorna ture si cumple y flase si no cumple con las condiciones</returns>
         public static bool VerificarExisteID(List<Operario> operarios, int id)
         {
             if (operarios.Count > 0 && operarios != null)
@@ -157,6 +216,10 @@ namespace Entidades
             return false;
         }
 
+        /// <summary>
+        /// Mostramos datos del Operario
+        /// </summary>
+        /// <returns>Returonamos un string con los datos de Operario</returns>
         public override string Mostrar()
         {
             string cadena;
@@ -171,17 +234,25 @@ namespace Entidades
             return sb.ToString();
         }
 
-        public static explicit operator string(Operario s)
+        /// <summary>
+        /// Mostramos datos del Operario (sobrecarga)
+        /// </summary>
+        /// <param name="o">Operario a mostrar</param>
+        public static explicit operator string(Operario o)
         {
             string cadena;
 
             StringBuilder sb = new StringBuilder();
-            cadena = s.Mostrar();
+            cadena = o.Mostrar();
             sb.Append(cadena);
 
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Mostramos datos del Operario
+        /// </summary>
+        /// <returns>Returonamos un string con los datos de Operario</returns>
         public string MostrarTodosDatos()
         {
             string cadena;

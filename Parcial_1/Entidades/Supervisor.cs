@@ -39,58 +39,85 @@ namespace Entidades
 
 
         #region Propiedades
+        /// <summary>
+        /// Retorna el valor del ID
+        /// </summary>
         public int ID
         {
             get { return this.id; }
         }
 
+        /// <summary>
+        /// Retorna el valor del DNI
+        /// </summary>
         public long DNI
         {
             get { return this.dni; }
-            set { this.dni = value; }
         }
+
+        /// <summary>
+        /// Retorna la cadena de Puesto
+        /// </summary>
         public string Puesto
         {
             get { return this.puesto; }
-            set { this.puesto = value; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Email
+        /// </summary>
         public string Email
         {
             get { return this.email; }
-            set { this.email = value; }
         }
 
+        /// <summary>
+        /// Retorna el valor del Edad
+        /// </summary>
         public int Edad
         {
             get { return this.edad; }
-            set { this.edad = value; }
         }
 
+        /// <summary>
+        /// Retorna el dato DateTime de FechaIngreso
+        /// </summary>
         public DateTime FechaIngreso
         {
             get { return this.fechaIngreso; }
-            set { this.fechaIngreso = value; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Direccion
+        /// </summary>
         public string Direccion
         {
             get { return this.direccion; }
-            set { this.direccion = value; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Telefono
+        /// </summary>
         public string Telefono
         {
             get { return this.telefono; }
-            set { this.telefono = value; }
         }
 
+        /// <summary>
+        /// Retorna la cadena de Password
+        /// </summary>
         public string Password
         {
             get { return password; }
         }
         #endregion
 
+        /// <summary>
+        /// Castea un dato a entero
+        /// </summary>
+        /// <param name="dato">Dato a convertir en entero</param>
+        /// <returns>Retorna el valor de un entero</returns>
+        /// <exception cref="FormatException">Formato incorrecto</exception>
         public static int CasteoInt(string dato)
         {
             int numeroInt;
@@ -105,6 +132,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Castea un valor a long
+        /// </summary>
+        /// <param name="dato">Dato a convertir en tipo long</param>
+        /// <returns>Retorna el valor de un long</returns>
+        /// <exception cref="FormatException">Formato incorrecto</exception>
         public static long CasteoLong(string dato)
         {
             long numeroLong;
@@ -119,6 +152,13 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Validamos que la contraseña sea igual a la requrida
+        /// </summary>
+        /// <param name="dato">Dato que contiene la contraseña ingresada por el usuario</param>
+        /// <param name="supervisor">Supervisor con sus datos ingresados</param>
+        /// <returns>Retora true si cumple o false si no cumple con las condiciones</returns>
+        /// <exception cref="InvalidPasswordException">Contraseña ingresada incorrecta</exception>
         public bool ValidarPasswordSupervisor(string dato, Supervisor supervisor)
         {
             if (supervisor != null)
@@ -135,6 +175,12 @@ namespace Entidades
             return false;
         }
 
+        /// <summary>
+        /// Verificamos mediante los parametros ingresados que el supervisor existe en la DB
+        /// </summary>
+        /// <param name="supervisores">Lista de supervisores existente de la DB</param>
+        /// <param name="su">Supervisor ingresado por el usuario</param>
+        /// <returns>Retorna ture si cumple y flase si no cumple con las condiciones</returns>
         public bool VerificarExisteSupervisor(List<Supervisor> supervisores, Supervisor su)
         {
             if (supervisores.Count > 0 && supervisores != null)
@@ -151,6 +197,10 @@ namespace Entidades
             return false;
         }
 
+        /// <summary>
+        /// Mostramos datos del Operario
+        /// </summary>
+        /// <returns>Returonamos un string con los datos de Operario</returns>
         public override string Mostrar()
         {
             string cadena;
@@ -165,6 +215,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Mostramos datos del Supervisor (sobrecarga)
+        /// </summary>
+        /// <param name="s">Supervisor a mostrar</param>
         public static explicit operator string(Supervisor s)
         {
             string cadena;
@@ -176,6 +230,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Mostramos datos del Operario
+        /// </summary>
+        /// <returns>Returonamos un string con los datos de Operario</returns>
         public string MostrarTodosDatos()
         {
             string cadena;
