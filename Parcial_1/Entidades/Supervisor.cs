@@ -16,11 +16,6 @@ namespace Entidades
         private string direccion;
         private string telefono;
         private const string password = "superusuario";
-        private static List<string>? listNombre;
-        private static List<string>? listApellido;
-        private static List<string>? listCargo;
-        private static List<string>? listPassword;
-        // va a haber que agregar datos del Supervisor cuando veamos base de datos
 
         public Supervisor(string nombre, string apellido) : base(nombre, apellido)
         {
@@ -154,84 +149,6 @@ namespace Entidades
                 }
             }
             return false;
-        }
-
-        public static List<string> HardcodearNombre()
-        {
-            listNombre = new List<string>();
-
-            //-------------- Op --------------//
-            listNombre.Add("Juan");
-            listNombre.Add("Santiago");
-            listNombre.Add("Gabriel");
-            listNombre.Add("Martin");
-            //-------------- Su --------------//
-            listNombre.Add("Kenpachi");
-            listNombre.Add("Brandon");
-            listNombre.Add("Stephen");
-            listNombre.Add("Marcos");
-
-            return listNombre;
-        }
-
-        public static List<string> HardcodearApellido()
-        {
-            listApellido = new List<string>();
-
-            //-------------- Op --------------//
-            listApellido.Add("Carlos");
-            listApellido.Add("Cano");
-            listApellido.Add("Abano");
-            listApellido.Add("Santos");
-            //-------------- Su --------------//
-            listApellido.Add("Zaraki");
-            listApellido.Add("Sanderson");
-            listApellido.Add("King");
-            listApellido.Add("Rodriguez");
-
-            return listApellido;
-        }
-
-        public static List<string> HardcodearCargo()
-        {
-            listCargo = new List<string>();
-
-            if (listNombre != null)
-            {
-                //-------------- Op --------------//
-                for (int i = 0; listNombre.Count / 2 > i; i++)
-                {
-                    listCargo.Add("Operario");
-                }
-                //-------------- Su --------------//
-                for (int i = 0; listNombre.Count / 2 > i; i++)
-                {
-                    listCargo.Add("Supervisor");
-                }
-            }
-
-            return listCargo;
-        }
-
-        public static List<string> HardcodearPassword()
-        {
-            listPassword = new List<string>();
-
-            if (listNombre != null)
-            {
-                //-------------- Op --------------//
-                for (int i = 0; listNombre.Count / 2 > i; i++)
-                {
-                    listPassword.Add("operario");
-                }
-                //-------------- Su --------------//
-                for (int i = 0; listNombre.Count / 2 > i; i++)
-                {
-                    listPassword.Add("superusaurio");
-                }
-            }
-
-            return listPassword;
         }
 
         public override string Mostrar()

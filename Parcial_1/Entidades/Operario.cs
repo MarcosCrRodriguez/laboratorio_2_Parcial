@@ -14,10 +14,6 @@ namespace Entidades
         private string direccion;
         private string telefono;
         private const string password = "operario";
-        private static List<string>? listNombre;
-        private static List<string>? listApellido;
-        private static List<string>? listSector;
-        // va a haber que agregar datos del Supervisor cuando veamos base de datos
 
         public Operario(string nombre, string apellido) : base(nombre, apellido)
         {
@@ -159,54 +155,6 @@ namespace Entidades
                 }
             }
             return false;
-        }
-
-        public static List<string> HardcodearNombre()
-        {
-            listNombre = new List<string>();
-
-            listNombre.Add("Juan");
-            listNombre.Add("Santiago");
-            listNombre.Add("Gabriel");
-            listNombre.Add("Martin");
-            listNombre.Add("Pedro");
-            listNombre.Add("Julieta");
-            listNombre.Add("Pablo");
-            listNombre.Add("Cecilia");
-
-            return listNombre;
-        }
-
-        public static List<string> HardcodearApellido()
-        {
-            listApellido = new List<string>();
-
-            listApellido.Add("Carlos");
-            listApellido.Add("Cano");
-            listApellido.Add("Abano");
-            listApellido.Add("Santos");
-            listApellido.Add("Ramon");
-            listApellido.Add("Indigo");
-            listApellido.Add("Perez");
-            listApellido.Add("Bernau");
-
-            return listApellido;
-        }
-
-        public static List<string> HardcodearSector()
-        {
-            listSector = new List<string>();
-
-            listSector.Add("Cabinet");
-            listSector.Add("Cabinet");
-            listSector.Add("Motherboard");
-            listSector.Add("Motherboard");
-            listSector.Add("Ram");
-            listSector.Add("Ram");
-            listSector.Add("Video Card");
-            listSector.Add("Video Card");
-
-            return listSector;
         }
 
         public override string Mostrar()

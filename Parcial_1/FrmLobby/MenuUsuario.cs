@@ -18,6 +18,8 @@ namespace FrmLobby
 {
     public partial class MenuUsuario : Form
     {
+        private IArchivos<string> manejadorArchivosTXT;
+        private IArchivos<List<string>> gestorArchivos;
         private TiposProductos tiposProdcuto;
         private int numeroProducto;
 
@@ -31,19 +33,18 @@ namespace FrmLobby
         private Cabinet cabinet;
 
         private string cargo;
-        private List<string> listNombre;
-        private List<string> listApellido;
         private List<TextBox> listaTxtBox;
         private List<string> listaStock;
         private List<string> instanciaListFormat;
-        private List<Operario> listOperarios;
-        private bool boolListaOp;
 
         private string path;
+        private string pathTXT;
 
         public MenuUsuario(FrmLobby menuInicial, int codigoUsuario, string cargo)
         {
             InitializeComponent();
+            this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.gestorArchivos = new ArchivosXML<List<string>>();
             this.menuInicial = menuInicial;
             this.codigoUsuario = codigoUsuario;
             this.videoCard = new VideoCard();
@@ -52,16 +53,13 @@ namespace FrmLobby
             this.cabinet = new Cabinet();
 
             this.cargo = cargo;
-            this.listNombre = new List<string>();
-            this.listApellido = new List<string>();
             this.listaTxtBox = new List<TextBox>();
             this.listaStock = new List<string>();
             this.instanciaListFormat = new List<string>();
-            this.listOperarios = new List<Operario>();
-            this.boolListaOp = false;
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
             this.CargarListas();
         }
 
@@ -108,19 +106,12 @@ namespace FrmLobby
 
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
-            if (this.listOperarios != null)
+            if (this.cargo == "Supervisor")
             {
-                if (this.cargo == "Supervisor")
-                {
-                    MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-                    FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
-                    frmDtgv.Show();
-                }
-            }
-            else
-            {
-                MessageBox.Show($"No se cargar ingresar <Registro Operarios>\nError al cargar Operarios", "Error al cargar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Hide();
+                FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
+                frmDtgv.Show();
             }
         }
 
@@ -173,8 +164,7 @@ namespace FrmLobby
         }
 
         /// <summary>
-        /// Ingreso unicamente en el constructor, me hardcodea una lista con datos,
-        /// que esos datos son los usuarios registrados 
+        /// Ingreso unicamente en el constructor, me "crea" una lista de TextBox
         /// </summary>
         private void CargarListas()
         {
@@ -189,22 +179,6 @@ namespace FrmLobby
             this.listaTxtBox.Add(this.txtFibtaVidrio);
             this.listaTxtBox.Add(this.txtCondensador);
             this.listaTxtBox.Add(this.txtVentilador);
-
-            //------------------------Operario------------------------//
-            this.listNombre = Operario.HardcodearNombre();
-            this.listApellido = Operario.HardcodearApellido();
-
-            Operario op;
-
-            if (this.boolListaOp == false)
-            {
-                for (int i = 0; i < listNombre.Count; i++)
-                {
-                    op = new Operario(this.listNombre[i], this.listApellido[i]);
-                    this.listOperarios.Add(op);
-                }
-                this.boolListaOp = true;
-            }
         }
 
         /// <summary>
@@ -224,10 +198,10 @@ namespace FrmLobby
                 item.Enabled = false;
             }
 
-            this.txtBoxCantVideoCard.Text = VideoCard.CantidadProducto.ToString();
-            this.txtBoxCantMotherboard.Text = Motherboard.CantidadProducto.ToString();
-            this.txtBoxCantRam.Text = Ram.CantidadProducto.ToString();
-            this.txtBoxCantCabinet.Text = Cabinet.CantidadProducto.ToString();
+            this.txtBoxCantVideoCard.Text = ProductosDAO.LeerPorMaterial(1329, "VIDEO_CARD").ToString();
+            this.txtBoxCantMotherboard.Text = ProductosDAO.LeerPorMaterial(1329, "MOTHERBOARD").ToString();
+            this.txtBoxCantRam.Text = ProductosDAO.LeerPorMaterial(1329, "RAM").ToString();
+            this.txtBoxCantCabinet.Text = ProductosDAO.LeerPorMaterial(1329, "CABINET").ToString();
 
             this.txtBoxCantVideoCard.Enabled = false;
             this.txtBoxCantMotherboard.Enabled = false;
@@ -268,27 +242,27 @@ namespace FrmLobby
             }
             catch (UnauthorizedAccessException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "UnauthorizedAccessException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("UnauthorizedAccessException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Falta de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (PathTooLongException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "PathTooLongException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("PathTooLongException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Error con la ruta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (DirectoryNotFoundException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "DirectoryNotFoundException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DirectoryNotFoundException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "La ruta no se encuentra", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (IOException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "IOException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("IOException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Error al crear el directorio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -303,7 +277,7 @@ namespace FrmLobby
                 {
                     this.instanciaListFormat = Stock.InstanciarListaFormateada();
                     //EscribirXML
-                    if (!(ArchivosXML<List<string>>.EscribirArchivo(this.path + pathXML, this.instanciaListFormat)))
+                    if (!(this.gestorArchivos.EscribirArchivo(this.path + pathXML, this.instanciaListFormat)))
                     {
                         MessageBox.Show("No se pudo actualizar la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -311,7 +285,7 @@ namespace FrmLobby
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message);
             }
         }

@@ -46,6 +46,8 @@
             label4 = new Label();
             label3 = new Label();
             groupBox1 = new GroupBox();
+            txtIDProducto = new TextBox();
+            lblIDProducto = new Label();
             BtnFabric = new Button();
             label2 = new Label();
             label1 = new Label();
@@ -53,7 +55,7 @@
             BtnBackMenu = new Button();
             BtnMaterialesNecesarios = new Button();
             lblFactory = new Label();
-            BtnMostrar = new Button();
+            lblHelp = new Label();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numFabricar).BeginInit();
@@ -242,6 +244,8 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
+            groupBox1.Controls.Add(txtIDProducto);
+            groupBox1.Controls.Add(lblIDProducto);
             groupBox1.Controls.Add(BtnFabric);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
@@ -250,9 +254,25 @@
             groupBox1.ForeColor = SystemColors.ButtonHighlight;
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(310, 129);
+            groupBox1.Size = new Size(310, 162);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
+            // 
+            // txtIDProducto
+            // 
+            txtIDProducto.Location = new Point(135, 119);
+            txtIDProducto.Name = "txtIDProducto";
+            txtIDProducto.Size = new Size(147, 29);
+            txtIDProducto.TabIndex = 6;
+            // 
+            // lblIDProducto
+            // 
+            lblIDProducto.AutoSize = true;
+            lblIDProducto.Location = new Point(26, 122);
+            lblIDProducto.Name = "lblIDProducto";
+            lblIDProducto.Size = new Size(92, 21);
+            lblIDProducto.TabIndex = 5;
+            lblIDProducto.Text = "ID Producto";
             // 
             // BtnFabric
             // 
@@ -323,24 +343,25 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(54, 171);
+            lblFactory.Location = new Point(207, 187);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 27;
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
-            // BtnMostrar
+            // lblHelp
             // 
-            BtnMostrar.BackColor = Color.DarkGray;
-            BtnMostrar.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnMostrar.Location = new Point(186, 162);
-            BtnMostrar.Name = "BtnMostrar";
-            BtnMostrar.Size = new Size(125, 36);
-            BtnMostrar.TabIndex = 28;
-            BtnMostrar.Text = "Mostrar producto";
-            BtnMostrar.UseVisualStyleBackColor = false;
-            BtnMostrar.Click += BtnMostrar_Click;
+            lblHelp.AutoSize = true;
+            lblHelp.BackColor = Color.Transparent;
+            lblHelp.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHelp.ForeColor = SystemColors.ButtonHighlight;
+            lblHelp.Location = new Point(297, 187);
+            lblHelp.Name = "lblHelp";
+            lblHelp.Size = new Size(25, 19);
+            lblHelp.TabIndex = 62;
+            lblHelp.Text = "(?)";
+            lblHelp.Click += lblHelp_Click;
             // 
             // FrmProductoFinal
             // 
@@ -349,7 +370,7 @@
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
             ClientSize = new Size(592, 308);
             ControlBox = false;
-            Controls.Add(BtnMostrar);
+            Controls.Add(lblHelp);
             Controls.Add(lblFactory);
             Controls.Add(BtnMaterialesNecesarios);
             Controls.Add(BtnBackMenu);
@@ -396,6 +417,8 @@
         private Label label9;
         private Label label8;
         private Label label7;
-        private Button BtnMostrar;
+        private Label lblIDProducto;
+        private TextBox txtIDProducto;
+        private Label lblHelp;
     }
 }

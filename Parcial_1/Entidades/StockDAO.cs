@@ -57,6 +57,13 @@ namespace Entidades
             return rtn;
         }
 
+        /// <summary>
+        /// Lectura de un material especifico de la DB
+        /// </summary>
+        /// <param name="id">ID del Stock</param>
+        /// <param name="material">Tipo de material a leer</param>
+        /// <returns>Retorna la cantidad que me devuelve la DB</returns>
+        /// <exception cref="DataBasesException">Error con la base de datos</exception>
         public static int LeerPorMaterial(int id, string material)
         {
             int cantidad = -1;
@@ -86,6 +93,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Retorna un listado del Stock
+        /// </summary>
+        /// <param name="id">ID del Stock</param>
+        /// <returns>Retorna una lista de strings</returns>
+        /// <exception cref="DataBasesException">Error con la base de datos</exception>
         public static List<string> LeerStockPorID(int id)
         {
             List<string> listaStock = null;

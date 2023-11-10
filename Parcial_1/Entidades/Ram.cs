@@ -123,12 +123,18 @@ namespace Entidades
         /// <returns>Retora true si se cumplio la condicion, sino false</returns>
         public override bool FabricarProducto(int valor, List<int> listaValores)
         {
+            int cantidadAgregar;
+
             if (listaValores.Count > 0 && listaValores != null)
             {
-                Stock.CantCircuitosElectronicos += valor * this.listaValores[0];
-                Stock.CantBarraPlastico += valor * this.listaValores[1];
-                Stock.CantBaraHierro += valor * this.listaValores[2];
-                Stock.CantEngranajeHierro += valor * this.listaValores[3];
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[0]), 1077, "CIRCUITO_ELECTRONICO");
+                StockDAO.Modificar("CIRCUITO_ELECTRONICO", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[1]), 1077, "BARRA_PLASTICA");
+                StockDAO.Modificar("BARRA_PLASTICA", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[2]), 1077, "BARA_HIERRO");
+                StockDAO.Modificar("BARA_HIERRO", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[3]), 1077, "ENGRANAJE_HIERRO");
+                StockDAO.Modificar("ENGRANAJE_HIERRO", cantidadAgregar, 1077);
 
                 return true;
             }

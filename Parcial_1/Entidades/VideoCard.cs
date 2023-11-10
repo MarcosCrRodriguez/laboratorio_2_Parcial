@@ -142,48 +142,12 @@ namespace Entidades
         /// <returns>Retornamos la lista con los valores actualizados</returns>
         public List<int> PisarLista(int cantidadFdabricar)
         {
-            for (int i = 0; i < listaValores.Count; i++)
+            for (int i = 0; i < listaCantidades.Count; i++)
             {
                 this[i] = cantidadFdabricar * this.listaCantidades[i];
             }
 
             return this.listaValores;
-        }
-
-        public static int VerificarValorPositivo(int cantidadAgregar, int id, string material)
-        {
-            int rtn = -1;
-            int cantidadProducto;
-
-            try
-            {
-                cantidadProducto = ProductosDAO.LeerPorMaterial(id, material);
-                if (cantidadProducto != -1)
-                {
-                    cantidadAgregar += cantidadProducto;
-                    if (cantidadAgregar >= 0)
-                    {
-                        rtn = cantidadAgregar;
-                    }
-                    else
-                    {
-                        throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
-                    }
-                }
-                else
-                {
-                    throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
-                }
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException("Error con el formato de la cantidad ingresada", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocurrio un error inesperado", ex);
-            }
-            return rtn;
         }
 
         /// <summary>
@@ -194,16 +158,26 @@ namespace Entidades
         /// <returns>Retora true si se cumplio la condicion, sino false</returns>
         public override bool FabricarProducto(int valor, List<int> listaValores)
         {
+            int cantidadAgregar;
+
             if (listaValores.Count > 0 && listaValores != null)
             {
-                Stock.CantUnidadProcesamiento += valor * this.listaValores[0];
-                Stock.CantCableVerde += valor * this.listaValores[1];
-                Stock.CantBarraPlastico += valor * this.listaValores[2];
-                Stock.CantBaraHierro += valor * this.listaValores[3];
-                Stock.CantEngranajeHierro += valor * this.listaValores[4];
-                Stock.CantFibrasVidrio += valor * this.listaValores[5];
-                Stock.CantCondensador += valor * this.listaValores[6];
-                Stock.CantVentilador += valor * this.listaValores[7];
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[0]), 1077, "UNIDAD_PROCESAMIENTO");
+                StockDAO.Modificar("UNIDAD_PROCESAMIENTO", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[1]), 1077, "CABLE_VERDE");
+                StockDAO.Modificar("CABLE_VERDE", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[2]), 1077, "BARRA_PLASTICA");
+                StockDAO.Modificar("BARRA_PLASTICA", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[3]), 1077, "BARA_HIERRO");
+                StockDAO.Modificar("BARA_HIERRO", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[4]), 1077, "ENGRANAJE_HIERRO");
+                StockDAO.Modificar("ENGRANAJE_HIERRO", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[5]), 1077, "FIBRAS_VIDRIO");
+                StockDAO.Modificar("FIBRAS_VIDRIO", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[6]), 1077, "CONDENSADOR");
+                StockDAO.Modificar("CONDENSADOR", cantidadAgregar, 1077);
+                cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[7]), 1077, "VENTILADOR");
+                StockDAO.Modificar("VENTILADOR", cantidadAgregar, 1077);
 
                 return true;
             }

@@ -2,9 +2,9 @@
 
 namespace Archivos
 {
-    public static class ArchivosXML<T> 
+    public class ArchivosXML<T> : IArchivos<T>
     {
-        public static bool EscribirArchivo(string path, T dato)
+        public bool EscribirArchivo(string path, T dato)
         {
             bool rtn = false;
 

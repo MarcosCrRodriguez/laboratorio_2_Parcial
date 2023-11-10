@@ -57,6 +57,13 @@ namespace Entidades
             return rtn;
         }
 
+        /// <summary>
+        /// Lectura de un material especifico de la DB
+        /// </summary>
+        /// <param name="id">ID de Productos</param>
+        /// <param name="material">Material a leer</param>
+        /// <returns>Retorna la cantidad que hay en el material ingresado</returns>
+        /// <exception cref="DataBasesException">Error con la base de datos</exception>
         public static int LeerPorMaterial(int id, string material)
         {
             int cantidad = -1;

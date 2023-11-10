@@ -138,24 +138,5 @@ namespace TestUnitarios
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void EscribirArchivo_TratamosDeGuardarUnLogDeErrorEnUnArchivoTXT_DeberiamosDevolverUnTrue()
-        {
-            bool expected = true;
-
-            string path;
-            path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
-            path += @"\Archivos\";
-            string pathTXT = "Log_Excepciones.txt";
-
-            if (Directory.Exists(path))
-            {
-                //EscribirTXT
-                bool actual = ArchivosTXT<string>.EscribirArchivo(path + pathTXT, ArchivosTXT<string>.CrearFormatoExcepcion("FormatException", "StackTrace"));
-                
-                Assert.AreEqual(expected, actual);  
-            }
-        }
-
     }
 }

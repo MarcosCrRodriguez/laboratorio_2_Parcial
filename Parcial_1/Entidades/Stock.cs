@@ -182,6 +182,16 @@ namespace Entidades
         }
         #endregion
 
+        /// <summary>
+        /// Verificamos que las cantidades "a agregar" a la DB no sean negativas
+        /// </summary>
+        /// <param name="cantidadAgregar">Cantidad a agregar</param>
+        /// <param name="id">ID del material</param>
+        /// <param name="material">Nombre del material</param>
+        /// <returns>Retorna de ser el caso, la cantidad a agregar, con su diferencia calculada</returns>
+        /// <exception cref="NegativeValueException">Error si el valor a devolver es negativo</exception>
+        /// <exception cref="FormatException">Error de formato con algun dato trabajado</exception>
+        /// <exception cref="Exception">Captura algun error generico</exception>
         public static int VerificarValorPositivo(int cantidadAgregar, int id, string material)
         {
             int rtn = -1;
@@ -217,7 +227,7 @@ namespace Entidades
             }
             return rtn;
         }
-
+        
         /// <summary>
         /// Casteo de dato de decimal a entero
         /// </summary>
@@ -234,6 +244,13 @@ namespace Entidades
             return valor;
         }
 
+        /// <summary>
+        /// Convierto un string a int
+        /// </summary>
+        /// <param name="dato">Dato tipo string a convertir</param>
+        /// <returns>Retorno el valor convertido a entero</returns>
+        /// <exception cref="FormatException">Error de formato si no ingresa numeros</exception>
+        /// <exception cref="OverflowException">Fuera de rango para el tipo de dato</exception>
         public static int CasteoExplicito(string dato)
         {
             try
@@ -271,6 +288,10 @@ namespace Entidades
             return listaInt;
         }
 
+        /// <summary>
+        /// Lista de los datos Stock
+        /// </summary>
+        /// <returns>Retorna la lista string</returns>
         public static List<string> InstanciarListaMateriales()
         {
             listaMateriales = new List<string>() {
@@ -290,6 +311,10 @@ namespace Entidades
             return listaMateriales;
         }
 
+        /// <summary>
+        /// Formato de una lista con los valores y nombres del stock actual
+        /// </summary>
+        /// <returns>Retorna la lista formateada</returns>
         public static List<string> InstanciarListaFormateada()
         {
             List<string> listaStockDB = StockDAO.LeerStockPorID(1077);

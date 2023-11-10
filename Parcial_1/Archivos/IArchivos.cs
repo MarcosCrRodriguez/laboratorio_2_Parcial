@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
-    public interface IArchivos
+    public interface IArchivos<T> 
     {
+        bool EscribirArchivo(string path, T dato);
     }
 }

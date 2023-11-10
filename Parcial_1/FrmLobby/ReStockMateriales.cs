@@ -15,20 +15,26 @@ namespace FrmLobby
 {
     public partial class FrmReStockMateriales : Form
     {
+        private IArchivos<string> manejadorArchivosTXT;
+
         private MenuUsuario menuCargo;
         private List<string> listaStock;
         private List<TextBox> listaTxtBox;
 
         private string path;
+        private string pathTXT;
         public FrmReStockMateriales(MenuUsuario menuCargo)
         {
             InitializeComponent();
+            this.manejadorArchivosTXT = new ArchivosTXT<string>();
+
             this.menuCargo = menuCargo;
             this.listaStock = new List<string>();
             this.listaTxtBox = new List<TextBox>();
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
@@ -77,23 +83,23 @@ namespace FrmLobby
             }
             catch (EmptyParametersException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "EmptyParametersException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (FormatException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "FormatException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             catch (NegativeValueException ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "NegativeValueException", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("NegativeValueException", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "El valor en Stock no puede ser menor que 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                ArchivosTXT<string>.CargarExcepcionEnArchivo(this.path, "Exception", $"{ex.StackTrace}");
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
                 MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
