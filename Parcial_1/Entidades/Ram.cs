@@ -4,6 +4,8 @@ namespace Entidades
 {
     public class Ram : Producto
     {
+        private IMateriales gestorMateriales;
+
         private int cantCircuitoElectConsumida;
         private int cantBarraPlasticoConsumida;
         private int cantBaraHierroConsumida;
@@ -16,6 +18,8 @@ namespace Entidades
 
         public Ram()
         {
+            this.gestorMateriales = new StockDAO();
+
             this.cantCircuitoElectConsumida = 2;
             this.cantBarraPlasticoConsumida = 2;
             this.cantBaraHierroConsumida = 2;
@@ -128,13 +132,13 @@ namespace Entidades
             if (listaValores.Count > 0 && listaValores != null)
             {
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[0]), 1077, "CIRCUITO_ELECTRONICO");
-                StockDAO.Modificar("CIRCUITO_ELECTRONICO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("CIRCUITO_ELECTRONICO", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[1]), 1077, "BARRA_PLASTICA");
-                StockDAO.Modificar("BARRA_PLASTICA", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("BARRA_PLASTICA", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[2]), 1077, "BARA_HIERRO");
-                StockDAO.Modificar("BARA_HIERRO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("BARA_HIERRO", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[3]), 1077, "ENGRANAJE_HIERRO");
-                StockDAO.Modificar("ENGRANAJE_HIERRO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("ENGRANAJE_HIERRO", cantidadAgregar, 1077);
 
                 return true;
             }

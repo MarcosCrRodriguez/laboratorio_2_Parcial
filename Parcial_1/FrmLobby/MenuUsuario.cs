@@ -18,6 +18,7 @@ namespace FrmLobby
 {
     public partial class MenuUsuario : Form
     {
+        private IMateriales gestorProductos;
         private IArchivos<string> manejadorArchivosTXT;
         private IArchivos<List<string>> gestorArchivos;
         private TiposProductos tiposProdcuto;
@@ -43,6 +44,7 @@ namespace FrmLobby
         public MenuUsuario(FrmLobby menuInicial, int codigoUsuario, string cargo)
         {
             InitializeComponent();
+            this.gestorProductos = new ProductosDAO();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
             this.gestorArchivos = new ArchivosXML<List<string>>();
             this.menuInicial = menuInicial;
@@ -198,10 +200,10 @@ namespace FrmLobby
                 item.Enabled = false;
             }
 
-            this.txtBoxCantVideoCard.Text = ProductosDAO.LeerPorMaterial(1329, "VIDEO_CARD").ToString();
-            this.txtBoxCantMotherboard.Text = ProductosDAO.LeerPorMaterial(1329, "MOTHERBOARD").ToString();
-            this.txtBoxCantRam.Text = ProductosDAO.LeerPorMaterial(1329, "RAM").ToString();
-            this.txtBoxCantCabinet.Text = ProductosDAO.LeerPorMaterial(1329, "CABINET").ToString();
+            this.txtBoxCantVideoCard.Text = this.gestorProductos.LeerPorMaterial(1329, "VIDEO_CARD").ToString();
+            this.txtBoxCantMotherboard.Text = this.gestorProductos.LeerPorMaterial(1329, "MOTHERBOARD").ToString();
+            this.txtBoxCantRam.Text = this.gestorProductos.LeerPorMaterial(1329, "RAM").ToString();
+            this.txtBoxCantCabinet.Text = this.gestorProductos.LeerPorMaterial(1329, "CABINET").ToString();
 
             this.txtBoxCantVideoCard.Enabled = false;
             this.txtBoxCantMotherboard.Enabled = false;

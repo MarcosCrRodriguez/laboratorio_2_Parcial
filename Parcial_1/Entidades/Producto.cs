@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,11 @@ namespace Entidades
 {
     public abstract class Producto : Empresa
     {
+        private static IMateriales manejadorProductos;
         protected static ulong codigoFabricacion;
         protected Producto()
         {
+            manejadorProductos = new ProductosDAO();
             codigoFabricacion = (ulong)new Random().Next(10000000, 99999999);
         }
 
@@ -40,7 +43,7 @@ namespace Entidades
 
             try
             {
-                cantidadProducto = ProductosDAO.LeerPorMaterial(id, material);
+                cantidadProducto = manejadorProductos.LeerPorMaterial(id, material);
                 if (cantidadProducto != -1)
                 {
                     cantidadAgregar += cantidadProducto;
@@ -77,6 +80,10 @@ namespace Entidades
         /// <returns></returns>
         public abstract bool FabricarProducto(int valor, List<int> lista);
 
+        /// <summary>
+        /// Metodo abstracto mostrar que heredara en sus distintos Productos
+        /// </summary>
+        /// <returns>Retornara un string con datos del Producto</returns>
         public abstract string Mostrar();
     }
 }

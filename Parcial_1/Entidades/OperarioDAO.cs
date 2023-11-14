@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public static class OperarioDAO
+    public class OperarioDAO<T> : IUsuario<T> where T : Operario
     {
+        // interfaz Usuario
+
         private static string connectionString;
         private static SqlCommand command;
         private static SqlConnection connection;
@@ -26,29 +28,29 @@ namespace Entidades
         /// <summary>
         /// Guardamos / agregamos un Usuario en la base de datos
         /// </summary>
-        /// <param name="operario">Operario que agregaremos a la DB</param>
+        /// <param name="usuario">Operario que agregaremos a la DB</param>
         /// <returns>Retorna un true o false para ver si se pudo o no agregar a la DB</returns>
         /// <exception cref="SqlExceptionDuplicateUserDB">Lanzara la excepcion en caso de que el DNI ingresado EXISTA</exception>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static bool GuardarRegistro(Operario operario)
+        public bool GuardarRegistro(T usuario)
         {
-            bool rtn = false; ;
+            bool rtn = false;
             try
             {
                 command.Parameters.Clear();
                 connection.Open();
                 command.CommandText = $"Insert INTO USUARIOS (DNI, NOMBRE, APELLIDO, EMAIL, EDAD, FECHA_INGRESO, DIRECCION, TELEFONO, CARGO, PASSW) " +
                     $"VALUES (@DNI, @Nombre, @Apellido, @Email, @Edad, @FechaIngreso, @Direccion, @Telefono, @Cargo, @Passw)";
-                command.Parameters.AddWithValue("@DNI", operario.DNI);
-                command.Parameters.AddWithValue("@Nombre", operario.Nombre);
-                command.Parameters.AddWithValue("@Apellido", operario.Apellido);
-                command.Parameters.AddWithValue("@Edad", operario.Edad);
-                command.Parameters.AddWithValue("@Email", operario.Email);
-                command.Parameters.AddWithValue("@FechaIngreso", operario.FechaIngreso);
-                command.Parameters.AddWithValue("@Direccion", operario.Direccion);
-                command.Parameters.AddWithValue("@Telefono", operario.Telefono);
-                command.Parameters.AddWithValue("@Cargo", operario.Puesto);
-                command.Parameters.AddWithValue("@Passw", operario.Password);
+                command.Parameters.AddWithValue("@DNI", usuario.DNI);
+                command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
+                command.Parameters.AddWithValue("@Edad", usuario.Edad);
+                command.Parameters.AddWithValue("@Email", usuario.Email);
+                command.Parameters.AddWithValue("@FechaIngreso", usuario.FechaIngreso);
+                command.Parameters.AddWithValue("@Direccion", usuario.Direccion);
+                command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
+                command.Parameters.AddWithValue("@Cargo", usuario.Puesto);
+                command.Parameters.AddWithValue("@Passw", usuario.Password);
                 int rows = command.ExecuteNonQuery();
                 rtn = true;
             }
@@ -73,7 +75,7 @@ namespace Entidades
         /// <param name="id">ID que intentaremos de encontrar en la DB</param>
         /// <returns>Retorna el Operario encontrado por el ID</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static Operario LeerPorID(int id)
+        public T LeerPorID(int id)
         {
             Operario usuario = null;
             try
@@ -118,7 +120,7 @@ namespace Entidades
         /// <param name="dni">DNI que intentaremos de encontrar en la DB</param>
         /// <returns>Retorna el Operario encontrado por el DNI</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static Operario LeerPorDNI(long dni)
+        public T LeerPorDNI(long dni)
         {
             Operario usuario = null;
             try
@@ -163,7 +165,7 @@ namespace Entidades
         /// <param name="dato">Cargo del Usuario</param>
         /// <returns>Retorna la Lista</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static List<Operario> LeerOperarios(string dato)
+        public List<T> LeerOperarios(string dato)
         {
             List<Operario> personas = new List<Operario>();
             try
@@ -203,7 +205,7 @@ namespace Entidades
         /// <param name="dato">Cargo del Usuario</param>
         /// <returns>Retorna la Lista</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static List<Operario> LeerOperariosDatosCompletos(string dato)
+        public List<T> LeerOperariosDatosCompletos(string dato)
         {
             List<Operario> personas = new List<Operario>();
             try

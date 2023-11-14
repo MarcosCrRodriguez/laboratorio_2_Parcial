@@ -17,13 +17,14 @@ namespace Entidades
         private static int cantFibrasVidrio;
         private static int cantCondensador;
         private static int cantVentilador;
-        private static List<int> listaStock;
         private static List<string> listaMateriales;
+
+        private static IMateriales gestorMateriales;
 
         static Stock()
         {
-            listaStock = new List<int>();
             listaMateriales = new List<string>();
+            gestorMateriales = new StockDAO();
         }
 
         #region Propiedades
@@ -199,7 +200,7 @@ namespace Entidades
 
             try
             {
-                cantidadStock = StockDAO.LeerPorMaterial(id, material);
+                cantidadStock = gestorMateriales.LeerPorMaterial(id, material);
                 if (cantidadStock != -1)
                 {
                     cantidadAgregar += cantidadStock;
@@ -399,43 +400,43 @@ namespace Entidades
             {
                 case 0:
                     dictProducto = new Dictionary<string, int>() {
-                        { "UNIDAD_PROCESAMIENTO" ,StockDAO.LeerPorMaterial(1077, "UNIDAD_PROCESAMIENTO") },
-                        { "CABLE_VERDE" ,StockDAO.LeerPorMaterial(1077, "CABLE_VERDE") },
-                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
-                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
-                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
-                        { "FIBRAS_VIDRIO" ,StockDAO.LeerPorMaterial(1077, "FIBRAS_VIDRIO") },
-                        { "CONDENSADOR" ,StockDAO.LeerPorMaterial(1077, "CONDENSADOR") },
-                        { "VENTILADOR" ,StockDAO.LeerPorMaterial(1077, "VENTILADOR") }
+                        { "UNIDAD_PROCESAMIENTO" ,gestorMateriales.LeerPorMaterial(1077, "UNIDAD_PROCESAMIENTO") },
+                        { "CABLE_VERDE" ,gestorMateriales.LeerPorMaterial(1077, "CABLE_VERDE") },
+                        { "BARRA_PLASTICA" ,gestorMateriales.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
+                        { "FIBRAS_VIDRIO" ,gestorMateriales.LeerPorMaterial(1077, "FIBRAS_VIDRIO") },
+                        { "CONDENSADOR" ,gestorMateriales.LeerPorMaterial(1077, "CONDENSADOR") },
+                        { "VENTILADOR" ,gestorMateriales.LeerPorMaterial(1077, "VENTILADOR") }
                         };
                     break;
                 case 1:
                     dictProducto = new Dictionary<string, int>() {
-                        { "CIRCUITO_ELECTRONICO_AVANZADO" ,StockDAO.LeerPorMaterial(1077, "CIRCUITO_ELECTRONICO_AVANZADO") },
-                        { "CABLE_ROJO" ,StockDAO.LeerPorMaterial(1077, "CABLE_ROJO") },
-                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
-                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
-                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
-                        { "FIBRAS_VIDRIO" ,StockDAO.LeerPorMaterial(1077, "FIBRAS_VIDRIO") },
-                        { "CONDENSADOR" ,StockDAO.LeerPorMaterial(1077, "CONDENSADOR") },
-                        { "VENTILADOR" ,StockDAO.LeerPorMaterial(1077, "VENTILADOR") }
+                        { "CIRCUITO_ELECTRONICO_AVANZADO" ,gestorMateriales.LeerPorMaterial(1077, "CIRCUITO_ELECTRONICO_AVANZADO") },
+                        { "CABLE_ROJO" ,gestorMateriales.LeerPorMaterial(1077, "CABLE_ROJO") },
+                        { "BARRA_PLASTICA" ,gestorMateriales.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
+                        { "FIBRAS_VIDRIO" ,gestorMateriales.LeerPorMaterial(1077, "FIBRAS_VIDRIO") },
+                        { "CONDENSADOR" ,gestorMateriales.LeerPorMaterial(1077, "CONDENSADOR") },
+                        { "VENTILADOR" ,gestorMateriales.LeerPorMaterial(1077, "VENTILADOR") }
                         };
                     break;
                 case 2:
                     dictProducto = new Dictionary<string, int>() {
-                        { "CIRCUITO_ELECTRONICO" ,StockDAO.LeerPorMaterial(1077, "CIRCUITO_ELECTRONICO") },
-                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
-                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
-                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") }
+                        { "CIRCUITO_ELECTRONICO" ,gestorMateriales.LeerPorMaterial(1077, "CIRCUITO_ELECTRONICO") },
+                        { "BARRA_PLASTICA" ,gestorMateriales.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") }
                         };
                     break;
                 case 3:
                     dictProducto = new Dictionary<string, int>() {
-                        { "CABLE_ROJO" ,StockDAO.LeerPorMaterial(1077, "CABLE_ROJO") },
-                        { "BARRA_PLASTICA" ,StockDAO.LeerPorMaterial(1077, "BARRA_PLASTICA") },
-                        { "BARA_HIERRO" ,StockDAO.LeerPorMaterial(1077, "BARA_HIERRO") },
-                        { "ENGRANAJE_HIERRO" ,StockDAO.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
-                        { "VENTILADOR" ,StockDAO.LeerPorMaterial(1077, "VENTILADOR") }
+                        { "CABLE_ROJO" ,gestorMateriales.LeerPorMaterial(1077, "CABLE_ROJO") },
+                        { "BARRA_PLASTICA" ,gestorMateriales.LeerPorMaterial(1077, "BARRA_PLASTICA") },
+                        { "BARA_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "BARA_HIERRO") },
+                        { "ENGRANAJE_HIERRO" ,gestorMateriales.LeerPorMaterial(1077, "ENGRANAJE_HIERRO") },
+                        { "VENTILADOR" ,gestorMateriales.LeerPorMaterial(1077, "VENTILADOR") }
                         };
                     break;
                 default:

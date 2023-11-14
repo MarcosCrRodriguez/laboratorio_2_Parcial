@@ -5,6 +5,8 @@ namespace Entidades
 {
     public class VideoCard : Producto
     {
+        private IMateriales gestorMateriales;
+
         private int cantUniProcesamientoConsumida;
         private int cantCableVerdeConsumida;
         private int cantBarraPlasticoConsumida;
@@ -21,6 +23,8 @@ namespace Entidades
 
         public VideoCard()
         {
+            this.gestorMateriales = new StockDAO();
+
             this.cantUniProcesamientoConsumida = 4;
             this.cantCableVerdeConsumida = 9;
             this.cantBarraPlasticoConsumida = 4;
@@ -163,21 +167,21 @@ namespace Entidades
             if (listaValores.Count > 0 && listaValores != null)
             {
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[0]), 1077, "UNIDAD_PROCESAMIENTO");
-                StockDAO.Modificar("UNIDAD_PROCESAMIENTO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("UNIDAD_PROCESAMIENTO", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[1]), 1077, "CABLE_VERDE");
-                StockDAO.Modificar("CABLE_VERDE", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("CABLE_VERDE", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[2]), 1077, "BARRA_PLASTICA");
-                StockDAO.Modificar("BARRA_PLASTICA", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("BARRA_PLASTICA", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[3]), 1077, "BARA_HIERRO");
-                StockDAO.Modificar("BARA_HIERRO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("BARA_HIERRO", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[4]), 1077, "ENGRANAJE_HIERRO");
-                StockDAO.Modificar("ENGRANAJE_HIERRO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("ENGRANAJE_HIERRO", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[5]), 1077, "FIBRAS_VIDRIO");
-                StockDAO.Modificar("FIBRAS_VIDRIO", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("FIBRAS_VIDRIO", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[6]), 1077, "CONDENSADOR");
-                StockDAO.Modificar("CONDENSADOR", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("CONDENSADOR", cantidadAgregar, 1077);
                 cantidadAgregar = Stock.VerificarValorPositivo((valor * this.listaValores[7]), 1077, "VENTILADOR");
-                StockDAO.Modificar("VENTILADOR", cantidadAgregar, 1077);
+                this.gestorMateriales.Modificar("VENTILADOR", cantidadAgregar, 1077);
 
                 return true;
             }

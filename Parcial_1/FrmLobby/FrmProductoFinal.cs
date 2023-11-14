@@ -19,6 +19,7 @@ namespace FrmLobby
     public partial class FrmProductoFinal : Form
     {
         private IArchivos<string> manejadorArchivosTXT;
+        private IMateriales manejadorProductos;
 
         private int valorInt;
         private string productoDB;
@@ -39,6 +40,7 @@ namespace FrmLobby
         {
             InitializeComponent();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.manejadorProductos = new ProductosDAO();
 
             this.frmUsuario = frmUsuario;
             this.videoCard = new VideoCard();
@@ -224,7 +226,7 @@ namespace FrmLobby
                             cantidadAgregar = Producto.VerificarValorPositivo(Stock.CasteoExplicito(this.numFabricar.Value), Stock.CasteoExplicito(this.txtIDProducto.Text), this.productoDB);
                             if (cantidadAgregar != -1)
                             {
-                                if (ProductosDAO.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
+                                if (this.manejadorProductos.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
                                 {
                                     MessageBox.Show($"Se ha modificado el material {this.productoDB} con éxito", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);

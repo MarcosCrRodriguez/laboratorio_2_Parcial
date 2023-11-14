@@ -127,12 +127,13 @@ namespace TestUnitarios
         public void ModificarStock_ModificamosLosDatosDelStock_DeberiaDevolverUnTrue(string material)
         {
             //Arrange
+            IMateriales gestorMateriales = new StockDAO();
             bool expected = true;
             int id = 1077;
 
             //Act
             int cantidadAgregar = Stock.VerificarValorPositivo(1500, id, material);
-            bool actual = StockDAO.Modificar(material, cantidadAgregar, id);
+            bool actual = gestorMateriales.Modificar(material, cantidadAgregar, id);
 
             //Assert
             Assert.AreEqual(expected, actual);

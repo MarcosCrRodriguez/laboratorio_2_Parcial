@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class ProductosDAO
+    public class ProductosDAO : IMateriales
     {
         private static string connectionString;
         private static SqlCommand command;
@@ -31,7 +31,7 @@ namespace Entidades
         /// <param name="id">ID de Productos</param>
         /// <returns>Retorna un true o false para verificar que se modifico el Producto con EXITO</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception> 
-        public static bool Modificar(string material, int cantidadAgregar, int id)
+        public bool Modificar(string material, int cantidadAgregar, int id)
         {
             bool rtn = false;
             try
@@ -64,7 +64,7 @@ namespace Entidades
         /// <param name="material">Material a leer</param>
         /// <returns>Retorna la cantidad que hay en el material ingresado</returns>
         /// <exception cref="DataBasesException">Error con la base de datos</exception>
-        public static int LeerPorMaterial(int id, string material)
+        public int LeerPorMaterial(int id, string material)
         {
             int cantidad = -1;
             try

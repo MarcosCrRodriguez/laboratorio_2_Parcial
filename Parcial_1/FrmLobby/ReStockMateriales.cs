@@ -16,6 +16,7 @@ namespace FrmLobby
     public partial class FrmReStockMateriales : Form
     {
         private IArchivos<string> manejadorArchivosTXT;
+        private IMateriales gestorMateriales;
 
         private MenuUsuario menuCargo;
         private List<string> listaStock;
@@ -27,6 +28,7 @@ namespace FrmLobby
         {
             InitializeComponent();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.gestorMateriales = new StockDAO();
 
             this.menuCargo = menuCargo;
             this.listaStock = new List<string>();
@@ -62,7 +64,7 @@ namespace FrmLobby
                 cantidadAgregar = Stock.VerificarValorPositivo(Stock.CasteoExplicito(this.numCantAgregar.Value), Stock.CasteoExplicito(this.txtIDSotck.Text), this.txtMaterialSet.Text);
                 if (cantidadAgregar != -1)
                 {
-                    if (StockDAO.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
+                    if (this.gestorMateriales.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
                     {
                         MessageBox.Show($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
