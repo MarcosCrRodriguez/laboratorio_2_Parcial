@@ -17,16 +17,28 @@ namespace FrmLobby
     public partial class FrmDataGirdView : Form
     {
         private MenuUsuario menuPrincipal;
+        private Configuracion configJson;
         private List<Operario> listOperario;
+
+        private string path;
+        private string pathJSON;
         public FrmDataGirdView(MenuUsuario menuPrincipal)
         {
             InitializeComponent();
             this.menuPrincipal = menuPrincipal;
-            this.listOperario = OperarioDAO.LeerOperariosDatosCompletos("Operario");
+            this.listOperario = OperarioDAO<Operario>.LeerOperariosDatosCompletos("Operario");
+
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            this.path += @"\Archivos\";
+            this.pathJSON = "Imagenes.json";
         }
 
         private void FrmDataGirdView_Load(object sender, EventArgs e)
         {
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
+            this.BackgroundImage = img;
+
             this.DtgvRegistro.DataSource = this.listOperario;
             this.DtgvRegistro.Refresh();
             this.DtgvRegistro.Update();

@@ -15,16 +15,16 @@ namespace Entidades
 
             switch (proceso) 
             {
-                case ProcesoProduccion.Soldar:
+                case ProcesoProduccion.Soldado:
                     retorno = true;
                     break;
-                case ProcesoProduccion.Ensamblar:
+                case ProcesoProduccion.Ensamblado:
                     retorno = true;
                     break;
-                case ProcesoProduccion.Conectar:
+                case ProcesoProduccion.Conectado:
                     retorno = true;
                     break;
-                case ProcesoProduccion.Empaquetar:
+                case ProcesoProduccion.Empaquetado:
                     retorno = true;
                     break;
 

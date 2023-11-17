@@ -12,22 +12,26 @@ namespace TestUnitarios
         [ExpectedException(typeof(SqlExceptionDuplicateUserDB))]
         public void GuardarRegistro_CuandoRegistroUnOperarioConUnDNIExistente_DeberiaLanzarSqlExceptionDuplicateUserDB()
         {
+            IUsuario<Operario> manejadorUsuario = new OperarioDAO<Operario>();
+
             //Arrange
             Operario operario = new Operario("Escalabrini", "Ortiz", 0, "Operario", 42225555, "esc_ortiz@gmail.com", 45, DateTime.Now, "Calle None 123", "4123-1234");
 
             //Act
-            bool actual = OperarioDAO.GuardarRegistro(operario);
+            bool actual = manejadorUsuario.GuardarRegistro(operario);
         }
 
         [TestMethod]
         [ExpectedException(typeof(SqlExceptionDuplicateUserDB))]
         public void GuardarRegistro_CuandoRegistroUnSupervisorConUnDNIExistente_DeberiaLanzarSqlExceptionDuplicateUserDB()
         {
+            IUsuario<Supervisor> manejadorUsuario = new SupervisorDAO<Supervisor>();
+
             //Arrange
             Supervisor supervisor = new Supervisor("Napoleon", "Bonaparte", 0, "Supervisor", 42225555, "napoleon_b@gmail.com", 57, DateTime.Now, "Calle None 456", "7890-4567");
 
             //Act
-            bool actual = SupervisorDAO.GuardarRegistro(supervisor);
+            bool actual = manejadorUsuario.GuardarRegistro(supervisor);
         }
 
         [TestMethod]
@@ -38,7 +42,7 @@ namespace TestUnitarios
             Supervisor supervisor = new Supervisor("Marcos", "Rodriguez", 1000, "Supervisor", 42225555);
 
             //Act
-            bool actual = supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor);
+            bool actual = supervisor.VerificarExisteSupervisor(SupervisorDAO<Supervisor>.LeerSupervisores("Supervisor"), supervisor);
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -74,7 +78,7 @@ namespace TestUnitarios
             Operario operario = new Operario("Brandon", "Sanderson", 1056, "Operario", 12121313, "brandonsanderson@gmail.com", new Random().Next(18, 60), DateTime.Now, $"Calle None {new Random().Next(100, 2700)}", $"{new Random().Next(1000, 9999)}-{new Random().Next(1000, 9999)}");
 
             //Act
-            bool actual = SupervisorDAO.ModificarUsuario(operario);
+            bool actual = SupervisorDAO<Supervisor>.ModificarUsuario(operario);
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -90,7 +94,7 @@ namespace TestUnitarios
             bool expected = false;
 
             //Act
-            bool actual = Operario.VerificarExisteID(OperarioDAO.LeerOperariosDatosCompletos("Operario"), id);
+            bool actual = Operario.VerificarExisteID(OperarioDAO<Operario>.LeerOperariosDatosCompletos("Operario"), id);
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -106,7 +110,7 @@ namespace TestUnitarios
             bool expected = false;
 
             //Act
-            bool actual = SupervisorDAO.Eliminar(id, "Operario");
+            bool actual = SupervisorDAO<Supervisor>.Eliminar(id, "Operario");
 
             //Assert
             Assert.AreEqual(expected, actual);

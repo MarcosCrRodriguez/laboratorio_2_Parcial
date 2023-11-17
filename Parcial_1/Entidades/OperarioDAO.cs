@@ -10,8 +10,6 @@ namespace Entidades
 {
     public class OperarioDAO<T> : IUsuario<T> where T : Operario
     {
-        // interfaz Usuario
-
         private static string connectionString;
         private static SqlCommand command;
         private static SqlConnection connection;
@@ -102,7 +100,7 @@ namespace Entidades
                             );
                     }
                 }
-                return usuario;
+                return usuario as T;
             }
             catch (Exception ex)
             {
@@ -147,7 +145,7 @@ namespace Entidades
                             );
                     }
                 }
-                return usuario;
+                return usuario as T;
             }
             catch (Exception ex)
             {
@@ -165,7 +163,7 @@ namespace Entidades
         /// <param name="dato">Cargo del Usuario</param>
         /// <returns>Retorna la Lista</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public List<T> LeerOperarios(string dato)
+        public static List<Operario> LeerOperarios(string dato)
         {
             List<Operario> personas = new List<Operario>();
             try
@@ -205,7 +203,7 @@ namespace Entidades
         /// <param name="dato">Cargo del Usuario</param>
         /// <returns>Retorna la Lista</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public List<T> LeerOperariosDatosCompletos(string dato)
+        public static List<Operario> LeerOperariosDatosCompletos(string dato)
         {
             List<Operario> personas = new List<Operario>();
             try
@@ -243,5 +241,6 @@ namespace Entidades
                 connection.Close();
             }
         }
+
     }
 }

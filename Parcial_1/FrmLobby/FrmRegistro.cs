@@ -15,28 +15,44 @@ namespace FrmLobby
 {
     public partial class FormularioRegistro : Form
     {
+        public delegate void Mostrar(string texto, string titulo);
+
         private IArchivos<string> manejadorArchivosTXT;
+        private IUsuario<Operario> manejadorOperario;
+        private IUsuario<Supervisor> manejadorSupervisor;
+        private Configuracion configJson;
 
         private string path;
         private string pathTXT;
+        private string pathJSON;
         public FormularioRegistro()
         {
             InitializeComponent(); 
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.manejadorOperario = new OperarioDAO<Operario>();
+            this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathJSON = "Imagenes.json";
         }
 
         private void FormularioRegistro_Load(object sender, EventArgs e)
         {
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
+            this.BackgroundImage = img;
+
             this.cboxCargo.Items.Add("Operario");
             this.cboxCargo.Items.Add("Supervisor");
         }
 
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             try
             {
                 if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "" || this.cboxCargo.Text == "")
@@ -46,15 +62,15 @@ namespace FrmLobby
                 if (this.cboxCargo.Text == "Operario")
                 {
                     Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
-                    if (!(operario.VerificarExisteOperario(OperarioDAO.LeerOperarios("Operario"), operario)))
+                    if (!(operario.VerificarExisteOperario(OperarioDAO<Operario>.LeerOperarios("Operario"), operario)))
                     {
-                        if (OperarioDAO.GuardarRegistro(operario))
+                        if (manejadorOperario.GuardarRegistro(operario))
                         {
-                            operario = OperarioDAO.LeerPorDNI(operario.DNI);
+                            operario = manejadorOperario.LeerPorDNI(operario.DNI);
                             if (operario != null)
                             {
-                                MessageBox.Show($"Código de Usuario generado >{operario.ID}<", "Código Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                MessageBox.Show("Se registro el Operario con Exito", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                mostrarInformacion($"Código de Usuario generado >{operario.ID}<", "Código Usuario");
+                                mostrarInformacion("Se registro el Operario con Exito", "Registro Exitoso");
                                 this.Close();
                             }
                             else
@@ -67,15 +83,15 @@ namespace FrmLobby
                 else if (this.cboxCargo.Text == "Supervisor")
                 {
                     Supervisor supervisor = new Supervisor(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
-                    if (!(supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor)))
+                    if (!(supervisor.VerificarExisteSupervisor(SupervisorDAO<Supervisor>.LeerSupervisores("Supervisor"), supervisor)))
                     {
-                        if (SupervisorDAO.GuardarRegistro(supervisor))
+                        if (manejadorSupervisor.GuardarRegistro(supervisor))
                         {
-                            supervisor = SupervisorDAO.LeerPorDNI(supervisor.DNI);
+                            supervisor = manejadorSupervisor.LeerPorDNI(supervisor.DNI);
                             if (supervisor != null)
                             {
-                                MessageBox.Show($"Código de Usuario generado >{supervisor.ID}<", "Código Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                MessageBox.Show("Se registro el Supervisor con Exito", "Registro Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                mostrarInformacion($"Código de Usuario generado >{supervisor.ID}<", "Código Usuario");
+                                mostrarInformacion("Se registro el Supervisor con Exito", "Registro Exitoso");
                                 this.Close();
                             }
                             else
@@ -89,32 +105,32 @@ namespace FrmLobby
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Parametros Vacios");
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Tipo de dato Incorrecto");
             }
             catch (SqlExceptionDuplicateUserDB ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("SqlExceptionDuplicateUserDB", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Problemas con la Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Problemas con la Base de Datos");
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Parametros Vacios");
             }
             catch (ObjectNullException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("ObjectNullException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Objeto Null");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Error Inesperado");
             }
         }
 

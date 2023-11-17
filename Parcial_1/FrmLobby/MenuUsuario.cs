@@ -18,9 +18,13 @@ namespace FrmLobby
 {
     public partial class MenuUsuario : Form
     {
+        public delegate void Mostrar(string texto, string titulo);
+
         private IMateriales gestorProductos;
         private IArchivos<string> manejadorArchivosTXT;
         private IArchivos<List<string>> gestorArchivos;
+        private IUsuario<Operario> manejadorOperario;
+        private IUsuario<Supervisor> manejadorSupervisor;
         private TiposProductos tiposProdcuto;
         private int numeroProducto;
 
@@ -32,6 +36,7 @@ namespace FrmLobby
         private Motherboard motherboard;
         private Ram ram;
         private Cabinet cabinet;
+        private Configuracion configJson;
 
         private string cargo;
         private List<TextBox> listaTxtBox;
@@ -40,6 +45,7 @@ namespace FrmLobby
 
         private string path;
         private string pathTXT;
+        private string pathJSON;
 
         public MenuUsuario(FrmLobby menuInicial, int codigoUsuario, string cargo)
         {
@@ -47,6 +53,9 @@ namespace FrmLobby
             this.gestorProductos = new ProductosDAO();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
             this.gestorArchivos = new ArchivosXML<List<string>>();
+            this.manejadorOperario = new OperarioDAO<Operario>();
+            this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
+
             this.menuInicial = menuInicial;
             this.codigoUsuario = codigoUsuario;
             this.videoCard = new VideoCard();
@@ -62,6 +71,7 @@ namespace FrmLobby
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathJSON = "Imagenes.json";
             this.CargarListas();
         }
 
@@ -69,14 +79,14 @@ namespace FrmLobby
         {
             if (this.cargo == "Supervisor")
             {
-                this.supervisor = SupervisorDAO.LeerPorID(this.codigoUsuario);
+                this.supervisor = manejadorSupervisor.LeerPorID(this.codigoUsuario);
                 this.txtNombre.Text = $" {this.supervisor.Nombre} {this.supervisor.Apellido}";
                 this.gboxUsuario.Text = "Supervisor";
                 this.gboxUsuario.Enabled = false;
             }
             else
             {
-                this.operario = OperarioDAO.LeerPorID(this.codigoUsuario);
+                this.operario = manejadorOperario.LeerPorID(this.codigoUsuario);
                 this.txtNombre.Text = $" {this.operario.Nombre} {this.operario.Apellido}";
                 this.gboxUsuario.Text = "Operario";
                 this.gboxUsuario.Enabled = false;
@@ -84,6 +94,9 @@ namespace FrmLobby
                 this.BtnReStock.Visible = false;
             }
             this.CrearDirectorio();
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
+            this.BackgroundImage = img;
             this.CargaDatos();
         }
 
@@ -96,21 +109,25 @@ namespace FrmLobby
 
         private void BtnConfig_Click_1(object sender, EventArgs e)
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             if (this.cargo == "Supervisor")
             {
-                MessageBox.Show($"{this.supervisor.MostrarTodosDatos()}", "Configuracion datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                mostrarInformacion($"{this.supervisor.MostrarTodosDatos()}", "Datos pesonales");
             }
             else
             {
-                MessageBox.Show($"{this.operario.MostrarTodosDatos()}", "Configuracion datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                mostrarInformacion($"{this.operario.MostrarTodosDatos()}", "Datos pesonales");
             }
         }
 
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             if (this.cargo == "Supervisor")
             {
-                MessageBox.Show($"Cargando regsitro <Registro Operarios>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                mostrarInformacion($"Cargando.. <Registro Operarios>", "Ingresando");
                 this.Hide();
                 FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
                 frmDtgv.Show();
@@ -119,7 +136,9 @@ namespace FrmLobby
 
         private void BtnReStock_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Cargando ventana de <Stock>", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
+            mostrarInformacion("Cargando ventana de <Stock>", "Ingresando");
             this.Hide();
             FrmReStockMateriales frmReStock = new FrmReStockMateriales(this);
             frmReStock.Show();
@@ -127,9 +146,11 @@ namespace FrmLobby
 
         private void BtnVideoCard_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             this.tiposProdcuto = TiposProductos.VideoCard;
             this.numeroProducto = (int)this.tiposProdcuto;
-            MessageBox.Show($"Ingresando a produccion - Video Card -", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            mostrarInformacion($"Ingresando a produccion - {TiposProductos.VideoCard} -", "Ingresando");
             this.Hide();
             FrmProductoFinal frmReStock = new FrmProductoFinal(this, this.numeroProducto);
             frmReStock.Show();
@@ -137,9 +158,11 @@ namespace FrmLobby
 
         private void BtnMotherboard_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             this.tiposProdcuto = TiposProductos.Motherboard;
             this.numeroProducto = (int)this.tiposProdcuto;
-            MessageBox.Show($"Ingresando a produccion - Motherboard -", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            mostrarInformacion($"Ingresando a produccion - {TiposProductos.Motherboard} -", "Ingresando");
             this.Hide();
             FrmProductoFinal frmReStock = new FrmProductoFinal(this, this.numeroProducto);
             frmReStock.Show();
@@ -147,9 +170,11 @@ namespace FrmLobby
 
         private void BtnRam_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             this.tiposProdcuto = TiposProductos.Ram;
             this.numeroProducto = (int)this.tiposProdcuto;
-            MessageBox.Show($"Ingresando a produccion - Ram -", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            mostrarInformacion($"Ingresando a produccion - {TiposProductos.Ram} -", "Ingresando");
             this.Hide();
             FrmProductoFinal frmReStock = new FrmProductoFinal(this, this.numeroProducto);
             frmReStock.Show();
@@ -157,9 +182,11 @@ namespace FrmLobby
 
         private void BtnCabinet_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             this.tiposProdcuto = TiposProductos.Cabinet;
             this.numeroProducto = (int)this.tiposProdcuto;
-            MessageBox.Show($"Ingresando a produccion - Cabinet -", "Ingresando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            mostrarInformacion($"Ingresando a produccion - {TiposProductos.Cabinet} -", "Ingresando");
             this.Hide();
             FrmProductoFinal frmReStock = new FrmProductoFinal(this, this.numeroProducto);
             frmReStock.Show();
@@ -215,26 +242,32 @@ namespace FrmLobby
 
         private void LblVideo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{videoCard.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+            mostrarInformacion($"{videoCard.Mostrar()}", "Datos producto");
         }
 
         private void LblMoth_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{motherboard.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+            mostrarInformacion($"{motherboard.Mostrar()}", "Datos producto");
         }
 
         private void LblRam_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{ram.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+            mostrarInformacion($"{ram.Mostrar()}", "Datos producto");
         }
 
         private void LblCabinet_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{cabinet.Mostrar()}", "Datos producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+            mostrarInformacion($"{cabinet.Mostrar()}", "Datos producto");
         }
 
         public void CrearDirectorio()
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+            
             try
             {
                 if (!Directory.Exists(this.path))
@@ -245,32 +278,33 @@ namespace FrmLobby
             catch (UnauthorizedAccessException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("UnauthorizedAccessException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Falta de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarInformacion(ex.Message, "Falta de permisos");
             }
             catch (PathTooLongException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("PathTooLongException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error con la ruta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarInformacion(ex.Message, "Error con la ruta");
             }
             catch (DirectoryNotFoundException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DirectoryNotFoundException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "La ruta no se encuentra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarInformacion(ex.Message, "La ruta no se encuentra");
             }
             catch (IOException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("IOException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error al crear el directorio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarInformacion(ex.Message, "Error al crear el directorio");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarInformacion(ex.Message, "Error inesperado");
             }
         }
 
         public void ActualizarStockXML()
         {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             string pathXML = "Stock.xml";
 
             try
@@ -281,15 +315,16 @@ namespace FrmLobby
                     //EscribirXML
                     if (!(this.gestorArchivos.EscribirArchivo(this.path + pathXML, this.instanciaListFormat)))
                     {
-                        MessageBox.Show("No se pudo actualizar la carpeta xml", "Carpeta XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        mostrarInformacion("No se pudo actualizar la carpeta xml", "Carpeta XML");
                     }
                 }
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message);
+                mostrarInformacion(ex.Message, "Error inesperado");
             }
         }
+    
     }
 }

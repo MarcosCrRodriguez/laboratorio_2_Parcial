@@ -2,34 +2,59 @@ using Entidades;
 using ExcepcionesPropias;
 using Archivos;
 using System.Text;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Diagnostics;
+using System.Reflection.Metadata;
+using System.Text.Json;
 
 namespace FrmLobby
 {
     public partial class FrmLobby : Form
     {
+        public delegate void Mostrar(string texto, string titulo);
+
+        private IArchivos<Configuracion> manejadorJson;
         private IArchivos<string> manejadorArchivosTXT;
+        private IUsuario<Operario> manejadorOperario;
+        private IUsuario<Supervisor> manejadorSupervisor;
+        private Configuracion config;
+        private Configuracion configJson;
         private string path;
         private string pathTXT;
+        private string pathJSON;
 
         public FrmLobby()
         {
             InitializeComponent();
+            this.manejadorJson = new ArchivosJSON<Configuracion>();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.manejadorOperario = new OperarioDAO<Operario>();
+            this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathJSON = "Imagenes.json";
         }
 
         private void FrmLobby_Load(object sender, EventArgs e)
         {
             this.CrearDirectorio();
+            this.GenerarJson();
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
+            this.BackgroundImage = img;
             this.cboxCargo.Items.Add("");
             this.cboxCargo.Items.Add("Operario");
             this.cboxCargo.Items.Add("Supervisor");
+
+            FrmProcesos frmProcesos = new FrmProcesos(100);
+            frmProcesos.Show();
         }
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarError = new Mostrar(MostrarError);
+
             try
             {
                 if (this.txtNombre.Text == "" || this.txtApellido.Text == "" || this.txtCodigo.Text == "" || this.cboxCargo.Text == "" || this.txtPassword.Text == "" || this.txtDNI.Text == "")
@@ -40,11 +65,11 @@ namespace FrmLobby
                 if (this.cboxCargo.Text == "Operario")
                 {
                     Operario operario = new Operario(this.txtNombre.Text, this.txtApellido.Text, Operario.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text, Operario.CasteoLong(this.txtDNI.Text));
-                    if (operario.VerificarExisteOperario(OperarioDAO.LeerOperarios("Operario"), operario))
+                    if (operario.VerificarExisteOperario(OperarioDAO<Operario>.LeerOperarios("Operario"), operario))
                     {
                         if (operario.ValidarPasswordOperario(this.txtPassword.Text, operario))
                         {
-                            operario = OperarioDAO.LeerPorID(operario.ID);
+                            operario = manejadorOperario.LeerPorID(operario.ID);
                             if (operario != null)
                             {
                                 MessageBox.Show($"{operario.Nombre} {operario.Apellido} esta ingresando al menu", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -59,22 +84,22 @@ namespace FrmLobby
                         }
                         else
                         {
-                            MessageBox.Show("Contraseña o cargo INCORRECTO\nIngrese correctamente los datos", "Error de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            mostrarError("Contraseña o cargo INCORRECTO\nIngrese correctamente los datos", "Error de ingreso de datos");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No existe ningun operario con esos datos", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        mostrarError("No existe ningun operario con esos datos", "No existe el Usuario");
                     }
                 }
                 else if (this.cboxCargo.Text == "Supervisor")
                 {
                     Supervisor supervisor = new Supervisor(this.txtNombre.Text, this.txtApellido.Text, Supervisor.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text, Supervisor.CasteoLong(this.txtDNI.Text));
-                    if (supervisor.VerificarExisteSupervisor(SupervisorDAO.LeerSupervisores("Supervisor"), supervisor))
+                    if (supervisor.VerificarExisteSupervisor(SupervisorDAO<Supervisor>.LeerSupervisores("Supervisor"), supervisor))
                     {
                         if (supervisor.ValidarPasswordSupervisor(this.txtPassword.Text, supervisor))
                         {
-                            supervisor = SupervisorDAO.LeerPorID(supervisor.ID);
+                            supervisor = manejadorSupervisor.LeerPorID(supervisor.ID);
                             if (supervisor != null)
                             {
                                 MessageBox.Show($"{supervisor.Nombre} {supervisor.Apellido} esta ingresando al menu", "Iniciando Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -89,44 +114,44 @@ namespace FrmLobby
                         }
                         else
                         {
-                            MessageBox.Show("Contraseña o cargo INCORRECTO\nIngrese correctamente los datos", "Error de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            mostrarError("Contraseña o cargo INCORRECTO\nIngrese correctamente los datos", "Error de ingreso de datos");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No existe ningun supervisor con esos datos", "No existe el Usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        mostrarError("No existe ningun supervisor con esos datos", "No existe el Usuario");
                     }
                 }
             }
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Parametros Vacios");
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Tipo de dato Incorrecto");
             }
             catch (InvalidPasswordException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("InvalidPasswordException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Constraseña incorrecta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Constraseña incorrecta");
             }
             catch (ObjectNullException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("ObjectNullException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Objeto Null", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Objeto Null");
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error con BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Error con BD");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Error Inesperado");
             }
         }
         
@@ -191,6 +216,45 @@ namespace FrmLobby
             this.cboxCargo.Text = string.Empty;
             this.txtPassword.Text = string.Empty;
             this.txtDNI.Text = string.Empty;
+        }
+   
+        public void GenerarJson()
+        {
+            Mostrar mostrarError = new Mostrar(MostrarError);
+
+            try
+            {
+                this.config = new Configuracion("C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\medio_circuito_azul.jpg",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_rojo.jpg",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_azul.jpg"
+                );
+                this.manejadorJson.EscribirArchivo(this.path + this.pathJSON, this.config);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("UnauthorizedAccessException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "Permisos");
+            }
+            catch (JsonException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("JsonException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "Serializacion");
+            }
+            catch (Exception ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "Json");
+            }
+        }
+
+        public static void MostrarError(string texto, string titulo)
+        {
+            MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void MostrarInformacion(string texto, string titulo)
+        {
+            MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

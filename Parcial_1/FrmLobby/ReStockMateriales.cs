@@ -15,15 +15,20 @@ namespace FrmLobby
 {
     public partial class FrmReStockMateriales : Form
     {
+        public delegate void Mostrar(string texto, string titulo);
+
         private IArchivos<string> manejadorArchivosTXT;
         private IMateriales gestorMateriales;
 
         private MenuUsuario menuCargo;
+        private Configuracion configJson;
+
         private List<string> listaStock;
         private List<TextBox> listaTxtBox;
 
         private string path;
         private string pathTXT;
+        private string pathJSON;
         public FrmReStockMateriales(MenuUsuario menuCargo)
         {
             InitializeComponent();
@@ -37,11 +42,16 @@ namespace FrmLobby
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathJSON = "Imagenes.json";
         }
 
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
         {
             this.listaStock = StockDAO.LeerStockPorID(1077);
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
+            this.BackgroundImage = img;
+
             this.CargarListaNum();
             this.txtMaterialSet.Enabled = false;
         }
@@ -54,7 +64,10 @@ namespace FrmLobby
 
         private void BtnLoad_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             int cantidadAgregar;
+
             try
             {
                 if (this.txtIDSotck.Text == "" || this.txtMaterialSet.Text == "")
@@ -66,8 +79,8 @@ namespace FrmLobby
                 {
                     if (this.gestorMateriales.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
                     {
-                        MessageBox.Show($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        mostrarInformacion($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales");
+                        mostrarInformacion($"Actualizando datos...", "Actualización de información");
 
                         menuCargo.CargaDatos();
                         this.menuCargo.Show();
@@ -75,34 +88,34 @@ namespace FrmLobby
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo modificar los datos del material ingresado", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo cargar los materiales cargados en el formulario", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    mostrarError("No se pudo cargar los materiales cargados en el formulario", "Error de carga");
                 }
             }
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Parametros Vacios");
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Tipo de dato Incorrecto");
             }
 
             catch (NegativeValueException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("NegativeValueException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "El valor en Stock no puede ser menor que 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "El valor en Stock no puede ser menor que 0");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Error Inesperado");
             }
         }
 
@@ -192,14 +205,13 @@ namespace FrmLobby
 
         private void lblHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Stock.\n" +
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
+            mostrarInformacion("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Stock.\n" +
                 "- Materiales a modificar - necesita interactuar con algun label de los materiales para poder seleccionar el producto que desea modificar.\n" +
                 "- Cantidad a agregar - son las cantidades que desea agregar o quitar del Stock, del material que haya seleccionado.\n" +
                 "ID Stock: [1077]",
-                "Help Box",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-                );
+                "Help Box");
         }
     }
 }

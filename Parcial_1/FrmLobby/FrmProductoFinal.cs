@@ -18,6 +18,8 @@ namespace FrmLobby
 {
     public partial class FrmProductoFinal : Form
     {
+        public delegate void Mostrar(string texto, string titulo);
+
         private IArchivos<string> manejadorArchivosTXT;
         private IMateriales manejadorProductos;
 
@@ -28,6 +30,8 @@ namespace FrmLobby
         private Motherboard motherboard;
         private Ram ram;
         private Cabinet cabinet;
+        private Configuracion configJson;
+
         private int producto;
         private List<TextBox> listaTxtBox;
         private List<int> listaValores;
@@ -35,6 +39,7 @@ namespace FrmLobby
 
         private string path;
         private string pathTXT;
+        private string pathJSON;
 
         public FrmProductoFinal(MenuUsuario frmUsuario, int producto)
         {
@@ -55,11 +60,16 @@ namespace FrmLobby
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathJSON = "Imagenes.json";
         }
 
         private void FrmVideoCard_Load(object sender, EventArgs e)
         {
             this.valorInt = Stock.CasteoExplicito(numFabricar.Value);
+
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
+            this.BackgroundImage = img;
 
             if (this.producto == 0)
             {
@@ -132,7 +142,6 @@ namespace FrmLobby
 
                 this.listaValores = cabinet.CrearLista(this.valorInt);
             }
-
             this.CrearListaTxtBox();
             this.CargaDatos();
         }
@@ -165,6 +174,9 @@ namespace FrmLobby
 
         private void BtnFabric_Click(object sender, EventArgs e)
         {
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             int valorNegativo = -1;
             bool retorno;
             bool retSoldar;
@@ -194,11 +206,11 @@ namespace FrmLobby
 
                 if (retorno)
                 {
-                    MessageBox.Show("Iniciando proceso...", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    retSoldar = Produccion.Elaborar(ProcesoProduccion.Soldar);
-                    retEnsamblar = Produccion.Elaborar(ProcesoProduccion.Ensamblar);
-                    retConectar = Produccion.Elaborar(ProcesoProduccion.Conectar);
-                    retEmpaquetar = Produccion.Elaborar(ProcesoProduccion.Empaquetar);
+                    mostrarInformacion("Iniciando proceso...", "Fabricacion productos");
+                    retSoldar = Produccion.Elaborar(ProcesoProduccion.Soldado);
+                    retEnsamblar = Produccion.Elaborar(ProcesoProduccion.Ensamblado);
+                    retConectar = Produccion.Elaborar(ProcesoProduccion.Conectado);
+                    retEmpaquetar = Produccion.Elaborar(ProcesoProduccion.Empaquetado);
 
                     if (retSoldar && retConectar && retEnsamblar && retEmpaquetar)
                     {
@@ -228,29 +240,28 @@ namespace FrmLobby
                             {
                                 if (this.manejadorProductos.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
                                 {
-                                    MessageBox.Show($"Se ha modificado el material {this.productoDB} con éxito", "Carga materiales", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    MessageBox.Show($"Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    mostrarInformacion($"Se ha modificado el material {this.productoDB} con éxito", "Carga materiales");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("No se pudo modificar los datos del material ingresado", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("No se pudo cargar los materiales cargados en el formulario", "Error de carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                mostrarError("No se pudo cargar los materiales cargados en el formulario", "Error de carga");
                             }
 
-                            MessageBox.Show("Soldando materiales...\nEnsamblado de piezas...\nConectando cables...", "Proceso metalúrgico - Ensamblaje - Conexión cables", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            MessageBox.Show($"Fabricación EXITOSA\nEmpaquetando productos\n\nProductos fabricados: {this.valorInt}", "Procesos finalizados", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            MessageBox.Show("Actualizando datos...", "Actualización de información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            mostrarInformacion("Soldando materiales...\nEnsamblado de piezas...\nConectando cables...", "Proceso metalúrgico - Ensamblaje - Conexión cables");
+                            mostrarInformacion($"Fabricación EXITOSA\nEmpaquetando productos\n\nProductos fabricados: {this.valorInt}", "Procesos finalizados");
+                            mostrarInformacion($"Actualizando datos...", "Actualización de información");
                             frmUsuario.CargaDatos();
                             this.frmUsuario.Show();
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("No se pudieron fabricar los productos", "Fabricacion productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            mostrarError("No se pudieron fabricar los productos", "Fabricacion productos");
                         }
                     }
                 }
@@ -258,32 +269,32 @@ namespace FrmLobby
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Parametros Vacios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Parametros Vacios");
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Tipo de dato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Tipo de dato Incorrecto");
             }
             catch (InvalidPasswordException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("InvalidPasswordException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "ID incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "ID incorrecto");
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error con DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Error con DB");
             }
             catch (NegativeValueException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("NegativeValueException", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "El valor en Stock no puede ser menor que 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "El valor en Stock no puede ser menor que 0");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                MessageBox.Show(ex.Message, "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(ex.Message, "Error Inesperado");
             }
         }
 
@@ -391,6 +402,9 @@ namespace FrmLobby
         /// <returns>Retornaremos un booleano dependiendo de si se puede fabricar o faltan materiales para el producto final</returns>
         private bool VerificarStock()
         {
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
             string formatoStock;
             bool retorno = false;
 
@@ -398,14 +412,14 @@ namespace FrmLobby
 
             if (Stock.VerificarStock(this.listaValores, this.dictProducto))
             {
-                MessageBox.Show("Stock OK\nEn condiciones de producir la cantidad pedida", "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                mostrarInformacion("Stock OK\nEn condiciones de producir la cantidad pedida", "Estado Stock");
                 retorno = true;
             }
             else
             {
                 formatoStock = Stock.StockFaltante(this.listaValores, this.dictProducto);
-                MessageBox.Show(formatoStock, "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MessageBox.Show("Deberá fabricar una menor cantidad de materiales, o pedir a un supervisor que encargue mas materiales de los faltantes", "Estado Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mostrarError(formatoStock, "Estado Stock");
+                mostrarError("Deberá fabricar una menor cantidad de materiales, o pedir a un supervisor que encargue mas materiales de los faltantes", "Estado Stock");
             }
 
             return retorno;
@@ -413,12 +427,12 @@ namespace FrmLobby
 
         private void lblHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Producto que esta queriendo fabricar.\n" +
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
+            mostrarInformacion("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Producto que esta queriendo fabricar.\n" +
                 $"- {this.productoDB} cantidad a agregar - la cantidad de preductos que desea fabricar.\n" +
                 "ID Stock: [1329]",
-                "Help Box",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
+                "Help Box"
                 );
         }
     }

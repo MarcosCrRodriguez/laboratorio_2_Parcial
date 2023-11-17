@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public static class SupervisorDAO
+    public class SupervisorDAO<T> : IUsuario<T> where T : Supervisor
     {
-        // interfaz Usuario
-
         private static string connectionString;
         private static SqlCommand command;
         private static SqlConnection connection;
@@ -33,7 +31,7 @@ namespace Entidades
         /// <returns>Retorna un true o false para ver si se pudo o no agregar a la DB</returns>
         /// <exception cref="SqlExceptionDuplicateUserDB">Lanzara la excepcion en caso de que el DNI ingresado EXISTA</exception>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static bool GuardarRegistro(Supervisor usuario)
+        public bool GuardarRegistro(T usuario)
         {
             bool rtn = false;
             try
@@ -76,7 +74,7 @@ namespace Entidades
         /// <param name="id">ID que intentaremos de encontrar en la DB</param>
         /// <returns>Retorna el Supervisor encontrado por ID</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static Supervisor LeerPorID(int id)
+        public T LeerPorID(int id)
         {
             Supervisor usuario = null;
             try
@@ -103,7 +101,7 @@ namespace Entidades
                             );
                     }
                 }
-                return usuario;
+                return usuario as T;
             }
             catch (Exception ex)
             {
@@ -121,7 +119,7 @@ namespace Entidades
         /// <param name="dni">DNI que intentaremos de encontrar en la DB</param>
         /// <returns>Retorna el Supervisor encontrado por DNI</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static Supervisor LeerPorDNI(long dni)
+        public T LeerPorDNI(long dni)
         {
             Supervisor usuario = null;
             try
@@ -148,7 +146,7 @@ namespace Entidades
                             );
                     }
                 }
-                return usuario;
+                return usuario as T;
             }
             catch (Exception ex)
             {
