@@ -290,7 +290,7 @@ namespace Entidades
         /// <param name="dato">Cargo del Usuario</param>
         /// <returns>Retorna un true o false para verificar que se elimino el Usuario con EXITO</returns>
         /// <exception cref="DataBasesException">Lanzara la excepcion en caso de que haya un error con la DB</exception>
-        public static bool Eliminar(int id, string dato)
+        public static bool Eliminar(string dato, int id)
         {
             bool rtn = false;
             try

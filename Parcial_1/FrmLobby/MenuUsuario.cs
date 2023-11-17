@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace FrmLobby
 {
@@ -75,6 +76,11 @@ namespace FrmLobby
             this.CargarListas();
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuSu_Load(object sender, EventArgs e)
         {
             if (this.cargo == "Supervisor")
@@ -100,6 +106,11 @@ namespace FrmLobby
             this.CargaDatos();
         }
 
+        /// <summary>
+        /// Boton para volver al formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackSu_Click_1(object sender, EventArgs e)
         {
             this.menuInicial.LimpiarDatos();
@@ -107,6 +118,11 @@ namespace FrmLobby
             this.Close();
         }
 
+        /// <summary>
+        /// Boton que muestra una ventana con los datos del usuario que se encuentra manejando los formularios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnConfig_Click_1(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -121,6 +137,11 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Boton para ingresar al formulario de registro de operarios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRegistro_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -134,6 +155,11 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Boton para ingresar al formulario de re stock de materiales
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnReStock_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -144,6 +170,11 @@ namespace FrmLobby
             frmReStock.Show();
         }
 
+        /// <summary>
+        /// Boton para ingresar a la produccion de VideoCard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnVideoCard_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -156,6 +187,11 @@ namespace FrmLobby
             frmReStock.Show();
         }
 
+        /// <summary>
+        /// Boton para ingresar a la produccion de Motherboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnMotherboard_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -168,6 +204,11 @@ namespace FrmLobby
             frmReStock.Show();
         }
 
+        /// <summary>
+        /// Boton para ingresar a la produccion de Ram
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRam_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -180,6 +221,11 @@ namespace FrmLobby
             frmReStock.Show();
         }
 
+        /// <summary>
+        /// Boton para ingresar a la produccion de Cabinet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCabinet_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -240,30 +286,53 @@ namespace FrmLobby
             this.ActualizarStockXML();
         }
 
+        /// <summary>
+        /// Al interactuar con el lbl muestro una ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LblVideo_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             mostrarInformacion($"{videoCard.Mostrar()}", "Datos producto");
         }
 
+        /// <summary>
+        /// Al interactuar con el lbl muestro una ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LblMoth_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             mostrarInformacion($"{motherboard.Mostrar()}", "Datos producto");
         }
 
+        /// <summary>
+        /// Al interactuar con el lbl muestro una ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LblRam_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             mostrarInformacion($"{ram.Mostrar()}", "Datos producto");
         }
 
+        /// <summary>
+        /// Al interactuar con el lbl muestro una ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LblCabinet_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             mostrarInformacion($"{cabinet.Mostrar()}", "Datos producto");
         }
 
+        /// <summary>
+        /// Creo un directorio
+        /// </summary>
         public void CrearDirectorio()
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
@@ -302,9 +371,12 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Genero un archivo XML
+        /// </summary>
         public void ActualizarStockXML()
         {
-            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
             string pathXML = "Stock.xml";
 
             try
@@ -315,14 +387,44 @@ namespace FrmLobby
                     //EscribirXML
                     if (!(this.gestorArchivos.EscribirArchivo(this.path + pathXML, this.instanciaListFormat)))
                     {
-                        mostrarInformacion("No se pudo actualizar la carpeta xml", "Carpeta XML");
+                        mostrarError("No se pudo actualizar la carpeta xml", "Carpeta XML");
                     }
                 }
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("UnauthorizedAccessException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "No tienes permisos para escribir en este directorio");
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DirectoryNotFoundException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "El directorio especificado no existe");
+            }
+            catch (PathTooLongException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("PathTooLongException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "La ruta del archivo es demasiado larga");
+            }
+            catch (IOException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("IOException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "Error de entrada/salida al escribir en el archivo");
+            }
+            catch (XmlException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("XmlException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "Error en el formato XML");
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("InvalidOperationException", $"{ex.StackTrace}"));
+                mostrarError(ex.Message, "Error en el XmlSerializer");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                mostrarInformacion(ex.Message, "Error inesperado");
+                mostrarError(ex.Message, "Error inesperado");
             }
         }
     

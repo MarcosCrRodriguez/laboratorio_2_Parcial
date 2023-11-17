@@ -63,6 +63,11 @@ namespace FrmLobby
             this.pathJSON = "Imagenes.json";
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmVideoCard_Load(object sender, EventArgs e)
         {
             this.valorInt = Stock.CasteoExplicito(numFabricar.Value);
@@ -146,12 +151,22 @@ namespace FrmLobby
             this.CargaDatos();
         }
 
+        /// <summary>
+        /// Boton para volver al formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackMenu_Click(object sender, EventArgs e)
         {
             this.frmUsuario.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Boton que muestra una ventana con los materiales necesarios para los datos ingresados en la seccion de cantidades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnMaterialesNecesarios_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
@@ -172,6 +187,11 @@ namespace FrmLobby
             MessageBox.Show(sb.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Boton para fabricar la cantidad de productos ingresada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnFabric_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
@@ -179,10 +199,6 @@ namespace FrmLobby
 
             int valorNegativo = -1;
             bool retorno;
-            bool retSoldar;
-            bool retConectar;
-            bool retEnsamblar;
-            bool retEmpaquetar;
             bool retFabricar;
 
             try
@@ -206,63 +222,53 @@ namespace FrmLobby
 
                 if (retorno)
                 {
-                    mostrarInformacion("Iniciando proceso...", "Fabricacion productos");
-                    retSoldar = Produccion.Elaborar(ProcesoProduccion.Soldado);
-                    retEnsamblar = Produccion.Elaborar(ProcesoProduccion.Ensamblado);
-                    retConectar = Produccion.Elaborar(ProcesoProduccion.Conectado);
-                    retEmpaquetar = Produccion.Elaborar(ProcesoProduccion.Empaquetado);
-
-                    if (retSoldar && retConectar && retEnsamblar && retEmpaquetar)
+                    if (this.producto == 0)
                     {
-                        if (this.producto == 0)
-                        {
-                            retFabricar = videoCard.FabricarProducto(valorNegativo, this.listaValores);
-                        }
-                        else if (this.producto == 1)
-                        {
-                            retFabricar = motherboard.FabricarProducto(valorNegativo, this.listaValores);
-                        }
-                        else if (this.producto == 2)
-                        {
-                            retFabricar = ram.FabricarProducto(valorNegativo, this.listaValores);
-                        }
-                        else
-                        {
-                            retFabricar = cabinet.FabricarProducto(valorNegativo, this.listaValores);
-                        }
+                        retFabricar = videoCard.FabricarProducto(valorNegativo, this.listaValores);
+                    }
+                    else if (this.producto == 1)
+                    {
+                        retFabricar = motherboard.FabricarProducto(valorNegativo, this.listaValores);
+                    }
+                    else if (this.producto == 2)
+                    {
+                        retFabricar = ram.FabricarProducto(valorNegativo, this.listaValores);
+                    }
+                    else
+                    {
+                        retFabricar = cabinet.FabricarProducto(valorNegativo, this.listaValores);
+                    }
 
-                        if (retFabricar)
-                        {
-                            int cantidadAgregar;
+                    if (retFabricar)
+                    {
+                        int cantidadAgregar;
 
-                            cantidadAgregar = Producto.VerificarValorPositivo(Stock.CasteoExplicito(this.numFabricar.Value), Stock.CasteoExplicito(this.txtIDProducto.Text), this.productoDB);
-                            if (cantidadAgregar != -1)
+                        cantidadAgregar = Producto.VerificarValorPositivo(Stock.CasteoExplicito(this.numFabricar.Value), Stock.CasteoExplicito(this.txtIDProducto.Text), this.productoDB);
+                        if (cantidadAgregar != -1)
+                        {
+                            if (this.manejadorProductos.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
                             {
-                                if (this.manejadorProductos.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
-                                {
-                                    mostrarInformacion($"Se ha modificado el material {this.productoDB} con éxito", "Carga materiales");
-                                }
-                                else
-                                {
-                                    mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
-                                }
+                                FrmProcesos frmProcesos = new FrmProcesos(100);
+                                frmProcesos.Show();
                             }
                             else
                             {
-                                mostrarError("No se pudo cargar los materiales cargados en el formulario", "Error de carga");
+                                mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
                             }
-
-                            mostrarInformacion("Soldando materiales...\nEnsamblado de piezas...\nConectando cables...", "Proceso metalúrgico - Ensamblaje - Conexión cables");
-                            mostrarInformacion($"Fabricación EXITOSA\nEmpaquetando productos\n\nProductos fabricados: {this.valorInt}", "Procesos finalizados");
-                            mostrarInformacion($"Actualizando datos...", "Actualización de información");
-                            frmUsuario.CargaDatos();
-                            this.frmUsuario.Show();
-                            this.Close();
                         }
                         else
                         {
-                            mostrarError("No se pudieron fabricar los productos", "Fabricacion productos");
+                            mostrarError("No se pudo cargar los materiales cargados en el formulario", "Error de carga");
                         }
+
+                        mostrarInformacion($"Actualizando datos...", "Actualización de información");
+                        frmUsuario.CargaDatos();
+                        this.frmUsuario.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        mostrarError("No se pudieron fabricar los productos", "Fabricacion productos");
                     }
                 }
             }
@@ -425,6 +431,11 @@ namespace FrmLobby
             return retorno;
         }
 
+        /// <summary>
+        /// Mostrar una ventana de ayuda con una explicacion de como manejarse en el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblHelp_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);

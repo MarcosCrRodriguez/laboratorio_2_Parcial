@@ -36,6 +36,11 @@ namespace FrmLobby
             this.pathJSON = "Imagenes.json";
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmLobby_Load(object sender, EventArgs e)
         {
             this.CrearDirectorio();
@@ -46,11 +51,13 @@ namespace FrmLobby
             this.cboxCargo.Items.Add("");
             this.cboxCargo.Items.Add("Operario");
             this.cboxCargo.Items.Add("Supervisor");
-
-            FrmProcesos frmProcesos = new FrmProcesos(100);
-            frmProcesos.Show();
         }
 
+        /// <summary>
+        /// Boton para ingresar al siguiente formulario 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(MostrarError);
@@ -155,12 +162,22 @@ namespace FrmLobby
             }
         }
         
+        /// <summary>
+        /// Boton para ingresar al formulario de registro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
             FormularioRegistro frmRegistro = new FormularioRegistro();
             frmRegistro.ShowDialog();
         } 
 
+        /// <summary>
+        /// Click del apartado [x] donde se cierra o no el formulario principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmLobby_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Desea cerrar el formulario", "Informacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
@@ -169,6 +186,9 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Creo un directorio 
+        /// </summary>
         public void CrearDirectorio()
         {
             try
@@ -218,6 +238,9 @@ namespace FrmLobby
             this.txtDNI.Text = string.Empty;
         }
    
+        /// <summary>
+        /// Genero un archivo Json
+        /// </summary>
         public void GenerarJson()
         {
             Mostrar mostrarError = new Mostrar(MostrarError);
@@ -247,14 +270,25 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Mostramos un mensaje de Error con ciertos datos
+        /// </summary>
+        /// <param name="texto">Texto que tendra el mensaje</param>
+        /// <param name="titulo">Titulo que tendra el mensaje</param>
         public static void MostrarError(string texto, string titulo)
         {
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Mostramos un mensaje de Informacion con ciertos datos
+        /// </summary>
+        /// <param name="texto">Texto que tendra el mensaje</param>
+        /// <param name="titulo">Titulo que tendra el mensaje</param>
         public static void MostrarInformacion(string texto, string titulo)
         {
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
     }
 }

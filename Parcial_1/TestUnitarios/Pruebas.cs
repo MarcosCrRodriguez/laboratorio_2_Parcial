@@ -110,7 +110,7 @@ namespace TestUnitarios
             bool expected = false;
 
             //Act
-            bool actual = SupervisorDAO<Supervisor>.Eliminar(id, "Operario");
+            bool actual = SupervisorDAO<Supervisor>.Eliminar("Operario", id);
 
             //Assert
             Assert.AreEqual(expected, actual);

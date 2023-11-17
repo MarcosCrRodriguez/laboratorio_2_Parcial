@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +16,7 @@ namespace FrmLobby
 {
     public partial class FrmProcesos : Form
     {
+        //CancellationTokenSource cancellationTokenSource;
         private Configuracion configJson;
         private int cantidadFabricada;
         private string path;
@@ -36,66 +38,79 @@ namespace FrmLobby
 
             IniciarHilos();
         }
+
         private void IniciarHilos()
         {
-            Queue<Task> tasks = new Queue<Task>();
+            List<Task> tasks = new List<Task>();
 
-            Task primerTask = new Task(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado));
-            Task segundoTask = new Task(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado));
-            Task tercerTask = new Task(() => IniciarProceso(this.progressBarConectado, this.lblConectado));
-            Task cuartoTask = new Task(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal));
+            Task primerTask = Task.Run(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado, "Soldado de piezas"));
+            Task segundoTask = Task.Run(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado, "Ensamblado de piezas"));
+            Task tercerTask = Task.Run(() => IniciarProceso(this.progressBarConectado, this.lblConectado, "Conexion de componentes"));
 
-            tasks.Enqueue(primerTask);
-            tasks.Enqueue(segundoTask);
-            tasks.Enqueue(tercerTask);
-            tasks.Enqueue(cuartoTask);
+            tasks.Add(primerTask);
+            tasks.Add(segundoTask);
+            tasks.Add(tercerTask);
 
-            //Task.WaitAll(primerTask, segundoTask, tercerTask);
-
-            foreach (Task item in tasks)
+            Task.Run(() => Task.WaitAll(tasks.ToArray())).ContinueWith(_ =>
             {
-                item.Start();
-            }
+                Task cuartoTask = Task.Run(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal, "Empaquedato del producto"));
+                Task.Run(() => Task.WaitAll(cuartoTask)).ContinueWith(_ =>
+                {
+                    MessageBox.Show("Procesos finalizados", "Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //Task primerTask = new Task(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado));
-            //Task segundoTask = new Task(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado));
-            //Task tercerTask = new Task(() => IniciarProceso(this.progressBarConectado, this.lblConectado));
-            //primerTask.Start();
-            //segundoTask.Start();
-            //tercerTask.Start();
-
-            //Task.WaitAll(primerTask, segundoTask, tercerTask);
-
-            //Task cuartoTask = new Task(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal));
-            //cuartoTask.Start();
-
-            //cuartoTask.Wait();
-
-            //MessageBox.Show("Procesos finalizados", "Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //this.Close();
+                    // Asegurarse de cerrar el formulario en el hilo de la interfaz de usuario
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        this.Close();
+                    });
+                });
+            });
         }
 
-        public void IniciarProceso(ProgressBar progressBar, Label label)
+        //private void IniciarHilos()
+        //{
+        //    this.cancellationTokenSource = new CancellationTokenSource();
+        //    CancellationToken cancellationToken = this.cancellationTokenSource.Token;
+
+        //    Task primerTask = new Task(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado, "Soldado de piezas"));
+        //    Task segundoTask = new Task(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado, "Ensamblado de piezas"));
+        //    Task tercerTask = new Task(() => IniciarProceso(this.progressBarConectado, this.lblConectado, "Conexion de componentes"));
+        //    primerTask.Start();
+        //    segundoTask.Start();
+        //    tercerTask.Start();
+
+        //    //Task.WaitAll(primerTask, segundoTask, tercerTask);
+
+        //    Task cuartoTask = new Task(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal, "Empaquedato del producto"), cancellationToken);
+        //    cuartoTask.Start();
+
+        //    //cuartoTask.Wait();
+
+        //    //MessageBox.Show("Procesos finalizados", "Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    //this.Close();
+        //}
+
+        public void IniciarProceso(ProgressBar progressBar, Label label, string proceso)
         {
             while (progressBar.Value < progressBar.Maximum)
             {
                 Thread.Sleep(new Random().Next(this.cantidadFabricada / 2, this.cantidadFabricada));
-                IncrementarBarraProgreso(progressBar, label, Task.CurrentId.Value);
+                IncrementarBarraProgreso(progressBar, label, proceso);
             }
             FinalizarProceso(progressBar, label);
         }
 
-        private void IncrementarBarraProgreso(ProgressBar progressBar, Label label, int IDHilo)
+        private void IncrementarBarraProgreso(ProgressBar progressBar, Label label, string proceso)
         {
             if (InvokeRequired)
             {
-                Action<ProgressBar, Label, int> delegado = IncrementarBarraProgreso;
-                object[] parametros = new object[] { progressBar, label, IDHilo };
+                Action<ProgressBar, Label, string> delegado = IncrementarBarraProgreso;
+                object[] parametros = new object[] { progressBar, label, proceso };
                 Invoke(delegado, parametros);
             }
             else
             {
-                label.Text = $"Hilo N° {IDHilo} - {progressBar.Value}%";
+                label.Text = $"{proceso} - {progressBar.Value}%";
                 progressBar.Increment(1);
             }
         }
@@ -112,7 +127,7 @@ namespace FrmLobby
             {
                 if (progressBar.Value == progressBar.Maximum)
                 {
-                    label.Text = "FINALIZADO"; 
+                    label.Text = "PROCESO FINALIZADO";
                 }
             }
         }

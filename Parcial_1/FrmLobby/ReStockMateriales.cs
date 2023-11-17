@@ -45,6 +45,11 @@ namespace FrmLobby
             this.pathJSON = "Imagenes.json";
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmReStockMateriales_Load(object sender, EventArgs e)
         {
             this.listaStock = StockDAO.LeerStockPorID(1077);
@@ -56,12 +61,22 @@ namespace FrmLobby
             this.txtMaterialSet.Enabled = false;
         }
 
+        /// <summary>
+        /// Boton para volver al formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackWindow_Click(object sender, EventArgs e)
         {
             this.menuCargo.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Boton para cargar las cantidades ingresadas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnLoad_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
@@ -148,61 +163,121 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblCircuitoElect_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "CIRCUITO_ELECTRONICO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblCircuitoElectAv_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "CIRCUITO_ELECTRONICO_AVANZADO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblUnidadProcesamiento_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "UNIDAD_PROCESAMIENTO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblBarraPlastica_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "BARRA_PLASTICA";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblCableV_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "CABLE_VERDE";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblCableR_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "CABLE_ROJO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblBaraHierro_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "BARA_HIERRO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblEngranajeHierro_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "ENGRANAJE_HIERRO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblFibraVidrio_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "FIBRAS_VIDRIO";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblCondensador_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "CONDENSADOR";
         }
 
+        /// <summary>
+        /// Al seleccionar este lbl te ingresara un dato en el text box del tipo de material
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblVentilador_Click(object sender, EventArgs e)
         {
             this.txtMaterialSet.Text = "VENTILADOR";
         }
 
+        /// <summary>
+        /// Mostrar una ventana de ayuda con una explicacion de como manejarse en el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblHelp_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);

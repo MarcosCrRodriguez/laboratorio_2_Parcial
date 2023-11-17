@@ -33,6 +33,11 @@ namespace FrmLobby
             this.pathJSON = "Imagenes.json";
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmDataGirdView_Load(object sender, EventArgs e)
         {
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
@@ -44,24 +49,44 @@ namespace FrmLobby
             this.DtgvRegistro.Update();
         }
 
+        /// <summary>
+        /// Boton para volver al formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackMenu_Click(object sender, EventArgs e)
         {
             this.menuPrincipal.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Boton que ingresa al formulario de registro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
             FormularioRegistro frmRegistro = new FormularioRegistro();
             frmRegistro.ShowDialog();
         }
 
+        /// <summary>
+        /// Boton que ingresa al formulario de modificar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnModificar_Click(object sender, EventArgs e)
         {
             FrmModificar frmModificar = new FrmModificar();
             frmModificar.ShowDialog();
         }
 
+        /// <summary>
+        /// Boton que ingresa al formulario de eliminar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
             FrmEliminar frmEliminar = new FrmEliminar();

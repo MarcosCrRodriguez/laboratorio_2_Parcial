@@ -37,8 +37,8 @@
             gboxProduccion = new GroupBox();
             lblTitulo = new Label();
             gboxProcesoFinal = new GroupBox();
-            lblProcesoFinal = new Label();
             progressBarEmpaquetado = new ProgressBar();
+            lblProcesoFinal = new Label();
             gboxProduccion.SuspendLayout();
             gboxProcesoFinal.SuspendLayout();
             SuspendLayout();
@@ -47,7 +47,7 @@
             // 
             progressBarSoldado.Location = new Point(17, 56);
             progressBarSoldado.Name = "progressBarSoldado";
-            progressBarSoldado.Size = new Size(706, 23);
+            progressBarSoldado.Size = new Size(645, 23);
             progressBarSoldado.TabIndex = 0;
             // 
             // lblSoldado
@@ -63,7 +63,7 @@
             // 
             progressBarEnsamblado.Location = new Point(17, 119);
             progressBarEnsamblado.Name = "progressBarEnsamblado";
-            progressBarEnsamblado.Size = new Size(706, 23);
+            progressBarEnsamblado.Size = new Size(645, 23);
             progressBarEnsamblado.TabIndex = 2;
             // 
             // lblEnsamblado
@@ -88,7 +88,7 @@
             // 
             progressBarConectado.Location = new Point(17, 182);
             progressBarConectado.Name = "progressBarConectado";
-            progressBarConectado.Size = new Size(706, 23);
+            progressBarConectado.Size = new Size(645, 23);
             progressBarConectado.TabIndex = 5;
             // 
             // gboxProduccion
@@ -103,7 +103,7 @@
             gboxProduccion.ForeColor = SystemColors.ButtonHighlight;
             gboxProduccion.Location = new Point(12, 59);
             gboxProduccion.Name = "gboxProduccion";
-            gboxProduccion.Size = new Size(740, 226);
+            gboxProduccion.Size = new Size(676, 226);
             gboxProduccion.TabIndex = 6;
             gboxProduccion.TabStop = false;
             gboxProduccion.Text = "Produccion";
@@ -128,10 +128,17 @@
             gboxProcesoFinal.ForeColor = SystemColors.ButtonHighlight;
             gboxProcesoFinal.Location = new Point(12, 304);
             gboxProcesoFinal.Name = "gboxProcesoFinal";
-            gboxProcesoFinal.Size = new Size(740, 98);
+            gboxProcesoFinal.Size = new Size(676, 98);
             gboxProcesoFinal.TabIndex = 7;
             gboxProcesoFinal.TabStop = false;
             gboxProcesoFinal.Text = "Proceso final";
+            // 
+            // progressBarEmpaquetado
+            // 
+            progressBarEmpaquetado.Location = new Point(17, 56);
+            progressBarEmpaquetado.Name = "progressBarEmpaquetado";
+            progressBarEmpaquetado.Size = new Size(645, 23);
+            progressBarEmpaquetado.TabIndex = 6;
             // 
             // lblProcesoFinal
             // 
@@ -142,19 +149,13 @@
             lblProcesoFinal.TabIndex = 6;
             lblProcesoFinal.Text = "lblProcesoFinal";
             // 
-            // progressBarEmpaquetado
-            // 
-            progressBarEmpaquetado.Location = new Point(17, 56);
-            progressBarEmpaquetado.Name = "progressBarEmpaquetado";
-            progressBarEmpaquetado.Size = new Size(706, 23);
-            progressBarEmpaquetado.TabIndex = 6;
-            // 
             // FrmProcesos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(764, 450);
+            ClientSize = new Size(701, 422);
+            ControlBox = false;
             Controls.Add(gboxProcesoFinal);
             Controls.Add(lblTitulo);
             Controls.Add(gboxProduccion);

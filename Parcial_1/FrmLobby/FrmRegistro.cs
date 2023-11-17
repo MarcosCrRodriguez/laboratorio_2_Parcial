@@ -16,6 +16,8 @@ namespace FrmLobby
     public partial class FormularioRegistro : Form
     {
         public delegate void Mostrar(string texto, string titulo);
+        public delegate void ManejadorEventos(string path, string texto, int codigo);
+        public event ManejadorEventos manejadorEventos;
 
         private IArchivos<string> manejadorArchivosTXT;
         private IUsuario<Operario> manejadorOperario;
@@ -24,6 +26,7 @@ namespace FrmLobby
 
         private string path;
         private string pathTXT;
+        private string pathDB;
         private string pathJSON;
         public FormularioRegistro()
         {
@@ -35,9 +38,15 @@ namespace FrmLobby
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathDB = "Log_DB.txt";
             this.pathJSON = "Imagenes.json";
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormularioRegistro_Load(object sender, EventArgs e)
         {
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
@@ -46,8 +55,15 @@ namespace FrmLobby
 
             this.cboxCargo.Items.Add("Operario");
             this.cboxCargo.Items.Add("Supervisor");
+
+            this.manejadorEventos += EscribirArchivoDB;
         }
 
+        /// <summary>
+        /// Boton donde registro a un Usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
@@ -70,6 +86,12 @@ namespace FrmLobby
                             if (operario != null)
                             {
                                 mostrarInformacion($"Código de Usuario generado >{operario.ID}<", "Código Usuario");
+
+                                if (this.manejadorEventos is not null)
+                                {
+                                    this.manejadorEventos.Invoke(this.path + this.pathDB, "Generación de Usuario", operario.ID);
+                                }
+
                                 mostrarInformacion("Se registro el Operario con Exito", "Registro Exitoso");
                                 this.Close();
                             }
@@ -91,6 +113,12 @@ namespace FrmLobby
                             if (supervisor != null)
                             {
                                 mostrarInformacion($"Código de Usuario generado >{supervisor.ID}<", "Código Usuario");
+
+                                if (this.manejadorEventos is not null)
+                                {
+                                    this.manejadorEventos.Invoke(this.path + this.pathDB, "Generación de Usuario", supervisor.ID);
+                                }
+
                                 mostrarInformacion("Se registro el Supervisor con Exito", "Registro Exitoso");
                                 this.Close();
                             }
@@ -134,11 +162,21 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Boton que vuelve al formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackToLobby_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Boton para ingresar datos de un Usuario y asi facilitar el ingreso de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnHardcodear_Click(object sender, EventArgs e)
         {
             this.txtBoxNombre.Text = "Juan";
@@ -150,6 +188,17 @@ namespace FrmLobby
             this.monthCalendar.SelectionStart = DateTime.Now;
             this.txtBoxDireccion.Text = $"Calle None {new Random().Next(100, 7777)}";
             this.cboxCargo.Text = "Operario";
+        }
+
+        /// <summary>
+        /// Genero un archivo TXT
+        /// </summary>
+        /// <param name="path">Ruta del archivo</param>
+        /// <param name="texto">Texto que cargare en el archivo</param>
+        /// <param name="codigo">Codigo a cargar en el archivo</param>
+        public void EscribirArchivoDB(string path, string texto, int codigo)
+        {
+            this.manejadorArchivosTXT.EscribirArchivo(path, LogFormat.CrearFormatoDB(texto, codigo.ToString()));
         }
     }
 }

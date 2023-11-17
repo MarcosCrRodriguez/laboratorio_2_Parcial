@@ -17,29 +17,36 @@ namespace FrmLobby
     public partial class FrmModificar : Form
     {
         public delegate void Mostrar(string texto, string titulo);
+        public delegate void ManejadorEventos(string path, string texto);
+        public event ManejadorEventos manejadorEventos;
 
         private IArchivos<string> manejadorArchivosTXT;
         private IUsuario<Operario> manejadorOperario;
-        private IUsuario<Supervisor> manejadorSupervisor;
 
         private Configuracion configJson;
         private Operario? operario;
         private string path;
         private string pathTXT;
+        private string pathDB;
         private string pathJSON;
         public FrmModificar()
         {
             InitializeComponent();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
             this.manejadorOperario = new OperarioDAO<Operario>();
-            this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
+            this.pathDB = "Log_DB.txt";
             this.pathJSON = "Imagenes.json";
         }
 
+        /// <summary>
+        /// Carga del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmModificar_Load(object sender, EventArgs e)
         {
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
@@ -56,13 +63,25 @@ namespace FrmLobby
             this.monthCalendar.Enabled = false;
             this.txtBoxDireccion.ReadOnly = true;
             this.txtBoxCargo.ReadOnly = true;
+
+            this.manejadorEventos += EscribirArchivoDB;
         }
 
+        /// <summary>
+        /// Boton que vuelve al formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBackToLobby_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Boton para modificar los datos de un Usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnModificar_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
@@ -77,6 +96,10 @@ namespace FrmLobby
                 Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoInt(this.txtCodigoUsuario.Text), this.txtBoxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                 if (SupervisorDAO<Supervisor>.ModificarUsuario(operario))
                 {
+                    if (this.manejadorEventos is not null)
+                    {
+                        this.manejadorEventos.Invoke(this.path + this.pathDB, "Modificación de Usuario");
+                    }
                     mostrarInformacion("Se modifico el Operario correctamente", "Modificación de datos");
                     this.Close();
                 }
@@ -103,6 +126,11 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// ID del Usuario que modificara
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnIngresarID_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
@@ -166,6 +194,16 @@ namespace FrmLobby
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
                 mostrarError(ex.Message, "Error inesperado");
             }
+        }
+
+        /// <summary>
+        /// Genero un archivo TXT
+        /// </summary>
+        /// <param name="path">Ruta del archivo</param>
+        /// <param name="texto">Texto que cargare en el archivo</param>
+        public void EscribirArchivoDB(string path, string texto)
+        {
+            this.manejadorArchivosTXT.EscribirArchivo(path, LogFormat.CrearFormatoDB(texto, $"{this.txtCodigoUsuario.Text}"));
         }
     }
 }

@@ -10,6 +10,15 @@ namespace Archivos
 {
     public class ArchivosJSON<T> : IArchivos<T> where T : class
     {
+        /// <summary>
+        /// Genero un archivo Json
+        /// </summary>
+        /// <param name="path">Ruta del archivo</param>
+        /// <param name="dato">Dato a cargar en el archivo</param>
+        /// <returns></returns>
+        /// <exception cref="UnauthorizedAccessException">No tiene la autorizacion para realizar la tarea</exception>
+        /// <exception cref="JsonException">Error del archivo Json</exception>
+        /// <exception cref="Exception">Error generico</exception>
         public bool EscribirArchivo(string path, T dato)
         {
             bool rtn = false;
@@ -28,7 +37,6 @@ namespace Archivos
                 rtn = true;
             }
             catch (UnauthorizedAccessException ex)
-
             {
                 throw new UnauthorizedAccessException("Problemas de permisos", ex);
             }
@@ -44,6 +52,11 @@ namespace Archivos
             return rtn;
         }
 
+        /// <summary>
+        /// Lectura de datos del archivo Json
+        /// </summary>
+        /// <param name="path">Ruta del archivo</param>
+        /// <returns>Retorna el contenido del archivo</returns>
         public static T LeerArchivo(string path)
         {
             try
