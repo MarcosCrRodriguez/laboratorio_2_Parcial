@@ -39,6 +39,9 @@
             gboxProcesoFinal = new GroupBox();
             progressBarEmpaquetado = new ProgressBar();
             lblProcesoFinal = new Label();
+            btnCancelar = new Button();
+            btnCerrar = new Button();
+            lblFactory = new Label();
             gboxProduccion.SuspendLayout();
             gboxProcesoFinal.SuspendLayout();
             SuspendLayout();
@@ -149,13 +152,51 @@
             lblProcesoFinal.TabIndex = 6;
             lblProcesoFinal.Text = "lblProcesoFinal";
             // 
+            // btnCancelar
+            // 
+            btnCancelar.BackColor = Color.LightCoral;
+            btnCancelar.Location = new Point(593, 419);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(81, 27);
+            btnCancelar.TabIndex = 8;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click_1;
+            // 
+            // btnCerrar
+            // 
+            btnCerrar.BackColor = Color.SandyBrown;
+            btnCerrar.Location = new Point(139, 419);
+            btnCerrar.Name = "btnCerrar";
+            btnCerrar.Size = new Size(81, 27);
+            btnCerrar.TabIndex = 10;
+            btnCerrar.Text = "Cerrar";
+            btnCerrar.UseVisualStyleBackColor = false;
+            btnCerrar.Click += btnCerrar_Click;
+            // 
+            // lblFactory
+            // 
+            lblFactory.AutoSize = true;
+            lblFactory.BackColor = Color.Transparent;
+            lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblFactory.ForeColor = Color.Coral;
+            lblFactory.Location = new Point(27, 420);
+            lblFactory.Name = "lblFactory";
+            lblFactory.Size = new Size(87, 21);
+            lblFactory.TabIndex = 24;
+            lblFactory.Text = "Factory.IO";
+            lblFactory.TextAlign = ContentAlignment.TopCenter;
+            // 
             // FrmProcesos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(701, 422);
+            ClientSize = new Size(701, 458);
             ControlBox = false;
+            Controls.Add(lblFactory);
+            Controls.Add(btnCerrar);
+            Controls.Add(btnCancelar);
             Controls.Add(gboxProcesoFinal);
             Controls.Add(lblTitulo);
             Controls.Add(gboxProduccion);
@@ -183,5 +224,8 @@
         private GroupBox gboxProcesoFinal;
         private Label lblProcesoFinal;
         private ProgressBar progressBarEmpaquetado;
+        private Button btnCancelar;
+        private Button btnCerrar;
+        private Label lblFactory;
     }
 }

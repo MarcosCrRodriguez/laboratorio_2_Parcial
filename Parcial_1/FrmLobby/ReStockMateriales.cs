@@ -16,6 +16,8 @@ namespace FrmLobby
     public partial class FrmReStockMateriales : Form
     {
         public delegate void Mostrar(string texto, string titulo);
+        public delegate void ManejadorEventos(int cantidadAgregar);
+        public event ManejadorEventos manejadorEventos;
 
         private IArchivos<string> manejadorArchivosTXT;
         private IMateriales gestorMateriales;
@@ -59,6 +61,8 @@ namespace FrmLobby
 
             this.CargarListaNum();
             this.txtMaterialSet.Enabled = false;
+
+            this.manejadorEventos += ModificarCantidad;
         }
 
         /// <summary>
@@ -92,18 +96,9 @@ namespace FrmLobby
                 cantidadAgregar = Stock.VerificarValorPositivo(Stock.CasteoExplicito(this.numCantAgregar.Value), Stock.CasteoExplicito(this.txtIDSotck.Text), this.txtMaterialSet.Text);
                 if (cantidadAgregar != -1)
                 {
-                    if (this.gestorMateriales.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
+                    if (this.manejadorEventos is not null)
                     {
-                        mostrarInformacion($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales");
-                        mostrarInformacion($"Actualizando datos...", "Actualización de información");
-
-                        menuCargo.CargaDatos();
-                        this.menuCargo.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
+                        this.manejadorEventos.Invoke(cantidadAgregar);
                     }
                 }
                 else
@@ -287,6 +282,30 @@ namespace FrmLobby
                 "- Cantidad a agregar - son las cantidades que desea agregar o quitar del Stock, del material que haya seleccionado.\n" +
                 "ID Stock: [1077]",
                 "Help Box");
+        }
+
+        /// <summary>
+        /// Invocamos el evento para modificar la cantidad de materiales en la DB
+        /// </summary>
+        /// <param name="cantidadAgregar">Cantidad a modificar</param>
+        public void ModificarCantidad(int cantidadAgregar)
+        {
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
+
+            if (this.gestorMateriales.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
+            {
+                mostrarInformacion($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales");
+                mostrarInformacion($"Actualizando datos...", "Actualización de información");
+
+                menuCargo.CargaDatos();
+                this.menuCargo.Show();
+                this.Close();
+            }
+            else
+            {
+                mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
+            }
         }
     }
 }

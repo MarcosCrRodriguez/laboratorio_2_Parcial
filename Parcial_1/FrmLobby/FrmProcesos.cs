@@ -11,13 +11,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace FrmLobby
 {
     public partial class FrmProcesos : Form
     {
-        //CancellationTokenSource cancellationTokenSource;
+        CancellationTokenSource cancellationTokenSource;
         private Configuracion configJson;
+        private List<Task> tasks;
+
         private int cantidadFabricada;
         private string path;
         private string pathJSON;
@@ -32,38 +35,44 @@ namespace FrmLobby
 
         private void FrmProcesos_Load(object sender, EventArgs e)
         {
+            this.btnCerrar.Visible = false;
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
             this.BackgroundImage = img;
 
+            this.tasks = new List<Task>();
             IniciarHilos();
         }
 
         private void IniciarHilos()
         {
-            List<Task> tasks = new List<Task>();
+            this.cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken cancellationToken = this.cancellationTokenSource.Token;
 
-            Task primerTask = Task.Run(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado, "Soldado de piezas"));
-            Task segundoTask = Task.Run(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado, "Ensamblado de piezas"));
-            Task tercerTask = Task.Run(() => IniciarProceso(this.progressBarConectado, this.lblConectado, "Conexion de componentes"));
+            Task primerTask = Task.Run(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado, "Soldado de piezas"), cancellationToken);
+            Task segundoTask = Task.Run(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado, "Ensamblado de piezas"), cancellationToken);
+            Task tercerTask = Task.Run(() => IniciarProceso(this.progressBarConectado, this.lblConectado, "Conexion de componentes"), cancellationToken);
 
-            tasks.Add(primerTask);
-            tasks.Add(segundoTask);
-            tasks.Add(tercerTask);
+            this.tasks.Add(primerTask);
+            this.tasks.Add(segundoTask);
+            this.tasks.Add(tercerTask);
 
-            Task.Run(() => Task.WaitAll(tasks.ToArray())).ContinueWith(_ =>
+            Task.Run(() => Task.WaitAll(this.tasks.ToArray())).ContinueWith(_ =>
             {
-                Task cuartoTask = Task.Run(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal, "Empaquedato del producto"));
-                Task.Run(() => Task.WaitAll(cuartoTask)).ContinueWith(_ =>
+                if (!cancellationTokenSource.IsCancellationRequested)
                 {
-                    MessageBox.Show("Procesos finalizados", "Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Asegurarse de cerrar el formulario en el hilo de la interfaz de usuario
-                    this.Invoke((MethodInvoker)delegate
+                    Task cuartoTask = Task.Run(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal, "Empaquedato del producto"), cancellationToken);
+                    Task.Run(() => Task.WaitAll(cuartoTask)).ContinueWith(_ =>
                     {
-                        this.Close();
+                        MessageBox.Show("Procesos finalizados", "Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Asegurarse de cerrar el formulario en el hilo de la interfaz de usuario
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.Close();
+                        });
                     });
-                });
+                }
             });
         }
 
@@ -92,7 +101,8 @@ namespace FrmLobby
 
         public void IniciarProceso(ProgressBar progressBar, Label label, string proceso)
         {
-            while (progressBar.Value < progressBar.Maximum)
+            while (progressBar.Value < progressBar.Maximum
+                && !cancellationTokenSource.IsCancellationRequested)
             {
                 Thread.Sleep(new Random().Next(this.cantidadFabricada / 2, this.cantidadFabricada));
                 IncrementarBarraProgreso(progressBar, label, proceso);
@@ -127,10 +137,24 @@ namespace FrmLobby
             {
                 if (progressBar.Value == progressBar.Maximum)
                 {
-                    label.Text = "PROCESO FINALIZADO";
+                    label.Text = "FINALIZADO";
+                }
+                else
+                {
+                    label.Text = "CANCELADO";
                 }
             }
         }
 
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            cancellationTokenSource.Cancel();
+            this.btnCerrar.Visible = true;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

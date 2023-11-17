@@ -19,6 +19,8 @@ namespace FrmLobby
     public partial class FrmProductoFinal : Form
     {
         public delegate void Mostrar(string texto, string titulo);
+        public delegate void ManejadorEventos(int cantidadAgregar);
+        public event ManejadorEventos manejadorEventos;
 
         private IArchivos<string> manejadorArchivosTXT;
         private IMateriales manejadorProductos;
@@ -149,6 +151,8 @@ namespace FrmLobby
             }
             this.CrearListaTxtBox();
             this.CargaDatos();
+
+            manejadorEventos += ModificarCantidad;
         }
 
         /// <summary>
@@ -200,6 +204,7 @@ namespace FrmLobby
             int valorNegativo = -1;
             bool retorno;
             bool retFabricar;
+            int cantidadAgregar;
 
             try
             {
@@ -241,19 +246,12 @@ namespace FrmLobby
 
                     if (retFabricar)
                     {
-                        int cantidadAgregar;
-
                         cantidadAgregar = Producto.VerificarValorPositivo(Stock.CasteoExplicito(this.numFabricar.Value), Stock.CasteoExplicito(this.txtIDProducto.Text), this.productoDB);
                         if (cantidadAgregar != -1)
                         {
-                            if (this.manejadorProductos.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
+                            if (this.manejadorEventos is not null)
                             {
-                                FrmProcesos frmProcesos = new FrmProcesos(100);
-                                frmProcesos.Show();
-                            }
-                            else
-                            {
-                                mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
+                                this.manejadorEventos.Invoke(cantidadAgregar);
                             }
                         }
                         else
@@ -445,6 +443,25 @@ namespace FrmLobby
                 "ID Stock: [1329]",
                 "Help Box"
                 );
+        }
+    
+        /// <summary>
+        /// Invocamos el evento para modificar la cantidad de materiales en la DB
+        /// </summary>
+        /// <param name="cantidadAgregar">Cantidad a modificar</param>
+        public void ModificarCantidad(int cantidadAgregar)
+        {
+            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+
+            if (this.manejadorProductos.Modificar(this.productoDB, cantidadAgregar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
+            {
+                FrmProcesos frmProcesos = new FrmProcesos((int)this.numFabricar.Value);
+                frmProcesos.Show();
+            }
+            else
+            {
+                mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
+            }
         }
     }
 }
