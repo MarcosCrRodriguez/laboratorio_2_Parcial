@@ -21,42 +21,72 @@ ________________________________________________________________________________
 
 ## Ingreso del Usuario
 
-En el formulario usted tendra casillas en donde ingresara sus datos personales, cargo y contraseña con la cual le permitira el ingreso al Menu de Usuarios.
-En caso de querer ahorrar tiempo para no ingresar datos a mano, debera de interactuar con el boton 'Hardcoear' y le completara las casillas por usted.
+En el formulario usted tendra casillas en donde ingresara sus datos personales, id de la empresa, dni, cargo y contraseña con la cual le permitira el ingreso al Menu de Usuarios.
+En caso de no estar registrado en la base de datos, debera regsitrarse ingresando a su formulario con el boton "registrar".
 
-[![Captura-de-pantalla-2023-10-01-221635.png](https://i.postimg.cc/Dfg1SvHm/Captura-de-pantalla-2023-10-01-221635.png)](https://postimg.cc/hhXXwBSq)
+[![lobby.png](https://i.postimg.cc/ZY8dCv0Q/lobby.png)](https://postimg.cc/kD54H4QN)
 
 ## Menu de Usuario
 
-Aqui podremos visualizar los tipos y cantidades de materia prima. Tambien habrá botones con los cuales podremos interactuar, como los sectores de trabajo, en donde aparece a su costado las cantidades producidas hasta el momento de cada una de ellas. 
-En el caso de que haya ingresado un Supervisor, tendra tambien la opciones de ingresar a un formulario en donde podra agregar o quitar, de ser necesario, materia prima. Ademas, podria ver una lista de los operarios registrados hasta el momento.
-Para ambos usuarios podra modificar sus datos personales (en proceso)
+Aqui podremos visualizar los tipos y cantidades de materia prima que hay. Tambien habrá botones con los cuales podremos interactuar, como los sectores de trabajo, en donde aparece a su costado las cantidades producidas hasta el momento de cada una de ellas. Para ambos Usuarios, podrán ver sus datos personales en la opcion "datos del usuario".
+En el caso de que haya ingresado un Supervisor, tendrá también la opciones de ingresar a un formulario en donde podrá interactuar con el Stock de las materias primas. Ademas, podria ver una lista de los operarios registrados hasta el momento.
 
-[![Captura-de-pantalla-2023-10-01-221636.png](https://i.postimg.cc/7hPSYdN5/Captura-de-pantalla-2023-10-01-221636.png)](https://postimg.cc/bDMZm6WP)
+[![principal.png](https://i.postimg.cc/zXJMbWD2/principal.png)](https://postimg.cc/PNRK0Cw1)
 
 ## Producción materiales
 
-A un costado del a formulario se encontrarán las cantidades y tipos de materias primas a utlizar, con sus cantidades actuales. Para poder ver cuantos materiales se utilizaran con la fabricación de 'x' cantidad del producto, debería interactuar con el boton que dice 'Materiales necesarios'. Éste mostrara las cantidades a producir, y las cantidades a utilizar, con sus tipos, de materia prima.
-Reicien cuando uno abre la ventana emergente podra fabricar la cantidad ingresada, en caso de no poder fabricar dicha cantidad, se mostrará una ventana con los tipos y cantidades de materiales que faltan para poder fabricar la dicha cantidad de productos. En caso de querer ingresar los materiales faltantes, si o si necesitará ingresar un Supervisor para agregar dicha cantidad.
-También habra un boton que al interactuar con él abrira una ventana emergente con los datos del producto y sus cantidades farbricadas hasta el momento.
+A un costado del a formulario se encontrarán las cantidades y tipos de materias primas a utlizar, con sus cantidades actuales. Se puede visualizar cuantos materiales se utilizaran con la fabricación de 'x' producto, debería interactuar con el boton que dice 'Materiales necesarios'. 
+Podra fabricar cualquier cantidad ingresada, tiene un límite de 1500 como máximo, en caso de no tener las cantidades necesarias para fabricar dicho producto, el Usuario sera comunicado y se mostrara las cantidades faltantes para fabricar la cantidad de productos ingresada. 
+El símbolo (?) es para que el programa le de información al Usuario de como manejarse y explica un poco el menu mismo, asi será mas facil de orientar al Usuario.
 
-[![Captura-de-pantalla-2023-10-01-221822.png](https://i.postimg.cc/3x0mRg2F/Captura-de-pantalla-2023-10-01-221822.png)](https://postimg.cc/K1FRp3q1)
+[![producto-final.png](https://i.postimg.cc/52GbSp62/producto-final.png)](https://postimg.cc/18pk9GGk)
 
 ## Stock
 
-Dentro del formulario habrán casillas vacias para ingresar las cantidades a sumas o sacar de Stock. Una vez haya ingresado los datos necesarios, interactuar con el boton 'Load', automaticamente se cargaran los datos, y volvera al Menu de Usuario con las cantidades actualizadas.
+En el formulario mostrará las cantidades de materiales que hay en ese momento, junto a su tipo de material. Para poder agregar materiales al Stock, debera ingresar ID, tipo de material y cantidad, terminando con la interacción del boton "Load" que cargará de ser posible la cantidad ingresada.
 
-[![Captura-de-pantalla-2023-10-01-221902.png](https://i.postimg.cc/BbwPZ66z/Captura-de-pantalla-2023-10-01-221902.png)](https://postimg.cc/fSmRBMY7)
+[![stock.png](https://i.postimg.cc/pXsFRN1c/stock.png)](https://postimg.cc/3dDRFqh2)
 
 <p>
 ____________________________________________________________________________________________________________________________
 </p>
 
-## Regsitro de Operarios
+## Listado de Operarios
 
 En este formulario se encontrara un registro de todos los operarios que se encuentran en la empresa, solo los supervisores tienen acceso a este formulario.
+Este podrá registrar, modificar o eliminar un Operario de la base de datos.
 
-[![Captura-de-pantalla-2023-10-13-202759.png](https://i.postimg.cc/QC4CxH6T/Captura-de-pantalla-2023-10-13-202759.png)](https://postimg.cc/RJt4gVxS)
+[![dtgv.png](https://i.postimg.cc/y8533mKF/dtgv.png)](https://postimg.cc/Mn7phjvT)
+
+<p>
+____________________________________________________________________________________________________________________________
+</p>
+
+## Registro Usuario
+
+Aquí se podrá registrar al Usuario, Operario u Supervisor, parmitiendo agregar al Usuario creado a la base de datos.
+
+[![registro.png](https://i.postimg.cc/4N0xWX0G/registro.png)](https://postimg.cc/vcWyBwM2)
+
+<p>
+____________________________________________________________________________________________________________________________
+</p>
+
+## Modificación Usuario
+
+Aqúi se podrá modificar los datos de un Operario, ingresando su ID, se cargaran los datos del Usuario y de ser posible se podrán modificar los datos que desee.
+
+[![Modificar.png](https://i.postimg.cc/9f5FjJVN/Modificar.png)](https://postimg.cc/Sndp6LnW)
+
+<p>
+____________________________________________________________________________________________________________________________
+</p>
+
+## Eliminar Usuario
+
+Aquí se podrá dar de baja a un Operario, ingresando su ID, si existe en la base de datos se dará de baja mostrando un mensaje de éxito si pue posible.
+
+[![Eliminar.png](https://i.postimg.cc/9fhVk0t6/Eliminar.png)](https://postimg.cc/qNj9hkFw)
 
 <p>
 ____________________________________________________________________________________________________________________________
