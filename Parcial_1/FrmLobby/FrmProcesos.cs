@@ -44,6 +44,9 @@ namespace FrmLobby
             IniciarHilos();
         }
 
+        /// <summary>
+        /// Iniciamos los hilos
+        /// </summary>
         private void IniciarHilos()
         {
             this.cancellationTokenSource = new CancellationTokenSource();
@@ -76,6 +79,12 @@ namespace FrmLobby
             });
         }
 
+        /// <summary>
+        /// Proceso en el que esta trabajando
+        /// </summary>
+        /// <param name="progressBar">Barra de progreso, porcentaje del progreso de proceso</param>
+        /// <param name="label">Label donde se mostrara el proceso</param>
+        /// <param name="proceso">Proceso que esta trabajando</param>
         public void IniciarProceso(ProgressBar progressBar, Label label, string proceso)
         {
             while (progressBar.Value < progressBar.Maximum
@@ -87,6 +96,12 @@ namespace FrmLobby
             FinalizarProceso(progressBar, label);
         }
 
+        /// <summary>
+        /// Ingremento de la barra de progreso
+        /// </summary>
+        /// <param name="progressBar">Barra de progreso, porcentaje del progreso de proceso</param>
+        /// <param name="label">Label donde se mostrara el proceso</param>
+        /// <param name="proceso">Proceso que esta trabajando</param>
         private void IncrementarBarraProgreso(ProgressBar progressBar, Label label, string proceso)
         {
             if (InvokeRequired)
@@ -102,6 +117,11 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Cuando la barra de progreso llega hasta el límite
+        /// </summary>
+        /// <param name="progressBar">Barra finalizada / completada</param>
+        /// <param name="label">Label donde muestra un mensaje</param>
         private void FinalizarProceso(ProgressBar progressBar, Label label)
         {
             if (InvokeRequired)
@@ -123,12 +143,22 @@ namespace FrmLobby
             }
         }
 
+        /// <summary>
+        /// Boton para cancelar el proceso
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             cancellationTokenSource.Cancel();
             this.btnCerrar.Visible = true;
         }
 
+        /// <summary>
+        /// Boton para cerrar el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -37,6 +37,9 @@ namespace FrmLobby
             IniciarHilos();
         }
 
+        /// <summary>
+        /// Iniciamos el hilo 
+        /// </summary>
         public void IniciarHilos()
         {
             Task primerTask = Task.Run(() => IniciarProceso());
@@ -51,6 +54,9 @@ namespace FrmLobby
             });
         }
 
+        /// <summary>
+        /// Pausamos la ejecución del programa el tiempo que valga la variable "tiempo"
+        /// </summary>
         public void IniciarProceso()
         {
             int tiempo = 2000;
