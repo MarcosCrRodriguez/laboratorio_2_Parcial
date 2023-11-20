@@ -32,7 +32,7 @@ namespace FrmLobby
         {
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathGifLoading);
-            pictureBox1.Image = img;
+            this.pictureBox1.Image = img;
             this.tasks = new List<Task>();
             IniciarHilos();
         }
