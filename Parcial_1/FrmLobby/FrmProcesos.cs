@@ -76,29 +76,6 @@ namespace FrmLobby
             });
         }
 
-        //private void IniciarHilos()
-        //{
-        //    this.cancellationTokenSource = new CancellationTokenSource();
-        //    CancellationToken cancellationToken = this.cancellationTokenSource.Token;
-
-        //    Task primerTask = new Task(() => IniciarProceso(this.progressBarSoldado, this.lblSoldado, "Soldado de piezas"));
-        //    Task segundoTask = new Task(() => IniciarProceso(this.progressBarEnsamblado, this.lblEnsamblado, "Ensamblado de piezas"));
-        //    Task tercerTask = new Task(() => IniciarProceso(this.progressBarConectado, this.lblConectado, "Conexion de componentes"));
-        //    primerTask.Start();
-        //    segundoTask.Start();
-        //    tercerTask.Start();
-
-        //    //Task.WaitAll(primerTask, segundoTask, tercerTask);
-
-        //    Task cuartoTask = new Task(() => IniciarProceso(this.progressBarEmpaquetado, this.lblProcesoFinal, "Empaquedato del producto"), cancellationToken);
-        //    cuartoTask.Start();
-
-        //    //cuartoTask.Wait();
-
-        //    //MessageBox.Show("Procesos finalizados", "Finish", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    //this.Close();
-        //}
-
         public void IniciarProceso(ProgressBar progressBar, Label label, string proceso)
         {
             while (progressBar.Value < progressBar.Maximum

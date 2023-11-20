@@ -372,7 +372,6 @@
             lblHelp.Size = new Size(25, 19);
             lblHelp.TabIndex = 61;
             lblHelp.Text = "(?)";
-            lblHelp.Click += lblHelp_Click;
             // 
             // lblCantidadAgregar
             // 

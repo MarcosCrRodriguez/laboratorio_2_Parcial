@@ -63,6 +63,8 @@ namespace FrmLobby
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
             this.pathJSON = "Imagenes.json";
+
+            lblHelp.Click += new EventHandler(EventHandlerDinamico);
         }
 
         /// <summary>
@@ -430,21 +432,20 @@ namespace FrmLobby
         }
 
         /// <summary>
-        /// Mostrar una ventana de ayuda con una explicacion de como manejarse en el formulario
+        /// Muestra un mensaje por pantalla
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lblHelp_Click(object sender, EventArgs e)
+        public void EventHandlerDinamico(object sender, EventArgs e)
         {
-            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
-
-            mostrarInformacion("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Producto que esta queriendo fabricar.\n" +
+            MessageBox.Show("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Producto que esta queriendo fabricar.\n" +
                 $"- {this.productoDB} cantidad a agregar - la cantidad de preductos que desea fabricar.\n" +
                 "ID Stock: [1329]",
-                "Help Box"
-                );
+                "Help Box", 
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Information);
         }
-    
+
         /// <summary>
         /// Invocamos el evento para modificar la cantidad de materiales en la DB
         /// </summary>

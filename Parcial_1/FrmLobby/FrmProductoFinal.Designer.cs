@@ -361,7 +361,6 @@
             lblHelp.Size = new Size(25, 19);
             lblHelp.TabIndex = 62;
             lblHelp.Text = "(?)";
-            lblHelp.Click += lblHelp_Click;
             // 
             // FrmProductoFinal
             // 
