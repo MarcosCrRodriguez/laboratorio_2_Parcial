@@ -74,7 +74,7 @@ ________________________________________________________________________________
 
 ## Modificación Usuario
 
-Aqúi se podrá modificar los datos de un Operario, ingresando su ID, se cargaran los datos del Usuario y de ser posible se podrán modificar los datos que desee.
+Aquí se podrá modificar los datos de un Operario, ingresando su ID, se cargaran los datos del Usuario y de ser posible se podrán modificar los datos que desee.
 
 [![Modificar.png](https://i.postimg.cc/9f5FjJVN/Modificar.png)](https://postimg.cc/Sndp6LnW)
 
@@ -103,5 +103,8 @@ ________________________________________________________________________________
 ##### Encontro un Error?
 
 Si encontró un problema o desea enviar una mejora a este proyecto, envíe una idea para mejorar o arreglar ese problema.
+
+Archivo PDF donde se encuentra los mismo que en el README:
+[Factory.pdf](https://github.com/MarcosCrRodriguez/laboratorio_2_Parcial/files/13427681/Factory.pdf)
 
 
