@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KQnQSbt4z2nYQgnvro+YMNfiiqlasyd586Sq8ch1DIXzQF9S7fM5JhAWtwUXmcp1X+VfxOXMyjdjCRhjCkA7GA==",
+  "dgSpecHash": "LXvv2dJbZnsMO2idYm0A7bmzMndCA4+/6RIAThQRNR8OQ0S8SwuU9+BVpGuWBwQara1pKbjrDWChGc3+K07BNA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\FrmLobby\\FrmLobby.csproj",
+  "projectFilePath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\FrmLobby\\FrmLobby.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rodri\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\rodri\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

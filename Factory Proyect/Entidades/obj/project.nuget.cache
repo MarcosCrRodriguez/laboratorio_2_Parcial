@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GN9L/zxOivMFcrUOfcdfui4mf3fjD5K9dmb2Ur0Vbc0Km0f6YZOwtouxC//vFW381mQG8Pvis1eeJkTYLfVsuQ==",
+  "dgSpecHash": "5fmCVvXwH0ZF64Qgh9ANQFiQKkcqT+cr4ZZM4f0vQe3j26veXpNJH+jrBda00d2nPx0sbkD6mL36K6prWjxf6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Entidades\\Entidades.csproj",
+  "projectFilePath": "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Entidades\\Entidades.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rodri\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\rodri\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

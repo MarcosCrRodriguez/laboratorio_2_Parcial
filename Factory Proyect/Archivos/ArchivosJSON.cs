@@ -74,7 +74,7 @@ namespace Archivos
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception("Ocurrio un error al trabajar con el archivo JSON");
             }
         }
     }

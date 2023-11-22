@@ -253,10 +253,10 @@ namespace FrmLobby
 
             try
             {
-                this.config = new Configuracion("C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\medio_circuito_azul.jpg",
-                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_rojo.jpg",
-                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_azul.jpg",
-                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Parcial_1\\Factory.IO\\bin\\Debug\\net6.0\\Data\\loading.gif"
+                this.config = new Configuracion("C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\medio_circuito_azul.jpg",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_rojo.jpg",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_azul.jpg",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\loading.gif"
                 );
                 this.manejadorJson.EscribirArchivo(this.path + this.pathJSON, this.config);
             }
