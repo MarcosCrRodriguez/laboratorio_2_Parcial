@@ -61,7 +61,7 @@ namespace FrmLobby
         private void BtnDarBaja_Click(object sender, EventArgs e)
         {
             Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
-            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion); 
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
 
             try
             {

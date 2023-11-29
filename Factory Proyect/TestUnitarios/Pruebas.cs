@@ -15,7 +15,7 @@ namespace TestUnitarios
             IUsuario<Operario> manejadorUsuario = new OperarioDAO<Operario>();
 
             //Arrange
-            Operario operario = new Operario("Escalabrini", "Ortiz", 0, "Operario", 42225555, "esc_ortiz@gmail.com", 45, DateTime.Now, "Calle None 123", "4123-1234");
+            Operario operario = new Operario(0, "Operario", "Escalabrini", "Ortiz", 42225555, "esc_ortiz@gmail.com", 45, DateTime.Now, "Calle None 123", "4123-1234");
 
             //Act
             bool actual = manejadorUsuario.GuardarRegistro(operario);
@@ -28,7 +28,7 @@ namespace TestUnitarios
             IUsuario<Supervisor> manejadorUsuario = new SupervisorDAO<Supervisor>();
 
             //Arrange
-            Supervisor supervisor = new Supervisor("Napoleon", "Bonaparte", 0, "Supervisor", 42225555, "napoleon_b@gmail.com", 57, DateTime.Now, "Calle None 456", "7890-4567");
+            Supervisor supervisor = new Supervisor(0, "Supervisor", "Napoleon", "Bonaparte", 42225555, "napoleon_b@gmail.com", 57, DateTime.Now, "Calle None 456", "7890-4567");
 
             //Act
             bool actual = manejadorUsuario.GuardarRegistro(supervisor);
@@ -39,7 +39,7 @@ namespace TestUnitarios
         {
             //Arrange
             bool expected = true;
-            Supervisor supervisor = new Supervisor("Marcos", "Rodriguez", 1000, "Supervisor", 42225555);
+            Supervisor supervisor = new Supervisor(1000, "Supervisor", "Marcos", "Rodriguez", 42225555);
 
             //Act
             bool actual = supervisor.VerificarExisteSupervisor(SupervisorDAO<Supervisor>.LeerSupervisores("Supervisor"), supervisor);
@@ -53,10 +53,10 @@ namespace TestUnitarios
         public void ValidarPasswordOperario_PasamosElPasswordIngresadoYElOperario_DeberiaLanzarInvalidPasswordException()
         {
             //Arrange
-            Operario operario = new Operario("Brandon", "Sanderson", 1001, "Operario", 12121212);
+            string password = "operario";
 
             //Act
-            operario.ValidarPasswordOperario("password", operario);
+            Operario.ValidarPasswordOperario(password);
         }
 
         [TestMethod]
@@ -64,10 +64,10 @@ namespace TestUnitarios
         public void ValidarPasswordSupervisor_PasamosElPasswordIngresadoYElSupervisor_DeberiaLanzarInvalidPasswordException()
         {
             //Arrange
-            Supervisor supervisor = new Supervisor("Marcos", "Rodriguez", 1000, "Supervisor", 42225555);
+            string password = "password";
 
             //Act
-            supervisor.ValidarPasswordSupervisor("password", supervisor);
+            Supervisor.ValidarPasswordSupervisor(password);
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace TestUnitarios
         {
             //Arrange
             bool expected = true;
-            Operario operario = new Operario("Brandon", "Sanderson", 1056, "Operario", 12121313, "brandonsanderson@gmail.com", new Random().Next(18, 60), DateTime.Now, $"Calle None {new Random().Next(100, 2700)}", $"{new Random().Next(1000, 9999)}-{new Random().Next(1000, 9999)}");
+            Operario operario = new Operario(1056, "Operario", "Brandon", "Sanderson", 12121313, "brandonsanderson@gmail.com", new Random().Next(18, 60), DateTime.Now, $"Calle None {new Random().Next(100, 2700)}", $"{new Random().Next(1000, 9999)}-{new Random().Next(1000, 9999)}");
 
             //Act
             bool actual = SupervisorDAO<Supervisor>.ModificarUsuario(operario);

@@ -4,30 +4,35 @@ namespace Entidades
 {
     public class Usuario
     {
-        protected string nombre;
-        protected string apellido; 
+        protected int id;
+        protected string puesto; 
 
         public Usuario()
         {
 
         }
-        public Usuario(string nombre, string apellido)
+        public Usuario(int id, string puesto)
         {
-            this.nombre = nombre;
-            this.apellido = apellido;
+            this.id = id;
+            this.puesto = puesto;
         }
 
         #region Propiedades
-        public string Nombre
+
+        /// <summary>
+        /// Retorna el valor del ID
+        /// </summary>
+        public int ID
         {
-            get { return this.nombre; }
-            set { this.nombre = value; }
+            get { return this.id; }
         }
 
-        public string Apellido
+        /// <summary>
+        /// Retorna la cadena de Puesto
+        /// </summary>
+        public string Puesto
         {
-            get { return this.apellido; }
-            set { this.apellido = value; }
+            get { return this.puesto; }
         }
         #endregion
 
@@ -35,8 +40,8 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"Nombre: {this.nombre}");
-            sb.AppendLine($"Apellido: {this.apellido}");
+            sb.AppendLine($"Cídog Usuario: {this.id}");
+            sb.AppendLine($"Cargo: {this.puesto}");
 
             return sb.ToString();
         }

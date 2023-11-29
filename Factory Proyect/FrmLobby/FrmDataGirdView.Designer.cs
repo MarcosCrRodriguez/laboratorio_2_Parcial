@@ -41,7 +41,7 @@
             // 
             // BtnBackMenu
             // 
-            BtnBackMenu.BackColor = Color.BurlyWood;
+            BtnBackMenu.BackColor = Color.DarkGray;
             BtnBackMenu.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnBackMenu.ForeColor = SystemColors.ActiveCaptionText;
             BtnBackMenu.Location = new Point(1027, 315);
@@ -94,7 +94,7 @@
             // 
             // BtnRegistrar
             // 
-            BtnRegistrar.BackColor = Color.LimeGreen;
+            BtnRegistrar.BackColor = Color.Lime;
             BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnRegistrar.ForeColor = SystemColors.ActiveCaptionText;
             BtnRegistrar.Location = new Point(22, 315);

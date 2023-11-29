@@ -441,8 +441,8 @@ namespace FrmLobby
             MessageBox.Show("- ID Stock - usted ingresara un password que le permitirá el acceso a modificar el Producto que esta queriendo fabricar.\n" +
                 $"- {this.productoDB} cantidad a agregar - la cantidad de preductos que desea fabricar.\n" +
                 "ID Stock: [1329]",
-                "Help Box", 
-                MessageBoxButtons.OK, 
+                "Help Box",
+                MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
 

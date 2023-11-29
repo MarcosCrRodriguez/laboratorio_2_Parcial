@@ -87,10 +87,10 @@ namespace Entidades
                 {
                     while (reader.Read())
                     {
-                        usuario = new Operario(reader["NOMBRE"].ToString(),
-                            reader["APELLIDO"].ToString(),
-                            Convert.ToInt32(reader["CODIGO_USUARIO"]),
+                        usuario = new Operario(Convert.ToInt32(reader["CODIGO_USUARIO"]),
                             reader["CARGO"].ToString(),
+                            reader["NOMBRE"].ToString(),
+                            reader["APELLIDO"].ToString(),
                             Convert.ToInt64(reader["DNI"]),
                             reader["EMAIL"].ToString(),
                             Convert.ToInt32(reader["EDAD"]),
@@ -132,10 +132,10 @@ namespace Entidades
                 {
                     while (reader.Read())
                     {
-                        usuario = new Operario(reader["NOMBRE"].ToString(),
-                            reader["APELLIDO"].ToString(),
-                            Convert.ToInt32(reader["CODIGO_USUARIO"]),
+                        usuario = new Operario(Convert.ToInt32(reader["CODIGO_USUARIO"]),
                             reader["CARGO"].ToString(),
+                            reader["NOMBRE"].ToString(),
+                            reader["APELLIDO"].ToString(),
                             Convert.ToInt64(reader["DNI"]),
                             reader["EMAIL"].ToString(),
                             Convert.ToInt32(reader["EDAD"]),
@@ -177,10 +177,10 @@ namespace Entidades
                 {
                     while (reader.Read())
                     {
-                        personas.Add(new Operario(reader["NOMBRE"].ToString(),
-                            reader["APELLIDO"].ToString(),
-                            Convert.ToInt32(reader["CODIGO_USUARIO"]),
+                        personas.Add(new Operario(Convert.ToInt32(reader["CODIGO_USUARIO"]),
                             reader["CARGO"].ToString(),
+                            reader["NOMBRE"].ToString(),
+                            reader["APELLIDO"].ToString(),
                             Convert.ToInt64(reader["DNI"]))
                             );
                     }
@@ -217,10 +217,10 @@ namespace Entidades
                 {
                     while (reader.Read())
                     {
-                        personas.Add(new Operario(reader["NOMBRE"].ToString(),
-                        reader["APELLIDO"].ToString(),
-                        Convert.ToInt32(reader["CODIGO_USUARIO"]),
+                        personas.Add(new Operario(Convert.ToInt32(reader["CODIGO_USUARIO"]),
                         reader["CARGO"].ToString(),
+                        reader["NOMBRE"].ToString(),
+                        reader["APELLIDO"].ToString(),
                         Convert.ToInt64(reader["DNI"]),
                         reader["EMAIL"].ToString(),
                         Convert.ToInt32(reader["EDAD"]),

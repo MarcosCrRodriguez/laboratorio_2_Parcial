@@ -30,7 +30,7 @@ namespace FrmLobby
         private string pathJSON;
         public FormularioRegistro()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
             this.manejadorOperario = new OperarioDAO<Operario>();
             this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
@@ -77,7 +77,7 @@ namespace FrmLobby
                 }
                 if (this.cboxCargo.Text == "Operario")
                 {
-                    Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
+                    Operario operario = new Operario(0, this.cboxCargo.Text, this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                     if (!(operario.VerificarExisteOperario(OperarioDAO<Operario>.LeerOperarios("Operario"), operario)))
                     {
                         if (manejadorOperario.GuardarRegistro(operario))
@@ -104,7 +104,7 @@ namespace FrmLobby
                 }
                 else if (this.cboxCargo.Text == "Supervisor")
                 {
-                    Supervisor supervisor = new Supervisor(this.txtBoxNombre.Text, this.txtBoxApellido.Text, 0, this.cboxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
+                    Supervisor supervisor = new Supervisor(0, this.cboxCargo.Text, this.txtBoxNombre.Text, this.txtBoxApellido.Text, Supervisor.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Supervisor.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                     if (!(supervisor.VerificarExisteSupervisor(SupervisorDAO<Supervisor>.LeerSupervisores("Supervisor"), supervisor)))
                     {
                         if (manejadorSupervisor.GuardarRegistro(supervisor))

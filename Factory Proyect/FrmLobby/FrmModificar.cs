@@ -93,7 +93,7 @@ namespace FrmLobby
                 {
                     throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
                 }
-                Operario operario = new Operario(this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoInt(this.txtCodigoUsuario.Text), this.txtBoxCargo.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
+                Operario operario = new Operario(Operario.CasteoInt(this.txtCodigoUsuario.Text), this.txtBoxCargo.Text, this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                 if (SupervisorDAO<Supervisor>.ModificarUsuario(operario))
                 {
                     if (this.manejadorEventos is not null)

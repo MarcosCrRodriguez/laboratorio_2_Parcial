@@ -283,7 +283,7 @@
             BtnFabric.Name = "BtnFabric";
             BtnFabric.Size = new Size(91, 29);
             BtnFabric.TabIndex = 3;
-            BtnFabric.Text = "Fabirc";
+            BtnFabric.Text = "Fabric";
             BtnFabric.UseVisualStyleBackColor = false;
             BtnFabric.Click += BtnFabric_Click;
             // 

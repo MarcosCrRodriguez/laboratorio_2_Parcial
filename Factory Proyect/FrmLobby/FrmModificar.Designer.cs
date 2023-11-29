@@ -271,7 +271,7 @@
             // 
             // BtnBackToLobby
             // 
-            BtnBackToLobby.BackColor = Color.LightSalmon;
+            BtnBackToLobby.BackColor = Color.DarkGray;
             BtnBackToLobby.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnBackToLobby.Location = new Point(12, 445);
             BtnBackToLobby.Name = "BtnBackToLobby";

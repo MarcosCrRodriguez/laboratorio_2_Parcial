@@ -165,7 +165,7 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.BackColor = Color.SandyBrown;
+            btnCerrar.BackColor = Color.DarkGray;
             btnCerrar.Location = new Point(139, 419);
             btnCerrar.Name = "btnCerrar";
             btnCerrar.Size = new Size(81, 27);

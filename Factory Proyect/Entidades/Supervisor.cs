@@ -7,8 +7,8 @@ namespace Entidades
 
     public class Supervisor : Usuario
     {
-        private int id;
-        private string puesto;
+        private string nombre;
+        private string apellido;
         private long dni;
         private string email;
         private int edad;
@@ -17,18 +17,18 @@ namespace Entidades
         private string telefono;
         private const string password = "superusuario";
 
-        public Supervisor(string nombre, string apellido) : base(nombre, apellido)
+        public Supervisor(int id, string puesto) : base(id, puesto)
         {
-            this.puesto = "Supervisor";
+
         }
-        public Supervisor(string nombre, string apellido, int id, string puesto, long dni) : this(nombre, apellido)
+        public Supervisor(int id, string puesto, string nombre, string apellido, long dni) : this(id, puesto)
         {
-            this.id = id;
-            this.puesto = puesto;
+            this.nombre = nombre;
+            this.apellido = apellido;
             this.dni = dni;
         }
 
-        public Supervisor(string nombre, string apellido, int id, string puesto, long dni, string email, int edad, DateTime fechaNacimiento, string direccion, string telefono) : this(nombre, apellido, id, puesto, dni)
+        public Supervisor(int id, string puesto, string nombre, string apellido, long dni, string email, int edad, DateTime fechaNacimiento, string direccion, string telefono) : this(id, puesto, nombre, apellido, dni)
         {
             this.email = email;
             this.edad = edad;
@@ -39,12 +39,16 @@ namespace Entidades
 
 
         #region Propiedades
-        /// <summary>
-        /// Retorna el valor del ID
-        /// </summary>
-        public int ID
+        public string Nombre
         {
-            get { return this.id; }
+            get { return this.nombre; }
+            set { this.nombre = value; }
+        }
+
+        public string Apellido
+        {
+            get { return this.apellido; }
+            set { this.apellido = value; }
         }
 
         /// <summary>
@@ -53,14 +57,6 @@ namespace Entidades
         public long DNI
         {
             get { return this.dni; }
-        }
-
-        /// <summary>
-        /// Retorna la cadena de Puesto
-        /// </summary>
-        public string Puesto
-        {
-            get { return this.puesto; }
         }
 
         /// <summary>
@@ -159,19 +155,17 @@ namespace Entidades
         /// <param name="supervisor">Supervisor con sus datos ingresados</param>
         /// <returns>Retora true si cumple o false si no cumple con las condiciones</returns>
         /// <exception cref="InvalidPasswordException">Contraseña ingresada incorrecta</exception>
-        public bool ValidarPasswordSupervisor(string dato, Supervisor supervisor)
-        {
-            if (supervisor != null)
+        public static bool ValidarPasswordSupervisor(string dato)
+        {           
+            if (dato != password)
             {
-                if (dato != password)
-                {
-                    throw new InvalidPasswordException("La constraseña es invalida - [InvalidPasswordException]");
-                }
-                else if (dato == password && supervisor.Puesto == "Supervisor")
-                {
-                    return true;
-                }
+                throw new InvalidPasswordException("La constraseña es invalida\n-> [InvalidPasswordException]");
             }
+            else if (dato == password)
+            {
+                return true;
+            }
+            
             return false;
         }
 
@@ -187,8 +181,7 @@ namespace Entidades
             {
                 foreach (var supervisor in supervisores)
                 {
-                    if (su.ID == supervisor.ID && su.DNI == supervisor.DNI && su.Puesto == supervisor.Puesto
-                        && su.Nombre == supervisor.Nombre && su.Apellido == supervisor.Apellido)
+                    if (su.ID == supervisor.ID)
                     {
                         return true;
                     }
@@ -206,11 +199,11 @@ namespace Entidades
             string cadena;
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"CODIGO_USUARIO: {this.id}");
             cadena = base.Mostrar();
-            sb.Append(cadena);
+            sb.Append(cadena); 
+            sb.AppendLine($"Nombre: {this.nombre}");
+            sb.AppendLine($"Apellido: {this.apellido}");
             sb.AppendLine($"DNI: {this.dni}");
-            sb.AppendLine($"Puesto: {this.puesto}");
 
             return sb.ToString();
         }

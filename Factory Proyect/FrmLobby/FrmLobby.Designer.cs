@@ -29,49 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLobby));
-            txtNombre = new TextBox();
-            txtApellido = new TextBox();
             lblLobby = new Label();
-            lblNombre = new Label();
-            lblApellido = new Label();
             txtPassword = new TextBox();
-            lblCargo = new Label();
-            lblContraseña = new Label();
             cboxCargo = new ComboBox();
             BtnIngresar = new Button();
             lblFactory = new Label();
-            groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            pctBoxNo = new PictureBox();
+            pctBoxVisible = new PictureBox();
             groupBox3 = new GroupBox();
             txtCodigo = new TextBox();
-            label1 = new Label();
-            groupBox4 = new GroupBox();
-            label2 = new Label();
-            txtDNI = new TextBox();
             BtnRegistrar = new Button();
-            groupBox1.SuspendLayout();
+            groupbox4 = new GroupBox();
+            lblMessage = new Label();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pctBoxNo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pctBoxVisible).BeginInit();
             groupBox3.SuspendLayout();
-            groupBox4.SuspendLayout();
+            groupbox4.SuspendLayout();
             SuspendLayout();
-            // 
-            // txtNombre
-            // 
-            txtNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.Location = new Point(78, 24);
-            txtNombre.Multiline = true;
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(146, 29);
-            txtNombre.TabIndex = 0;
-            // 
-            // txtApellido
-            // 
-            txtApellido.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.Location = new Point(78, 81);
-            txtApellido.Multiline = true;
-            txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(146, 29);
-            txtApellido.TabIndex = 1;
             // 
             // lblLobby
             // 
@@ -79,78 +55,27 @@
             lblLobby.BackColor = Color.Transparent;
             lblLobby.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblLobby.ForeColor = SystemColors.ButtonHighlight;
-            lblLobby.Location = new Point(27, 19);
+            lblLobby.Location = new Point(45, 18);
             lblLobby.Name = "lblLobby";
             lblLobby.Size = new Size(207, 40);
             lblLobby.TabIndex = 2;
             lblLobby.Text = "Lobby - Login";
             // 
-            // lblNombre
-            // 
-            lblNombre.AutoSize = true;
-            lblNombre.BackColor = Color.Transparent;
-            lblNombre.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblNombre.ForeColor = SystemColors.ButtonHighlight;
-            lblNombre.Location = new Point(12, 30);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(60, 19);
-            lblNombre.TabIndex = 3;
-            lblNombre.Text = "Nombre";
-            // 
-            // lblApellido
-            // 
-            lblApellido.AutoSize = true;
-            lblApellido.BackColor = Color.Transparent;
-            lblApellido.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblApellido.ForeColor = SystemColors.ButtonHighlight;
-            lblApellido.Location = new Point(11, 84);
-            lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(61, 19);
-            lblApellido.TabIndex = 4;
-            lblApellido.Text = "Apellido";
-            // 
             // txtPassword
             // 
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPassword.Location = new Point(101, 84);
+            txtPassword.Location = new Point(89, 33);
             txtPassword.Multiline = true;
             txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(146, 29);
             txtPassword.TabIndex = 5;
-            // 
-            // lblCargo
-            // 
-            lblCargo.AutoSize = true;
-            lblCargo.BackColor = Color.Transparent;
-            lblCargo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblCargo.ForeColor = SystemColors.ButtonHighlight;
-            lblCargo.Location = new Point(48, 30);
-            lblCargo.Name = "lblCargo";
-            lblCargo.Size = new Size(47, 19);
-            lblCargo.TabIndex = 7;
-            lblCargo.Text = "Cargo";
-            lblCargo.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblContraseña
-            // 
-            lblContraseña.AutoSize = true;
-            lblContraseña.BackColor = Color.Transparent;
-            lblContraseña.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblContraseña.ForeColor = SystemColors.ButtonHighlight;
-            lblContraseña.Location = new Point(14, 87);
-            lblContraseña.Name = "lblContraseña";
-            lblContraseña.Size = new Size(81, 19);
-            lblContraseña.TabIndex = 8;
-            lblContraseña.Text = "Contraseña";
-            lblContraseña.TextAlign = ContentAlignment.TopCenter;
             // 
             // cboxCargo
             // 
             cboxCargo.DropDownStyle = ComboBoxStyle.DropDownList;
             cboxCargo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cboxCargo.FormattingEnabled = true;
-            cboxCargo.Location = new Point(101, 24);
+            cboxCargo.Location = new Point(18, 33);
             cboxCargo.Name = "cboxCargo";
             cboxCargo.Size = new Size(146, 29);
             cboxCargo.TabIndex = 9;
@@ -161,9 +86,9 @@
             BtnIngresar.FlatAppearance.BorderColor = Color.Black;
             BtnIngresar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnIngresar.ForeColor = SystemColors.ActiveCaptionText;
-            BtnIngresar.Location = new Point(362, 313);
+            BtnIngresar.Location = new Point(369, 246);
             BtnIngresar.Name = "BtnIngresar";
-            BtnIngresar.Size = new Size(144, 55);
+            BtnIngresar.Size = new Size(120, 55);
             BtnIngresar.TabIndex = 10;
             BtnIngresar.Text = "Ingresar al sistema";
             BtnIngresar.UseVisualStyleBackColor = false;
@@ -175,55 +100,59 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(258, 329);
+            lblFactory.Location = new Point(76, 271);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 15;
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
-            // groupBox1
-            // 
-            groupBox1.BackColor = Color.Transparent;
-            groupBox1.Controls.Add(txtNombre);
-            groupBox1.Controls.Add(lblNombre);
-            groupBox1.Controls.Add(txtApellido);
-            groupBox1.Controls.Add(lblApellido);
-            groupBox1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            groupBox1.ForeColor = SystemColors.ButtonHighlight;
-            groupBox1.Location = new Point(27, 76);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(239, 131);
-            groupBox1.TabIndex = 16;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Datos Personales";
-            // 
             // groupBox2
             // 
             groupBox2.BackColor = Color.Transparent;
-            groupBox2.Controls.Add(cboxCargo);
-            groupBox2.Controls.Add(lblCargo);
+            groupBox2.Controls.Add(pctBoxNo);
+            groupBox2.Controls.Add(pctBoxVisible);
             groupBox2.Controls.Add(txtPassword);
-            groupBox2.Controls.Add(lblContraseña);
             groupBox2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             groupBox2.ForeColor = SystemColors.ButtonHighlight;
-            groupBox2.Location = new Point(295, 76);
+            groupBox2.Location = new Point(239, 79);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(264, 131);
+            groupBox2.Size = new Size(241, 78);
             groupBox2.TabIndex = 17;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Puesto";
+            groupBox2.Text = "Password";
+            // 
+            // pctBoxNo
+            // 
+            pctBoxNo.Image = (Image)resources.GetObject("pctBoxNo.Image");
+            pctBoxNo.Location = new Point(16, 24);
+            pctBoxNo.Name = "pctBoxNo";
+            pctBoxNo.Size = new Size(56, 48);
+            pctBoxNo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pctBoxNo.TabIndex = 7;
+            pctBoxNo.TabStop = false;
+            pctBoxNo.Click += pctBoxNo_Click;
+            // 
+            // pctBoxVisible
+            // 
+            pctBoxVisible.Image = (Image)resources.GetObject("pctBoxVisible.Image");
+            pctBoxVisible.Location = new Point(16, 24);
+            pctBoxVisible.Name = "pctBoxVisible";
+            pctBoxVisible.Size = new Size(56, 48);
+            pctBoxVisible.SizeMode = PictureBoxSizeMode.StretchImage;
+            pctBoxVisible.TabIndex = 6;
+            pctBoxVisible.TabStop = false;
+            pctBoxVisible.Click += pctBoxVisible_Click;
             // 
             // groupBox3
             // 
             groupBox3.BackColor = Color.Transparent;
             groupBox3.Controls.Add(txtCodigo);
-            groupBox3.Controls.Add(label1);
             groupBox3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             groupBox3.ForeColor = SystemColors.ButtonHighlight;
-            groupBox3.Location = new Point(27, 213);
+            groupBox3.Location = new Point(27, 79);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(239, 71);
+            groupBox3.Size = new Size(177, 78);
             groupBox3.TabIndex = 18;
             groupBox3.TabStop = false;
             groupBox3.Text = "Código Usuario";
@@ -231,70 +160,47 @@
             // txtCodigo
             // 
             txtCodigo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCodigo.Location = new Point(78, 24);
+            txtCodigo.Location = new Point(18, 33);
             txtCodigo.Multiline = true;
             txtCodigo.Name = "txtCodigo";
             txtCodigo.Size = new Size(146, 29);
             txtCodigo.TabIndex = 0;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(18, 30);
-            label1.Name = "label1";
-            label1.Size = new Size(54, 19);
-            label1.TabIndex = 3;
-            label1.Text = "Código";
-            // 
-            // groupBox4
-            // 
-            groupBox4.BackColor = Color.Transparent;
-            groupBox4.Controls.Add(label2);
-            groupBox4.Controls.Add(txtDNI);
-            groupBox4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            groupBox4.ForeColor = SystemColors.ButtonHighlight;
-            groupBox4.Location = new Point(295, 213);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(264, 71);
-            groupBox4.TabIndex = 19;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "DNI";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(14, 30);
-            label2.Name = "label2";
-            label2.Size = new Size(81, 19);
-            label2.TabIndex = 4;
-            label2.Text = "Documento";
-            // 
-            // txtDNI
-            // 
-            txtDNI.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDNI.Location = new Point(101, 24);
-            txtDNI.Multiline = true;
-            txtDNI.Name = "txtDNI";
-            txtDNI.Size = new Size(146, 29);
-            txtDNI.TabIndex = 0;
-            // 
             // BtnRegistrar
             // 
-            BtnRegistrar.BackColor = Color.RosyBrown;
+            BtnRegistrar.BackColor = Color.DarkGray;
             BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnRegistrar.Location = new Point(105, 313);
+            BtnRegistrar.Location = new Point(229, 246);
             BtnRegistrar.Name = "BtnRegistrar";
-            BtnRegistrar.Size = new Size(132, 55);
+            BtnRegistrar.Size = new Size(111, 55);
             BtnRegistrar.TabIndex = 15;
             BtnRegistrar.Text = "Registrar";
             BtnRegistrar.UseVisualStyleBackColor = false;
             BtnRegistrar.Click += BtnRegistrar_Click;
+            // 
+            // groupbox4
+            // 
+            groupbox4.BackColor = Color.Transparent;
+            groupbox4.Controls.Add(cboxCargo);
+            groupbox4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            groupbox4.ForeColor = SystemColors.ButtonHighlight;
+            groupbox4.Location = new Point(27, 172);
+            groupbox4.Name = "groupbox4";
+            groupbox4.Size = new Size(177, 79);
+            groupbox4.TabIndex = 19;
+            groupbox4.TabStop = false;
+            groupbox4.Text = "Cargo";
+            // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.BackColor = Color.Transparent;
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(239, 172);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(198, 17);
+            lblMessage.TabIndex = 20;
+            lblMessage.Text = "Esperando el ingreso de datos...";
             // 
             // FrmLobby
             // 
@@ -303,16 +209,17 @@
             BackColor = Color.PapayaWhip;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Center;
-            ClientSize = new Size(592, 391);
+            ClientSize = new Size(510, 321);
+            Controls.Add(lblMessage);
+            Controls.Add(groupbox4);
             Controls.Add(BtnRegistrar);
-            Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Controls.Add(lblFactory);
             Controls.Add(BtnIngresar);
             Controls.Add(lblLobby);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            ForeColor = Color.Black;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "FrmLobby";
@@ -320,39 +227,30 @@
             Text = "Lobby";
             FormClosing += FrmLobby_FormClosing;
             Load += FrmLobby_Load;
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pctBoxNo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pctBoxVisible).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
+            groupbox4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox txtNombre;
-        private TextBox txtApellido;
         private Label lblLobby;
-        private Label lblNombre;
-        private Label lblApellido;
         private TextBox txtPassword;
-        private Label lblCargo;
-        private Label lblContraseña;
         private ComboBox cboxCargo;
         private Button BtnIngresar;
         private Label lblFactory;
-        private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
         private TextBox txtCodigo;
-        private Label label1;
-        private GroupBox groupBox4;
-        private Label label2;
-        private TextBox txtDNI;
         private Button BtnRegistrar;
+        private GroupBox groupbox4;
+        private Label lblMessage;
+        private PictureBox pctBoxVisible;
+        private PictureBox pctBoxNo;
     }
 }

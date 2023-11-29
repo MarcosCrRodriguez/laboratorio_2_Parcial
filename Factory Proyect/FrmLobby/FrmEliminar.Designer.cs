@@ -94,7 +94,7 @@
             // 
             // BtnBackMenu
             // 
-            BtnBackMenu.BackColor = Color.BurlyWood;
+            BtnBackMenu.BackColor = Color.DarkGray;
             BtnBackMenu.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnBackMenu.ForeColor = SystemColors.ActiveCaptionText;
             BtnBackMenu.Location = new Point(180, 179);
