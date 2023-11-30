@@ -78,21 +78,28 @@ namespace FrmLobby
                     if (Supervisor.ValidarPasswordSupervisor(this.txtPassword.Text))
                     {
                         Supervisor supervisor = new Supervisor(Supervisor.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text);
-                        supervisor = manejadorSupervisor.LeerPorID(supervisor.ID);
-                        if (supervisor != null)
+                        if (supervisor.VerificarExisteSupervisor(SupervisorDAO<Supervisor>.LeerSupervisores("Supervisor"), supervisor))
                         {
-                            CargarLblInformacion("Cargando el menu...");
-                            FrmLoading frmLoading = new FrmLoading();
-                            frmLoading.ShowDialog();
+                            supervisor = manejadorSupervisor.LeerPorID(supervisor.ID);
+                            if (supervisor != null)
+                            {
+                                CargarLblInformacion("Cargando el menu...");
+                                FrmLoading frmLoading = new FrmLoading();
+                                frmLoading.ShowDialog();
 
-                            mostrarInformacion($"{supervisor.Nombre} {supervisor.Apellido} ingreso al menu", "Menu Principal");
-                            this.Hide();
-                            MenuUsuario frmOperario = new MenuUsuario(this, supervisor.ID, supervisor.Puesto);
-                            frmOperario.Show();
+                                mostrarInformacion($"{supervisor.Nombre} {supervisor.Apellido} ingreso al menu", "Menu Principal");
+                                this.Hide();
+                                MenuUsuario frmOperario = new MenuUsuario(this, supervisor.ID, supervisor.Puesto);
+                                frmOperario.Show();
+                            }
+                            else
+                            {
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario\n-> [ObjetoNullException]");
+                            }
                         }
                         else
                         {
-                            throw new ObjectNullException("No se pudieron cargar los datos al Usuario\n-> [ObjetoNullException]");
+                            throw new DataBasesException("No existe el Usuario en la DB");
                         }
                     }
                 }
@@ -101,20 +108,27 @@ namespace FrmLobby
                     if (Operario.ValidarPasswordOperario(this.txtPassword.Text))
                     {
                         Operario operario = new Operario(Operario.CasteoInt(this.txtCodigo.Text), this.cboxCargo.Text);
-                        operario = manejadorOperario.LeerPorID(operario.ID);
-                        if (operario != null)
+                        if (operario.VerificarExisteOperario(OperarioDAO<Operario>.LeerOperarios("Operario"), operario))
                         {
-                            FrmLoading frmLoading = new FrmLoading();
-                            frmLoading.ShowDialog();
+                            operario = manejadorOperario.LeerPorID(operario.ID);
+                            if (operario != null)
+                            {
+                                FrmLoading frmLoading = new FrmLoading();
+                                frmLoading.ShowDialog();
 
-                            MessageBox.Show($"{operario.Nombre} {operario.Apellido} ingreso al menu", "Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Hide();
-                            MenuUsuario frmOperario = new MenuUsuario(this, operario.ID, operario.Puesto);
-                            frmOperario.Show();
+                                MessageBox.Show($"{operario.Nombre} {operario.Apellido} ingreso al menu", "Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Hide();
+                                MenuUsuario frmOperario = new MenuUsuario(this, operario.ID, operario.Puesto);
+                                frmOperario.Show();
+                            }
+                            else
+                            {
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario\n-> [ObjetoNullException]");
+                            }
                         }
                         else
                         {
-                            throw new ObjectNullException("No se pudieron cargar los datos al Usuario\n-> [ObjetoNullException]");
+                            throw new DataBasesException("No existe el Usuario en la DB");
                         }
                     }
                 }
@@ -223,6 +237,8 @@ namespace FrmLobby
             this.txtCodigo.Text = string.Empty;
             this.cboxCargo.Text = string.Empty;
             this.txtPassword.Text = string.Empty;
+            this.lblMessage.Text = "Esperando el ingreso de datos...";
+            this.lblMessage.ForeColor = Color.White;
         }
 
         /// <summary>

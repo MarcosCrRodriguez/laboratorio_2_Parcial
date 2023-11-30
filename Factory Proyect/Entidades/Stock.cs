@@ -210,17 +210,17 @@ namespace Entidades
                     }
                     else
                     {
-                        throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
+                        throw new NegativeValueException("El valor en Stock no puede ser \nmenor que 0 -> [NegativeValueException]");
                     }
                 }
                 else
                 {
-                    throw new NegativeValueException("El valor en Stock no puede ser menor que 0 - [NegativeValueException]");
+                    throw new NegativeValueException("El valor en Stock no puede ser \nmenor que 0 -> [NegativeValueException]");
                 }
             }
             catch (FormatException ex)
             {
-                throw new FormatException("Error con el formato de la cantidad ingresada", ex);
+                throw new FormatException("Error con el formato de la \ncantidad ingresada", ex);
             }
             catch (Exception ex)
             {

@@ -91,7 +91,7 @@ namespace FrmLobby
             {
                 if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "")
                 {
-                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio\n-> [ParametrosVaciosException]");
                 }
                 Operario operario = new Operario(Operario.CasteoInt(this.txtCodigoUsuario.Text), this.txtBoxCargo.Text, this.txtBoxNombre.Text, this.txtBoxApellido.Text, Operario.CasteoLong(this.txtBoxDNI.Text), this.txtBoxEmail.Text, Operario.CasteoInt(this.txtBoxEdad.Text), this.monthCalendar.SelectionStart, this.txtBoxDireccion.Text, this.txtBoxTelefono.Text);
                 if (SupervisorDAO<Supervisor>.ModificarUsuario(operario))
@@ -100,29 +100,29 @@ namespace FrmLobby
                     {
                         this.manejadorEventos.Invoke(this.path + this.pathDB, "Modificación de Usuario");
                     }
-                    mostrarInformacion("Se modifico el Operario correctamente", "Modificación de datos");
+                    CargarLblInformacion("Se modifico el Operario correctamente");
                     this.Close();
                 }
             }
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Parametros Vacios");
+                CargarLblError(ex.Message);
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Tipo de dato Incorrecto");
+                CargarLblError(ex.Message);
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error con DB");
+                CargarLblError(ex.Message);
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error inesperado");
+                CargarLblError("Error inesperado");
             }
         }
 
@@ -133,13 +133,14 @@ namespace FrmLobby
         /// <param name="e"></param>
         private void BtnIngresarID_Click(object sender, EventArgs e)
         {
-            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
+            CargarLblInformacion("Código de Usuario ingresado\nEsperando la modificación de datos...");
+            this.lblMessage.ForeColor = Color.White;
 
             try
             {
                 if (this.txtCodigoUsuario.Text == "")
                 {
-                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio\n-> [ParametrosVaciosException]");
                 }
                 if (Operario.VerificarExisteID(OperarioDAO<Operario>.LeerOperariosDatosCompletos("Operario"), Operario.CasteoInt(this.txtCodigoUsuario.Text)))
                 {
@@ -171,28 +172,28 @@ namespace FrmLobby
                 }
                 else
                 {
-                    mostrarError("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado");
+                    CargarLblError("El Usuario no se encuentra en la DB\nO no puede dar de bajo ya que\ntiene un cargo igual o superior al suyo");
                 }
             }
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Parametros Vacios");
+                CargarLblError(ex.Message);
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Tipo de dato Incorrecto");
+                CargarLblError(ex.Message);
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error con DB");
+                CargarLblError(ex.Message);
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error inesperado");
+                CargarLblError("Error inesperado");
             }
         }
 
@@ -204,6 +205,18 @@ namespace FrmLobby
         public void EscribirArchivoDB(string path, string texto)
         {
             this.manejadorArchivosTXT.EscribirArchivo(path, LogFormat.CrearFormatoDB(texto, $"{this.txtCodigoUsuario.Text}"));
+        }
+
+        public void CargarLblInformacion(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Green;
+            this.lblMessage.Text = texto;
+        }
+
+        public void CargarLblError(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Red;
+            this.lblMessage.Text = texto;
         }
     }
 }

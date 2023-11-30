@@ -35,6 +35,7 @@
             BtnDarBaja = new Button();
             BtnBackMenu = new Button();
             lblFactory = new Label();
+            lblMessage = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,7 +85,7 @@
             BtnDarBaja.BackColor = Color.Tomato;
             BtnDarBaja.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnDarBaja.ForeColor = SystemColors.ActiveCaptionText;
-            BtnDarBaja.Location = new Point(12, 179);
+            BtnDarBaja.Location = new Point(12, 223);
             BtnDarBaja.Name = "BtnDarBaja";
             BtnDarBaja.Size = new Size(136, 53);
             BtnDarBaja.TabIndex = 21;
@@ -97,7 +98,7 @@
             BtnBackMenu.BackColor = Color.DarkGray;
             BtnBackMenu.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnBackMenu.ForeColor = SystemColors.ActiveCaptionText;
-            BtnBackMenu.Location = new Point(180, 179);
+            BtnBackMenu.Location = new Point(180, 223);
             BtnBackMenu.Name = "BtnBackMenu";
             BtnBackMenu.Size = new Size(119, 53);
             BtnBackMenu.TabIndex = 22;
@@ -118,13 +119,26 @@
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.BackColor = Color.Transparent;
+            lblMessage.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(12, 163);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(198, 17);
+            lblMessage.TabIndex = 24;
+            lblMessage.Text = "Esperando el ingreso de datos...";
+            // 
             // FrmEliminar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
-            ClientSize = new Size(311, 252);
+            ClientSize = new Size(311, 286);
             ControlBox = false;
+            Controls.Add(lblMessage);
             Controls.Add(lblFactory);
             Controls.Add(BtnBackMenu);
             Controls.Add(BtnDarBaja);
@@ -148,5 +162,6 @@
         private Button BtnDarBaja;
         private Button BtnBackMenu;
         private Label lblFactory;
+        private Label lblMessage;
     }
 }

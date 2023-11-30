@@ -103,6 +103,7 @@ namespace FrmLobby
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
             this.BackgroundImage = img;
+            this.lblMessage.Text = "Esperando el ingreso de datos...";
             this.CargaDatos();
         }
 
@@ -148,7 +149,7 @@ namespace FrmLobby
 
             if (this.cargo == "Supervisor")
             {
-                mostrarInformacion($"Cargando.. <Registro Operarios>", "Ingresando");
+                mostrarInformacion($"Cargando... <Registro Operarios>", "Ingresando");
                 this.Hide();
                 FrmDataGirdView frmDtgv = new FrmDataGirdView(this);
                 frmDtgv.Show();
@@ -164,7 +165,7 @@ namespace FrmLobby
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
 
-            mostrarInformacion("Cargando ventana de <Stock>", "Ingresando");
+            mostrarInformacion("Cargando... <Stock>", "Ingresando");
             this.Hide();
             FrmReStockMateriales frmReStock = new FrmReStockMateriales(this);
             frmReStock.Show();
@@ -336,7 +337,7 @@ namespace FrmLobby
         public void CrearDirectorio()
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
-            
+
             try
             {
                 if (!Directory.Exists(this.path))
@@ -427,6 +428,7 @@ namespace FrmLobby
                 mostrarError(ex.Message, "Error inesperado");
             }
         }
-    
+
+
     }
 }

@@ -58,6 +58,7 @@
             BtnIngresarID = new Button();
             monthCalendar = new MonthCalendar();
             label4 = new Label();
+            lblMessage = new Label();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -273,7 +274,7 @@
             // 
             BtnBackToLobby.BackColor = Color.DarkGray;
             BtnBackToLobby.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnBackToLobby.Location = new Point(12, 445);
+            BtnBackToLobby.Location = new Point(12, 463);
             BtnBackToLobby.Name = "BtnBackToLobby";
             BtnBackToLobby.Size = new Size(136, 52);
             BtnBackToLobby.TabIndex = 18;
@@ -285,7 +286,7 @@
             // 
             BtnModificar.BackColor = Color.LimeGreen;
             BtnModificar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnModificar.Location = new Point(321, 445);
+            BtnModificar.Location = new Point(319, 463);
             BtnModificar.Name = "BtnModificar";
             BtnModificar.Size = new Size(136, 52);
             BtnModificar.TabIndex = 19;
@@ -299,7 +300,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(348, 408);
+            lblFactory.Location = new Point(21, 431);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 20;
@@ -339,7 +340,7 @@
             // 
             BtnIngresarID.BackColor = Color.DarkGray;
             BtnIngresarID.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnIngresarID.Location = new Point(185, 450);
+            BtnIngresarID.Location = new Point(185, 468);
             BtnIngresarID.Name = "BtnIngresarID";
             BtnIngresarID.Size = new Size(97, 42);
             BtnIngresarID.TabIndex = 22;
@@ -367,13 +368,26 @@
             label4.TabIndex = 9;
             label4.Text = "Fecha de Ingreso";
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.BackColor = Color.Transparent;
+            lblMessage.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(209, 379);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(185, 17);
+            lblMessage.TabIndex = 28;
+            lblMessage.Text = "Ingrese el código de usuario...";
+            // 
             // FrmModificar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
-            ClientSize = new Size(470, 509);
+            ClientSize = new Size(470, 526);
             ControlBox = false;
+            Controls.Add(lblMessage);
             Controls.Add(label4);
             Controls.Add(monthCalendar);
             Controls.Add(BtnIngresarID);
@@ -437,5 +451,6 @@
         private TextBox txtBoxCargo;
         private MonthCalendar monthCalendar;
         private Label label4;
+        private Label lblMessage;
     }
 }

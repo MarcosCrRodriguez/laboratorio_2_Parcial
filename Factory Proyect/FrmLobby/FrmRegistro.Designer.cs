@@ -55,6 +55,7 @@
             label10 = new Label();
             monthCalendar = new MonthCalendar();
             label4 = new Label();
+            lblMessage = new Label();
             groupBox1.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
@@ -239,7 +240,7 @@
             // 
             BtnRegistrar.BackColor = Color.LimeGreen;
             BtnRegistrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnRegistrar.Location = new Point(323, 412);
+            BtnRegistrar.Location = new Point(323, 439);
             BtnRegistrar.Name = "BtnRegistrar";
             BtnRegistrar.Size = new Size(136, 52);
             BtnRegistrar.TabIndex = 13;
@@ -250,7 +251,7 @@
             // BtnHardcodear
             // 
             BtnHardcodear.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnHardcodear.Location = new Point(185, 419);
+            BtnHardcodear.Location = new Point(185, 446);
             BtnHardcodear.Name = "BtnHardcodear";
             BtnHardcodear.Size = new Size(97, 38);
             BtnHardcodear.TabIndex = 14;
@@ -264,7 +265,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(347, 379);
+            lblFactory.Location = new Point(37, 393);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 16;
@@ -275,7 +276,7 @@
             // 
             BtnBackToLobby.BackColor = Color.DarkGray;
             BtnBackToLobby.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnBackToLobby.Location = new Point(13, 412);
+            BtnBackToLobby.Location = new Point(18, 439);
             BtnBackToLobby.Name = "BtnBackToLobby";
             BtnBackToLobby.Size = new Size(136, 52);
             BtnBackToLobby.TabIndex = 17;
@@ -318,7 +319,7 @@
             // 
             // monthCalendar
             // 
-            monthCalendar.Location = new Point(210, 208);
+            monthCalendar.Location = new Point(210, 198);
             monthCalendar.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
             monthCalendar.MinDate = new DateTime(1960, 1, 1, 0, 0, 0, 0);
             monthCalendar.Name = "monthCalendar";
@@ -330,19 +331,32 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(219, 175);
+            label4.Location = new Point(219, 170);
             label4.Name = "label4";
             label4.Size = new Size(113, 19);
             label4.TabIndex = 18;
             label4.Text = "Fecha de Ingreso";
+            // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.BackColor = Color.Transparent;
+            lblMessage.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(210, 369);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(198, 17);
+            lblMessage.TabIndex = 21;
+            lblMessage.Text = "Esperando el ingreso de datos...";
             // 
             // FormularioRegistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_vector;
-            ClientSize = new Size(471, 476);
+            ClientSize = new Size(471, 503);
             ControlBox = false;
+            Controls.Add(lblMessage);
             Controls.Add(label4);
             Controls.Add(monthCalendar);
             Controls.Add(groupBox5);
@@ -400,5 +414,6 @@
         private ComboBox cboxCargo;
         private MonthCalendar monthCalendar;
         private Label label4;
+        private Label lblMessage;
     }
 }

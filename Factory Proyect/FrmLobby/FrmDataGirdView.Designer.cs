@@ -70,7 +70,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(728, 330);
+            lblFactory.Location = new Point(1027, 32);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 16;

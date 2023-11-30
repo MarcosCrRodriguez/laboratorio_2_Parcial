@@ -85,15 +85,13 @@ namespace FrmLobby
         /// <param name="e"></param>
         private void BtnLoad_Click(object sender, EventArgs e)
         {
-            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
-            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
             int cantidadAgregar;
 
             try
             {
                 if (this.txtIDSotck.Text == "" || this.txtMaterialSet.Text == "")
                 {
-                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio\n-> [ParametrosVaciosException]");
                 }
                 cantidadAgregar = Stock.VerificarValorPositivo(Stock.CasteoExplicito(this.numCantAgregar.Value), Stock.CasteoExplicito(this.txtIDSotck.Text), this.txtMaterialSet.Text);
                 if (cantidadAgregar != -1)
@@ -105,29 +103,29 @@ namespace FrmLobby
                 }
                 else
                 {
-                    mostrarError("No se pudo cargar los materiales cargados en el formulario", "Error de carga");
+                    CargarLblError("No se pudo cargar los materiales \ncargados en el formulario");
                 }
             }
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Parametros Vacios");
+                CargarLblError(ex.Message);
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Tipo de dato Incorrecto");
+                CargarLblError(ex.Message);
             }
 
             catch (NegativeValueException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("NegativeValueException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "El valor en Stock no puede ser menor que 0");
+                CargarLblError("El valor en Stock no puede \nser menor que 0");
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error Inesperado");
+                CargarLblError("Error Inesperado");
             }
         }
 
@@ -276,12 +274,11 @@ namespace FrmLobby
         /// <param name="cantidadAgregar">Cantidad a modificar</param>
         public void ModificarCantidad(int cantidadAgregar)
         {
-            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
 
             if (this.gestorMateriales.Modificar(this.txtMaterialSet.Text, cantidadAgregar, Stock.CasteoExplicito(this.txtIDSotck.Text)))
             {
-                mostrarInformacion($"Se ha modificado el material {this.txtMaterialSet.Text} con éxito", "Carga materiales");
+                CargarLblInformacion($"Se ha modificado el material \n{this.txtMaterialSet.Text} con éxito");
                 mostrarInformacion($"Actualizando datos...", "Actualización de información");
 
                 menuCargo.CargaDatos();
@@ -290,7 +287,7 @@ namespace FrmLobby
             }
             else
             {
-                mostrarError("No se pudo modificar los datos del material ingresado", "Error de carga");
+                CargarLblError("No se pudo modificar los datos \ndel material ingresado");
             }
         }
 
@@ -308,6 +305,18 @@ namespace FrmLobby
                 "Help Box",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        public void CargarLblInformacion(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Green;
+            this.lblMessage.Text = texto;
+        }
+
+        public void CargarLblError(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Red;
+            this.lblMessage.Text = texto;
         }
     }
 }

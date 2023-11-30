@@ -49,6 +49,7 @@ namespace FrmLobby
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
             this.BackgroundImage = img;
+            this.lblMessage.Text = "Esperando el ingreso de datos...";
 
             this.manejadorEventos += EscribirArchivoDB;
         }
@@ -60,14 +61,11 @@ namespace FrmLobby
         /// <param name="e"></param>
         private void BtnDarBaja_Click(object sender, EventArgs e)
         {
-            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
-            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
-
             try
             {
                 if (this.txtCodigoUsuario.Text == "")
                 {
-                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio\n-> [ParametrosVaciosException]");
                 }
                 if (Operario.VerificarExisteID(OperarioDAO<Operario>.LeerOperarios("Operario"), Convert.ToInt32(this.txtCodigoUsuario.Text)))
                 {
@@ -78,33 +76,33 @@ namespace FrmLobby
                     }
                     else
                     {
-                        mostrarInformacion("El Usuario no se dio de baja", "Baja Cancelada");
+                        CargarLblError("El Usuario no se dio de baja");
                     }
                 }
                 else
                 {
-                    mostrarError("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado");
+                    CargarLblError("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que\ntiene un cargo igual o superior al suyo");
                 }
             }
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Parametros Vacios");
+                CargarLblError(ex.Message);
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Tipo de dato Incorrecto");
+                CargarLblError(ex.Message);
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error con DB");
+                CargarLblError(ex.Message);
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error inesperado");
+                CargarLblError("Error inesperado");
             }
         }
 
@@ -125,21 +123,18 @@ namespace FrmLobby
         /// <param name="ID">ID del Usuario</param>
         public void EliminarUsuario(string cargo, int ID)
         {
-            Mostrar mostrarError = new Mostrar(FrmLobby.MostrarError);
-            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
-
-            if (SupervisorDAO<Supervisor>.Eliminar("Operario", Convert.ToInt32(this.txtCodigoUsuario.Text)))
+            if (SupervisorDAO<Supervisor>.Eliminar(cargo, ID))
             {
                 if (this.manejadorEventos is not null)
                 {
                     this.manejadorEventos.Invoke(this.path + this.pathDB, "Baja de Usuario");
                 }
-                mostrarInformacion("El Usuario se ha dado de baja correctamente", "Baja Confirmada");
+                CargarLblInformacion("El Usuario se ha dado de baja correctamente");
                 this.Close();
             }
             else
             {
-                mostrarError("El Usuario no se encuentra en la base de datos\nO no puede dar de bajo ya que tiene un cargo igual o superior al suyo", "Usuario no encontrado");
+                CargarLblError("El Usuario no se encuentra en la DB\nO no puede dar de bajo ya que\ntiene un cargo igual o superior al suyo");
             }
         }
 
@@ -153,5 +148,16 @@ namespace FrmLobby
             this.manejadorArchivosTXT.EscribirArchivo(path, LogFormat.CrearFormatoDB(texto, $"{this.txtCodigoUsuario.Text}"));
         }
 
+        public void CargarLblInformacion(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Green;
+            this.lblMessage.Text = texto;
+        }
+
+        public void CargarLblError(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Red;
+            this.lblMessage.Text = texto;
+        }
     }
 }

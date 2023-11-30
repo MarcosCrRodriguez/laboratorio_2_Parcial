@@ -73,7 +73,7 @@ namespace FrmLobby
             {
                 if (this.txtBoxNombre.Text == "" || this.txtBoxApellido.Text == "" || this.txtBoxEdad.Text == "" || this.txtBoxEmail.Text == "" || this.txtBoxTelefono.Text == "" || this.txtBoxDNI.Text == "" || this.txtBoxDireccion.Text == "" || this.cboxCargo.Text == "")
                 {
-                    throw new EmptyParametersException("Alguno de los campos esta vacio - [ParametrosVaciosException]");
+                    throw new EmptyParametersException("Alguno de los campos esta vacio\n-> [ParametrosVaciosException]");
                 }
                 if (this.cboxCargo.Text == "Operario")
                 {
@@ -92,12 +92,12 @@ namespace FrmLobby
                                     this.manejadorEventos.Invoke(this.path + this.pathDB, "Generación de Usuario", operario.ID);
                                 }
 
-                                mostrarInformacion("Se registro el Operario con Exito", "Registro Exitoso");
+                                CargarLblInformacion("Se registro el Operario con Exito");
                                 this.Close();
                             }
                             else
                             {
-                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario\nNo se puede trabajar con un dato tipo null\n-> [ObjetoNullException]");
                             }
                         }
                     }
@@ -119,12 +119,12 @@ namespace FrmLobby
                                     this.manejadorEventos.Invoke(this.path + this.pathDB, "Generación de Usuario", supervisor.ID);
                                 }
 
-                                mostrarInformacion("Se registro el Supervisor con Exito", "Registro Exitoso");
+                                CargarLblInformacion("Se registro el Supervisor con Exito");
                                 this.Close();
                             }
                             else
                             {
-                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario, no se puede trabajar con un dato tipo null - [ObjetoNullException]");
+                                throw new ObjectNullException("No se pudieron cargar los datos al Usuario\nNo se puede trabajar con un dato tipo null\n-> [ObjetoNullException]");
                             }
                         }
                     }
@@ -133,32 +133,32 @@ namespace FrmLobby
             catch (EmptyParametersException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("EmptyParametersException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Parametros Vacios");
+                CargarLblError(ex.Message);
             }
             catch (FormatException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("FormatException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Tipo de dato Incorrecto");
+                CargarLblError(ex.Message);
             }
             catch (SqlExceptionDuplicateUserDB ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("SqlExceptionDuplicateUserDB", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Problemas con la Base de Datos");
+                CargarLblError(ex.Message);
             }
             catch (DataBasesException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("DataBasesException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Parametros Vacios");
+                CargarLblError(ex.Message);
             }
             catch (ObjectNullException ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("ObjectNullException", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Objeto Null");
+                CargarLblError(ex.Message);
             }
             catch (Exception ex)
             {
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
-                mostrarError(ex.Message, "Error Inesperado");
+                CargarLblError("Error Inesperado");
             }
         }
 
@@ -199,6 +199,18 @@ namespace FrmLobby
         public void EscribirArchivoDB(string path, string texto, int codigo)
         {
             this.manejadorArchivosTXT.EscribirArchivo(path, LogFormat.CrearFormatoDB(texto, codigo.ToString()));
+        }
+
+        public void CargarLblInformacion(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Green;
+            this.lblMessage.Text = texto;
+        }
+
+        public void CargarLblError(string texto)
+        {
+            this.lblMessage.ForeColor = Color.Red;
+            this.lblMessage.Text = texto;
         }
     }
 }

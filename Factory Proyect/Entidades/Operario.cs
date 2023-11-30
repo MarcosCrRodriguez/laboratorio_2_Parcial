@@ -178,7 +178,7 @@ namespace Entidades
             {
                 foreach (var operario in operarios)
                 {
-                    if (op.ID == operario.ID)
+                    if (op.ID == operario.ID && op.Puesto == operario.Puesto)
                     {
                         return true;
                     }

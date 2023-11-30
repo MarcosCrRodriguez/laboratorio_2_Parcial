@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             gboxMateriales = new GroupBox();
+            lblMessage = new Label();
             txtVentilador = new TextBox();
             txtCondensador = new TextBox();
             txtFibraVidrio = new TextBox();
             txtEngranajeHierro = new TextBox();
             txtBaraHierro = new TextBox();
-            BtnLoad = new Button();
             txtCableR = new TextBox();
             txtCableV = new TextBox();
             txtBarraPlastica = new TextBox();
@@ -52,6 +52,7 @@
             lblCircuitoElect = new Label();
             lblUnidadProcesamiento = new Label();
             lblCircuitoElectAv = new Label();
+            BtnLoad = new Button();
             BtnBackWindow = new Button();
             lblFactory = new Label();
             lblMaterialesModificar = new Label();
@@ -68,12 +69,12 @@
             // gboxMateriales
             // 
             gboxMateriales.BackColor = Color.Transparent;
+            gboxMateriales.Controls.Add(lblMessage);
             gboxMateriales.Controls.Add(txtVentilador);
             gboxMateriales.Controls.Add(txtCondensador);
             gboxMateriales.Controls.Add(txtFibraVidrio);
             gboxMateriales.Controls.Add(txtEngranajeHierro);
             gboxMateriales.Controls.Add(txtBaraHierro);
-            gboxMateriales.Controls.Add(BtnLoad);
             gboxMateriales.Controls.Add(txtCableR);
             gboxMateriales.Controls.Add(txtCableV);
             gboxMateriales.Controls.Add(txtBarraPlastica);
@@ -95,10 +96,21 @@
             gboxMateriales.ForeColor = SystemColors.ButtonHighlight;
             gboxMateriales.Location = new Point(12, 12);
             gboxMateriales.Name = "gboxMateriales";
-            gboxMateriales.Size = new Size(435, 284);
+            gboxMateriales.Size = new Size(443, 286);
             gboxMateriales.TabIndex = 24;
             gboxMateriales.TabStop = false;
             gboxMateriales.Text = "Cantidad materiales a agregar";
+            // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.BackColor = Color.Transparent;
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(219, 233);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(206, 19);
+            lblMessage.TabIndex = 64;
+            lblMessage.Text = "Esperando el ingreso de datos...";
             // 
             // txtVentilador
             // 
@@ -134,17 +146,6 @@
             txtBaraHierro.Name = "txtBaraHierro";
             txtBaraHierro.Size = new Size(88, 25);
             txtBaraHierro.TabIndex = 53;
-            // 
-            // BtnLoad
-            // 
-            BtnLoad.BackColor = Color.MediumSeaGreen;
-            BtnLoad.Location = new Point(265, 234);
-            BtnLoad.Name = "BtnLoad";
-            BtnLoad.Size = new Size(116, 34);
-            BtnLoad.TabIndex = 27;
-            BtnLoad.Text = "Load Materials";
-            BtnLoad.UseVisualStyleBackColor = false;
-            BtnLoad.Click += BtnLoad_Click;
             // 
             // txtCableR
             // 
@@ -298,11 +299,22 @@
             lblCircuitoElectAv.Text = "Circuito Elect Av";
             lblCircuitoElectAv.Click += lblCircuitoElectAv_Click;
             // 
+            // BtnLoad
+            // 
+            BtnLoad.BackColor = Color.MediumSeaGreen;
+            BtnLoad.Location = new Point(466, 211);
+            BtnLoad.Name = "BtnLoad";
+            BtnLoad.Size = new Size(116, 34);
+            BtnLoad.TabIndex = 27;
+            BtnLoad.Text = "Load Materials";
+            BtnLoad.UseVisualStyleBackColor = false;
+            BtnLoad.Click += BtnLoad_Click;
+            // 
             // BtnBackWindow
             // 
             BtnBackWindow.BackColor = Color.BurlyWood;
             BtnBackWindow.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnBackWindow.Location = new Point(461, 237);
+            BtnBackWindow.Location = new Point(466, 264);
             BtnBackWindow.Name = "BtnBackWindow";
             BtnBackWindow.Size = new Size(127, 58);
             BtnBackWindow.TabIndex = 25;
@@ -316,7 +328,7 @@
             lblFactory.BackColor = Color.Transparent;
             lblFactory.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblFactory.ForeColor = Color.Coral;
-            lblFactory.Location = new Point(482, 199);
+            lblFactory.Location = new Point(22, 301);
             lblFactory.Name = "lblFactory";
             lblFactory.Size = new Size(87, 21);
             lblFactory.TabIndex = 26;
@@ -398,13 +410,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_background_v_1517907jpg_sw800;
-            ClientSize = new Size(605, 308);
+            ClientSize = new Size(605, 334);
             ControlBox = false;
             Controls.Add(numCantAgregar);
             Controls.Add(lblCantidadAgregar);
             Controls.Add(lblHelp);
             Controls.Add(txtIDSotck);
             Controls.Add(lblID);
+            Controls.Add(BtnLoad);
             Controls.Add(txtMaterialSet);
             Controls.Add(lblMaterialesModificar);
             Controls.Add(lblFactory);
@@ -457,5 +470,6 @@
         private Label lblHelp;
         private Label lblCantidadAgregar;
         private NumericUpDown numCantAgregar;
+        private Label lblMessage;
     }
 }

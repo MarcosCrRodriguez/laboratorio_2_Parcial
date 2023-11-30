@@ -181,7 +181,7 @@ namespace Entidades
             {
                 foreach (var supervisor in supervisores)
                 {
-                    if (su.ID == supervisor.ID)
+                    if (su.ID == supervisor.ID && su.Puesto == supervisor.Puesto)
                     {
                         return true;
                     }

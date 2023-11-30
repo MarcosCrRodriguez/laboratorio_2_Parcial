@@ -77,6 +77,7 @@
             txtCircuitoElectAv = new TextBox();
             txtCircuitoElect = new TextBox();
             lblFactory = new Label();
+            lblMessage = new Label();
             gboxUsuario.SuspendLayout();
             gboxSectores.SuspendLayout();
             gboxMateriales.SuspendLayout();
@@ -571,6 +572,18 @@
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.BackColor = Color.Transparent;
+            lblMessage.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(135, 361);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(137, 17);
+            lblMessage.TabIndex = 26;
+            lblMessage.Text = "Esperando opciones...";
+            // 
             // MenuUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -578,6 +591,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(704, 431);
             ControlBox = false;
+            Controls.Add(lblMessage);
             Controls.Add(lblFactory);
             Controls.Add(gboxMateriales);
             Controls.Add(gboxSectores);
@@ -649,5 +663,6 @@
         private TextBox txtBoxCantMotherboard;
         private TextBox txtBoxCantVideoCard;
         private Label label16;
+        private Label lblMessage;
     }
 }

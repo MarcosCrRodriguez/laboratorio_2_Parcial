@@ -55,11 +55,11 @@ namespace Entidades
             }
             catch (SqlException ex)
             {
-                throw new SqlExceptionDuplicateUserDB("No se pudo cargar el Usuario con un DNI ya existente", ex);
+                throw new SqlExceptionDuplicateUserDB("No se pudo cargar el Usuario con un \nDNI ya existente", ex);
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -105,7 +105,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -150,7 +150,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -190,7 +190,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
+                throw new DataBasesException("Hubo problemas con la carga de la \nlista desde la BD", ex); ;
             }
             finally
             {
@@ -235,7 +235,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Hubo problemas con la carga de la lista desde la BD", ex); ;
+                throw new DataBasesException("Hubo problemas con la carga de la \nlista desde la BD", ex); ;
             }
             finally
             {
@@ -274,7 +274,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -307,7 +307,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
