@@ -7,6 +7,9 @@
     <Compile Update="FrmEliminar.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FrmEnviarProductosTerminados.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FrmLoading.cs">
       <SubType>Form</SubType>
     </Compile>

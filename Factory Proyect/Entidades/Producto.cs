@@ -72,6 +72,42 @@ namespace Entidades
             return rtn;
         }
 
+        public static int VerificarPosibilidadEnvio(int cantidadEnviar, int id, string material)
+        {
+            int rtn = -1;
+            int cantidadProducto;
+
+            try
+            {
+                cantidadProducto = manejadorProductos.LeerPorMaterial(id, material);
+
+                Func<int, int, int> resta = (cantidadProducto, cantidadEnviar) => cantidadProducto - cantidadEnviar;
+                int cantidadResto = resta(cantidadProducto, cantidadEnviar);
+
+                if (cantidadResto >= 0)
+                {
+                    rtn = cantidadResto;
+                }
+                else
+                {
+                    throw new NegativeValueException("No puede enviar una cantidad que\nno existe -> [NegativeValueException]");
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Error con el formato de la cantidad \ningresada", ex);
+            }
+            catch (NegativeValueException ex)
+            {
+                throw new NegativeValueException("No puede enviar una cantidad que\nno existe -> [NegativeValueException]", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrio un error inesperado", ex);
+            }
+            return rtn;
+        }
+
         /// <summary>
         /// Metodo abstracto de la clase base, Fabricación del producto
         /// </summary>

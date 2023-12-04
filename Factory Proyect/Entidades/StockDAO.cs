@@ -48,7 +48,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -85,7 +85,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -132,7 +132,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {

@@ -39,6 +39,8 @@ namespace FrmLobby
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
             this.BackgroundImage = img;
+            this.lblMessage.Text = "Trabajando en los procesos del producto...";
+            this.lblMessage.ForeColor = Color.White;
 
             this.tasks = new List<Task>();
             IniciarHilos();
@@ -152,6 +154,7 @@ namespace FrmLobby
         {
             cancellationTokenSource.Cancel();
             this.btnCerrar.Visible = true;
+            this.lblMessage.Text = "Procesos cancelados";
         }
 
         /// <summary>

@@ -42,6 +42,7 @@
             btnCancelar = new Button();
             btnCerrar = new Button();
             lblFactory = new Label();
+            lblMessage = new Label();
             gboxProduccion.SuspendLayout();
             gboxProcesoFinal.SuspendLayout();
             SuspendLayout();
@@ -187,6 +188,17 @@
             lblFactory.Text = "Factory.IO";
             lblFactory.TextAlign = ContentAlignment.TopCenter;
             // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMessage.ForeColor = SystemColors.ButtonHighlight;
+            lblMessage.Location = new Point(239, 426);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(260, 17);
+            lblMessage.TabIndex = 25;
+            lblMessage.Text = "Trabajando en los procesos del producto...";
+            // 
             // FrmProcesos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -194,6 +206,7 @@
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(701, 458);
             ControlBox = false;
+            Controls.Add(lblMessage);
             Controls.Add(lblFactory);
             Controls.Add(btnCerrar);
             Controls.Add(btnCancelar);
@@ -227,5 +240,6 @@
         private Button btnCancelar;
         private Button btnCerrar;
         private Label lblFactory;
+        private Label lblMessage;
     }
 }

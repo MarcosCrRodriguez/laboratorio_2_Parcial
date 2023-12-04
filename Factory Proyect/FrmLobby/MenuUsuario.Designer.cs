@@ -78,9 +78,11 @@
             txtCircuitoElect = new TextBox();
             lblFactory = new Label();
             lblMessage = new Label();
+            pctBoxCamion = new PictureBox();
             gboxUsuario.SuspendLayout();
             gboxSectores.SuspendLayout();
             gboxMateriales.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pctBoxCamion).BeginInit();
             SuspendLayout();
             // 
             // BtnVideoCard
@@ -199,7 +201,7 @@
             // 
             BtnRegistro.BackColor = Color.Bisque;
             BtnRegistro.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnRegistro.Location = new Point(388, 368);
+            BtnRegistro.Location = new Point(397, 368);
             BtnRegistro.Name = "BtnRegistro";
             BtnRegistro.Size = new Size(149, 47);
             BtnRegistro.TabIndex = 18;
@@ -578,11 +580,23 @@
             lblMessage.BackColor = Color.Transparent;
             lblMessage.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblMessage.ForeColor = SystemColors.ButtonHighlight;
-            lblMessage.Location = new Point(135, 361);
+            lblMessage.Location = new Point(124, 361);
             lblMessage.Name = "lblMessage";
             lblMessage.Size = new Size(137, 17);
             lblMessage.TabIndex = 26;
             lblMessage.Text = "Esperando opciones...";
+            // 
+            // pctBoxCamion
+            // 
+            pctBoxCamion.BackColor = Color.Transparent;
+            pctBoxCamion.Image = (Image)resources.GetObject("pctBoxCamion.Image");
+            pctBoxCamion.Location = new Point(311, 350);
+            pctBoxCamion.Name = "pctBoxCamion";
+            pctBoxCamion.Size = new Size(70, 73);
+            pctBoxCamion.SizeMode = PictureBoxSizeMode.StretchImage;
+            pctBoxCamion.TabIndex = 27;
+            pctBoxCamion.TabStop = false;
+            pctBoxCamion.Click += pctBoxCamion_Click;
             // 
             // MenuUsuario
             // 
@@ -591,6 +605,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(704, 431);
             ControlBox = false;
+            Controls.Add(pctBoxCamion);
             Controls.Add(lblMessage);
             Controls.Add(lblFactory);
             Controls.Add(gboxMateriales);
@@ -610,6 +625,7 @@
             gboxSectores.PerformLayout();
             gboxMateriales.ResumeLayout(false);
             gboxMateriales.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pctBoxCamion).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -664,5 +680,6 @@
         private TextBox txtBoxCantVideoCard;
         private Label label16;
         private Label lblMessage;
+        private PictureBox pctBoxCamion;
     }
 }

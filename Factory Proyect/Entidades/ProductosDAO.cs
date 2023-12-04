@@ -48,7 +48,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {
@@ -85,7 +85,41 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new DataBasesException("Error a la hora de trabajar con Base de Datos", ex);
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static List<string> LeerProductosPorID(int id)
+        {
+            List<string> listaProductos = null;
+            try
+            {
+                command.Parameters.Clear();
+                connection.Open();
+                command.CommandText = $"SELECT * FROM PRODUCTOS WHERE ID_PRODUCTOS = @ID_PRODUCTOS";
+                command.Parameters.AddWithValue("@ID_PRODUCTOS", id);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        listaProductos = new List<string>() {
+                            reader["VIDEO_CARD"].ToString(),
+                            reader["MOTHERBOARD"].ToString(),
+                            reader["RAM"].ToString(),
+                            reader["CABINET"].ToString()
+                        };
+                    }
+                }
+                return listaProductos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataBasesException("Error a la hora de trabajar con la DB", ex);
             }
             finally
             {

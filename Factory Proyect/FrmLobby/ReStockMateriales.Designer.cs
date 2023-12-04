@@ -302,7 +302,7 @@
             // BtnLoad
             // 
             BtnLoad.BackColor = Color.MediumSeaGreen;
-            BtnLoad.Location = new Point(466, 211);
+            BtnLoad.Location = new Point(477, 211);
             BtnLoad.Name = "BtnLoad";
             BtnLoad.Size = new Size(116, 34);
             BtnLoad.TabIndex = 27;
@@ -314,7 +314,7 @@
             // 
             BtnBackWindow.BackColor = Color.BurlyWood;
             BtnBackWindow.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnBackWindow.Location = new Point(466, 264);
+            BtnBackWindow.Location = new Point(472, 264);
             BtnBackWindow.Name = "BtnBackWindow";
             BtnBackWindow.Size = new Size(127, 58);
             BtnBackWindow.TabIndex = 25;
@@ -341,7 +341,7 @@
             lblMaterialesModificar.BackColor = Color.Transparent;
             lblMaterialesModificar.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblMaterialesModificar.ForeColor = SystemColors.ButtonHighlight;
-            lblMaterialesModificar.Location = new Point(453, 77);
+            lblMaterialesModificar.Location = new Point(461, 77);
             lblMaterialesModificar.Name = "lblMaterialesModificar";
             lblMaterialesModificar.Size = new Size(146, 19);
             lblMaterialesModificar.TabIndex = 58;
@@ -349,7 +349,7 @@
             // 
             // txtMaterialSet
             // 
-            txtMaterialSet.Location = new Point(461, 100);
+            txtMaterialSet.Location = new Point(467, 99);
             txtMaterialSet.Name = "txtMaterialSet";
             txtMaterialSet.Size = new Size(132, 23);
             txtMaterialSet.TabIndex = 58;
@@ -360,7 +360,7 @@
             lblID.BackColor = Color.Transparent;
             lblID.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblID.ForeColor = SystemColors.ButtonHighlight;
-            lblID.Location = new Point(494, 19);
+            lblID.Location = new Point(498, 16);
             lblID.Name = "lblID";
             lblID.Size = new Size(64, 19);
             lblID.TabIndex = 59;
@@ -368,7 +368,7 @@
             // 
             // txtIDSotck
             // 
-            txtIDSotck.Location = new Point(461, 41);
+            txtIDSotck.Location = new Point(467, 38);
             txtIDSotck.Name = "txtIDSotck";
             txtIDSotck.Size = new Size(132, 23);
             txtIDSotck.TabIndex = 60;
@@ -391,7 +391,7 @@
             lblCantidadAgregar.BackColor = Color.Transparent;
             lblCantidadAgregar.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point);
             lblCantidadAgregar.ForeColor = SystemColors.ButtonHighlight;
-            lblCantidadAgregar.Location = new Point(454, 138);
+            lblCantidadAgregar.Location = new Point(460, 143);
             lblCantidadAgregar.Name = "lblCantidadAgregar";
             lblCantidadAgregar.Size = new Size(139, 19);
             lblCantidadAgregar.TabIndex = 62;
@@ -399,7 +399,7 @@
             // 
             // numCantAgregar
             // 
-            numCantAgregar.Location = new Point(461, 166);
+            numCantAgregar.Location = new Point(467, 165);
             numCantAgregar.Maximum = new decimal(new int[] { 45000, 0, 0, 0 });
             numCantAgregar.Name = "numCantAgregar";
             numCantAgregar.Size = new Size(132, 23);
@@ -410,7 +410,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.design_in_the_concept_of_electronic_circuit_boards_background_v_1517907jpg_sw800;
-            ClientSize = new Size(605, 334);
+            ClientSize = new Size(611, 334);
             ControlBox = false;
             Controls.Add(numCantAgregar);
             Controls.Add(lblCantidadAgregar);

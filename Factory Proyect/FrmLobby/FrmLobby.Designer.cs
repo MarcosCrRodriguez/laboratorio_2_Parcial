@@ -64,7 +64,7 @@
             // txtPassword
             // 
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPassword.Location = new Point(89, 33);
+            txtPassword.Location = new Point(87, 33);
             txtPassword.Multiline = true;
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(146, 29);
@@ -86,7 +86,7 @@
             BtnIngresar.FlatAppearance.BorderColor = Color.Black;
             BtnIngresar.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             BtnIngresar.ForeColor = SystemColors.ActiveCaptionText;
-            BtnIngresar.Location = new Point(369, 246);
+            BtnIngresar.Location = new Point(365, 246);
             BtnIngresar.Name = "BtnIngresar";
             BtnIngresar.Size = new Size(120, 55);
             BtnIngresar.TabIndex = 10;
@@ -117,7 +117,7 @@
             groupBox2.ForeColor = SystemColors.ButtonHighlight;
             groupBox2.Location = new Point(239, 79);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(241, 78);
+            groupBox2.Size = new Size(246, 78);
             groupBox2.TabIndex = 17;
             groupBox2.TabStop = false;
             groupBox2.Text = "Password";

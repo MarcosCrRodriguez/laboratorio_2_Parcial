@@ -88,22 +88,22 @@ namespace FrmLobby
                 this.supervisor = manejadorSupervisor.LeerPorID(this.codigoUsuario);
                 this.txtNombre.Text = $" {this.supervisor.Nombre} {this.supervisor.Apellido}";
                 this.gboxUsuario.Text = "Supervisor";
-                this.gboxUsuario.Enabled = false;
             }
             else
             {
                 this.operario = manejadorOperario.LeerPorID(this.codigoUsuario);
                 this.txtNombre.Text = $" {this.operario.Nombre} {this.operario.Apellido}";
                 this.gboxUsuario.Text = "Operario";
-                this.gboxUsuario.Enabled = false;
+                this.pctBoxCamion.Visible = false;
                 this.BtnRegistro.Visible = false;
                 this.BtnReStock.Visible = false;
             }
+            this.gboxUsuario.Enabled = false;
             this.CrearDirectorio();
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
             this.BackgroundImage = img;
-            this.lblMessage.Text = "Esperando el ingreso de datos...";
+            this.lblMessage.Text = "Esperando opciones...";
             this.CargaDatos();
         }
 
@@ -429,6 +429,14 @@ namespace FrmLobby
             }
         }
 
+        private void pctBoxCamion_Click(object sender, EventArgs e)
+        {
+            Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
 
+            mostrarInformacion("Cargando... <Exportacion de Productos Terminados>", "Ingresando");
+            this.Hide();
+            FrmEnviarProductosTerminados enviarProductosTerminados = new FrmEnviarProductosTerminados(this);
+            enviarProductosTerminados.Show();
+        }
     }
 }
