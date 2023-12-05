@@ -46,9 +46,7 @@ namespace FrmLobby
         {
             this.CrearDirectorio();
             this.GenerarJson();
-            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
-            Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
-            this.BackgroundImage = img;
+            this.CargaImagenes();
             this.pctBoxVisible.Visible = false;
             this.pctBoxNo.Visible = true;
             this.txtPassword.PasswordChar = '*';
@@ -84,7 +82,7 @@ namespace FrmLobby
                             if (supervisor != null)
                             {
                                 CargarLblInformacion("Cargando el menu...");
-                                FrmLoading frmLoading = new FrmLoading();
+                                FrmGIF frmLoading = new FrmGIF("loading");
                                 frmLoading.ShowDialog();
 
                                 mostrarInformacion($"{supervisor.Nombre} {supervisor.Apellido} ingreso al menu", "Menu Principal");
@@ -113,7 +111,7 @@ namespace FrmLobby
                             operario = manejadorOperario.LeerPorID(operario.ID);
                             if (operario != null)
                             {
-                                FrmLoading frmLoading = new FrmLoading();
+                                FrmGIF frmLoading = new FrmGIF("loading");
                                 frmLoading.ShowDialog();
 
                                 MessageBox.Show($"{operario.Nombre} {operario.Apellido} ingreso al menu", "Menu Principal", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -253,7 +251,11 @@ namespace FrmLobby
                 this.config = new Configuracion("C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\medio_circuito_azul.jpg",
                 "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_rojo.jpg",
                 "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\circuito_azul.jpg",
-                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\loading.gif"
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\apagado.png",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\vista.png",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\camion.png",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\loading.gif",
+                "C:\\Users\\rodri\\OneDrive\\Documentos\\Parciales Progra.ll\\laboratorio_2_Parcial\\Factory Proyect\\Factory.IO\\bin\\Debug\\net6.0\\Data\\envio-animacion.gif"
                 );
                 this.manejadorJson.EscribirArchivo(this.path + this.pathJSON, this.config);
             }
@@ -272,6 +274,17 @@ namespace FrmLobby
                 this.manejadorArchivosTXT.EscribirArchivo(this.path + this.pathTXT, LogFormat.CrearFormatoExcepcion("Exception", $"{ex.StackTrace}"));
                 mostrarError(ex.Message, "Json");
             }
+        }
+
+        public void CargaImagenes()
+        {
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image imgBack = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
+            this.BackgroundImage = imgBack;
+            Image imgApagado = Image.FromFile(this.configJson.PathImagenOjoApagado);
+            this.pctBoxNo.Image = imgApagado;
+            Image imgPrendido = Image.FromFile(this.configJson.PathImagenOjoPrendido);
+            this.pctBoxVisible.Image = imgPrendido;
         }
 
         /// <summary>

@@ -22,18 +22,19 @@ namespace FrmLobby
 
         private IArchivos<string> manejadorArchivosTXT;
         private IUsuario<Operario> manejadorOperario;
-
+        private FrmDataGirdView frmDataGirdView;
         private Configuracion configJson;
         private Operario? operario;
         private string path;
         private string pathTXT;
         private string pathDB;
         private string pathJSON;
-        public FrmModificar()
+        public FrmModificar(FrmDataGirdView frmDataGirdView)
         {
             InitializeComponent();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
             this.manejadorOperario = new OperarioDAO<Operario>();
+            this.frmDataGirdView = frmDataGirdView;
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
@@ -100,6 +101,7 @@ namespace FrmLobby
                     {
                         this.manejadorEventos.Invoke(this.path + this.pathDB, "Modificación de Usuario");
                     }
+                    this.frmDataGirdView.RefreshData();
                     CargarLblInformacion("Se modifico el Operario correctamente");
                     this.Close();
                 }

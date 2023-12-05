@@ -100,9 +100,6 @@ namespace FrmLobby
             }
             this.gboxUsuario.Enabled = false;
             this.CrearDirectorio();
-            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
-            Image img = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
-            this.BackgroundImage = img;
             this.lblMessage.Text = "Esperando opciones...";
             this.CargaDatos();
         }
@@ -429,7 +426,16 @@ namespace FrmLobby
             }
         }
 
-        private void pctBoxCamion_Click(object sender, EventArgs e)
+        public void CargaImagenes()
+        {
+            this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
+            Image imgBack = Image.FromFile(this.configJson.PathImagenCircuitoAzul);
+            this.BackgroundImage = imgBack;
+            Image imgCamion = Image.FromFile(this.configJson.PathImagenCamion);
+            this.pctBoxCamion.Image = imgCamion;
+        }
+
+            private void pctBoxCamion_Click(object sender, EventArgs e)
         {
             Mostrar mostrarInformacion = new Mostrar(FrmLobby.MostrarInformacion);
 

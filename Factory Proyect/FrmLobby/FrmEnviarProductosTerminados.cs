@@ -37,6 +37,8 @@ namespace FrmLobby
             this.path += @"\Archivos\";
             this.pathTXT = "Log_Excepciones.txt";
             this.pathJSON = "Imagenes.json";
+
+            this.lblHelp.Click += new EventHandler(EventHandlerDinamico);
         }
 
         private void FrmEnviarProductosTerminados_Load(object sender, EventArgs e)
@@ -152,8 +154,11 @@ namespace FrmLobby
 
             if (this.gestorMateriales.Modificar(this.txtMaterialSet.Text, cantidadEnviar, Stock.CasteoExplicito(this.txtIDProducto.Text)))
             {
+                FrmGIF frmLoading = new FrmGIF("send");
+                frmLoading.ShowDialog();
+
                 CargarLblInformacion($"Se ha enviado {this.txtMaterialSet.Text}\ncon éxito");
-                mostrarInformacion($"Actualizando datos...", "Actualización de información");
+                mostrarInformacion("Los Productos fueron enviados exitosamente\nActualizando datos...", "Actualización de información");
 
                 this.menuUsuario.CargaDatos();
                 this.menuUsuario.Show();
@@ -175,6 +180,22 @@ namespace FrmLobby
         {
             this.lblMessage.ForeColor = Color.Red;
             this.lblMessage.Text = texto;
+        }
+
+        /// <summary>
+        /// Muestra un mensaje por pantalla
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void EventHandlerDinamico(object sender, EventArgs e)
+        {
+            MessageBox.Show("- ID Producto - usted ingresara un password que le permitirá el acceso a modificar los Productos mediante el envio.\n" +
+                "- Materiales a enviar - necesita interactuar con algun label de los materiales para poder seleccionar el Producto que desea enviar.\n" +
+                "- Cantidad a enviar - son las cantidades que desea enviar del Producto seleccionado.\n" +
+                "ID Producto: [1329]",
+                "Help Box",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

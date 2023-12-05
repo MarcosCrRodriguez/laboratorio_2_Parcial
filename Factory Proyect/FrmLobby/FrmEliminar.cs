@@ -21,16 +21,18 @@ namespace FrmLobby
         public event ManejadorEventos manejadorEventos;
 
         private IArchivos<string> manejadorArchivosTXT;
+        private FrmDataGirdView frmDataGirdView;
         private Configuracion configJson;
 
         private string path;
         private string pathTXT;
         private string pathDB;
         private string pathJSON;
-        public FrmEliminar()
+        public FrmEliminar(FrmDataGirdView frmDataGirdView)
         {
             InitializeComponent();
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.frmDataGirdView = frmDataGirdView;
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
@@ -129,6 +131,7 @@ namespace FrmLobby
                 {
                     this.manejadorEventos.Invoke(this.path + this.pathDB, "Baja de Usuario");
                 }
+                this.frmDataGirdView.RefreshData();
                 CargarLblInformacion("El Usuario se ha dado de baja correctamente");
                 this.Close();
             }

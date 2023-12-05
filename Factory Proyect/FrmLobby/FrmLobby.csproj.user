@@ -10,7 +10,7 @@
     <Compile Update="FrmEnviarProductosTerminados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmLoading.cs">
+    <Compile Update="FrmGIF.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FrmLobby.cs">

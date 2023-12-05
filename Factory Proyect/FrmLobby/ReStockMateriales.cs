@@ -46,7 +46,7 @@ namespace FrmLobby
             this.pathTXT = "Log_Excepciones.txt";
             this.pathJSON = "Imagenes.json";
 
-            lblHelp.Click += new EventHandler(EventHandlerDinamico);
+            this.lblHelp.Click += new EventHandler(EventHandlerDinamico);
         }
 
         /// <summary>

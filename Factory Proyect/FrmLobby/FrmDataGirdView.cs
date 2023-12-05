@@ -26,7 +26,6 @@ namespace FrmLobby
         {
             InitializeComponent();
             this.menuPrincipal = menuPrincipal;
-            this.listOperario = OperarioDAO<Operario>.LeerOperariosDatosCompletos("Operario");
 
             this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
             this.path += @"\Archivos\";
@@ -43,10 +42,7 @@ namespace FrmLobby
             this.configJson = ArchivosJSON<Configuracion>.LeerArchivo(this.path + this.pathJSON);
             Image img = Image.FromFile(this.configJson.PathImagenCircuitoRojo);
             this.BackgroundImage = img;
-
-            this.DtgvRegistro.DataSource = this.listOperario;
-            this.DtgvRegistro.Refresh();
-            this.DtgvRegistro.Update();
+            this.RefreshData();
         }
 
         /// <summary>
@@ -67,7 +63,7 @@ namespace FrmLobby
         /// <param name="e"></param>
         private void BtnRegistrar_Click(object sender, EventArgs e)
         {
-            FormularioRegistro frmRegistro = new FormularioRegistro();
+            FormularioRegistro frmRegistro = new FormularioRegistro(this);
             frmRegistro.ShowDialog();
         }
 
@@ -78,7 +74,7 @@ namespace FrmLobby
         /// <param name="e"></param>
         private void BtnModificar_Click(object sender, EventArgs e)
         {
-            FrmModificar frmModificar = new FrmModificar();
+            FrmModificar frmModificar = new FrmModificar(this);
             frmModificar.ShowDialog();
         }
 
@@ -89,8 +85,16 @@ namespace FrmLobby
         /// <param name="e"></param>
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            FrmEliminar frmEliminar = new FrmEliminar();
+            FrmEliminar frmEliminar = new FrmEliminar(this);
             frmEliminar.ShowDialog();
+        }
+
+        public void RefreshData()
+        {
+            this.listOperario = OperarioDAO<Operario>.LeerOperariosDatosCompletos("Operario");
+            this.DtgvRegistro.DataSource = this.listOperario;
+            this.DtgvRegistro.Refresh();
+            this.DtgvRegistro.Update();
         }
     }
 }

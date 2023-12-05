@@ -22,6 +22,7 @@ namespace FrmLobby
         private IArchivos<string> manejadorArchivosTXT;
         private IUsuario<Operario> manejadorOperario;
         private IUsuario<Supervisor> manejadorSupervisor;
+        private FrmDataGirdView frmDataGirdView;
         private Configuracion configJson;
 
         private string path;
@@ -31,6 +32,21 @@ namespace FrmLobby
         public FormularioRegistro()
         {
             InitializeComponent();
+            this.manejadorArchivosTXT = new ArchivosTXT<string>();
+            this.manejadorOperario = new OperarioDAO<Operario>();
+            this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
+
+            this.path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}";
+            this.path += @"\Archivos\";
+            this.pathTXT = "Log_Excepciones.txt";
+            this.pathDB = "Log_DB.txt";
+            this.pathJSON = "Imagenes.json";
+        }
+
+        public FormularioRegistro(FrmDataGirdView frmDataGirdView)
+        {
+            InitializeComponent();
+            this.frmDataGirdView = frmDataGirdView;
             this.manejadorArchivosTXT = new ArchivosTXT<string>();
             this.manejadorOperario = new OperarioDAO<Operario>();
             this.manejadorSupervisor = new SupervisorDAO<Supervisor>();
@@ -91,6 +107,10 @@ namespace FrmLobby
                                 {
                                     this.manejadorEventos.Invoke(this.path + this.pathDB, "Generación de Usuario", operario.ID);
                                 }
+                                if (this.frmDataGirdView != null)
+                                {
+                                    this.frmDataGirdView.RefreshData();
+                                }
 
                                 CargarLblInformacion("Se registro el Operario con Exito");
                                 this.Close();
@@ -118,7 +138,10 @@ namespace FrmLobby
                                 {
                                     this.manejadorEventos.Invoke(this.path + this.pathDB, "Generación de Usuario", supervisor.ID);
                                 }
-
+                                if (this.frmDataGirdView != null)
+                                {
+                                    this.frmDataGirdView.RefreshData();
+                                }
                                 CargarLblInformacion("Se registro el Supervisor con Exito");
                                 this.Close();
                             }

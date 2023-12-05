@@ -222,6 +222,10 @@ namespace Entidades
             {
                 throw new FormatException("Error con el formato de la \ncantidad ingresada", ex);
             }
+            catch (NegativeValueException ex)
+            {
+                throw new NegativeValueException("El valor en Stock no puede ser \nmenor que 0 -> [NegativeValueException]", ex);
+            }
             catch (Exception ex)
             {
                 throw new Exception("Ocurrio un error inesperado", ex);
